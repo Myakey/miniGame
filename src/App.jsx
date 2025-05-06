@@ -6,6 +6,7 @@ import React from 'react'
 import MainMenu from "./routes/MainMenu"
 import InGame from "./routes/inGame"
 import VN from "./routes/VN"
+import CharSel from './routes/charaSel'
 import './styles/main.css'
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
         <Route path="/" element={<MainMenu />}/>
         <Route path="/inGame" element={<InGame />}/>
         <Route path="/vn" element={<VN />}/>
+        <Route path="/charaSel" element={<CharSel />}/>
       </Routes>
     </BrowserRouter>
   )
