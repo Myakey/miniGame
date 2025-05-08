@@ -3,4 +3,5 @@
 
 .mainMenu{
     background-image: url(../assets/image/titleScreen/titleScreen.jpg);
+    background-size: contain;
 }
