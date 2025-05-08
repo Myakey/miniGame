@@ -1,6 +1,7 @@
 import React from "react";
 import Button from '../components/UI/Buttons'
 import titleScreen from '../assets/image/titleScreen/title.png'
+import titleBackground from '../assets/image/titleScreen/titleScreen.jpg'
 import Modal from "../components/UI/ModalBox"
 import { useNavigate } from 'react-router-dom';
 
