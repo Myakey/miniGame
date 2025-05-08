@@ -8,9 +8,9 @@ function MainMenu(){
     let navigate = useNavigate();
     return(
        <>
-       <div className="mainMenu h-screen w-screen justify-center">
-        <div className="justify-self-center">
-                <img src={titleScreen} className="h-50"/>
+       <div className="mainMenu h-screen w-screen justify-center p-10 flex flex-col items-center">
+        <div className="">
+                <img src={titleScreen} className="lg:h-70 mt-10"/>
                 <div className="flex flex-col gap-10 items-center mt-20">
                     <Button text="Hi!"/>
                     <Modal 
