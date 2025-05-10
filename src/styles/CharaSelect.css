@@ -1,0 +1,28 @@
+.charaSelect{
+    font-family: myFirstFont;
+    background-size: cover;
+    background-position: left;
+    background-image: linear-gradient(0deg,rgba(255, 255, 255, 0.5),rgba(255, 255, 255, 0.5)), url(../assets/image/CharaSelect/background.png);
+    height: 100%;
+    width: 100%;
+}
+
+.mask-image-left {
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%);
+  }
+
+  @keyframes slideIn {
+    0% {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  .animate-slide-in {
+    animation: slideIn 0.5s ease-out forwards;
+  }
