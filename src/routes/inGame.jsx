@@ -3,6 +3,7 @@ import { useRef, useState } from "react";
 
 import Phaser from "phaser";
 import { PhaserGame } from '../inGame/PhaserGame'
+import '../styles/inGame.css'
 
 function MainGame(){
 
@@ -61,14 +62,14 @@ function MainGame(){
 
     return(
        <>
-        <div id="mainGame">
-            <PhaserGame ref={phaserRef} currentActiveScene={currentScene} />
-            <div>
-                <div>
-                    This is the game
-                </div>
+       <div className="flex flex-row">
+            <div id="mainGame">
+                <PhaserGame ref={phaserRef} currentActiveScene={currentScene} />
             </div>
-        </div>
+            <div>
+                Hello!
+            </div>
+       </div>
        </>
     )
 }
