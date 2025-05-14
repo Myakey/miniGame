@@ -1,25 +1,20 @@
 import Phaser from "phaser";
 import Yukari from "../../assets/image/InGame/SpriteSheets/Yukari.png";
 import { EventBus } from "../EventBus";
+import { GameState } from "../../hooks/gamestate"
 // import trialMap from "../../assets/image/InGame/maps/Trial.tmj"
+import { useNavigate } from 'react-router-dom';
 
 export class MainGame extends Phaser.Scene {
+
+  
+
   constructor() {
     super({ key: "MainGame" });
   }
 
   preload() {
-    this.load.tilemapTiledJSON("map", "/src/assets/image/InGame/maps/mapTrial2.tmj");
-    this.load.image("Grass", "/src/assets/image/InGame/maps/Grass.png");
-    this.load.image("ChickenHouse", "/src/assets/image/InGame/maps/ChickenHouse.png");
-    this.load.spritesheet(
-      "Yukari",
-      "src/assets/image/InGame/SpriteSheets/Yukari.png",
-      {
-        frameWidth: 176,
-        frameHeight: 240,
-      }
-    );
+    
   }
 
   generatePlayerAnimation() {
@@ -100,23 +95,36 @@ export class MainGame extends Phaser.Scene {
     this.generatePlayerAnimation();
 
     // const map = this.make.tilemap({ key: "map" });
+    const startX = GameState.pos_x;
+    const startY = GameState.pos_y;
    
 
     const map = this.add.tilemap("map");
-    const tiles = map.addTilesetImage("ground", "Grass");
-    const chickenHouse = map.addTilesetImage("ChickenHouse", "ChickenHouse");
-    const groundLayer = map.createLayer("ground", tiles);
-    const obstacleLayer = map.createLayer("obstacles", chickenHouse);
+    const path = map.addTilesetImage("path", "Path");
+    const grass = map.addTilesetImage("grass", "Grass");
+    const trees = map.addTilesetImage("tree", "Tree")
+    const groundLayer = map.createLayer("layer1", path);
+    const grassLayer = map.createLayer("layer2", grass)
+    const obstacleLayer = map.createLayer("layer3", trees);
 
-    this.player = this.physics.add.sprite(400, 300, "Yukari");
-    this.player.setScale(0.5)
+    this.player = this.physics.add.sprite(startX, startY, "Yukari");
+    this.player.setScale(0.3)
 
     this.cameras.main.setZoom(1);
     // this.cameras.main.followOffset(true);
 
-    const scale = 3;
-      groundLayer.setScale(scale);
-      obstacleLayer.setScale(scale);
+    
+
+    const scale = 2;
+    groundLayer.setScale(scale);
+    obstacleLayer.setScale(scale);
+    grassLayer.setScale(scale);
+
+    obstacleLayer.setCollisionByProperty({ collides: true });
+    this.physics.add.collider(this.player, obstacleLayer);
+
+    this.physics.world.setBounds(0, 0, map.widthInPixels*2, map.heightInPixels*2);
+    this.cameras.main.setBounds(0, 0, map.widthInPixels*2, map.heightInPixels*2);
     this.input.gamepad.once(
       "connected",
       function (pad) {
@@ -125,7 +133,7 @@ export class MainGame extends Phaser.Scene {
       this
     );
 
-    this.player.body.setCollideWorldBounds();
+    this.player.body.setCollideWorldBounds(true);
 
     this.triggerZone = this.add.zone(400, 300, 100, 100);
     this.physics.world.enable(this.triggerZone);
@@ -134,11 +142,20 @@ export class MainGame extends Phaser.Scene {
 
     this.cameras.main.startFollow(this.player);
 
-    // obstacleLayer.setCollisionByProperty({ collides: true });
-    // this.physics.add.collider(this.player, obstacleLayer);
+    obstacleLayer.setCollision([0]);
+    this.physics.add.collider(this.player, obstacleLayer);
 
     // this.physics.world.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
     // this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
+
+    const graphics = this.add.graphics();
+      graphics.lineStyle(2, 0xff0000, 1); // Red border with line width of 2
+      graphics.strokeRect(
+          this.physics.world.bounds.x,
+          this.physics.world.bounds.y,
+          this.physics.world.bounds.width,
+          this.physics.world.bounds.height
+    );
     this.physics.add.collider(this.player, obstacleLayer)
 
 
@@ -149,16 +166,33 @@ export class MainGame extends Phaser.Scene {
       }).setVisible(false);
 
 
+    // this.physics.add.overlap(this.player, this.triggerZone, () => {
+    //   this.infoText.setVisible(true);
+    // });
+
     this.physics.add.overlap(this.player, this.triggerZone, () => {
-      this.infoText.setVisible(true);
-    });
+      this.SaveState();
+      // this.scene.start("BlokM", {
+      //   x: this.player.x,
+      //   y: this.player.y
+      // });
+      EventBus.emit("navigate", "/");
+    }, null, this);
 
     this.cursors = this.input.keyboard.createCursorKeys();
     this.shiftKey = this.input.keyboard.addKey(
       Phaser.Input.Keyboard.KeyCodes.SHIFT
-    );
+    ); 
 
-    EventBus.emit("current-scene-ready", this);
+    
+
+    EventBus.emit("current-scene-ready", this)
+  }
+
+  SaveState(){
+    console.log("Its here the savestate!");
+    GameState.pos_x = this.player.x;
+    GameState.pos_y = this.player.y;
   }
 
   handleMovement(){

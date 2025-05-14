@@ -1,4 +1,6 @@
 import { Scene } from 'phaser';
+import Yukari from "../../assets/image/InGame/SpriteSheets/Yukari.png";
+import { useNavigate } from 'react-router-dom';
 
 export class Preloader extends Scene
 {
@@ -29,7 +31,19 @@ export class Preloader extends Scene
 
     preload ()
     {
-        //  Load the assets for the game - Replace with your own assets
+        this.load.tilemapTiledJSON("map", "/src/assets/image/InGame/maps/tilesTest.tmj");
+        this.load.image("Grass", "/src/assets/image/InGame/maps/grass.png");
+        this.load.image("Path", "/src/assets/image/InGame/maps/path.png");
+        this.load.image("Tree", "/src/assets/image/InGame/maps/Tree01a.png")
+        this.load.spritesheet(
+        "Yukari",
+        "src/assets/image/InGame/SpriteSheets/Yukari.png",
+        {
+            frameWidth: 176,
+            frameHeight: 240,
+        }
+        );
+            //  Load the assets for the game - Replace with your own assets
         this.load.setPath('assets');
 
         this.load.image('logo', 'logo.png');
@@ -42,6 +56,6 @@ export class Preloader extends Scene
         //  For example, you can define global animations here, so we can use them in other scenes.
 
         //  Move to the MainMenu. You could also swap this for a Scene Transition, such as a camera fade.
-        this.scene.start('MainMenu');
+        this.scene.start('MainGame');
     }
 }

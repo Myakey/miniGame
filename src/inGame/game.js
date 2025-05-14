@@ -1,10 +1,12 @@
 import { MainGame } from "./scenes/MainGame";
+import { Preloader } from "./scenes/Preloader";
+import { BlokM } from "./scenes/blokM";
 import Phaser from "phaser";
 
 const config = {
     type: Phaser.AUTO,
-    width: 1024,
-    height: 768,
+    width: 1200,
+    height: 600,
     parent: 'game-container',
     backgroundColor: "#91b2c1",
     // scale: {
@@ -22,7 +24,9 @@ const config = {
       gamepad: true,
     },
     scene: [
-        MainGame
+        Preloader,
+        MainGame,
+        BlokM
     ]
 };
 

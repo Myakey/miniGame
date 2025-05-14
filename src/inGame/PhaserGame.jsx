@@ -1,9 +1,12 @@
 import { forwardRef, useEffect, useLayoutEffect, useRef } from "react";
 import StartGame from './game'
 import { EventBus } from './EventBus';
+import { useNavigate } from "react-router-dom";
 
 export const PhaserGame = forwardRef(function PhaserGame ({ currentActiveScene }, ref){
     const game = useRef();
+
+    const navigate = useNavigate();
 
     useLayoutEffect(() => {
 
@@ -34,8 +37,11 @@ export const PhaserGame = forwardRef(function PhaserGame ({ currentActiveScene }
             ref.current.scene = currentScene;
         })
 
+        EventBus.on("navigate", navigate);
+
         return () =>{
             EventBus.removeListener('current-scene-ready');
+            EventBus.off("navigate", navigate);
         }
     }, [currentActiveScene, ref])
 
