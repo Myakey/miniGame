@@ -1,11 +1,22 @@
 import React from "react";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 
 import Phaser from "phaser";
 import { PhaserGame } from '../inGame/PhaserGame'
 import '../styles/inGame.css'
+import { useNavigate } from 'react-router-dom';
+
+import StatusBars from "../components/Game/StatusBars";
+import Button from "../components/UI/Buttons"
 
 function MainGame(){
+
+    let navigate = useNavigate();
+
+    const icons = [{name : "hunger"},{name : "energy"}, {name: "hygiene"} , {name :"happiness"}];
+
+
+    const [countTest, setCountTest] = useState(0);
 
     const [canMoveSprite, setCanMoveSprite] = useState(true);
 
@@ -60,14 +71,37 @@ function MainGame(){
         
     }
 
+    useEffect(() => {
+        const intervalId = setInterval(() => {
+        setCountTest(c => c + 1); // ✅ Pass a state updater
+        }, 1000);
+        return () => clearInterval(intervalId);
+    }, []);
+
+    function createStatus(text){
+        return(
+            <StatusBars icon = {text.name}/>
+        )
+    }
+
     return(
        <>
-       <div className="flex flex-row">
+       <div className="absolute">
+        <Button text="Back" onClick={()=>{navigate('/')}}/>
+       </div>
+       <div className="flex flex-col items-center">
+             
+            <div className="text-8xl">
+                Objective
+            </div>
+            <div className="flex flex-row gap-5 justify-center text-center z-20 rounded-3xl bg-blue-400 p-5">
+                {icons.map(createStatus)}
+                <div>
+                    Money
+                </div>
+            </div>
             <div id="mainGame">
                 <PhaserGame ref={phaserRef} currentActiveScene={currentScene} />
-            </div>
-            <div>
-                Hello!
             </div>
        </div>
        </>

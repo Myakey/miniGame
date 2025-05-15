@@ -15,7 +15,7 @@ function Modal(innerText){
                 <div className="relative bg-white rounded-xl shadow-xl p-6 w-full max-w-md transition-transform transform scale-100 hover:scale-[1.01]">
                   <button
                     onClick={toggleModal}
-                    className="absolute top-3 right-3 text-gray-400 hover:text-gray-600 text-2xl font-bold"
+                    className="absolute top-3 right-3 text-gray-400 hover:text-gray-600 text-2xl font-bold hover:cursor-pointer"
                   >
                     &times;
                   </button>

@@ -5,6 +5,9 @@ import titleBackground from '../assets/image/titleScreen/titleScreen.jpg'
 import Modal from "../components/UI/ModalBox"
 import { useNavigate } from 'react-router-dom';
 
+import { GameState } from "../hooks/gamestate";
+import { Game } from "phaser";
+
 function MainMenu(){
     let navigate = useNavigate();
     return(
@@ -18,7 +21,10 @@ function MainMenu(){
                     text= 
                         <div className="flex flex-row justify-between">
                             <Button text="Char Select" onClick={()=>{navigate('/')}}/>
-                            <Button text="InGame" onClick={()=>{navigate('/inGame')}}/>
+                            <Button text="InGame" onClick={()=>{
+                                GameState.char = prompt ("Pilih Karakter sebelum mulai!");
+                                navigate('/inGame')
+                                }}/>
                             <Button text="VN" onClick={()=>{navigate('/vn')}}/>
                             <Button text="charaSel" onClick={()=>{navigate('/charaSel')}}/>
                         </div>
