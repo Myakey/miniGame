@@ -1,6 +1,7 @@
 import { MainGame } from "./scenes/MainGame";
 import { Preloader } from "./scenes/Preloader";
 import { BlokM } from "./scenes/blokM";
+import { Boot } from "./scenes/Boot";
 import Phaser from "phaser";
 
 const config = {
@@ -24,6 +25,7 @@ const config = {
       gamepad: true,
     },
     scene: [
+        Boot,
         Preloader,
         MainGame,
         BlokM

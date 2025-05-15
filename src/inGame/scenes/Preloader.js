@@ -1,6 +1,8 @@
 import { Scene } from 'phaser';
 import Yukari from "../../assets/image/InGame/SpriteSheets/Yukari.png";
 import { useNavigate } from 'react-router-dom';
+import { GameState } from '../../hooks/gamestate';
+import { charaList } from '../mechanics/charaList';
 
 export class Preloader extends Scene
 {
@@ -15,10 +17,10 @@ export class Preloader extends Scene
         this.add.image(512, 384, 'background');
 
         //  A simple progress bar. This is the outline of the bar.
-        this.add.rectangle(512, 384, 468, 32).setStrokeStyle(1, 0xffffff);
+        const bar = this.add.rectangle(512, 384, 468, 32).setStrokeStyle(1, 0xffffff);
 
         //  This is the progress bar itself. It will increase in size from the left based on the % of progress.
-        const bar = this.add.rectangle(512-230, 384, 4, 28, 0xffffff);
+        
 
         //  Use the 'progress' event emitted by the LoaderPlugin to update the loading bar
         this.load.on('progress', (progress) => {
@@ -31,16 +33,19 @@ export class Preloader extends Scene
 
     preload ()
     {
+        let findChara = GameState.char;
+        let foundChara = charaList.find(char => char.name === findChara);
+        console.log(foundChara);
         this.load.tilemapTiledJSON("map", "/src/assets/image/InGame/maps/tilesTest.tmj");
         this.load.image("Grass", "/src/assets/image/InGame/maps/grass.png");
         this.load.image("Path", "/src/assets/image/InGame/maps/path.png");
         this.load.image("Tree", "/src/assets/image/InGame/maps/Tree01a.png")
         this.load.spritesheet(
         "Yukari",
-        "src/assets/image/InGame/SpriteSheets/Yukari.png",
+        foundChara.path,
         {
-            frameWidth: 176,
-            frameHeight: 240,
+            frameWidth: foundChara.width,
+            frameHeight: foundChara.height,
         }
         );
             //  Load the assets for the game - Replace with your own assets

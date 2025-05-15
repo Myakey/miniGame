@@ -80,18 +80,21 @@ function MainGame(){
 
     function createStatus(text){
         return(
-            <StatusBars icon = {text.name} num={countTest}/>
+            <StatusBars icon = {text.name}/>
         )
     }
 
     return(
        <>
+       <div className="absolute">
+        <Button text="Back" onClick={()=>{navigate('/')}}/>
+       </div>
        <div className="flex flex-col items-center">
+             
             <div className="text-8xl">
-            <Button text="Back" onClick={()=>{navigate('/')}}/>
                 Objective
             </div>
-            <div className="flex flex-row gap-5 justify-center text-center">
+            <div className="flex flex-row gap-5 justify-center text-center z-20 rounded-3xl bg-blue-400 p-5">
                 {icons.map(createStatus)}
                 <div>
                     Money

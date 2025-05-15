@@ -169,15 +169,18 @@ export class MainGame extends Phaser.Scene {
     // this.physics.add.overlap(this.player, this.triggerZone, () => {
     //   this.infoText.setVisible(true);
     // });
-
+    this.inTriggerZone = false;
+    this.interactKey = this.input.keyboard.addKey("E");
     this.physics.add.overlap(this.player, this.triggerZone, () => {
       this.SaveState();
-      // this.scene.start("BlokM", {
-      //   x: this.player.x,
-      //   y: this.player.y
-      // });
-      EventBus.emit("navigate", "/");
+      this.inTriggerZone = true;
     }, null, this);
+
+    this.interactKey.on("down", () =>{
+      if(this.inTriggerZone){
+         EventBus.emit("navigate", "/");
+      }
+    })
 
     this.cursors = this.input.keyboard.createCursorKeys();
     this.shiftKey = this.input.keyboard.addKey(
@@ -316,12 +319,14 @@ export class MainGame extends Phaser.Scene {
       }
     }
 
-      const inZone = Phaser.Geom.Intersects.RectangleToRectangle(
-        this.player.getBounds(),
-        this.triggerZone.getBounds()
-      );
-
-      this.infoText.setVisible(inZone);
+    const inZone = Phaser.Geom.Intersects.RectangleToRectangle(
+      this.player.getBounds(),
+      this.triggerZone.getBounds()
+    );
+    this.inTriggerZone = inZone;
+    console.log("InZone :" + inZone);
+    
+    this.infoText.setVisible(inZone);
   }
 
    interactWithArea() {
