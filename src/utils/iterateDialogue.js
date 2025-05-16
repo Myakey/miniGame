@@ -1,31 +1,35 @@
-import { useState, useEffect, useCallback } from "react";
-import { dialogueData } from "../components/VN/dialogueData.js";
+import { useState, useEffect } from "react";
+import { actData } from "../components/VN/dialogueData.js";
 
-export function dialogueIterator(onEnd) {
+export const dialogueIterator = (actName = "act1", onComplete = () => {}) => {
+  const scenes = actData[actName] || [];
   const [index, setIndex] = useState(0);
   const [autoPlay, setAutoPlay] = useState(false);
 
-  const current = dialogueData[index];
+  useEffect(() => {
+    setIndex(0);
+    setAutoPlay(false);
+  }, [actName]);
 
-  const handleNext = useCallback(() => {
-    if (index < dialogueData.length - 1) {
-      setIndex((prev) => prev + 1);
+  const current = scenes[index] || {};
+
+  const handleNext = () => {
+    if (index < scenes.length - 1) {
+      setIndex(index + 1);
     } else {
-      setAutoPlay(false); 
-      if (onEnd) onEnd(); 
+      setAutoPlay(false);
     }
-  }, [index, onEnd]);
+  };
 
   useEffect(() => {
     let interval;
     if (autoPlay) {
-      interval = setInterval(() => {
+      interval = setTimeout(() => {
         handleNext();
-      }, 2500); 
+      }, 2500);
     }
-
-    return () => clearInterval(interval);
-  }, [autoPlay, handleNext]);
+    return () => clearTimeout(interval);
+  }, [autoPlay, index]);
 
   return {
     current,
@@ -33,4 +37,4 @@ export function dialogueIterator(onEnd) {
     autoPlay,
     setAutoPlay,
   };
-}
+};
