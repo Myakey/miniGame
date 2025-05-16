@@ -36,6 +36,8 @@ export default function charSel() {
 
       if (e.key === "ArrowUp") {
         changeCharacter(currentIndex + 2);
+      } else if (e.key === "ArrowDown" && charNames[currentIndex] === "Sakuya Izayoi") { 
+        changeCharacter(currentIndex - 3);
       } else if (e.key === "ArrowDown") {
         changeCharacter(currentIndex - 2);
       } else if (e.key === "ArrowLeft") {
@@ -63,7 +65,7 @@ export default function charSel() {
             <div className="flex items-center justify-center pb-10">
               <div className="flex flex-row gap-8 ">
                 <div
-                  className={`border-4 rounded-tl-2xl rounded-br-2xl border-red-500 bg-red-100 overflow-hidden shadow-lg w-40 h-50 transform -skew-x-6 transition-transform duration-200 hover:scale-110 active:scale-110 ${(currentIndex + char.length) % char.length === 0
+                  className={`border-4 rounded-tl-2xl rounded-br-2xl border-red-500 bg-red-100 overflow-hidden shadow-lg w-35 h-45 transform -skew-x-6 transition-transform duration-200 hover:scale-110 active:scale-110  ${(currentIndex + char.length) % char.length === 0
                     ? "scale-110"
                     : "scale-100"
                     }`}
@@ -76,7 +78,7 @@ export default function charSel() {
                   />
                 </div>
                 <div
-                  className={`rounded-tl-2xl rounded-br-2xl border-4 border-blue-400 bg-blue-200 overflow-hidden shadow-lg w-40 h-50 -skew-x-6 transform hover:scale-110 active:scale-110 ${(currentIndex + char.length) % char.length === 1
+                  className={`rounded-tl-2xl rounded-br-2xl border-4 border-blue-400 bg-blue-200 overflow-hidden shadow-lg w-35 h-45 -skew-x-6 transform duration-200 hover:scale-110 active:scale-110 ${(currentIndex + char.length) % char.length === 1
                     ? "scale-110"
                     : "scale-100"
                     }`}
@@ -89,7 +91,7 @@ export default function charSel() {
                   />
                 </div>
                 <div
-                  className={`rounded-tl-2xl rounded-br-2xl border-4 border-gray-500 bg-gray-300 overflow-hidden shadow-lg w-40 h-50 -skew-x-6 hover:scale-110 active:scale-110${(currentIndex + char.length) % char.length === 2
+                  className={`rounded-tl-2xl rounded-br-2xl border-4 border-gray-500 bg-gray-300 overflow-hidden shadow-lg w-35 h-45 -skew-x-6 hover:scale-110 active:scale-110  ${(currentIndex + char.length) % char.length === 2
                     ? "scale-110"
                     : "scale-100"
                     }`}
@@ -108,7 +110,7 @@ export default function charSel() {
             <div className="flex items-center justify-center pb-10">
               <div className="flex flex-row gap-8  ">
                 <div
-                  className={`border-4 rounded-tl-2xl rounded-br-2xl border-yellow-500 bg-yellow-100 overflow-hidden shadow-lg w-40 h-50 transform -skew-x-6 hover:scale-110 active:scale-110${(currentIndex + char.length) % char.length === 3
+                  className={`border-4 rounded-tl-2xl rounded-br-2xl border-yellow-500 bg-yellow-100 overflow-hidden shadow-lg w-35 h-45 transform -skew-x-6 hover:scale-110 active:scale-110 ${(currentIndex + char.length) % char.length === 3
                     ? "scale-110"
                     : "scale-100"
                     }`}
@@ -121,7 +123,7 @@ export default function charSel() {
                   />
                 </div>
                 <div
-                  className={`rounded-tl-2xl rounded-br-2xl border-4 border-pink-400 overflow-hidden shadow-lg w-40 h-50 -skew-x-6 transform hover:scale-110 active:scale-110 ${(currentIndex + char.length) % char.length === 4
+                  className={`rounded-tl-2xl rounded-br-2xl border-4 border-pink-400 overflow-hidden shadow-lg w-35 h-45 -skew-x-6 transform hover:scale-110 active:scale-110 ${(currentIndex + char.length) % char.length === 4
                     ? "scale-110"
                     : "scale-100"
                     }`}
@@ -148,9 +150,9 @@ export default function charSel() {
             {/*Name Bar*/}
             <div
               key={currentIndex}
-              className="fixed flex justify-between z-40 h-25 w-100 bg-black/70 justify-center items-center text-center bottom-70 right-10 rounded-tl-2xl rounded-br-2xl mask-image-left animate-slide-in"
+              className="fixed flex z-40 h-15 w-70 bg-black/70 justify-center items-center text-center bottom-55 right-12 rounded-tl-2xl rounded-br-2xl mask-image-left animate-slide-in"
             >
-              <h1 className="text-white text-4xl ">
+              <h1 className="text-white text-3xl ">
                 {charNames[currentIndex]}
               </h1>
             </div>
@@ -161,12 +163,12 @@ export default function charSel() {
         </div>
         {/*Middle Bottom Text*/}
         <div className="flex pb-10 bottom-0 absolute z-10 justify-center items-center text-center w-full animate-pulse ">
-          <h1 className="text-white italic text-3xl drop-shadow-[2px_2px_rgba(0,0,0,0.9)]">Double click or press A to choose...</h1>
+          <h1 className="text-white italic text-2xl drop-shadow-[2px_2px_rgba(0,0,0,0.9)]">Double click or press A to choose...</h1>
         </div>
 
         {/*Title*/}
-        <div className="flex pb-10 top-12 absolute z-10 justify-center items-center text-center w-full ">
-          <h1 className="text-orange-300 text-7xl drop-shadow-[3px_2px_rgba(0,0,0,0.9)]">Character Select</h1>
+        <div className="flex pb-10 top-8 absolute z-10 justify-center items-center text-center w-full ">
+          <h1 className="text-orange-300 text-6xl drop-shadow-[3px_2px_rgba(0,0,0,0.9)]">Character Select</h1>
         </div>
       </div>
     </>
