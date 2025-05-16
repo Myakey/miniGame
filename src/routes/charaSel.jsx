@@ -63,7 +63,7 @@ export default function charSel() {
             <div className="flex items-center justify-center pb-10">
               <div className="flex flex-row gap-8 ">
                 <div
-                  className={`border-4 rounded-tl-2xl rounded-br-2xl border-red-500 bg-red-100 overflow-hidden shadow-lg w-40 h-50 transform -skew-x-6 transition-transform duration-200 ${(currentIndex + char.length) % char.length === 0
+                  className={`border-4 rounded-tl-2xl rounded-br-2xl border-red-500 bg-red-100 overflow-hidden shadow-lg w-40 h-50 transform -skew-x-6 transition-transform duration-200 hover:scale-110 active:scale-110 ${(currentIndex + char.length) % char.length === 0
                     ? "scale-110"
                     : "scale-100"
                     }`}
@@ -89,7 +89,7 @@ export default function charSel() {
                   />
                 </div>
                 <div
-                  className={`rounded-tl-2xl rounded-br-2xl border-4 border-gray-500 bg-gray-300 overflow-hidden shadow-lg w-40 h-50 -skew-x-6 ${(currentIndex + char.length) % char.length === 2
+                  className={`rounded-tl-2xl rounded-br-2xl border-4 border-gray-500 bg-gray-300 overflow-hidden shadow-lg w-40 h-50 -skew-x-6 hover:scale-110 active:scale-110${(currentIndex + char.length) % char.length === 2
                     ? "scale-110"
                     : "scale-100"
                     }`}
@@ -108,7 +108,7 @@ export default function charSel() {
             <div className="flex items-center justify-center pb-10">
               <div className="flex flex-row gap-8  ">
                 <div
-                  className={`border-4 rounded-tl-2xl rounded-br-2xl border-yellow-500 bg-yellow-100 overflow-hidden shadow-lg w-40 h-50 transform -skew-x-6 ${(currentIndex + char.length) % char.length === 3
+                  className={`border-4 rounded-tl-2xl rounded-br-2xl border-yellow-500 bg-yellow-100 overflow-hidden shadow-lg w-40 h-50 transform -skew-x-6 hover:scale-110 active:scale-110${(currentIndex + char.length) % char.length === 3
                     ? "scale-110"
                     : "scale-100"
                     }`}
