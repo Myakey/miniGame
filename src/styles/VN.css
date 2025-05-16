@@ -1,0 +1,173 @@
+.vnBackground {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+    overflow: hidden;
+}
+
+.character-sprite {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 30%;
+    max-width: 290px;
+    height: auto;
+    z-index: 10;
+    object-fit: contain;
+    object-position: bottom;
+    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
+    transition: transform 0.3s ease;
+}
+
+.character-sprites {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 30%;
+    max-width: 400px;
+    height: auto;
+    z-index: 10;
+    object-fit: contain;
+    object-position: bottom;
+    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
+    transition: transform 0.3s ease;
+}
+
+.right-10 {
+    right: 10%;
+    filter: brightness(0.4);
+}
+
+.left-10 {
+    left: 10%;
+}
+
+.dim {
+    filter: brightness(0.4);
+}
+
+.button-image {
+    width: 50%;
+    height: auto;
+    max-width: 100px;
+    margin: 0 auto;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    opacity: 1;
+}
+
+.button-image:hover {
+    transform: scale(1.1);
+    opacity: 0.9;
+}
+
+.button-image:active {
+    transform: scale(0.95);
+    opacity: 0.8;
+}
+
+/* .dialogue-container {
+    position: absolute;
+    bottom: 5%;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    z-index: 20;
+} */    
+
+.dialogue-box {
+    position: fixed;
+    bottom: 10px;
+    left: 50%;
+    width: 90%;
+    max-width: 800px;
+    padding: 2rem;
+    background-color: rgba(0, 0, 0, 0.85);
+    color: white;
+    border-radius: 50px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(4px);
+    z-index: 20; 
+    animation: fadeInUp 0.4s ease-out;
+}
+
+.dialogue-box h2 {
+    position: absolute;
+    top: 10px;
+    left: 40px;
+    color: blue;
+    font-size: 1.5rem;
+    margin-bottom: 0.8rem;
+    text-shadow: 0 0 8px rgba(0, 0, 255, 0.6);
+}
+
+.dialogue-box p {
+    font-size: 1.3rem;
+    line-height: 1.5;
+    margin-top: 2rem;
+    text-align: left;
+    color: white;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.ui-buttons {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    display: flex; 
+    gap: 10px; 
+    z-index: 30;
+}
+
+.ui-button {
+    /* background-color: rgba(0, 0, 0, 0.5);  */
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.ui-button:hover {
+    transform: scale(1.1); 
+    opacity: 0.9;
+}
+
+.ui-button:active {
+    transform: scale(0.95); 
+    opacity: 0.8;
+}
+
+.button-image {
+    width: 50px; 
+    height: auto;
+}
+
+@media (max-width: 640px) {
+    .character-sprite,
+    .character-sprites {
+        width: 45%;
+    }
+
+    .dialogue-box {
+        padding: 1.5rem;
+        font-size: 1rem;
+    }
+
+    .ui-button{
+        padding: 5px;
+    }
+}

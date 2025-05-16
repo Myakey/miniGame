@@ -13,7 +13,7 @@ function MainMenu(){
     return(
        <>
        <div className="mainMenu h-screen w-screen justify-center p-10 flex flex-col items-center">
-        <div className="">
+            <div className="">
                 <img src={titleScreen} className="lg:h-70 mt-10"/>
                 <div className="flex flex-col gap-10 items-center mt-20">
                     <Button text="Hi!"/>
