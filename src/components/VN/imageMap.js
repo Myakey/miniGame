@@ -28,7 +28,6 @@ import shrineBG from "../../assets/image/vn/shrine.jpg";
 import houseNoon from "../../assets/image/vn/HouseNoon.png";
 import tangerang from "../../assets/image/vn/tangerang.png";
 import tangNoon from "../../assets/image/vn/tangerangNoon.png";
-import houseNoon from "../../assets/image/vn/HouseNoon.png";
 
 export const characterSprites = {
     reimu: reimu1,
