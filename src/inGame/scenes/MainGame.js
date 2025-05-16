@@ -113,8 +113,7 @@ export class MainGame extends Phaser.Scene {
     this.cameras.main.setZoom(1);
     // this.cameras.main.followOffset(true);
 
-    
-
+  
     const scale = 2;
     groundLayer.setScale(scale);
     obstacleLayer.setScale(scale);

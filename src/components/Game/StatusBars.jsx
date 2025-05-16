@@ -1,3 +1,7 @@
+import energy from "../../assets/image/InGame/icons/energy.png"
+// import energy from "../../assets/image/InGame/icons/energy.png"
+// import energy from "../../assets/image/InGame/icons/energy.png"
+
 export default function StatusBars(input){
     return(
     <>
