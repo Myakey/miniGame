@@ -15,7 +15,7 @@ function App() {
 
   return (
     <BrowserRouter>
-    {loaded ? (
+    {!loaded ? (
       <LoadingScreen onLoaded={() => setLoaded(true)} />
     ) : (
       <Routes>
