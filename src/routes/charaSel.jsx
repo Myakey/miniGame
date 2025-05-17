@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import "../styles/CharaSelect.css"
-import { ReimuRight, ReimuButton, RemiliaRight, RemiliaButton, SakuyaRight, SakuyaButton, YukariRight, YukariButton, FlandreRight, FlandreButton } from "../assets/assetsPreLoad";
+import { ReimuRight, ReimuButton, RemiliaRight, RemiliaButton, SakuyaRight, SakuyaButton, YukariRight, YukariButton, FlandreRight, FlandreButton, soundAssets } from "../assets/assetsPreLoad";
 
 
 
 export default function charSel() {
-  const audioTest = new Audio("/src/assets/sound/CharaSelectChoose.mp3");
+  const audioTest = new Audio(soundAssets[0]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const char = [ReimuRight, RemiliaRight, SakuyaRight, YukariRight, FlandreRight];
   const charButtons = [ReimuButton, RemiliaButton, SakuyaButton, YukariButton, FlandreButton];

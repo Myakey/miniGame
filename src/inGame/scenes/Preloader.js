@@ -1,5 +1,10 @@
 import { Scene } from 'phaser';
-import Yukari from "../../assets/image/InGame/SpriteSheets/Yukari.png";
+import Grass from '../../assets/image/InGame/maps/grass.png';
+import Path from '../../assets/image/InGame/maps/path.png';
+import Tree from '../../assets/image/InGame/maps/Tree01a.png';
+
+
+
 import { useNavigate } from 'react-router-dom';
 import { GameState } from '../../hooks/gamestate';
 import { charaList } from '../mechanics/charaList';
@@ -36,10 +41,17 @@ export class Preloader extends Scene
         let findChara = GameState.char;
         let foundChara = charaList.find(char => char.name === findChara);
         console.log(foundChara);
-        this.load.tilemapTiledJSON("map", "/src/assets/image/InGame/maps/tilesTest.tmj");
-        this.load.image("Grass", "/src/assets/image/InGame/maps/grass.png");
-        this.load.image("Path", "/src/assets/image/InGame/maps/path.png");
-        this.load.image("Tree", "/src/assets/image/InGame/maps/Tree01a.png")
+        // this.load.once('complete', () => {
+        // fetch('/public/maps/Trial.tmj')
+        //     .then(res => res.json())
+        //     .then(mapData => {
+        //     this.createMap(mapData);
+        //     });
+        // });
+        this.load.tilemapTiledJSON('map', '/assets/img/map/tilesTest.tmj');
+        this.load.image("Grass", Grass);
+        this.load.image("Path", Path);
+        this.load.image("Tree", Tree)
         this.load.spritesheet(
         "Yukari",
         foundChara.path,

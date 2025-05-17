@@ -11,6 +11,9 @@ import YukariButton from "../assets/image/CharaSelect/YukariButton.png";
 
 import CharaSelectSound from "../assets/sound/CharaSelectChoose.mp3";
 
+import { useEffect } from "react";
+
+
 export const assetsLoadImg = [ReimuRight, RemiliaRight, SakuyaRight, YukariRight, FlandreRight, FlandreButton, ReimuButton, RemiliaButton, SakuyaButton, YukariButton];
 
 export const soundAssets = [CharaSelectSound]

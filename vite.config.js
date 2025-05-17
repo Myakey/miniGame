@@ -11,5 +11,6 @@ export default defineConfig({
   },
   server: {
     historyApiFallback: true, // for local dev
-  }
+  },
+  assetsInclude: ['**/*.tmj']
 })
