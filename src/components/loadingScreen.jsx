@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { assetsLoad, soundAssets } from "../assets/assetsPreLoad";
+import { assetsLoadImg, soundAssets } from "../assets/assetsPreLoad";
 
 export default function LoadingScreen( {onLoaded} ){
     const [loadedAssets, setLoadedAssets] = useState(0);
