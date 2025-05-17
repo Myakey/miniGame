@@ -1,15 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import "../styles/CharaSelect.css"
-import Reimu from "../assets/image/CharaSelect/ReimuRight.png";
-import Remilia from "../assets/image/CharaSelect/RemiliaRight.png";
-import Sakuya from "../assets/image/CharaSelect/SakuyaRight.png";
-import Yukari from "../assets/image/CharaSelect/YukariRight.png";
-import Flandre from "../assets/image/CharaSelect/FlandreRight.png";
+
 
 export default function charSel() {
   const audioTest = new Audio("/src/assets/sound/CharaSelectChoose.mp3");
   const [currentIndex, setCurrentIndex] = useState(0);
-  const char = [Reimu, Remilia, Sakuya, Yukari, Flandre]
+  // const char = [Reimu, Remilia, Sakuya, Yukari, Flandre]
 
   const charNames = [
     "Reimu Hakurei",
