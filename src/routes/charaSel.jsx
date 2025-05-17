@@ -1,11 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
 import "../styles/CharaSelect.css"
+import { ReimuRight, ReimuButton, RemiliaRight, RemiliaButton, SakuyaRight, SakuyaButton, YukariRight, YukariButton, FlandreRight, FlandreButton } from "../assets/assetsPreLoad";
+
 
 
 export default function charSel() {
   const audioTest = new Audio("/src/assets/sound/CharaSelectChoose.mp3");
   const [currentIndex, setCurrentIndex] = useState(0);
-  // const char = [Reimu, Remilia, Sakuya, Yukari, Flandre]
+  const char = [ReimuRight, RemiliaRight, SakuyaRight, YukariRight, FlandreRight];
+  const charButtons = [ReimuButton, RemiliaButton, SakuyaButton, YukariButton, FlandreButton];
 
   const charNames = [
     "Reimu Hakurei",
@@ -68,7 +71,7 @@ export default function charSel() {
                   onClick={() => changeCharacter(0)}
                 >
                   <img
-                    src="/src/assets/image/CharaSelect/ReimuButton.png"
+                    src={charButtons[0]}
                     alt="Character 1"
                     className="object-cover w-full h-full"
                   />
@@ -81,7 +84,7 @@ export default function charSel() {
                   onClick={() => changeCharacter(1)}
                 >
                   <img
-                    src="/src/assets/image/CharaSelect/ScarletButton.png"
+                    src={charButtons[1]}
                     alt="Character 2"
                     className="object-cover w-full h-full"
                   />
@@ -94,7 +97,7 @@ export default function charSel() {
                   onClick={() => changeCharacter(2)}
                 >
                   <img
-                    src="/src/assets/image/CharaSelect/SakuyaButton.png"
+                    src={charButtons[2]}
                     alt="Character 3"
                     className="object-cover w-full h-full"
                   />
@@ -113,7 +116,7 @@ export default function charSel() {
                   onClick={() => changeCharacter(3)}
                 >
                   <img
-                    src="/src/assets/image/CharaSelect/YukariButton.png"
+                    src={charButtons[3]}
                     alt="Character 1"
                     className="object-cover w-full h-full"
                   />
@@ -126,7 +129,7 @@ export default function charSel() {
                   onClick={() => changeCharacter(4)}
                 >
                   <img
-                    src="/src/assets/image/CharaSelect/FlandreButton.png"
+                    src={charButtons[4]}
                     alt="Character 2"
                     className="object-cover w-full h-full"
                   />

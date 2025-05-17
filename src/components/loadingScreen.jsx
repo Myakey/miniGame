@@ -3,11 +3,11 @@ import { assetsLoadImg, soundAssets } from "../assets/assetsPreLoad";
 
 export default function LoadingScreen( {onLoaded} ){
     const [loadedAssets, setLoadedAssets] = useState(0);
-    const totalAssets = assetsLoad.length + soundAssets.length;
+    const totalAssets = assetsLoadImg.length + soundAssets.length;
 
     useEffect(() => {
         const loadAssets = async () => {
-            for (const asset of assetsLoad) {
+            for (const asset of assetsLoadImg) {
                 await new Promise((resolve) => {
                     const img = new Image();
                     img.src = asset;
