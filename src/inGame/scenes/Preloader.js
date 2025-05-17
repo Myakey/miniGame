@@ -1,10 +1,4 @@
 import { Scene } from 'phaser';
-import Grass from '../../assets/image/InGame/maps/grass.png';
-import Path from '../../assets/image/InGame/maps/path.png';
-import Tree from '../../assets/image/InGame/maps/Tree01a.png';
-
-
-
 import { useNavigate } from 'react-router-dom';
 import { GameState } from '../../hooks/gamestate';
 import { charaList } from '../mechanics/charaList';
@@ -49,9 +43,9 @@ export class Preloader extends Scene
         //     });
         // });
         this.load.tilemapTiledJSON('map', '/assets/img/map/tilesTest.tmj');
-        this.load.image("Grass", Grass);
-        this.load.image("Path", Path);
-        this.load.image("Tree", Tree)
+        this.load.image("Grass", '/assets/img/map/grass.png');
+        this.load.image("Path", '/assets/img/map/path.png');
+        this.load.image("Tree", '/assets/img/map/Tree01a.png');
         this.load.spritesheet(
         "Yukari",
         foundChara.path,
