@@ -5,5 +5,7 @@ export const GameState = {
     happiness: 50,
     hunger: 50,
     hygiene: 50,
-    energy: 50
+    energy: 50,
+    inventory: [],
+    money: 0,
 }

@@ -1,16 +1,18 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import "../styles/CharaSelect.css"
+import { ReimuRight, ReimuButton, RemiliaRight, RemiliaButton, SakuyaRight, SakuyaButton, YukariRight, YukariButton, FlandreRight, FlandreButton, soundAssets } from "../assets/assetsPreLoad";
+import { GameState } from "../hooks/gamestate";
+
+
 
 export default function charSel() {
-  const audioTest = new Audio("/src/assets/sound/CharaSelectChoose.mp3");
+  const audioTest = new Audio(soundAssets[0]);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const char = [
-    "/src/assets/image/CharaSelect/ReimuRight.png",
-    "/src/assets/image/CharaSelect/RemiliaRight.png",
-    "/src/assets/image/CharaSelect/SakuyaRight.png",
-    "src/assets/image/CharaSelect/YukariRight.png",
-    "src/assets/image/CharaSelect/FlandreRight.png",
-  ];
+  const char = [ReimuRight, RemiliaRight, SakuyaRight, YukariRight, FlandreRight];
+  const charButtons = [ReimuButton, RemiliaButton, SakuyaButton, YukariButton, FlandreButton];
+  let navigate = useNavigate();
+
   const charNames = [
     "Reimu Hakurei",
     "Remilia Scarlet",
@@ -44,6 +46,10 @@ export default function charSel() {
         changeCharacter(currentIndex - 1);
       } else if (e.key === "ArrowRight") {
         changeCharacter(currentIndex + 1);
+      } else if (e.key === "Enter") {
+        let selectedCharacter = charNames[currentIndex];
+        GameState.char = selectedCharacter.split(" ")[0];
+        navigate("/inGame"); 
       }
 
       //Reset prevent spamming
@@ -70,9 +76,14 @@ export default function charSel() {
                     : "scale-100"
                     }`}
                   onClick={() => changeCharacter(0)}
+                  onDoubleClick={() => {
+                    let selectedCharacter = charNames[currentIndex];
+                    GameState.char = selectedCharacter.split(" ")[0];
+                    navigate("/inGame"); 
+                  }}
                 >
                   <img
-                    src="/src/assets/image/CharaSelect/ReimuButton.png"
+                    src={charButtons[0]}
                     alt="Character 1"
                     className="object-cover w-full h-full"
                   />
@@ -83,9 +94,14 @@ export default function charSel() {
                     : "scale-100"
                     }`}
                   onClick={() => changeCharacter(1)}
+                  onDoubleClick={() => {
+                    let selectedCharacter = charNames[currentIndex];
+                    GameState.char = selectedCharacter.split(" ")[0];
+                    navigate("/inGame"); 
+                  }}
                 >
                   <img
-                    src="/src/assets/image/CharaSelect/ScarletButton.png"
+                    src={charButtons[1]}
                     alt="Character 2"
                     className="object-cover w-full h-full"
                   />
@@ -96,9 +112,14 @@ export default function charSel() {
                     : "scale-100"
                     }`}
                   onClick={() => changeCharacter(2)}
+                  onDoubleClick={() => {
+                    let selectedCharacter = charNames[currentIndex];
+                    GameState.char = selectedCharacter.split(" ")[0];
+                    navigate("/inGame"); 
+                  }}
                 >
                   <img
-                    src="/src/assets/image/CharaSelect/SakuyaButton.png"
+                    src={charButtons[2]}
                     alt="Character 3"
                     className="object-cover w-full h-full"
                   />
@@ -115,9 +136,14 @@ export default function charSel() {
                     : "scale-100"
                     }`}
                   onClick={() => changeCharacter(3)}
+                  onDoubleClick={() => {
+                    let selectedCharacter = charNames[currentIndex];
+                    GameState.char = selectedCharacter.split(" ")[0];
+                    navigate("/inGame"); 
+                  }}
                 >
                   <img
-                    src="/src/assets/image/CharaSelect/YukariButton.png"
+                    src={charButtons[3]}
                     alt="Character 1"
                     className="object-cover w-full h-full"
                   />
@@ -128,9 +154,14 @@ export default function charSel() {
                     : "scale-100"
                     }`}
                   onClick={() => changeCharacter(4)}
+                  onDoubleClick={() => {
+                    let selectedCharacter = charNames[currentIndex];
+                    GameState.char = selectedCharacter.split(" ")[0];
+                    navigate("/inGame"); 
+                  }}
                 >
                   <img
-                    src="/src/assets/image/CharaSelect/FlandreButton.png"
+                    src={charButtons[4]}
                     alt="Character 2"
                     className="object-cover w-full h-full"
                   />

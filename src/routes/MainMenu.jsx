@@ -22,8 +22,7 @@ function MainMenu(){
                         <div className="flex flex-row justify-between">
                             <Button text="Char Select" onClick={()=>{navigate('/')}}/>
                             <Button text="InGame" onClick={()=>{
-                                GameState.char = prompt ("Pilih Karakter sebelum mulai!");
-                                navigate('/inGame')
+                                navigate('/charaSel')
                                 }}/>
                             <Button text="VN" onClick={()=>{navigate('/vn')}}/>
                             <Button text="charaSel" onClick={()=>{navigate('/charaSel')}}/>
