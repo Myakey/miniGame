@@ -1,7 +1,13 @@
-import { MainGame } from "./scenes/MainGame";
-import { Preloader } from "./scenes/Preloader";
-import { BlokM } from "./scenes/blokM";
 import { Boot } from "./scenes/Boot";
+import { Preloader } from "./scenes/Preloader";
+import { MainGame } from "./scenes/MainGame";
+import { Dieng } from "./scenes/Dieng";
+import { Pantai } from "./scenes/Pantai";
+import { FlowerField } from "./scenes/flowerField";
+import { BlokM } from "./scenes/blokM";
+import { HakureiShrine } from "./scenes/HakureiShrine";
+import { debugScene } from "./scenes/debugScene";
+
 import Phaser from "phaser";
 
 const config = {
@@ -10,10 +16,10 @@ const config = {
     height: 600,
     parent: 'game-container',
     backgroundColor: "#91b2c1",
-    // scale: {
-    //      mode: Phaser.Scale.RESIZE,
-    //     autoCenter: Phaser.Scale.CENTER_BOTH,
-    // },
+    scale: {
+         mode: Phaser.Scale.RESIZE,
+        autoCenter: Phaser.Scale.CENTER_BOTH,
+    },
     physics: {
       default: 'arcade',
       arcade: {
@@ -28,7 +34,12 @@ const config = {
         Boot,
         Preloader,
         MainGame,
-        BlokM
+        BlokM,
+        Dieng,
+        HakureiShrine,
+        Pantai,
+        FlowerField,
+        debugScene,
     ]
 };
 

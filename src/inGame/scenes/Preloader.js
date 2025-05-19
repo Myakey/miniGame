@@ -35,13 +35,6 @@ export class Preloader extends Scene
         let findChara = GameState.char;
         let foundChara = charaList.find(char => char.name === findChara);
         console.log(foundChara);
-        // this.load.once('complete', () => {
-        // fetch('/public/maps/Trial.tmj')
-        //     .then(res => res.json())
-        //     .then(mapData => {
-        //     this.createMap(mapData);
-        //     });
-        // });
         this.load.tilemapTiledJSON('map', '/assets/img/map/tilesTest.tmj');
         this.load.image("Grass", '/assets/img/map/grass.png');
         this.load.image("Path", '/assets/img/map/path.png');

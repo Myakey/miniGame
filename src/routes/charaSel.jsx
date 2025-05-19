@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import "../styles/CharaSelect.css"
 import { ReimuRight, ReimuButton, RemiliaRight, RemiliaButton, SakuyaRight, SakuyaButton, YukariRight, YukariButton, FlandreRight, FlandreButton, soundAssets } from "../assets/assetsPreLoad";
+import { GameState } from "../hooks/gamestate";
 
 
 
@@ -9,6 +11,7 @@ export default function charSel() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const char = [ReimuRight, RemiliaRight, SakuyaRight, YukariRight, FlandreRight];
   const charButtons = [ReimuButton, RemiliaButton, SakuyaButton, YukariButton, FlandreButton];
+  let navigate = useNavigate();
 
   const charNames = [
     "Reimu Hakurei",
@@ -43,6 +46,10 @@ export default function charSel() {
         changeCharacter(currentIndex - 1);
       } else if (e.key === "ArrowRight") {
         changeCharacter(currentIndex + 1);
+      } else if (e.key === "Enter") {
+        let selectedCharacter = charNames[currentIndex];
+        GameState.char = selectedCharacter.split(" ")[0];
+        navigate("/inGame"); 
       }
 
       //Reset prevent spamming
@@ -69,6 +76,11 @@ export default function charSel() {
                     : "scale-100"
                     }`}
                   onClick={() => changeCharacter(0)}
+                  onDoubleClick={() => {
+                    let selectedCharacter = charNames[currentIndex];
+                    GameState.char = selectedCharacter.split(" ")[0];
+                    navigate("/inGame"); 
+                  }}
                 >
                   <img
                     src={charButtons[0]}
@@ -82,6 +94,11 @@ export default function charSel() {
                     : "scale-100"
                     }`}
                   onClick={() => changeCharacter(1)}
+                  onDoubleClick={() => {
+                    let selectedCharacter = charNames[currentIndex];
+                    GameState.char = selectedCharacter.split(" ")[0];
+                    navigate("/inGame"); 
+                  }}
                 >
                   <img
                     src={charButtons[1]}
@@ -95,6 +112,11 @@ export default function charSel() {
                     : "scale-100"
                     }`}
                   onClick={() => changeCharacter(2)}
+                  onDoubleClick={() => {
+                    let selectedCharacter = charNames[currentIndex];
+                    GameState.char = selectedCharacter.split(" ")[0];
+                    navigate("/inGame"); 
+                  }}
                 >
                   <img
                     src={charButtons[2]}
@@ -114,6 +136,11 @@ export default function charSel() {
                     : "scale-100"
                     }`}
                   onClick={() => changeCharacter(3)}
+                  onDoubleClick={() => {
+                    let selectedCharacter = charNames[currentIndex];
+                    GameState.char = selectedCharacter.split(" ")[0];
+                    navigate("/inGame"); 
+                  }}
                 >
                   <img
                     src={charButtons[3]}
@@ -127,6 +154,11 @@ export default function charSel() {
                     : "scale-100"
                     }`}
                   onClick={() => changeCharacter(4)}
+                  onDoubleClick={() => {
+                    let selectedCharacter = charNames[currentIndex];
+                    GameState.char = selectedCharacter.split(" ")[0];
+                    navigate("/inGame"); 
+                  }}
                 >
                   <img
                     src={charButtons[4]}

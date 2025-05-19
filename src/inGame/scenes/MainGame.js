@@ -1,21 +1,19 @@
 import Phaser from "phaser";
 import Yukari from "../../assets/image/InGame/SpriteSheets/Yukari.png";
 import { EventBus } from "../EventBus";
-import { GameState } from "../../hooks/gamestate"
+import { GameState } from "../../hooks/gamestate";
 // import trialMap from "../../assets/image/InGame/maps/Trial.tmj"
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+import { handleMovement } from "../movements/handleMovement";
+import setupPlayerMovement from "../movements/pathFinding";
 
 export class MainGame extends Phaser.Scene {
-
-  
 
   constructor() {
     super({ key: "MainGame" });
   }
 
-  preload() {
-    
-  }
+  preload() {}
 
   generatePlayerAnimation() {
     this.anims.create({
@@ -91,29 +89,142 @@ export class MainGame extends Phaser.Scene {
     });
   }
 
+  handleTrigger(zoneNumber) {
+    this.SaveState();
+    this.inTriggerZone = zoneNumber;
+  }
+
+  generateTriggerZone() {
+    this.triggerZone1 = this.add.zone(400, 100, 100, 100);
+    this.physics.world.enable(this.triggerZone1);
+    this.triggerZone1.body.setAllowGravity(false);
+    this.triggerZone1.body.setImmovable(true);
+
+    this.triggerZone2 = this.add.zone(600, 100, 100, 100);
+    this.physics.world.enable(this.triggerZone2);
+    this.triggerZone2.body.setAllowGravity(false);
+    this.triggerZone2.body.setImmovable(true);
+
+    this.triggerZone3 = this.add.zone(400, 300, 100, 100);
+    this.physics.world.enable(this.triggerZone3);
+    this.triggerZone3.body.setAllowGravity(false);
+    this.triggerZone3.body.setImmovable(true);
+
+    this.triggerZone4 = this.add.zone(600, 300, 100, 100);
+    this.physics.world.enable(this.triggerZone4);
+    this.triggerZone4.body.setAllowGravity(false);
+    this.triggerZone4.body.setImmovable(true);
+
+    this.triggerZone5 = this.add.zone(800, 300, 100, 100);
+    this.physics.world.enable(this.triggerZone5);
+    this.triggerZone5.body.setAllowGravity(false);
+    this.triggerZone5.body.setImmovable(true);
+
+    this.triggerZone6 = this.add.zone(1000, 300, 100, 100);
+    this.physics.world.enable(this.triggerZone6);
+    this.triggerZone6.body.setAllowGravity(false);
+    this.triggerZone6.body.setImmovable(true);
+
+    this.inTriggerZone = false;
+    this.interactKey = this.input.keyboard.addKey("E");
+    this.physics.add.overlap(
+      this.player,
+      this.triggerZone1,
+      () => {
+        this.handleTrigger(1);
+      },
+      null,
+      this
+    );
+
+    this.physics.add.overlap(
+      this.player,
+      this.triggerZone2,
+      () => {
+        this.handleTrigger(2);
+      },
+      null,
+      this
+    );
+
+    this.physics.add.overlap(
+      this.player,
+      this.triggerZone3,
+      () => {
+        this.handleTrigger(3);
+      },
+      null,
+      this
+    );
+
+    this.physics.add.overlap(
+      this.player,
+      this.triggerZone4,
+      () => {
+        this.handleTrigger(4);
+      },
+      null,
+      this
+    );
+
+    this.physics.add.overlap(
+      this.player,
+      this.triggerZone5,
+      () => {
+        this.handleTrigger(5);
+      },
+      null,
+      this
+    );
+
+    this.physics.add.overlap(
+      this.player,
+      this.triggerZone5,
+      () => {
+        this.handleTrigger(6);
+      },
+      null,
+      this
+    );
+  }
+
+  generatePlaces(){
+    this.interactKey.on("down", () => {
+      switch(this.inTriggerZone){
+        case 1 : this.scene.start("BlokM"); break;
+        case 2 : this.scene.start("Dieng"); break;
+        case 3 : this.scene.start("HakureiShrine"); break;
+        case 4 : this.scene.start("FlowerField"); break;
+        case 5 : this.scene.start("Pantai"); break;
+        case 6 : this.scene.start("debugScene"); break;
+        default : break;
+      }
+        // EventBus.emit("perform-action", "bath");
+        //  EventBus.emit("navigate", "/");
+    });
+  }
+
   create() {
     this.generatePlayerAnimation();
 
     // const map = this.make.tilemap({ key: "map" });
     const startX = GameState.pos_x;
     const startY = GameState.pos_y;
-   
 
     const map = this.add.tilemap("map");
     const path = map.addTilesetImage("path", "Path");
     const grass = map.addTilesetImage("grass", "Grass");
-    const trees = map.addTilesetImage("tree", "Tree")
+    const trees = map.addTilesetImage("tree", "Tree");
     const groundLayer = map.createLayer("layer1", path);
-    const grassLayer = map.createLayer("layer2", grass)
+    const grassLayer = map.createLayer("layer2", grass);
     const obstacleLayer = map.createLayer("layer3", trees);
 
     this.player = this.physics.add.sprite(startX, startY, "Yukari");
-    this.player.setScale(0.3)
+    this.player.setScale(0.3);
 
     this.cameras.main.setZoom(1);
     // this.cameras.main.followOffset(true);
 
-  
     const scale = 2;
     groundLayer.setScale(scale);
     obstacleLayer.setScale(scale);
@@ -122,8 +233,18 @@ export class MainGame extends Phaser.Scene {
     obstacleLayer.setCollisionByProperty({ collides: true });
     this.physics.add.collider(this.player, obstacleLayer);
 
-    this.physics.world.setBounds(0, 0, map.widthInPixels*2, map.heightInPixels*2);
-    this.cameras.main.setBounds(0, 0, map.widthInPixels*2, map.heightInPixels*2);
+    this.physics.world.setBounds(
+      0,
+      0,
+      map.widthInPixels * 2,
+      map.heightInPixels * 2
+    );
+    this.cameras.main.setBounds(
+      0,
+      0,
+      map.widthInPixels * 2,
+      map.heightInPixels * 2
+    );
     this.input.gamepad.once(
       "connected",
       function (pad) {
@@ -134,10 +255,7 @@ export class MainGame extends Phaser.Scene {
 
     this.player.body.setCollideWorldBounds(true);
 
-    this.triggerZone = this.add.zone(400, 300, 100, 100);
-    this.physics.world.enable(this.triggerZone);
-    this.triggerZone.body.setAllowGravity(false);
-    this.triggerZone.body.setImmovable(true);
+    this.generateTriggerZone();
 
     this.cameras.main.startFollow(this.player);
 
@@ -148,170 +266,74 @@ export class MainGame extends Phaser.Scene {
     // this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
 
     const graphics = this.add.graphics();
-      graphics.lineStyle(2, 0xff0000, 1); // Red border with line width of 2
-      graphics.strokeRect(
-          this.physics.world.bounds.x,
-          this.physics.world.bounds.y,
-          this.physics.world.bounds.width,
-          this.physics.world.bounds.height
+    graphics.lineStyle(2, 0xff0000, 1); // Red border with line width of 2
+    graphics.strokeRect(
+      this.physics.world.bounds.x,
+      this.physics.world.bounds.y,
+      this.physics.world.bounds.width,
+      this.physics.world.bounds.height
     );
-    this.physics.add.collider(this.player, obstacleLayer)
-
+    this.physics.add.collider(this.player, obstacleLayer);
 
     this.infoText = this.add
       .text(280, 250, "Nice!", {
         fontSize: "20px",
         fill: "#fff",
-      }).setVisible(false);
+      })
+      .setVisible(false);
 
+      this.generatePlaces();
 
     // this.physics.add.overlap(this.player, this.triggerZone, () => {
     //   this.infoText.setVisible(true);
     // });
-    this.inTriggerZone = false;
-    this.interactKey = this.input.keyboard.addKey("E");
-    this.physics.add.overlap(this.player, this.triggerZone, () => {
-      this.SaveState();
-      this.inTriggerZone = true;
-    }, null, this);
-
-    this.interactKey.on("down", () =>{
-      if(this.inTriggerZone){
-         EventBus.emit("navigate", "/");
-      }
-    })
 
     this.cursors = this.input.keyboard.createCursorKeys();
     this.shiftKey = this.input.keyboard.addKey(
       Phaser.Input.Keyboard.KeyCodes.SHIFT
-    ); 
-
-    
-
-    EventBus.emit("current-scene-ready", this)
+    );
+    //  this.movement = setupPlayerMovement(this, this.player, map, grassLayer);
+    EventBus.on('move', this.handleMove, this);
+    EventBus.on("stop", this.handleStopInput, this);
+    EventBus.emit("current-scene-ready", this);
   }
 
-  SaveState(){
+  handleMove(direction) {
+  switch (direction) {
+    case "up": this.cursors.up.isDown = true; break;
+    case "down": this.cursors.down.isDown = true; break;
+    case "left": this.cursors.left.isDown = true; break;
+    case "right": this.cursors.right.isDown = true; break;
+  }
+}
+
+handleStopInput() {
+  this.cursors.left.isDown = false;
+  this.cursors.right.isDown = false;
+  this.cursors.up.isDown = false;
+  this.cursors.down.isDown = false;
+}
+
+  SaveState() {
     console.log("Its here the savestate!");
     GameState.pos_x = this.player.x;
     GameState.pos_y = this.player.y;
   }
 
-  handleMovement(){
-    let baseSpeed = 100;
-    let velocityX = 0;
-    let velocityY = 0;
-    let speed = this.shiftKey.isDown ? baseSpeed * 2 : baseSpeed;
-    let moving = false;
-
-    if (this.gamepad) {
-      //X Value of the pad
-      let axisH = this.gamepad.axes[0].getValue();
-      let axisV = this.gamepad.axes[1].getValue();
-
-      //DI baawah 0.2 sticknya berarti ga bisa maju lagi
-      const deadZone = 0.2;
-      if (Math.abs(axisH) > deadZone) velocityX = axisH;
-      if (Math.abs(axisV) > deadZone) velocityY = axisV;
-
-      //0 = A, 1 = B, 2 = X, 3 = Y
-      if (this.gamepad.buttons[2].pressed) {
-        speed *= 2;
-      }
-    }
-
-    if (this.cursors.left.isDown) {
-      velocityX = -1;
-    } else if (this.cursors.right.isDown) {
-      velocityX = 1;
-    }
-
-    if (this.cursors.up.isDown) {
-      velocityY = -1;
-    } else if (this.cursors.down.isDown) {
-      velocityY = 1;
-    }
-
-    if (velocityX !== 0 && velocityY !== 0) {
-      const norm = Math.sqrt(0.5); 
-      velocityX *= norm;
-      velocityY *= norm;
-
-      if (velocityX < 0 && velocityY < 0) {
-        this.player.play("walkDiagLeftUp", true);
-        this.lastDirection = "diagLeftUp";
-      } else if (velocityX > 0 && velocityY < 0) {
-        this.player.play("walkDiagRightUp", true);
-        this.lastDirection = "diagRightUp";
-      } else if (velocityX < 0 && velocityY > 0) {
-        this.player.play("walkDiagLeftDown", true);
-        this.lastDirection = "diagLeftDown";
-      } else if (velocityX > 0 && velocityY > 0) {
-        this.player.play("walkDiagRightDown", true);
-        this.lastDirection = "diagRightDown";
-      }
-
-      moving = true;
-    } else {
-      if (velocityX < 0) {
-        this.player.play("walkLeft", true);
-        this.lastDirection = "left";
-        moving = true;
-      } else if (velocityX > 0) {
-        this.player.play("walkRight", true);
-        this.lastDirection = "right";
-        moving = true;
-      }
-
-      if (velocityY < 0) {
-        this.player.play("walkUp", true);
-        this.lastDirection = "up";
-        moving = true;
-      } else if (velocityY > 0) {
-        this.player.play("walkDown", true);
-        this.lastDirection = "down";
-        moving = true;
-      }
-    }
-
-    this.player.body.setVelocity(velocityX * speed, velocityY * speed);
-
-    if (!moving) {
-      this.player.anims.stop();
-
-      switch (this.lastDirection) {
-        case "up":
-          this.player.setFrame(0); 
-          break;
-        case "right":
-          this.player.setFrame(8); 
-          break;
-        case "down":
-          this.player.setFrame(16); 
-          break;
-        case "left":
-          this.player.setFrame(24); 
-          break;
-          //Bisa ditambahin lagi buat yang diagonal? Coba ditambahin lagi buat diagonal
-        default:
-          this.player.setFrame(0); 
-      }
-    }
-  }
+  
 
   update() {
-    this.handleMovement();
+    handleMovement(this);
 
     if (this.gamepad) {
       const xButtonPressed = this.gamepad.buttons[2].pressed; // X button (standard mapping)
 
-      
-
       const playerBounds = this.player.getBounds();
       const areaBounds = this.triggerZone.getBounds();
 
-      
-      if (Phaser.Geom.Intersects.RectangleToRectangle(playerBounds, areaBounds)) {
+      if (
+        Phaser.Geom.Intersects.RectangleToRectangle(playerBounds, areaBounds)
+      ) {
         if (xButtonPressed) {
           this.interactWithArea();
         }
@@ -320,15 +342,18 @@ export class MainGame extends Phaser.Scene {
 
     const inZone = Phaser.Geom.Intersects.RectangleToRectangle(
       this.player.getBounds(),
-      this.triggerZone.getBounds()
+      this.triggerZone1.getBounds()
     );
-    this.inTriggerZone = inZone;
-    console.log("InZone :" + inZone);
-    
+
+
     this.infoText.setVisible(inZone);
   }
 
-   interactWithArea() {
+  shutdown() {
+    EventBus.off("move", this.handleMoveInput, this);
+  }
+
+  interactWithArea() {
     console.log("Interacted with the special area!");
     // Add your interaction logic here
   }

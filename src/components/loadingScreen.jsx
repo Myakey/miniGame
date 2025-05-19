@@ -24,7 +24,7 @@ export default function LoadingScreen( {onLoaded} ){
                 setLoadedAssets((prev) => prev + 1);
             }
 
-            onLoaded(); // Call the onLoaded function when all assets are loaded
+            onLoaded(); 
         };
 
         loadAssets();
