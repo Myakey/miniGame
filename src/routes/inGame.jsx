@@ -20,6 +20,8 @@ import ArrowControls from "../inGame/movements/arrows";
 
 import Shop from "../components/Game/Shop";
 
+import Inventory from "../components/Game/Inventory";
+
 function MainGame() {
   let navigate = useNavigate();
 
@@ -86,6 +88,9 @@ function MainGame() {
 
   return (
     <>
+  
+        <Shop />
+        <Inventory />
       <div className="absolute top-4 left-4 z-30">
         <Button text="Back" onClick={() => navigate("/")} />
       </div>

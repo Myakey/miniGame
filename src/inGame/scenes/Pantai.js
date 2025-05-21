@@ -34,6 +34,23 @@ export class Pantai extends Phaser.Scene{
       EventBus.emit("performAction", "bath");
     });
 
+    const button2 = this.add.text(600, 150, "Bath", {
+      fontSize: "18px",
+      fill: "#0f0",
+      backgroundColor: "#000",
+      padding: { x: 10, y: 5 }
+    }).setInteractive()
+    .on("pointerdown", () => {
+      EventBus.emit("showShop");
+    });
+
+    this.cursors = this.input.keyboard.createCursorKeys();
+    this.shiftKey = this.input.keyboard.addKey(
+          Phaser.Input.Keyboard.KeyCodes.SHIFT
+    );
+  }
+
+  update(){
     
   }
 }

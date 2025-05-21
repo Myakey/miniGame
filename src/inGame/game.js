@@ -7,6 +7,7 @@ import { FlowerField } from "./scenes/flowerField";
 import { BlokM } from "./scenes/blokM";
 import { HakureiShrine } from "./scenes/HakureiShrine";
 import { debugScene } from "./scenes/debugScene";
+import DanmakuScene from "./scenes/danMaku";
 
 import Phaser from "phaser";
 
@@ -40,6 +41,7 @@ const config = {
         Pantai,
         FlowerField,
         debugScene,
+        DanmakuScene
     ]
 };
 
