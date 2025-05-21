@@ -9,7 +9,7 @@ import RemiliaButton from "../assets/image/CharaSelect/ScarletButton.png";
 import SakuyaButton from "../assets/image/CharaSelect/SakuyaButton.png";
 import YukariButton from "../assets/image/CharaSelect/YukariButton.png";
 
-import NitoriShop from "../assets/image/InGame/ShopItems/Nitori.png"
+import NitoriShop from "../assets/image/InGame/ShopItems/nitori.png"
 
 import CharaSelectSound from "../assets/sound/CharaSelectChoose.mp3";
 import NitoriShopSound from "../assets/sound/inGame/nitoriShopLine.mp3";
