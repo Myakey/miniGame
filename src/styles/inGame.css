@@ -11,10 +11,72 @@ html, body {
   background-color: #000; /* Optional: to see the container area clearly */
 }
 
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 
+/* Utility class for fade-in */
+.animate-fade-in {
+  animation: fade-in 0.5s ease-out forwards;
+}
 
+@keyframes popZoom {
+  0% {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
 
+.pop-zoom{
+  animation: popZoom 300ms ease-out;
+}
 
+.book-container {
+  perspective: 1000px;
+  transform-style: preserve-3d;    /* 3D context for children:contentReference[oaicite:10]{index=10} */
+  width: 400px; height: 300px;
+  position: relative;
+}
+
+.cover {
+  position: absolute;
+  width: 50%; height: 100%;
+  backface-visibility: hidden;      /* hide backside when rotated:contentReference[oaicite:11]{index=11} */
+  transition: transform 0.6s ease;
+}
+
+.cover.left {
+  left: 0; background: #4A90E2;
+  transform-origin: right center;
+  backface-visibility: hidden;
+}
+.cover.right {
+  right: 0; background: #50E3C2;
+  transform-origin: left center;
+  backface-visibility: hidden;
+}
+
+/* Closed state */
+.book-container .cover {
+  transform: rotateY(0deg);
+}
+
+/* Open state (via class or animation) */
+.book-container.open .cover.left  { transform: rotateY(-120deg); }
+.book-container.open .cover.right { transform: rotateY( 120deg); }
 
 
 

@@ -9,13 +9,18 @@ import RemiliaButton from "../assets/image/CharaSelect/ScarletButton.png";
 import SakuyaButton from "../assets/image/CharaSelect/SakuyaButton.png";
 import YukariButton from "../assets/image/CharaSelect/YukariButton.png";
 
+import NitoriShop from "../assets/image/InGame/ShopItems/Nitori.png"
+
 import CharaSelectSound from "../assets/sound/CharaSelectChoose.mp3";
+import NitoriShopSound from "../assets/sound/inGame/nitoriShopLine.mp3";
 
 import { useEffect } from "react";
 
 
-export const assetsLoadImg = [ReimuRight, RemiliaRight, SakuyaRight, YukariRight, FlandreRight, FlandreButton, ReimuButton, RemiliaButton, SakuyaButton, YukariButton];
+export const assetsLoadImg = [ReimuRight, RemiliaRight, SakuyaRight, YukariRight, FlandreRight, FlandreButton, ReimuButton, RemiliaButton, SakuyaButton, YukariButton, NitoriShop];
 
-export const soundAssets = [CharaSelectSound]
+export const soundAssets = [CharaSelectSound, NitoriShopSound];
 
-export { RemiliaButton, SakuyaButton, YukariButton, FlandreButton, ReimuButton, ReimuRight, RemiliaRight, SakuyaRight, YukariRight, FlandreRight };
+export { NitoriShopSound };
+
+export { RemiliaButton, SakuyaButton, YukariButton, FlandreButton, ReimuButton, ReimuRight, RemiliaRight, SakuyaRight, YukariRight, FlandreRight, NitoriShop };
