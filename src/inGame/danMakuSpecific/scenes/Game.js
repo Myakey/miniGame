@@ -27,9 +27,9 @@ import fCharger from "./assets/SpriteSheets/EnemiesSpriteSheet/Charger.png";
 import fChargerJson from "./assets/SpriteSheets/EnemiesSpriteSheet/Charger.json";
 import fPlayerLaser from "./assets/SpriteSheets/PlayerLaser.png";
 import fPlayerLaserJson from "./assets/SpriteSheets/PlayerLaser.json";
-export default class Game extends Phaser.Scene {
+export default class DanMakuTrial extends Phaser.Scene {
 	constructor() {
-		super("game");
+		super("DanMakuTrial");
 	}
 	preload() {
 		this.load.image("background", fBackground);
@@ -73,11 +73,7 @@ export default class Game extends Phaser.Scene {
 		);
 
 		// used to control particles
-		this.particleEmitterManager =
-			new Phaser.GameObjects.Particles.ParticleEmitterManager(
-				this,
-				"background"
-			);
+		this.particleEmitterManager = this.add.particles("background");
 
 		this.enemyList = {
 			Dakannon: new Dakannon(this, -300, -300, "")
