@@ -9,6 +9,8 @@ import { HakureiShrine } from "./scenes/HakureiShrine";
 import { debugScene } from "./scenes/debugScene";
 import DanmakuScene from "./scenes/danMaku";
 
+import DanMakuTrial from "./danMakuSpecific/scenes/Game";
+
 import Phaser from "phaser";
 
 const config = {
@@ -41,7 +43,8 @@ const config = {
         Pantai,
         FlowerField,
         debugScene,
-        DanmakuScene
+        DanmakuScene,
+        DanMakuTrial
     ]
 };
 

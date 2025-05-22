@@ -40,7 +40,7 @@ export class FlowerField extends Phaser.Scene{
     })
     .setInteractive()
     .on("pointerdown", () => {
-      this.scene.start("DanmakuScene");
+      this.scene.start("DanMakuTrial");
     });
 
      this.cursors = this.input.keyboard.createCursorKeys();
