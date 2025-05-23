@@ -259,7 +259,7 @@ handleStopInput() {
       const xButtonPressed = this.gamepad.buttons[2].pressed; // X button (standard mapping)
 
       const playerBounds = this.player.getBounds();
-      const areaBounds = this.triggerZone.getBounds();
+      const areaBounds = this.triggerZone1.getBounds();
 
       if (
         Phaser.Geom.Intersects.RectangleToRectangle(playerBounds, areaBounds)
