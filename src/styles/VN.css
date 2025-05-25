@@ -7,46 +7,50 @@
     position: relative;
     overflow: hidden;
 }
-
-.character-sprite {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 30%;
-    max-width: 290px;
-    height: auto;
-    z-index: 10;
-    object-fit: contain;
-    object-position: bottom;
-    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
-    transition: transform 0.3s ease;
-}
-
+/* 
+.character-sprite,
 .character-sprites {
     position: absolute;
     bottom: 0;
-    right: 0;
     width: 30%;
-    max-width: 400px;
+    max-width: 300px; 
+    max-height: 100%;
     height: auto;
     z-index: 10;
     object-fit: contain;
     object-position: bottom;
     filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
     transition: transform 0.3s ease;
+} */
+
+.character-wrapper {
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  position: absolute;
+}
+
+.character-sprite {
+  max-height: 75%;
+  width: auto;
+  object-fit: contain;
+  object-position: bottom;
+  filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
+  transition: transform 0.3s ease;
 }
 
 .right-10 {
     right: 10%;
-    filter: brightness(0.4);
 }
 
 .left-10 {
     left: 10%;
 }
 
-.dim {
-    filter: brightness(0.4);
+.dimmed {
+    filter: brightness(0.4) grayscale(0.3);
+    transition: filter 0.3s ease;
 }
 
 .button-image {
@@ -80,14 +84,14 @@
 } */    
 
 .dialogue-box {
-    position: fixed;
-    bottom: 10px;
+    position: absolute;
+    bottom: 40px;
     left: 50%;
     width: 90%;
     max-width: 800px;
     padding: 2rem;
-    background-color: rgba(0, 0, 0, 0.85);
-    color: white;
+    background-color: rgba(255, 255, 255, 0.6);
+    color: black;
     border-radius: 50px;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(4px);
@@ -97,20 +101,21 @@
 
 .dialogue-box h2 {
     position: absolute;
-    top: 10px;
+    top: -20px;
     left: 40px;
     color: blue;
     font-size: 1.5rem;
     margin-bottom: 0.8rem;
     text-shadow: 0 0 8px rgba(0, 0, 255, 0.6);
+    z-index: 10;
 }
 
 .dialogue-box p {
     font-size: 1.3rem;
     line-height: 1.5;
-    margin-top: 2rem;
+    margin-bottom: 0;
     text-align: left;
-    color: white;
+    color: black;
 }
 
 @keyframes fadeInUp {
@@ -129,7 +134,7 @@
     top: 10px;
     left: 10px;
     display: flex; 
-    gap: 10px; 
+    gap: 2px; 
     z-index: 30;
 }
 
@@ -156,10 +161,41 @@
     height: auto;
 }
 
-@media (max-width: 640px) {
+//custom scrollbar nih!
+.custom-scroll::-webkit-scrollbar {
+  width: 10px;
+}
+
+.custom-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb {
+  background-color: rgba(180, 200, 255, 0.6); /* soft blue */
+  border-radius: 10px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+  transition: background-color 0.3s ease;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(140, 180, 255, 0.7); /* deeper blue on hover */
+}
+
+/* Firefox support */
+.custom-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(180, 200, 255, 0.6) transparent;
+}
+
+@media (max-width: 768px) {
     .character-sprite,
     .character-sprites {
-        width: 45%;
+        width: 80%;
+    }
+
+    .vnBackground.is-mobile .dimmed {
+        display: none !important;
     }
 
     .dialogue-box {

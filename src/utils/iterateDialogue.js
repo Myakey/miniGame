@@ -1,36 +1,110 @@
 import { useState, useEffect, useCallback } from "react";
-import { dialogueData } from "../components/VN/dialogueData.js";
+import { actData } from "../components/VN/dialogueData.js"; 
 
-export function dialogueIterator(onEnd) {
-  const [index, setIndex] = useState(0);
-  const [autoPlay, setAutoPlay] = useState(false);
+export const usedialogueIterator = (actName = "act1", onComplete = () => {}) => {
+  const scenes = actData[actName] || [];
+  const [index, setIndex] = useState(0);//ngetrack current scene
+  const [autoPlay, setAutoPlay] = useState(false);//buat autoplay
+  const [displayedText, setDisplayedText] = useState("");//efek typing
+  const [logHistory, setLogHistory] = useState([]);//buat log history
+  const [isHalted, setIsHalted] = useState(false);//buat halt
 
-  const current = dialogueData[index];
+  const current = scenes[index] || {};
 
-  const handleNext = useCallback(() => {
-    if (index < dialogueData.length - 1) {
-      setIndex((prev) => prev + 1);
-    } else {
-      setAutoPlay(false); 
-      if (onEnd) onEnd(); 
-    }
-  }, [index, onEnd]);
-
+  //riset semua dari 0 kalo ganti act
   useEffect(() => {
-    let interval;
-    if (autoPlay) {
-      interval = setInterval(() => {
-        handleNext();
-      }, 2500); 
+    setIndex(0);
+    setAutoPlay(false);
+    setLogHistory([]);
+    setDisplayedText("");
+    setIsHalted(false);
+  }, [actName]);
+
+  //cek kalo scene ada halt
+  useEffect(() => {
+    // Cek kalo scene haltnya true
+    if (current && current.halt) {
+      setIsHalted(true);
+      const haltDuration = typeof current.haltDuration === 'number' ? current.haltDuration : 3000;
+      const timer = setTimeout(() => {
+        setIsHalted(false);
+      }, haltDuration);
+      return () => clearTimeout(timer);
+    } else {
+      setIsHalted(false);
+    }
+  }, [current, index]); 
+
+  // next dialogue
+  const handleNext = useCallback(() => {
+    // disable kalo ada halt
+    if (isHalted) return;
+
+    if (index < scenes.length - 1) {
+      setIndex((prevIndex) => prevIndex + 1);
+    } else {
+      // If it's the last scene, turn off autoplay and call onComplete
+      setAutoPlay(false);
+      if (typeof onComplete === 'function') {
+        onComplete(); 
+      }
+    }
+  }, [index, scenes.length, isHalted, onComplete]);
+
+  // efek typing
+  useEffect(() => {
+    setDisplayedText("");
+    if (!current || !current.text) {
+        if (current && current.speaker) {
+             setLogHistory(prev => {
+                const logLine = `${current.speaker}: (No dialogue)`; 
+                return prev.length === 0 || prev[prev.length - 1] !== logLine ? [...prev, logLine]: prev;
+            });
+        }
+        return;
     }
 
-    return () => clearInterval(interval);
-  }, [autoPlay, handleNext]);
+    let charIndex = 0;
+    const typingSpeed = current.typingSpeed || 30; 
+    const typingInterval = setInterval(() => {
+      charIndex++;
+      setDisplayedText(current.text.slice(0, charIndex));
+
+      if (charIndex >= current.text.length) {
+        clearInterval(typingInterval);
+
+        setLogHistory(prev => {
+          const logLine = current.speaker ? `${current.speaker}: ${current.text}` : current.text;
+          return prev.length === 0 || prev[prev.length - 1] !== logLine ? [...prev, logLine]: prev;
+        });
+      }
+    }, typingSpeed);
+    return () => clearInterval(typingInterval);
+  }, [current, index]); 
+
+  // efek delay di auto play
+  useEffect(() => {
+    let autoPlayTimer;
+    // Check if autoplay is enabled, text is fully displayed, and not currently halted
+    if (autoPlay && current && current.text && displayedText === current.text && !isHalted) {
+      const autoPlayDelay = typeof current.autoPlayDelay === 'number' ? current.autoPlayDelay : 2000; 
+      autoPlayTimer = setTimeout(() => {
+        handleNext();
+      }, autoPlayDelay);
+    }
+    return () => clearTimeout(autoPlayTimer);
+  }, [autoPlay, displayedText, current, isHalted, handleNext]); 
+
 
   return {
     current,
+    displayedText,
     handleNext,
     autoPlay,
     setAutoPlay,
+    logHistory,
+    isHalted,
+    currentIndex: index, 
+    totalScenes: scenes.length
   };
-}
+};
