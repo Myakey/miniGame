@@ -154,6 +154,8 @@ export const characterSprites = {
     nitori2: nitori2,
     nitori3: nitori3,
     nitori4: nitori4,
+
+    meiling: meiling,
 };
 
 export const backgroundImages = {

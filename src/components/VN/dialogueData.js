@@ -11,11 +11,11 @@ act1: [
         haltDuration: 500,
     },
     {
-        speaker: "Reimu",
+        speaker: "Meiling",
         text: "hi! nice to meet you",
         background: "shrine",
         characters: [
-            { name: "Reimu", sprite: "reimu", position: "right" },
+            { name: "Meiling", sprite: "meiling", position: "right" },
             { name: "Sakuya", sprite: "sakuya", position: "left" }
         ],
         halt: false
