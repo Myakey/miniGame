@@ -101,14 +101,14 @@ import marisa7 from "../../assets/image/Characters/spriteMarisa/7.png";
 import marisa8 from "../../assets/image/Characters/spriteMarisa/8.png";
 
 // Sprite Hong Meiling
-import meiling from "../../assets/image/Characters/spriteHongMeiling/0.png";
-import meiling1 from "../../assets/image/Characters/spriteHongMeiling/1.png";
-import meiling2 from "../../assets/image/Characters/spriteHongMeiling/2.png";
-import meiling3 from "../../assets/image/Characters/spriteHongMeiling/3.png";
-import meiling4 from "../../assets/image/Characters/spriteHongMeiling/4.png";
-import meiling5 from "../../assets/image/Characters/spriteHongMeiling/5.png";
-import meiling6 from "../../assets/image/Characters/spriteHongMeiling/6.png";
-import meiling7 from "../../assets/image/Characters/spriteHongMeiling/7.png";
+import meiling from "../../assets/image/Characters/spriteHongMeiLing/0.png";
+import meiling1 from "../../assets/image/Characters/spriteHongMeiLing/1.png";
+import meiling2 from "../../assets/image/Characters/spriteHongMeiLing/2.png";
+import meiling3 from "../../assets/image/Characters/spriteHongMeiLing/3.png";
+import meiling4 from "../../assets/image/Characters/spriteHongMeiLing/4.png";
+import meiling5 from "../../assets/image/Characters/spriteHongMeiLing/5.png";
+import meiling6 from "../../assets/image/Characters/spriteHongMeiLing/6.png";
+import meiling7 from "../../assets/image/Characters/spriteHongMeiLing/7.png";
 
 //Sprite Hieda no Akyuu
 import hieda from "../../assets/image/Characters/spriteHieda/0.png";
