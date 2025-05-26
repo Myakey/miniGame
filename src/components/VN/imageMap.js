@@ -129,6 +129,7 @@ import shrineBG from "../../assets/image/vn/shrine.jpg";
 import houseNoon from "../../assets/image/vn/HouseNoon.png";
 import tangerang from "../../assets/image/vn/tangerang.png";
 import tangNoon from "../../assets/image/vn/tangerangNoon.png";
+import shrineInterior from "../../assets/image/vn/Hakurei_Shrine_Interior.png";
 
 //Title Background
 import actBackground from "../../assets/image/vn/actBG.jpg";
@@ -255,6 +256,7 @@ export const backgroundImages = {
     tangerang: tangerang,
     tangNoon: tangNoon,
     houseNoon: houseNoon,
+    shrineInterior: shrineInterior,
 };
 
 export const titleBackground = {
