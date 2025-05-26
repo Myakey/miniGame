@@ -7,6 +7,7 @@ export const act1Data = [
         background: "titleBG",
         halt: true,
         haltDuration: 500,
+        sound: "background1",
     },
     {
         speaker: "narrator",
@@ -43,7 +44,8 @@ export const act1Data = [
         background: "shrineInterior",
         characters: [
         ],
-        halt: false
+        halt: false,
+        sound: "none",
     },
     {
         speaker: "Sakuya",
@@ -63,7 +65,8 @@ export const act1Data = [
             { name: "Flandre", sprite: "flandre2", position: "right" },
             { name: "Remilia", sprite: "remilia1", position: "left" }
         ], 
-        halt: false
+        halt: false,
+        sound: "Alice",
     },
     {
         speaker: "Narrator",

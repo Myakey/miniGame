@@ -14,13 +14,18 @@ import NitoriShop from "../assets/image/InGame/ShopItems/nitori.png"
 import CharaSelectSound from "../assets/sound/CharaSelectChoose.mp3";
 import NitoriShopSound from "../assets/sound/inGame/nitoriShopLine.mp3";
 
+import EsotericistPiano from "../assets/sound/VN/Esotericist.mp3"
+import Alice from "../assets/sound/VN/Alice.mp3"
+
 import { useEffect } from "react";
+
+
 
 
 export const assetsLoadImg = [ReimuRight, RemiliaRight, SakuyaRight, YukariRight, FlandreRight, FlandreButton, ReimuButton, RemiliaButton, SakuyaButton, YukariButton, NitoriShop];
 
-export const soundAssets = [CharaSelectSound, NitoriShopSound];
+export const soundAssets = [CharaSelectSound, NitoriShopSound, EsotericistPiano, Alice];
 
-export { NitoriShopSound };
+export { NitoriShopSound, EsotericistPiano, Alice };
 
 export { RemiliaButton, SakuyaButton, YukariButton, FlandreButton, ReimuButton, ReimuRight, RemiliaRight, SakuyaRight, YukariRight, FlandreRight, NitoriShop };
