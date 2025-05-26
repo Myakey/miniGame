@@ -10,14 +10,11 @@ import setupPlayerMovement from "../movements/pathFinding";
 import CreatePlayerAnimation from "../movements/animation";
 
 export class MainGame extends Phaser.Scene {
-
   constructor() {
     super({ key: "MainGame" });
   }
 
   preload() {}
-
-  
 
   handleTrigger(zoneNumber) {
     this.SaveState();
@@ -118,19 +115,32 @@ export class MainGame extends Phaser.Scene {
     );
   }
 
-  generatePlaces(){
+  generatePlaces() {
     this.interactKey.on("down", () => {
-      switch(this.inTriggerZone){
-        case 1 : this.scene.start("BlokM"); break;
-        case 2 : this.scene.start("Dieng"); break;
-        case 3 : this.scene.start("HakureiShrine"); break;
-        case 4 : this.scene.start("FlowerField"); break;
-        case 5 : this.scene.start("Pantai"); break;
-        case 6 : this.scene.start("debugScene"); break;
-        default : break;
+      switch (this.inTriggerZone) {
+        case 1:
+          this.scene.start("BlokM");
+          break;
+        case 2:
+          this.scene.start("Dieng");
+          break;
+        case 3:
+          this.scene.start("HakureiShrine");
+          break;
+        case 4:
+          this.scene.start("FlowerField");
+          break;
+        case 5:
+          this.scene.start("Pantai");
+          break;
+        case 6:
+          this.scene.start("debugScene");
+          break;
+        default:
+          break;
       }
-        // EventBus.emit("perform-action", "bath");
-        //  EventBus.emit("navigate", "/");
+      // EventBus.emit("perform-action", "bath");
+      //  EventBus.emit("navigate", "/");
     });
   }
 
@@ -142,12 +152,12 @@ export class MainGame extends Phaser.Scene {
     const startY = GameState.pos_y;
 
     const map = this.add.tilemap("map");
-    const path = map.addTilesetImage("path", "Path");
-    const grass = map.addTilesetImage("grass", "Grass");
-    const trees = map.addTilesetImage("tree", "Tree");
-    const groundLayer = map.createLayer("layer1", path);
-    const grassLayer = map.createLayer("layer2", grass);
-    const obstacleLayer = map.createLayer("layer3", trees);
+    const ground = map.addTilesetImage("TILEMAPS", "GroundTile");
+    // const grass = map.addTilesetImage("grass", "Grass");
+    // const trees = map.addTilesetImage("tree", "Tree");
+    const groundLayer = map.createLayer("Ground", ground);
+    // const grassLayer = map.createLayer("layer2", grass);
+    // const obstacleLayer = map.createLayer("layer3", trees);
 
     this.player = this.physics.add.sprite(startX, startY, "Yukari");
     this.player.setScale(0.3);
@@ -155,33 +165,41 @@ export class MainGame extends Phaser.Scene {
     this.cameras.main.setZoom(1);
     // this.cameras.main.followOffset(true);
 
-    const scale = 2;
+    const scale = 1;
     groundLayer.setScale(scale);
-    obstacleLayer.setScale(scale);
-    grassLayer.setScale(scale);
+    // obstacleLayer.setScale(scale);
+    // grassLayer.setScale(scale);
 
-    obstacleLayer.setCollisionByProperty({ collides: true });
-    this.physics.add.collider(this.player, obstacleLayer);
+    // obstacleLayer.setCollisionByProperty({ collides: true });
+    // this.physics.add.collider(this.player, obstacleLayer);
 
-    this.physics.world.setBounds(
-      0,
-      0,
-      map.widthInPixels * 2,
-      map.heightInPixels * 2
-    );
+    // 
     this.cameras.main.setBounds(
       0,
       0,
-      map.widthInPixels * 2,
-      map.heightInPixels * 2
+      map.widthInPixels * 1,
+      map.heightInPixels * 1
     );
+
     this.input.gamepad.once(
       "connected",
       function (pad) {
         this.gamepad = pad;
+        console.log("Gamepad connected (event):", pad.id);
       },
       this
     );
+
+    // Also check if a gamepad is already connected
+    if (this.input.gamepad.total > 0) {
+      const pads = this.input.gamepad.gamepads;
+      for (let i = 0; i < pads.length; i++) {
+        if (pads[i]) {
+          this.gamepad = pads[i];
+          console.log("Gamepad already connected:", this.gamepad.id);
+        }
+      }
+    }
 
     this.player.body.setCollideWorldBounds(true);
 
@@ -189,8 +207,8 @@ export class MainGame extends Phaser.Scene {
 
     this.cameras.main.startFollow(this.player);
 
-    obstacleLayer.setCollision([0]);
-    this.physics.add.collider(this.player, obstacleLayer);
+    // obstacleLayer.setCollision([0]);
+    // this.physics.add.collider(this.player, obstacleLayer);
 
     // this.physics.world.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
     // this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
@@ -203,7 +221,7 @@ export class MainGame extends Phaser.Scene {
       this.physics.world.bounds.width,
       this.physics.world.bounds.height
     );
-    this.physics.add.collider(this.player, obstacleLayer);
+    // this.physics.add.collider(this.player, obstacleLayer);
 
     this.infoText = this.add
       .text(280, 250, "Nice!", {
@@ -212,7 +230,7 @@ export class MainGame extends Phaser.Scene {
       })
       .setVisible(false);
 
-      this.generatePlaces();
+    this.generatePlaces();
 
     // this.physics.add.overlap(this.player, this.triggerZone, () => {
     //   this.infoText.setVisible(true);
@@ -223,34 +241,40 @@ export class MainGame extends Phaser.Scene {
       Phaser.Input.Keyboard.KeyCodes.SHIFT
     );
     //  this.movement = setupPlayerMovement(this, this.player, map, grassLayer);
-    EventBus.on('move', this.handleMove, this);
+    EventBus.on("move", this.handleMove, this);
     EventBus.on("stop", this.handleStopInput, this);
     EventBus.emit("current-scene-ready", this);
   }
 
   handleMove(direction) {
-  switch (direction) {
-    case "up": this.cursors.up.isDown = true; break;
-    case "down": this.cursors.down.isDown = true; break;
-    case "left": this.cursors.left.isDown = true; break;
-    case "right": this.cursors.right.isDown = true; break;
+    switch (direction) {
+      case "up":
+        this.cursors.up.isDown = true;
+        break;
+      case "down":
+        this.cursors.down.isDown = true;
+        break;
+      case "left":
+        this.cursors.left.isDown = true;
+        break;
+      case "right":
+        this.cursors.right.isDown = true;
+        break;
+    }
   }
-}
 
-handleStopInput() {
-  this.cursors.left.isDown = false;
-  this.cursors.right.isDown = false;
-  this.cursors.up.isDown = false;
-  this.cursors.down.isDown = false;
-}
+  handleStopInput() {
+    this.cursors.left.isDown = false;
+    this.cursors.right.isDown = false;
+    this.cursors.up.isDown = false;
+    this.cursors.down.isDown = false;
+  }
 
   SaveState() {
     console.log("Its here the savestate!");
     GameState.pos_x = this.player.x;
     GameState.pos_y = this.player.y;
   }
-
-  
 
   update() {
     handleMovement(this);
@@ -274,7 +298,6 @@ handleStopInput() {
       this.player.getBounds(),
       this.triggerZone1.getBounds()
     );
-
 
     this.infoText.setVisible(inZone);
   }
