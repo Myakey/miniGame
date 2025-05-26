@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { actData } from "../components/VN/dialogueData.js"; 
+import { playSound, pauseSound, stopAllSounds } from "../utils/soundHandler";
 
 export const usedialogueIterator = (actName = "act1", onComplete = () => {}, customData = null) => {
   const scenes = customData || actData[actName] || [];
@@ -10,8 +11,23 @@ export const usedialogueIterator = (actName = "act1", onComplete = () => {}, cus
   const [isHalted, setIsHalted] = useState(false);//buat halt
   const  [isTyping, setIsTyping] = useState(false);//buat ngetrack kalo lagi typing
   const typingIntervalRef = useRef(null); // buat ngetrack interval typing
+   const currentSoundRef = useRef(null); //Sound
 
   const current = scenes[index] || {};
+
+  const handleSound = useCallback(() => {
+    const soundKey = current.sound;
+
+    if (soundKey === "none") {
+      stopAllSounds(); 
+      console.log("YES!");
+      currentSoundRef.current = null;
+    } else if (soundKey && soundKey !== currentSoundRef.current) {
+      playSound(soundKey); // play new sound
+      currentSoundRef.current = soundKey;
+    } 
+    // else: do nothing — keep current sound playing
+  }, [current]);
 
   //riset semua dari 0 kalo ganti act
   useEffect(() => {
@@ -20,6 +36,7 @@ export const usedialogueIterator = (actName = "act1", onComplete = () => {}, cus
     setLogHistory([]);
     setDisplayedText("");
     setIsHalted(false);
+    currentSoundRef.current = null;
   }, [actName]);
 
   //cek kalo scene ada halt
@@ -36,6 +53,10 @@ export const usedialogueIterator = (actName = "act1", onComplete = () => {}, cus
       setIsHalted(false);
     }
   }, [current, index]); 
+
+  useEffect(() => {
+    handleSound(); // 👉 play/pause sound when current changes
+  }, [handleSound]);
 
   // next dialogue
   const handleNext = useCallback(() => {
