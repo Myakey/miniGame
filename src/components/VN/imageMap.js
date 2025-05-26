@@ -137,9 +137,9 @@ import flandreRoom from "../../assets/image/vn/Flandre's_Room.png";
 import moriyaShrine from "../../assets/image/vn/Moriya_Shrine.png";
 import mansionInterior from "../../assets/image/vn/Scarlet_Devil_Mansion_Interior.png";
 import mansionOutside from "../../assets/image/vn/Scarlet_Devil_Mansion_Outside.png";
-import blokM1_TS from "../../assets/image/vn/blok M_1_TS.png";
-import blokM2_TS from "../../assets/image/vn/blok M_2_TS.png";
-import blokM3_TS from "../../assets/image/vn/blok M_3_TS.png";
+import blokM1_TS from "../../assets/image/vn/Blok_M_1_TS.png";
+import blokM2_TS from "../../assets/image/vn/Blok_M_2_TS.png";
+import blokM3_TS from "../../assets/image/vn/Blok_M_3_TS.png";
 import Suzunaan_TS from "../../assets/image/vn/Suzunaan_TS.png";
 
 
