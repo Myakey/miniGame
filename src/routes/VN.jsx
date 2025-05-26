@@ -192,9 +192,9 @@ useEffect(() => {
           {showModal && (
               <div className="modal absolute top-12 left-0 bg-white border rounded-lg shadow-lg p-4 z-50" onClick={e => e.stopPropagation()}>
                 <div className="flex flex-row justify-between">
-                  <Button text="Act 1" onClick={() => { setShowModal(false); setCustomActData(null); navigate('/vn', { state: { act: "act1" } }) }} />
-                  <Button text="Act 2" onClick={() => { setShowModal(false); setCustomActData(null); navigate('/vn', { state: { act: "act2" } }) }} />
-                  <Button text="Act 3" onClick={() => { setShowModal(false); setCustomActData(null); navigate('/vn', { state: { act: "act3" } }) }} />
+                  <Button text="Act 1" onClick={() => { setShowModal(false); setCustomActData(act1Data); navigate('/vn', { state: { act: "customAct1" } }) }} />
+                  <Button text="Act 2" onClick={() => { setShowModal(false); setCustomActData(act2Data); navigate('/vn', { state: { act: "customAct2" } }) }} />
+                  <Button text="Act 3" onClick={() => { setShowModal(false); setCustomActData(act3Data); navigate('/vn', { state: { act: "customAct3" } }) }} />
                   <Button text="Act 3.1" onClick={() => { setShowModal(false); setCustomActData(act3_1Data); navigate('/vn', { state: { act: "customAct3_1" } }) }} />
                   <Button text="Act 3.2" onClick={() => { setShowModal(false); setCustomActData(act3_2Data); navigate('/vn', { state: { act: "customAct3_2" } }) }} />
                   <Button text="Act 3.3" onClick={() => { setShowModal(false); setCustomActData(act3_3Data); navigate('/vn', { state: { act: "customAct3_3" } }) }} />
