@@ -32,7 +32,7 @@ function VN() {
   const location = useLocation();
   const isMobile = useIsMobile();
   const actName = location.state?.act || "act1";
-  const { current, displayedText, handleNext, autoPlay, setAutoPlay, logHistory, isHalted } = usedialogueIterator(actName); //routes
+  const { current, displayedText, handleNext, autoPlay, setAutoPlay, logHistory, isHalted, isTyping, skipTyping } = usedialogueIterator(actName); //routes
 
   const [showModal, setShowModal] = useState(false);
   const [showLog, setShowLog] = useState(false);
@@ -40,6 +40,27 @@ function VN() {
   const [titleScreenOpacity, setTitleScreenOpacity] = useState(0);
   const [isTitleActive, setIsTitleActive] = useState(false);
   const prevActNameRef = useRef(actName);
+
+
+  const handleAdvance = () => {
+    if(isHalted) return;
+    if(isTyping) {
+      skipTyping();
+    } else {
+      handleNext();
+    }
+  }
+useEffect(() => {
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter" || e.key === ' ') {
+      handleAdvance();
+    }
+  };
+  window.addEventListener("keydown", handleKeyDown);
+  return () => {
+    window.removeEventListener("keydown", handleKeyDown);
+  };
+}, [handleAdvance, isTyping, isHalted]);
 
   useEffect(() => {
     if (current && current.isTitleScreen) {
@@ -133,7 +154,7 @@ function VN() {
   }
 
   return (
-    <div className={`vnBackground ${isMobile ? "is-mobile" : ""}`} onClick={!autoPlay && !isHalted ? handleNext : undefined} style={{ backgroundImage: `url(${backgroundImages[current.background]})`, }}>
+    <div className={`vnBackground ${isMobile ? "is-mobile" : ""}`} onClick={!autoPlay && !isHalted ? handleAdvance : undefined} style={{ backgroundImage: `url(${backgroundImages[current.background]})`, }}>
 
       {current.characters && current.characters
         .filter(char => !isMobile || char.name === current.speaker)
