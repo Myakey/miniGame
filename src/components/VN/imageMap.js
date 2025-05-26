@@ -150,7 +150,7 @@ export const characterSprites = {
     reimu10: reimuOrbNervous,
 
     sakuya: sakuyaSmile,
-    sakuya: sakuyaAngry,
+    sakuya1: sakuyaAngry,
     sakuya2: sakuyaBored,
     sakuya3: sakuyaDis,
     sakuya4: sakuyaShock,
