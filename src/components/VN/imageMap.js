@@ -1,29 +1,29 @@
 //Sprite Reimu
-import reimu from "../../assets/image/Characters/spriteReimu/0.png";
-import reimu1 from "../../assets/image/Characters/spriteReimu/1.png";
-import reimu2 from "../../assets/image/Characters/spriteReimu/2.png";
-import reimu3 from "../../assets/image/Characters/spriteReimu/3.png";
-import reimu4 from "../../assets/image/Characters/spriteReimu/4.png";
-import reimu5 from "../../assets/image/Characters/spriteReimu/5.png";
-import reimu6 from "../../assets/image/Characters/spriteReimu/6.png";
-import reimu7 from "../../assets/image/Characters/spriteReimu/7.png";
-import reimu8 from "../../assets/image/Characters/spriteReimu/8.png";
-import reimu9 from "../../assets/image/Characters/spriteReimu/9.png";
-import reimu10 from "../../assets/image/Characters/spriteReimu/10.png";
+import reimuSmile from "../../assets/image/Characters/spriteReimu/0.png";
+import reimuNervous from "../../assets/image/Characters/spriteReimu/1.png";
+import reimuShock from "../../assets/image/Characters/spriteReimu/2.png";
+import reimuChill from "../../assets/image/Characters/spriteReimu/3.png";
+import reimuOrb from "../../assets/image/Characters/spriteReimu/4.png";
+import reimuOrbSad from "../../assets/image/Characters/spriteReimu/5.png";
+import reimuAngry from "../../assets/image/Characters/spriteReimu/6.png";
+import reimuHappy from "../../assets/image/Characters/spriteReimu/7.png";
+import reimuSad from "../../assets/image/Characters/spriteReimu/8.png";
+import reimuNeutral from "../../assets/image/Characters/spriteReimu/9.png";
+import reimuOrbNervous from "../../assets/image/Characters/spriteReimu/10.png";
 
 //Sprite Sakuya
-import sakuya from "../../assets/image/Characters/spriteSakuya/0.png";
-import sakuya1 from "../../assets/image/Characters/spriteSakuya/1.png";
-import sakuya2 from "../../assets/image/Characters/spriteSakuya/2.png";
-import sakuya3 from "../../assets/image/Characters/spriteSakuya/3.png";
-import sakuya4 from "../../assets/image/Characters/spriteSakuya/4.png";
-import sakuya5 from "../../assets/image/Characters/spriteSakuya/5.png";
+import sakuyaSmile from "../../assets/image/Characters/spriteSakuya/0.png";
+import sakuyaAngry from "../../assets/image/Characters/spriteSakuya/1.png";
+import sakuyaBored from "../../assets/image/Characters/spriteSakuya/2.png";
+import sakuyaDis from "../../assets/image/Characters/spriteSakuya/3.png";
+import sakuyaShock from "../../assets/image/Characters/spriteSakuya/4.png";
+import sakuyaHappy from "../../assets/image/Characters/spriteSakuya/5.png";
 
 //Sprite Flandre
 import flandre from "../../assets/image/Characters/spriteFlandre/0.png";
 import flandre1 from "../../assets/image/Characters/spriteFlandre/1.png";
 import flandre2 from "../../assets/image/Characters/spriteFlandre/2.png";
-import flandre3 from "../../assets/image/Characters/spriteFlandre/3.png";
+import flandreHappy from "../../assets/image/Characters/spriteFlandre/3.png";
 import flandre4 from "../../assets/image/Characters/spriteFlandre/4.png";
 import flandre5 from "../../assets/image/Characters/spriteFlandre/5.png";
 import flandre6 from "../../assets/image/Characters/spriteFlandre/6.png";
@@ -136,27 +136,116 @@ import actBackground from "../../assets/image/vn/actBG.jpg";
 
 
 export const characterSprites = {
-    reimu: reimu1,
-    sakuya: sakuya1,
-    reimu2: reimu2,
-    sakuya2: sakuya2,
-    reimu3: reimu3,
-    sakuya3: sakuya3,
-    reimu4: reimu4,
-    sakuya4: sakuya4,
+    reimu: reimuSmile, //yang kedua itu declare dari import
+    reimu1: reimuNervous,
+    reimu2: reimuShock,
+    reimu3: reimuChill,
+    reimu4: reimuOrb,
+    reimu5: reimuOrbSad,
+    reimu6: reimuAngry,
+    reimu7: reimuHappy,
+    reimu8: reimuSad,
+    reimu9: reimuNeutral,
+    reimu10: reimuOrbNervous,
 
+    sakuya: sakuyaSmile,
+    sakuya: sakuyaAngry,
+    sakuya2: sakuyaBored,
+    sakuya3: sakuyaDis,
+    sakuya4: sakuyaShock,
+    sakuya5: sakuyaHappy,
+
+    flandre: flandre,
     flandre: flandre1,
     flandre2: flandre2,
-    flandre3: flandre3,
+    flandre3: flandreHappy,
     flandre4: flandre4,
+    flandre5: flandre5,
+    flandre6: flandre6,
+    flandre7: flandre7,
 
+    nitori: nitori,
     nitori: nitori1,
     nitori2: nitori2,
     nitori3: nitori3,
     nitori4: nitori4,
 
+    remilia: remilia,
+    remilia1: remilia1,
+    remilia2: remilia2,
+    remilia3: remilia3,
+    remilia4: remilia4,
+    remilia5: remilia5,
+
+    yukari: yukari,
+    yukari1: yukari1,
+    yukari2: yukari2,
+    yukari3: yukari3,
+
+    yuuka: yuuka,
+    yuuka1: yuuka1,
+    yuuka2: yuuka2,
+    yuuka3: yuuka3,
+    yuuka4: yuuka4,
+    yuuka5: yuuka5,
+
+    sumireko: sumireko,
+    sumireko1: sumireko1,
+    sumireko2: sumireko2,
+    sumireko3: sumireko3,
+    sumireko4: sumireko4,
+    sumireko5: sumireko5,
+    sumireko6: sumireko6,
+    sumireko7: sumireko7,
+    sumireko8: sumireko8,
+    sumireko9: sumireko9,
+
+    kosuzu: kosuzu,
+    kosuzu1: kosuzu1,
+    kosuzu2: kosuzu2,
+    kosuzu3: kosuzu3,
+    kosuzu4: kosuzu4,
+    kosuzu5: kosuzu5,
+
+    sanae: sanae,
+    sanae1: sanae1,
+    sanae2: sanae2,
+    sanae3: sanae3,
+    sanae4: sanae4,
+    sanae5: sanae5,
+    sanae6: sanae6,
+    sanae7: sanae7,
+    sanae8: sanae8,
+
+    marisa: marisa,
+    marisa1: marisa1,
+    marisa2: marisa2,
+    marisa3: marisa3,
+    marisa4: marisa4,
+    marisa5: marisa5,
+    marisa6: marisa6,
+    marisa7: marisa7,
+    marisa8: marisa8,
+
     meiling: meiling,
-    meiling1: meiling1
+    meiling1: meiling1,
+    meiling2: meiling2,
+    meiling3: meiling3,
+    meiling4: meiling4,
+    meiling5: meiling5,
+    meiling6: meiling6,
+    meiling7: meiling7,
+
+    hieda: hieda,
+    hieda1: hieda1,
+    hieda2: hieda2,
+    hieda3: hieda3,
+    hieda4: hieda4,
+    hieda5: hieda5,
+    hieda6: hieda6,
+    hieda7: hieda7,
+    hieda8: hieda8,
+    hieda9: hieda9,
 };
 
 export const backgroundImages = {

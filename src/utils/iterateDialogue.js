@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { actData } from "../components/VN/dialogueData.js"; 
 
 export const usedialogueIterator = (actName = "act1", onComplete = () => {}) => {
@@ -8,6 +8,8 @@ export const usedialogueIterator = (actName = "act1", onComplete = () => {}) => 
   const [displayedText, setDisplayedText] = useState("");//efek typing
   const [logHistory, setLogHistory] = useState([]);//buat log history
   const [isHalted, setIsHalted] = useState(false);//buat halt
+  const  [isTyping, setIsTyping] = useState(false);//buat ngetrack kalo lagi typing
+  const typingIntervalRef = useRef(null); // buat ngetrack interval typing
 
   const current = scenes[index] || {};
 
@@ -51,9 +53,22 @@ export const usedialogueIterator = (actName = "act1", onComplete = () => {}) => 
     }
   }, [index, scenes.length, isHalted, onComplete]);
 
+  const skipTyping = useCallback(() => {
+    if (isTyping && current && current.text) {
+      clearInterval(typingIntervalRef.current);
+      setDisplayedText(current.text); // Set the full text immediately
+      setIsTyping(false); // Stop typing effect
+      setLogHistory(prev => {
+        const logLine = current.speaker ? `${current.speaker}: ${current.text}` : current.text;
+        return prev.length === 0 || prev[prev.length - 1] !== logLine ? [...prev, logLine]: prev;
+      });
+    }
+  }, [isTyping, current]); // Add isTyping and current as dependencies
+
   // efek typing
   useEffect(() => {
     setDisplayedText("");
+    setIsTyping(false);//tambahan
     if (!current || !current.text) {
         if (current && current.speaker) {
              setLogHistory(prev => {
@@ -66,20 +81,23 @@ export const usedialogueIterator = (actName = "act1", onComplete = () => {}) => 
 
     let charIndex = 0;
     const typingSpeed = current.typingSpeed || 30; 
-    const typingInterval = setInterval(() => {
+    setIsTyping(true);
+    typingIntervalRef.current = setInterval (() => {
       charIndex++;
       setDisplayedText(current.text.slice(0, charIndex));
-
       if (charIndex >= current.text.length) {
-        clearInterval(typingInterval);
-
+        clearInterval(typingIntervalRef.current);
+        setIsTyping(false);
         setLogHistory(prev => {
           const logLine = current.speaker ? `${current.speaker}: ${current.text}` : current.text;
           return prev.length === 0 || prev[prev.length - 1] !== logLine ? [...prev, logLine]: prev;
         });
       }
     }, typingSpeed);
-    return () => clearInterval(typingInterval);
+    return () => {
+      clearInterval(typingIntervalRef.current);
+      setIsTyping(false);
+    };
   }, [current, index]); 
 
   // efek delay di auto play
@@ -104,6 +122,8 @@ export const usedialogueIterator = (actName = "act1", onComplete = () => {}) => 
     setAutoPlay,
     logHistory,
     isHalted,
+    isTyping,
+    skipTyping,
     currentIndex: index, 
     totalScenes: scenes.length
   };
