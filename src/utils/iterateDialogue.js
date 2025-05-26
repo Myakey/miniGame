@@ -1,8 +1,8 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { actData } from "../components/VN/dialogueData.js"; 
 
-export const usedialogueIterator = (actName = "act1", onComplete = () => {}) => {
-  const scenes = actData[actName] || [];
+export const usedialogueIterator = (actName = "act1", onComplete = () => {}, customData = null) => {
+  const scenes = customData || actData[actName] || [];
   const [index, setIndex] = useState(0);//ngetrack current scene
   const [autoPlay, setAutoPlay] = useState(false);//buat autoplay
   const [displayedText, setDisplayedText] = useState("");//efek typing
