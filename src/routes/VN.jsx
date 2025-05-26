@@ -11,6 +11,15 @@ import { actData } from "../components/VN/dialogueData.js";
 import { characterSprites, backgroundImages, titleBackground } from "../components/VN/imageMap.js";
 import { usedialogueIterator } from "../utils/iterateDialogue";
 
+import { act1Data } from "../components/VN/Act1.js";
+import { act2Data } from "../components/VN/Act2.js";
+import { act3Data } from "../components/VN/Act3.js";
+import { act3_1Data } from "../components/VN/Act3_1.js";
+import { act3_2Data } from "../components/VN/Act3_2.js";
+import { act3_3Data } from "../components/VN/Act3_3.js";
+import { act4Data } from "../components/VN/Act4.js";
+import { act5Data } from "../components/VN/Act5.js";
+
 const Button = ({ text, onClick }) => (
   <button className="text-xs bg-gray-300 px-3 py-1 rounded-full shadow hover:bg-gray-400 m-1" onClick={onClick}>{text}</button>
 );
@@ -32,7 +41,12 @@ function VN() {
   const location = useLocation();
   const isMobile = useIsMobile();
   const actName = location.state?.act || "act1";
-  const { current, displayedText, handleNext, autoPlay, setAutoPlay, logHistory, isHalted, isTyping, skipTyping } = usedialogueIterator(actName); //routes
+  const [customActData, setCustomActData] = useState(null);
+  const { current, displayedText, handleNext, autoPlay, setAutoPlay, logHistory, isHalted, isTyping, skipTyping } = usedialogueIterator(
+    customActData ? "custom" : actName,
+    undefined,
+    customActData
+  ); //routes
 
   const [showModal, setShowModal] = useState(false);
   const [showLog, setShowLog] = useState(false);
@@ -178,10 +192,15 @@ useEffect(() => {
           {showModal && (
               <div className="modal absolute top-12 left-0 bg-white border rounded-lg shadow-lg p-4 z-50" onClick={e => e.stopPropagation()}>
                 <div className="flex flex-row justify-between">
-                  <Button text="Act 1" onClick={() => { setShowModal(false); navigate('/vn', { state: { act: "act1" } }) }} />
-                  <Button text="Act 2" onClick={() => { setShowModal(false); navigate('/vn', { state: { act: "act2" } }) }} />
-                  <Button text="Act 3" onClick={() => { setShowModal(false); navigate('/vn', { state: { act: "act3" } }) }} />
-                  <Button text="Act 4" onClick={() => { setShowModal(false); navigate('/vn', { state: { act: "act4" } }) }} />
+                  <Button text="Act 1" onClick={() => { setShowModal(false); setCustomActData(null); navigate('/vn', { state: { act: "act1" } }) }} />
+                  <Button text="Act 2" onClick={() => { setShowModal(false); setCustomActData(null); navigate('/vn', { state: { act: "act2" } }) }} />
+                  <Button text="Act 3" onClick={() => { setShowModal(false); setCustomActData(null); navigate('/vn', { state: { act: "act3" } }) }} />
+                  <Button text="Act 3.1" onClick={() => { setShowModal(false); setCustomActData(act3_1Data); navigate('/vn', { state: { act: "customAct3_1" } }) }} />
+                  <Button text="Act 3.2" onClick={() => { setShowModal(false); setCustomActData(act3_2Data); navigate('/vn', { state: { act: "customAct3_2" } }) }} />
+                  <Button text="Act 3.3" onClick={() => { setShowModal(false); setCustomActData(act3_3Data); navigate('/vn', { state: { act: "customAct3_3" } }) }} />
+                  <Button text="Act 4" onClick={() => { setShowModal(false); setCustomActData(act4Data); navigate('/vn', { state: { act: "customAct4" } }) }} />
+                  <Button text="Act 5" onClick={() => { setShowModal(false); setCustomActData(act5Data); navigate('/vn', { state: { act: "customAct5" } }) }} />
+                    
                 </div>
               </div>
             )}
