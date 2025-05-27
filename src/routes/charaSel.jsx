@@ -15,16 +15,43 @@ import {
   soundAssets,
 } from "../assets/assetsPreLoad";
 import { GameState } from "../hooks/gamestate";
+import {
+  FlandreSelect,
+  YukariSelect,
+  ReimuSelect,
+  RemiliaSelect,
+  SakuyaSelect,
+} from "../assets/assetsPreLoad";
+import { Selected } from "../assets/assetsPreLoad";
 
 export default function CharSel() {
   const audioTest = new Audio(soundAssets[0]);
+  const charSelectSounds = [
+    ReimuSelect,
+    RemiliaSelect,
+    SakuyaSelect,
+    YukariSelect,
+    FlandreSelect,
+  ];
   const [currentIndex, setCurrentIndex] = useState(0);
   const [chara, setChara] = useState(ReimuRight);
   const [inputReady, setInputReady] = useState(false);
 
-  const char = [ReimuRight, RemiliaRight, SakuyaRight, YukariRight, FlandreRight];
-  const charNames = ["Reimu Hakurei", "Remilia Scarlet", "Sakuya Izayoi", "Yukari Yakumo", "Flandre Scarlet"];
-   const charButtons = [
+  const char = [
+    ReimuRight,
+    RemiliaRight,
+    SakuyaRight,
+    YukariRight,
+    FlandreRight,
+  ];
+  const charNames = [
+    "Reimu Hakurei",
+    "Remilia Scarlet",
+    "Sakuya Izayoi",
+    "Yukari Yakumo",
+    "Flandre Scarlet",
+  ];
+  const charButtons = [
     ReimuButton,
     RemiliaButton,
     SakuyaButton,
@@ -39,6 +66,28 @@ export default function CharSel() {
   const prevButtonsPressedRef = useRef(new Set());
   const nextAllowedInputTimeRef = useRef(0);
   const mountTime = useRef(performance.now());
+
+  const [fadeOut, setFadeOut] = useState(false);
+  const [transitioning, setTransitioning] = useState(false);
+
+
+  function handleCharacterSelect(index) {
+    GameState.char = charNames[index].split(" ")[0];
+    const audio = new Audio(charSelectSounds[index]);
+    const selected = new Audio(Selected);
+    selected.play();
+    audio.play();
+    setTransitioning(true);
+
+    setFadeOut(true);
+
+    audio.onloadedmetadata = () => {
+      const duration = audio.duration * 1000;
+      setTimeout(() => {
+        navigate("/inGame");
+      }, duration);
+  };
+  }
 
   function changeCharacter(i) {
     const clampedIndex = (i + char.length) % char.length;
@@ -64,12 +113,16 @@ export default function CharSel() {
 
       if (e.key === "ArrowUp") changeCharacter(currentIndex + 2);
       else if (e.key === "ArrowDown") {
-        changeCharacter(charNames[currentIndex] === "Sakuya Izayoi" ? currentIndex - 3 : currentIndex - 2);
+        changeCharacter(
+          charNames[currentIndex] === "Sakuya Izayoi"
+            ? currentIndex - 3
+            : currentIndex - 2
+        );
       } else if (e.key === "ArrowLeft") changeCharacter(currentIndex - 1);
       else if (e.key === "ArrowRight") changeCharacter(currentIndex + 1);
       else if (e.key === "Enter") {
         GameState.char = charNames[currentIndex].split(" ")[0];
-        navigate("/inGame");
+        handleCharacterSelect(currentIndex);
       }
 
       setTimeout(() => (isKeyPressed.current = false), 200);
@@ -80,7 +133,8 @@ export default function CharSel() {
       const now = performance.now();
 
       if (!gp) {
-        if (isMounted) animationFrameRef.current = requestAnimationFrame(handleGamepadInput);
+        if (isMounted)
+          animationFrameRef.current = requestAnimationFrame(handleGamepadInput);
         return;
       }
 
@@ -111,12 +165,20 @@ export default function CharSel() {
           changeCharacter(currentIndex + 2);
           nextAllowedInputTimeRef.current = now + 300;
         } else if (dpadUp || (axisY < -axisThreshold && verticalEdge)) {
-          changeCharacter(charNames[currentIndex] === "Sakuya Izayoi" ? currentIndex - 3 : currentIndex - 2);
+          changeCharacter(
+            charNames[currentIndex] === "Sakuya Izayoi"
+              ? currentIndex - 3
+              : currentIndex - 2
+          );
           nextAllowedInputTimeRef.current = now + 300;
         }
       }
 
-      if (gp.buttons[0].pressed && !prevButtonsPressedRef.current.has(0) && now > nextAllowedInputTimeRef.current) {
+      if (
+        gp.buttons[0].pressed &&
+        !prevButtonsPressedRef.current.has(0) &&
+        now > nextAllowedInputTimeRef.current
+      ) {
         GameState.char = charNames[currentIndex].split(" ")[0];
         navigate("/inGame");
         nextAllowedInputTimeRef.current = now + 500;
@@ -134,7 +196,8 @@ export default function CharSel() {
         else prevButtonsPressedRef.current.delete(i);
       });
 
-      if (isMounted) animationFrameRef.current = requestAnimationFrame(handleGamepadInput);
+      if (isMounted)
+        animationFrameRef.current = requestAnimationFrame(handleGamepadInput);
     };
 
     if (inputReady) {
@@ -153,6 +216,9 @@ export default function CharSel() {
 
   return (
     <>
+      {fadeOut && (
+  <div className="fixed top-0 left-0 w-full h-full bg-black z-50 animate-fadeOut"></div>
+)}
       <div className="charaSelect">
         <div className="flex flex-row h-screen w-screen overflow-hidden">
           <div className="flex flex-col h-screen w-screen overflow-hidden justify-center">
