@@ -133,7 +133,7 @@ import shrineInterior from "../../assets/image/vn/Hakurei_Shrine_Interior.png";
 import Suzunaan from "../../assets/image/vn/Suzunaan.png";
 import beach from "../../assets/image/vn/Beach.png";
 import dieng from "../../assets/image/vn/Diengs_Summit.png";
-import flandreRoom from "../../assets/image/vn/Flandre's_Room.png";
+import flandreRoom from "../../assets/image/vn/Flandre_Room.png";
 import moriyaShrine from "../../assets/image/vn/Moriya_Shrine.png";
 import mansionInterior from "../../assets/image/vn/Scarlet_Devil_Mansion_Interior.png";
 import mansionOutside from "../../assets/image/vn/Scarlet_Devil_Mansion_Outside.png";
@@ -169,7 +169,7 @@ export const characterSprites = {
     sakuya5: sakuyaHappy,
 
     flandre: flandre,
-    flandre: flandre1,
+    flandre1: flandre1,
     flandre2: flandre2,
     flandre3: flandreHappy,
     flandre4: flandre4,
