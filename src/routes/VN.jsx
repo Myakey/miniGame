@@ -11,6 +11,8 @@ import { actData } from "../components/VN/dialogueData.js";
 import { characterSprites, backgroundImages, titleBackground } from "../components/VN/imageMap.js";
 import { usedialogueIterator } from "../utils/iterateDialogue";
 
+import { prologueData } from "../components/VN/Prologue.js";
+import { introData } from "../components/VN/Intro.js";
 import { act1Data } from "../components/VN/Act1.js";
 import { act2Data } from "../components/VN/Act2.js";
 import { act3Data } from "../components/VN/Act3.js";
@@ -55,6 +57,9 @@ function VN() {
   const [isTitleActive, setIsTitleActive] = useState(false);
   const prevActNameRef = useRef(actName);
 
+  const [sceneOpacity, setSceneOpacity] = useState(1);
+  const fadeTimeoutRef = useRef(null);
+
 
   const handleAdvance = () => {
     if(isHalted) return;
@@ -64,18 +69,21 @@ function VN() {
       handleNext();
     }
   }
-useEffect(() => {
-  const handleKeyDown = (e) => {
-    if (e.key === "Enter" || e.key === ' ') {
-      handleAdvance();
-    }
-  };
-  window.addEventListener("keydown", handleKeyDown);
-  return () => {
-    window.removeEventListener("keydown", handleKeyDown);
-  };
-}, [handleAdvance, isTyping, isHalted]);
 
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Enter" || e.key === ' ') {
+        handleAdvance();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [handleAdvance, isTyping, isHalted]);
+
+  //FadeIn Title
   useEffect(() => {
     if (current && current.isTitleScreen) {
       setIsTitleActive(true); 
@@ -93,6 +101,51 @@ useEffect(() => {
       setIsTitleActive(false);
     }
   }, [current?.isTitleScreen, actName, current?.title]);
+
+  //FadeIn Scene
+  useEffect (() => {
+    if (current && current.halt){
+      setSceneOpacity(0);
+      fadeTimeoutRef.current = setTimeout(() => {
+        setSceneOpacity(1);
+      }, 10);
+      return () => clearTimeout(fadeTimeoutRef.current);
+    } else {
+      setSceneOpacity(1);
+    }
+  }, [current]);
+
+  const handleAdvanceWithFade = () => {
+    if (isHalted) return;
+    if(current && current.halt){
+      setSceneOpacity(0);
+      setTimeout(() => {
+        handleNext();
+      }, FADE_DURATION);
+    } else {
+      handleNext();
+    }
+  };
+
+  //FadeOut buat autoplay & halt
+  useEffect(() => {
+    if(autoPlay && current && current.text && displayedText === current.text && !isHalted){
+      const autoPlayDelay = typeof current.autoPlayDelay === "number" ? current.autoPlayDelay : 2000;
+      if(current.halt){
+        fadeTimeoutRef.current = setTimeout(() => {
+          setSceneOpacity(0);
+          setTimeout(() => {
+            handleNext();
+          }, FADE_DURATION);
+        }, autoPlayDelay);
+      } else {
+        fadeTimeoutRef.current = setTimeout(() => {
+          handleNext();
+        }, autoPlayDelay);
+      }      
+      return () => clearTimeout(fadeTimeoutRef.current);
+    }
+  }, [autoPlay, displayedText, current, isHalted, handleNext]);
 
   const handleTitleClickAndFade = () => {
     if (!isTitleActive || titleScreenOpacity === 0) return; 
@@ -168,7 +221,7 @@ useEffect(() => {
   }
 
   return (
-    <div className={`vnBackground ${isMobile ? "is-mobile" : ""}`} onClick={!autoPlay && !isHalted ? handleAdvance : undefined} style={{ backgroundImage: `url(${backgroundImages[current.background]})`, }}>
+    <div className={`vnBackground ${isMobile ? "is-mobile" : ""}`} onClick={!autoPlay && !isHalted ? handleAdvanceWithFade : undefined} style={{ backgroundImage: `url(${backgroundImages[current.background]})`, opacity: sceneOpacity, transition: `opacity ${FADE_DURATION}ms ease-in-out` }}>
 
       {current.characters && current.characters
         .filter(char => !isMobile || char.name === current.speaker)
@@ -192,6 +245,8 @@ useEffect(() => {
           {showModal && (
               <div className="modal absolute top-12 left-0 bg-white border rounded-lg shadow-lg p-4 z-50" onClick={e => e.stopPropagation()}>
                 <div className="flex flex-row justify-between">
+                  <Button text="Prologue" onClick={() => {setShowModal(false); setCustomActData(prologueData); navigate('/vn', { state: { act: "customPrologue" } }) }} />
+                  <Button text="Intro" onClick={() => { setShowModal(false); setCustomActData(introData); navigate('/vn', { state: { act: "customIntro" } }) }} />
                   <Button text="Act 1" onClick={() => { setShowModal(false); setCustomActData(act1Data); navigate('/vn', { state: { act: "customAct1" } }) }} />
                   <Button text="Act 2" onClick={() => { setShowModal(false); setCustomActData(act2Data); navigate('/vn', { state: { act: "customAct2" } }) }} />
                   <Button text="Act 3" onClick={() => { setShowModal(false); setCustomActData(act3Data); navigate('/vn', { state: { act: "customAct3" } }) }} />

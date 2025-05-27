@@ -37,7 +37,7 @@ export const usedialogueIterator = (actName = "act1", onComplete = () => {}, cus
     setDisplayedText("");
     setIsHalted(false);
     currentSoundRef.current = null;
-  }, [actName]);
+  }, [actName, customData]);
 
   //cek kalo scene ada halt
   useEffect(() => {
