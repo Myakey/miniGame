@@ -11,7 +11,14 @@ import YukariButton from "../assets/image/CharaSelect/YukariButton.png";
 
 import NitoriShop from "../assets/image/InGame/ShopItems/nitori.png"
 
-import CharaSelectSound from "../assets/sound/CharaSelectChoose.mp3";
+import CharaSelectSound from "../assets/sound/CharSel/CharaSelectChoose.mp3";
+import FlandreSelect from "../assets/sound/CharSel/FlandreCharSel.mp3";
+import ReimuSelect from "../assets/sound/CharSel/ReimuCharSel.mp3";
+import RemiliaSelect from "../assets/sound/CharSel/RemiliaCharSel.mp3";
+import SakuyaSelect from "../assets/sound/CharSel/SakuyaCharSel.mp3";
+import YukariSelect from "../assets/sound/CharSel/YukariCharSel.mp3";
+import Selected from "../assets/sound/CharSel/Selected.mp3";
+
 import NitoriShopSound from "../assets/sound/inGame/nitoriShopLine.mp3";
 
 import EsotericistPiano from "../assets/sound/VN/Esotericist.mp3"
@@ -24,8 +31,8 @@ import { useEffect } from "react";
 
 export const assetsLoadImg = [ReimuRight, RemiliaRight, SakuyaRight, YukariRight, FlandreRight, FlandreButton, ReimuButton, RemiliaButton, SakuyaButton, YukariButton, NitoriShop];
 
-export const soundAssets = [CharaSelectSound, NitoriShopSound, EsotericistPiano, Alice];
+export const soundAssets = [CharaSelectSound, NitoriShopSound, EsotericistPiano, Alice, FlandreSelect, ReimuSelect, RemiliaSelect, SakuyaSelect, YukariSelect];
 
-export { NitoriShopSound, EsotericistPiano, Alice };
+export { NitoriShopSound, EsotericistPiano, Alice, FlandreSelect, ReimuSelect, RemiliaSelect, SakuyaSelect, YukariSelect, Selected };
 
 export { RemiliaButton, SakuyaButton, YukariButton, FlandreButton, ReimuButton, ReimuRight, RemiliaRight, SakuyaRight, YukariRight, FlandreRight, NitoriShop };
