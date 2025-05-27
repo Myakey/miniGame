@@ -3,14 +3,13 @@ import {characterSprites, backgroundImages } from "./imageMap";
 export const act1Data = [
     {
         isTitleScreen: true,
-        title: "ACT I",
+        title: "ACT I - Serious Talk, Chaotic Company",
         background: "titleBG",
         halt: true,
         haltDuration: 500,
         sound: "background1",
     },
     {
-        speaker: "narrator",
         text: "(Inside the Hakurei Shrine — Reimu, Remilia, and Sakuya are deep in discussion when a voice suddenly echoes from the entrance.)",
         background: "shrineInterior",
         characters: [
@@ -24,7 +23,7 @@ export const act1Data = [
         background: "shrineInterior",
         characters: [
             { name: "Reimu", sprite: "reimu9", position: "right" },
-            { name: "Remilia", sprite: "remilia2", position: "left" }
+            { name: "Remilia", sprite: "remilia", position: "left" }
         ],
         halt: false
     },
@@ -69,7 +68,6 @@ export const act1Data = [
         sound: "Alice",
     },
     {
-        speaker: "Narrator",
         text: "(The three of them are shocked as Flandre suddenly appears at the gate.)",
         background: "shrineInterior",
         characters: [
