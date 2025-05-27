@@ -40,7 +40,7 @@ export const act3Data = [
   },
   {
     speaker: "Sakuya",
-    text: "Are you sure that you sensed Hieda no Akyuu’s presence here, Reimu?",
+    text: "Are you sure that you sensed Hieda no hieda’s presence here, Reimu?",
     background: "blokM",
     characters: [
       { name: "Sakuya", sprite: "sakuya", position: "right" },
@@ -153,30 +153,30 @@ export const act3Data = [
     halt: false
   },
   {
-    speaker: "Akyuu",
+    speaker: "hieda",
     text: "You’re right. Is that why you’re here, Reimu?",
     background: "blokM",
     characters: [
-      { name: "Akyuu", sprite: "akyuu", position: "right" }
+      { name: "hieda", sprite: "hieda", position: "right" }
     ],
     halt: false
   },
   {
     speaker: "Reimu",
-    text: "Oh, Akyuu, you’re here too. Yeah—we came to ask if you have any idea what’s causing all of this.",
+    text: "Oh, hieda, you’re here too. Yeah—we came to ask if you have any idea what’s causing all of this.",
     background: "blokM",
     characters: [
       { name: "Reimu", sprite: "reimu", position: "right" },
-      { name: "Akyuu", sprite: "akyuu", position: "left" }
+      { name: "hieda", sprite: "hieda", position: "left" }
     ],
     halt: false
   },
   {
-    speaker: "Akyuu",
+    speaker: "hieda",
     text: "It’s difficult to say for sure. Why don’t we talk inside first?",
     background: "blokM",
     characters: [
-      { name: "Akyuu", sprite: "akyuu", position: "right" }
+      { name: "hieda", sprite: "hieda", position: "right" }
     ],
     halt: false
   },
@@ -210,20 +210,20 @@ export const act3Data = [
   },
   {
     speaker: "Reimu",
-    text: "Right. Akyuu, do you have any leads?",
+    text: "Right. hieda, do you have any leads?",
     background: "suzunaan",
     characters: [
       { name: "Reimu", sprite: "reimu", position: "right" },
-      { name: "Akyuu", sprite: "akyuu", position: "left" }
+      { name: "hieda", sprite: "hieda", position: "left" }
     ],
     halt: false
   },
   {
-    speaker: "Akyuu",
+    speaker: "hieda",
     text: "To some extent, yes. It seems someone tried to force their way into Gensokyo. But something went wrong, and it disrupted the balance of the Great Barrier.",
     background: "suzunaan",
     characters: [
-      { name: "Akyuu", sprite: "akyuu", position: "right" }
+      { name: "hieda", sprite: "hieda", position: "right" }
     ],
     halt: false
   },
@@ -237,11 +237,11 @@ export const act3Data = [
     halt: false
   },
   {
-    speaker: "Akyuu",
+    speaker: "hieda",
     text: "Sadly, no. I only know that the disturbance originates from someone—or something—from the outside world.",
     background: "suzunaan",
     characters: [
-      { name: "Akyuu", sprite: "akyuu", position: "right" }
+      { name: "hieda", sprite: "hieda", position: "right" }
     ],
     halt: false
   },
@@ -262,11 +262,11 @@ export const act3Data = [
     halt: false
   },
   {
-    speaker: "Akyuu",
+    speaker: "hieda",
     text: "Actually, I’ve been sensing a few objects scattered across Gensokyo—ones that carry an aura foreign to this land. If you can track them all down, it might bring you a step closer to solving this.",
     background: "suzunaan",
     characters: [
-      { name: "Akyuu", sprite: "akyuu", position: "right" }
+      { name: "hieda", sprite: "hieda", position: "right" }
     ],
     halt: false
   },
@@ -280,17 +280,17 @@ export const act3Data = [
     halt: false
   },
   {
-    speaker: "Akyuu",
+    speaker: "hieda",
     text: "I can sense three of them. One’s located somewhere in Mount Dieng, another in a flower field, and one right here in Blok M. That’s all I can detect for now.",
     background: "suzunaan",
     characters: [
-      { name: "Akyuu", sprite: "akyuu", position: "right" }
+      { name: "hieda", sprite: "hieda", position: "right" }
     ],
     halt: false
   },
   {
     speaker: "Reimu",
-    text: "Thanks, Akyuu. That helps a lot. Splitting up should save time… but how should we divide the work?",
+    text: "Thanks, hieda. That helps a lot. Splitting up should save time… but how should we divide the work?",
     background: "suzunaan",
     characters: [
       { name: "Reimu", sprite: "reimu", position: "right" }
@@ -462,12 +462,12 @@ export const act3Data = [
   },
   {
     speaker: "Reimu",
-    text: "Well then, we should get moving. See you later, Kosuzu, Akyuu.",
+    text: "Well then, we should get moving. See you later, Kosuzu, hieda.",
     background: "suzunaan",
     characters: [
       { name: "Reimu", sprite: "reimu", position: "right" },
       { name: "Kosuzu", sprite: "kosuzu", position: "left" },
-      { name: "Akyuu", sprite: "akyuu", position: "left" }
+      { name: "hieda", sprite: "hieda", position: "left" }
     ],
     halt: false
   },
