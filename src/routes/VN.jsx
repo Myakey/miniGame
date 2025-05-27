@@ -11,6 +11,8 @@ import { actData } from "../components/VN/dialogueData.js";
 import { characterSprites, backgroundImages, titleBackground } from "../components/VN/imageMap.js";
 import { usedialogueIterator } from "../utils/iterateDialogue";
 
+import { prologueData } from "../components/VN/Prologue.js";
+import { introData } from "../components/VN/Intro.js";
 import { act1Data } from "../components/VN/Act1.js";
 import { act2Data } from "../components/VN/Act2.js";
 import { act3Data } from "../components/VN/Act3.js";
@@ -192,6 +194,8 @@ useEffect(() => {
           {showModal && (
               <div className="modal absolute top-12 left-0 bg-white border rounded-lg shadow-lg p-4 z-50" onClick={e => e.stopPropagation()}>
                 <div className="flex flex-row justify-between">
+                  <Button text="Prologue" onClick={() => {setShowModal(false); setCustomActData(prologueData); navigate('/vn', { state: { act: "customPrologue" } }) }} />
+                  <Button text="Intro" onClick={() => { setShowModal(false); setCustomActData(introData); navigate('/vn', { state: { act: "customIntro" } }) }} />
                   <Button text="Act 1" onClick={() => { setShowModal(false); setCustomActData(act1Data); navigate('/vn', { state: { act: "customAct1" } }) }} />
                   <Button text="Act 2" onClick={() => { setShowModal(false); setCustomActData(act2Data); navigate('/vn', { state: { act: "customAct2" } }) }} />
                   <Button text="Act 3" onClick={() => { setShowModal(false); setCustomActData(act3Data); navigate('/vn', { state: { act: "customAct3" } }) }} />
