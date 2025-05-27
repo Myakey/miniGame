@@ -4,12 +4,14 @@ import { NitoriShop } from "../../assets/assetsPreLoad";
 import { NitoriShopSound } from "../../assets/assetsPreLoad";
 import Button from "../UI/Buttons";
 import { EventBus } from "../../inGame/EventBus";
+import { GameState } from "../../hooks/gamestate";
 
 import ShopOne from "../../assets/image/InGame/shopOne.jpeg"
 
-import { itemsListDebug } from "../../inGame/mechanics/itemsListDebug";
+import { itemsList } from "../../inGame/mechanics/itemsList";
 
 export default function Shop() {
+  const place = GameState.currentlocation;
   const [show, setShow] = useState(false);
   const NitoriSound = new Audio(NitoriShopSound);
   const [displayedText, setDisplayedText] = useState("");
@@ -29,6 +31,19 @@ export default function Shop() {
       EventBus.off("showShop", handleAction);
     };
   }, []);
+
+
+  const handleBuy = (item) => {
+  if (GameState.money < item.money) {
+    alert("You don't have enough money!");
+    return;
+  }
+  // Deduct money
+  GameState.money -= item.money;
+  GameState.inventory.push(item.id);
+  alert(`You bought ${item.name}!`);
+  };
+
 
   // useEffect(() => {
     
@@ -113,10 +128,16 @@ export default function Shop() {
               <div className="p-4 bg-gray-100 rounded w-full h-full text-center overflow-auto">
                 <h2 className="text-xl font-bold mb-2">SHOP BOX!</h2>
                 <div className="grid grid-cols-3 gap-4"> {/* grid container */}
-                      {itemsListDebug.map(item => (
-                        <div key={item.Id} className="border rounded p-3 bg-white shadow-sm">
-                          <h3 className="font-semibold">{item.Name}</h3>
+                      {itemsList
+                      .filter(item => item.places === place)
+                      .map(item => (
+                        <div key={item.id} className="border rounded p-3 bg-white shadow-sm">
+                          <h3 className="font-semibold">{item.name}</h3>
                           <img src={item.image} />
+                          <button
+                            onClick={() => handleBuy(item)}
+                            className="px-2 py-1 bg-blue-500 text-white text-sm rounded hover:bg-blue-600"
+                          >BUY</button>
                           {/* You can add a buy button or image here */}
                         </div>
                       ))}

@@ -11,6 +11,5 @@ export default function bath(currentStatus) {
     return {
         ...currentStatus,
         hygiene: newHygiene,
-        energy: currentStatus.energy - 10, // Taking a bath consumes some energy
     };
 }
