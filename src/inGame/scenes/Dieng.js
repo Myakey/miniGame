@@ -1,4 +1,6 @@
-import Phaser from "phaser"
+import Phaser from 'phaser';
+import { EventBus } from "../EventBus";
+import { GameState } from '../../hooks/gamestate';
 
 export class Dieng extends Phaser.Scene{
     constructor(){
@@ -9,6 +11,8 @@ export class Dieng extends Phaser.Scene{
     }
 
     create(data) {
+    GameState.currentlocation = "Dieng";
+    console.log("You are now in:", GameState.currentlocation);
     this.add.text(100, 100, "Dieng", { fontSize: "20px", fill: "#fff" });
 
     const button = this.add.text(100, 150, "Return to Main Scene", {

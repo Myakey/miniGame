@@ -2,6 +2,7 @@ import Phaser from "phaser"
 
 import CreatePlayerAnimation from "../movements/animation";
 import { handleMovement } from "../movements/handleMovement";
+import { GameState } from "../../hooks/gamestate";
 
 export class FlowerField extends Phaser.Scene{
     constructor(){
@@ -12,6 +13,9 @@ export class FlowerField extends Phaser.Scene{
     }
 
     create(data) {
+
+    GameState.currentlocation = "flowerField";
+    console.log("You are now in:", GameState.currentlocation);
 
     const startX = 300;
     const startY = 400;

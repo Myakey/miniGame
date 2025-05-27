@@ -145,12 +145,7 @@ export class MainGame extends Phaser.Scene {
   }
 
   create() {
-    CreatePlayerAnimation(this);
-
-    // const map = this.make.tilemap({ key: "map" });
-    const startX = GameState.pos_x;
-    const startY = GameState.pos_y;
-
+    //MAP Initializer
     const map = this.add.tilemap("map");
     const ground = map.addTilesetImage("TILEMAPS", "GroundTile");
     // const grass = map.addTilesetImage("grass", "Grass");
@@ -159,21 +154,26 @@ export class MainGame extends Phaser.Scene {
     // const grassLayer = map.createLayer("layer2", grass);
     // const obstacleLayer = map.createLayer("layer3", trees);
 
+    const scale = 1;
+    groundLayer.setScale(scale);
+
+    //INITIALIZER
+    CreatePlayerAnimation(this);
+    // const map = this.make.tilemap({ key: "map" });
+    const startX = GameState.pos_x;
+    const startY = GameState.pos_y;
+
     this.player = this.physics.add.sprite(startX, startY, "Yukari");
     this.player.setScale(0.3);
 
     this.cameras.main.setZoom(1);
-    // this.cameras.main.followOffset(true);
 
-    const scale = 1;
-    groundLayer.setScale(scale);
-    // obstacleLayer.setScale(scale);
-    // grassLayer.setScale(scale);
+    const mapWidth = map.widthInPixels;
+    const mapHeight = map.heightInPixels;
 
-    // obstacleLayer.setCollisionByProperty({ collides: true });
-    // this.physics.add.collider(this.player, obstacleLayer);
+    // Set world bounds to match the map size
+    this.physics.world.setBounds(0, 0, mapWidth, mapHeight);
 
-    // 
     this.cameras.main.setBounds(
       0,
       0,
@@ -189,7 +189,6 @@ export class MainGame extends Phaser.Scene {
       },
       this
     );
-
     // Also check if a gamepad is already connected
     if (this.input.gamepad.total > 0) {
       const pads = this.input.gamepad.gamepads;
@@ -207,21 +206,14 @@ export class MainGame extends Phaser.Scene {
 
     this.cameras.main.startFollow(this.player);
 
-    // obstacleLayer.setCollision([0]);
-    // this.physics.add.collider(this.player, obstacleLayer);
-
-    // this.physics.world.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
-    // this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
-
     const graphics = this.add.graphics();
-    graphics.lineStyle(2, 0xff0000, 1); // Red border with line width of 2
+    graphics.lineStyle(2, 0xff0000, 1); 
     graphics.strokeRect(
       this.physics.world.bounds.x,
       this.physics.world.bounds.y,
       this.physics.world.bounds.width,
       this.physics.world.bounds.height
     );
-    // this.physics.add.collider(this.player, obstacleLayer);
 
     this.infoText = this.add
       .text(280, 250, "Nice!", {
@@ -232,14 +224,19 @@ export class MainGame extends Phaser.Scene {
 
     this.generatePlaces();
 
-    // this.physics.add.overlap(this.player, this.triggerZone, () => {
-    //   this.infoText.setVisible(true);
-    // });
+    //time test
+    this.time.addEvent({
+      delay: 1000,               // 1 real second = 1 game hour
+      callback: this.tickGameTime,
+      callbackScope: this,
+      loop: true,
+    });
 
     this.cursors = this.input.keyboard.createCursorKeys();
     this.shiftKey = this.input.keyboard.addKey(
       Phaser.Input.Keyboard.KeyCodes.SHIFT
     );
+
     //  this.movement = setupPlayerMovement(this, this.player, map, grassLayer);
     EventBus.on("move", this.handleMove, this);
     EventBus.on("stop", this.handleStopInput, this);
@@ -300,6 +297,15 @@ export class MainGame extends Phaser.Scene {
     );
 
     this.infoText.setVisible(inZone);
+  }
+
+  tickGameTime(){
+  GameState.time.hour += 1;
+  if (GameState.time.hour >= 24) {
+    GameState.time.hour = 0;
+    GameState.time.day += 1;
+  }
+  EventBus.emit("timeTick", { time: GameState.time });
   }
 
   shutdown() {

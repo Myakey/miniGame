@@ -133,7 +133,7 @@ import shrineInterior from "../../assets/image/vn/Hakurei_Shrine_Interior.png";
 import Suzunaan from "../../assets/image/vn/Suzunaan.png";
 import beach from "../../assets/image/vn/Beach.png";
 import dieng from "../../assets/image/vn/Diengs_Summit.png";
-import flandreRoom from "../../assets/image/vn/Flandre's_Room.png";
+import flandreRoom from "../../assets/image/vn/Flandre_Room.png";
 import moriyaShrine from "../../assets/image/vn/Moriya_Shrine.png";
 import mansionInterior from "../../assets/image/vn/Scarlet_Devil_Mansion_Interior.png";
 import mansionOutside from "../../assets/image/vn/Scarlet_Devil_Mansion_Outside.png";
@@ -141,7 +141,7 @@ import blokM1_TS from "../../assets/image/vn/Blok_M_1_TS.png";
 import blokM2_TS from "../../assets/image/vn/Blok_M_2_TS.png";
 import blokM3_TS from "../../assets/image/vn/Blok_M_3_TS.png";
 import Suzunaan_TS from "../../assets/image/vn/Suzunaan_TS.png";
-
+import classRoom from "../../assets/image/CG/sumirekoClass.jpg";
 
 //Title Background
 import actBackground from "../../assets/image/vn/actBG.jpg";
@@ -169,7 +169,7 @@ export const characterSprites = {
     sakuya5: sakuyaHappy,
 
     flandre: flandre,
-    flandre: flandre1,
+    flandre1: flandre1,
     flandre2: flandre2,
     flandre3: flandreHappy,
     flandre4: flandre4,
@@ -280,6 +280,7 @@ export const backgroundImages = {
     blokM2_TS: blokM2_TS,
     blokM3_TS: blokM3_TS,
     Suzunaan_TS: Suzunaan_TS,
+    classRoom: classRoom,
 };
 
 export const titleBackground = {

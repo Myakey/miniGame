@@ -35,11 +35,27 @@ export class Preloader extends Scene
         let findChara = GameState.char;
         let foundChara = charaList.find(char => char.name === findChara);
         console.log(foundChara);
+        //MainMap
         this.load.tilemapTiledJSON('map', '/assets/img/map/mainMap.tmj');
         this.load.image("Grass", '/assets/img/map/grass.png');
         this.load.image("Path", '/assets/img/map/path.png');
         this.load.image("Tree", '/assets/img/map/Tree01a.png');
         this.load.image("GroundTile", '/assets/img/map/TILEMAPS.png');
+
+        //Dieng
+
+        //Hakurei Shrine (Rumah)
+        this.load.tilemapTiledJSON("rumah", "/assets/img/map/rumah/rumah.tmj");
+        this.load.image("BathroomFloor", "/assets/img/map/rumah/Tiles/bathFloor.png");
+        this.load.image("toiletFrontOpen", "/assets/img/map/rumah/Object/toiletFrontOpen.png");
+        this.load.image("walls", "/assets/img/map/rumah/Tiles/wallBorder.png")
+
+        //FLowerField
+
+        //Beach
+
+
+        //Character SpriteSheets
         this.load.spritesheet(
         "Yukari",
         foundChara.path,
