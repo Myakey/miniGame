@@ -7,5 +7,10 @@ export const GameState = {
     hygiene: 50,
     energy: 50,
     inventory: [],
-    money: 0,
+    money: 100000,
+    currentlocation:"",
+    time: {
+        hour : 6,
+        day: 0
+    },
 }

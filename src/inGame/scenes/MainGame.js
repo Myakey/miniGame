@@ -224,6 +224,14 @@ export class MainGame extends Phaser.Scene {
 
     this.generatePlaces();
 
+    //time test
+    this.time.addEvent({
+      delay: 1000,               // 1 real second = 1 game hour
+      callback: this.tickGameTime,
+      callbackScope: this,
+      loop: true,
+    });
+
     this.cursors = this.input.keyboard.createCursorKeys();
     this.shiftKey = this.input.keyboard.addKey(
       Phaser.Input.Keyboard.KeyCodes.SHIFT
@@ -289,6 +297,15 @@ export class MainGame extends Phaser.Scene {
     );
 
     this.infoText.setVisible(inZone);
+  }
+
+  tickGameTime(){
+  GameState.time.hour += 1;
+  if (GameState.time.hour >= 24) {
+    GameState.time.hour = 0;
+    GameState.time.day += 1;
+  }
+  EventBus.emit("timeTick", { time: GameState.time });
   }
 
   shutdown() {

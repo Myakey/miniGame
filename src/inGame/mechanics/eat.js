@@ -1,19 +1,28 @@
+import { GameState } from '../../hooks/gamestate';
+import { itemsList } from './itemsList';
+import { EventBus } from '../EventBus';
 
 
+export default function eat(currentStatus, id) {
+    const item = itemsList.find(i => i.id === id);
 
-export default function eat(currentStatus) {
     // Check if the character is already full
-    if (currentStatus.hunger <= 0) {
+    if (currentStatus.hunger >= 100) {
         return currentStatus; // No change needed
     }
-
+    const hungerGain = item.hunger;
+    const happinessGain = item.happiness;
+    const hygieneGain = item.hygiene;
     // Calculate the new hunger level after eating
-    const newHunger = Math.min(currentStatus.hunger + 30, 100); // Cap at 100
-
+    const newHunger = Math.min(currentStatus.hunger + hungerGain, 100); // Cap at 100
+    const newHappiness = Math.max(currentStatus.happiness + happinessGain, 0);
+    const newHygiene = Math.max(currentStatus.hygiene + hygieneGain, 0);
     // Return the updated status
     return {
         ...currentStatus,
         hunger: newHunger,
-        energy: currentStatus.energy - 5, // Eating consumes some energy
+        happiness: newHappiness,
+        hygiene: newHygiene,
+        energy: Math.max(currentStatus.energy - 5, 0), // Eating consumes some energy
     };
 }

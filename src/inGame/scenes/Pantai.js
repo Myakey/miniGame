@@ -1,5 +1,6 @@
-import Phaser from "phaser"
+import Phaser from 'phaser';
 import { EventBus } from "../EventBus";
+import { GameState } from '../../hooks/gamestate';
 
 export class Pantai extends Phaser.Scene{
     constructor(){
@@ -10,6 +11,8 @@ export class Pantai extends Phaser.Scene{
     }
 
     create(data) {
+    GameState.currentlocation = "blokM";
+    console.log("You are now in:", GameState.currentlocation);
     this.add.text(100, 100, "Pantai", { fontSize: "20px", fill: "#fff" });
 
     const button = this.add.text(100, 150, "Return to Main Scene", {
@@ -34,7 +37,7 @@ export class Pantai extends Phaser.Scene{
       EventBus.emit("performAction", "bath");
     });
 
-    const button2 = this.add.text(600, 150, "Bath", {
+    const button2 = this.add.text(600, 150, "Shop", {
       fontSize: "18px",
       fill: "#0f0",
       backgroundColor: "#000",

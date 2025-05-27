@@ -17,7 +17,7 @@ export default function ArrowControls(){
   };
 
   return (
-    <div className="fixed bottom-4 left-4 flex flex-col gap-2">
+    <div className="fixed bottom-4 left-4 flex flex-col gap-2 md:hidden">
       <button
         className="bg-gray-200 px-4 py-2 rounded"
         onMouseDown={() => handleDown("up")}
