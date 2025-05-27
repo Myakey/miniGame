@@ -57,6 +57,9 @@ function VN() {
   const [isTitleActive, setIsTitleActive] = useState(false);
   const prevActNameRef = useRef(actName);
 
+  const [sceneOpacity, setSceneOpacity] = useState(1);
+  const fadeTimeoutRef = useRef(null);
+
 
   const handleAdvance = () => {
     if(isHalted) return;
@@ -66,18 +69,21 @@ function VN() {
       handleNext();
     }
   }
-useEffect(() => {
-  const handleKeyDown = (e) => {
-    if (e.key === "Enter" || e.key === ' ') {
-      handleAdvance();
-    }
-  };
-  window.addEventListener("keydown", handleKeyDown);
-  return () => {
-    window.removeEventListener("keydown", handleKeyDown);
-  };
-}, [handleAdvance, isTyping, isHalted]);
 
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Enter" || e.key === ' ') {
+        handleAdvance();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [handleAdvance, isTyping, isHalted]);
+
+  //FadeIn Title
   useEffect(() => {
     if (current && current.isTitleScreen) {
       setIsTitleActive(true); 
@@ -95,6 +101,51 @@ useEffect(() => {
       setIsTitleActive(false);
     }
   }, [current?.isTitleScreen, actName, current?.title]);
+
+  //FadeIn Scene
+  useEffect (() => {
+    if (current && current.halt){
+      setSceneOpacity(0);
+      fadeTimeoutRef.current = setTimeout(() => {
+        setSceneOpacity(1);
+      }, 10);
+      return () => clearTimeout(fadeTimeoutRef.current);
+    } else {
+      setSceneOpacity(1);
+    }
+  }, [current]);
+
+  const handleAdvanceWithFade = () => {
+    if (isHalted) return;
+    if(current && current.halt){
+      setSceneOpacity(0);
+      setTimeout(() => {
+        handleNext();
+      }, FADE_DURATION);
+    } else {
+      handleNext();
+    }
+  };
+
+  //FadeOut buat autoplay & halt
+  useEffect(() => {
+    if(autoPlay && current && current.text && displayedText === current.text && !isHalted){
+      const autoPlayDelay = typeof current.autoPlayDelay === "number" ? current.autoPlayDelay : 2000;
+      if(current.halt){
+        fadeTimeoutRef.current = setTimeout(() => {
+          setSceneOpacity(0);
+          setTimeout(() => {
+            handleNext();
+          }, FADE_DURATION);
+        }, autoPlayDelay);
+      } else {
+        fadeTimeoutRef.current = setTimeout(() => {
+          handleNext();
+        }, autoPlayDelay);
+      }      
+      return () => clearTimeout(fadeTimeoutRef.current);
+    }
+  }, [autoPlay, displayedText, current, isHalted, handleNext]);
 
   const handleTitleClickAndFade = () => {
     if (!isTitleActive || titleScreenOpacity === 0) return; 
@@ -170,7 +221,7 @@ useEffect(() => {
   }
 
   return (
-    <div className={`vnBackground ${isMobile ? "is-mobile" : ""}`} onClick={!autoPlay && !isHalted ? handleAdvance : undefined} style={{ backgroundImage: `url(${backgroundImages[current.background]})`, }}>
+    <div className={`vnBackground ${isMobile ? "is-mobile" : ""}`} onClick={!autoPlay && !isHalted ? handleAdvanceWithFade : undefined} style={{ backgroundImage: `url(${backgroundImages[current.background]})`, opacity: sceneOpacity, transition: `opacity ${FADE_DURATION}ms ease-in-out` }}>
 
       {current.characters && current.characters
         .filter(char => !isMobile || char.name === current.speaker)
