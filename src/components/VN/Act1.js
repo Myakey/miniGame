@@ -10,7 +10,6 @@ export const act1Data = [
         sound: "background1",
     },
     {
-        speaker: "narrator",
         text: "(Inside the Hakurei Shrine — Reimu, Remilia, and Sakuya are deep in discussion when a voice suddenly echoes from the entrance.)",
         background: "shrineInterior",
         characters: [
@@ -69,7 +68,6 @@ export const act1Data = [
         sound: "Alice",
     },
     {
-        speaker: "Narrator",
         text: "(The three of them are shocked as Flandre suddenly appears at the gate.)",
         background: "shrineInterior",
         characters: [
