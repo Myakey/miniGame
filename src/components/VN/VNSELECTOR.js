@@ -4,6 +4,7 @@ import { act1Data } from "./Act1.js";
 import { act2Data } from "./Act2.js";
 import { act3Data } from "./Act3.js";
 import { act3_1Data } from "./Act3_1.js";
+import { act3_2Data } from "./Act3_2.js";
 import { act3_3Data } from "./Act3_3.js";
 import { act4Data } from "./Act4.js";
 import { act5Data } from "./Act5.js";
