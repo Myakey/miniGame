@@ -103,8 +103,6 @@ export class HakureiShrine extends Phaser.Scene{
   }
 
   generateMap(){
-    GameState.currentlocation = "HakureiShrine";
-    
     //MAP INITIALIZER
     const map = this.add.tilemap("rumah");
     const Tiles1 = map.addTilesetImage("Tiles1", "Tiles1");

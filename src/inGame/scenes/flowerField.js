@@ -10,7 +10,7 @@ export class FlowerField extends Phaser.Scene{
     }
 
     preload(){
-      GameState.currentlocation.currentLoc = "flowerField";
+      GameState.currentlocation.currentLoc = "FlowerField";
       this.posX = GameState.afterVN ? GameState.currentlocation.currentPosX : 747; // Default position if not set
       this.posY = GameState.afterVN ? GameState.currentlocation.currentPosY : 859; // Default position if not set
     }
