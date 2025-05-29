@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="1">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="1">
+ <editorsettings>
+  <export target="pantai.tmj" format="json"/>
+ </editorsettings>
  <tileset firstgid="1" name="coba" tilewidth="16" tileheight="16" tilecount="100" columns="10">
   <image source="TILEMAPS.png" width="160" height="160"/>
  </tileset>
@@ -3690,6 +3693,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
+ <objectgroup id="6" name="Interactables"/>
  <layer id="5" name="trees" width="30" height="20">
   <data encoding="csv">
 773,774,775,0,0,0,804,805,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,

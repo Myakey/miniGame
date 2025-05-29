@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { handleMovement } from "../movements/handleMovement";
 import setupPlayerMovement from "../movements/pathFinding";
 import { SceneRegistry } from "../SceneRegistry";
+import { FlowerField } from "./flowerField";
 
 
 
@@ -122,10 +123,15 @@ export class MainGame extends Phaser.Scene {
     this.cameras.main.fadeIn(1000, 0, 0, 0);
     const map = this.add.tilemap("map");
     const ground = map.addTilesetImage("TILEMAPS", "GroundTile");
-    const groundLayer = map.createLayer("Ground", ground);
-    groundLayer.setScale(3);
+    const sunflowers = map.addTilesetImage("flower", "sunflowers");
+    const decoration = map.addTilesetImage("blokM","MainDetails");
+    const home = map.addTilesetImage("home", "Home")
 
-    
+
+    const groundLayer = map.createLayer("Ground", ground);
+    const tempatLayer = map.createLayer("tempat", [home, decoration, sunflowers]);
+    const detailsLayer = map.createLayer("details", [decoration, home]);
+    const grassLayer = map.createLayer("grass", ground);
 
     const startX = GameState.pos_x;
     const startY = GameState.pos_y;
@@ -138,6 +144,11 @@ export class MainGame extends Phaser.Scene {
     const scale = 3;
     const mapWidth = map.widthInPixels;
     const mapHeight = map.heightInPixels;
+
+    groundLayer.setScale(scale);
+    tempatLayer.setScale(scale);
+    detailsLayer.setScale(scale);
+    grassLayer.setScale(scale);
 
     this.physics.world.setBounds(0, 0, mapWidth * scale, mapHeight * scale);
     this.cameras.main.setBounds(0, 0, mapWidth * scale, mapHeight * scale);

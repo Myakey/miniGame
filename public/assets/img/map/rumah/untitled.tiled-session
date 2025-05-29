@@ -74,6 +74,64 @@
         "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/flowerField/project.tmx#tree": {
             "scaleInDock": 1
         },
+        "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/mainMap.tmj": {
+            "scale": 1.8445833333333332,
+            "selectedLayer": 3,
+            "viewCenter": {
+                "x": 239.89157442963634,
+                "y": 160.19878021233345
+            }
+        },
+        "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/mainMap.tmj#TILEMAPS": {
+            "scaleInDock": 1
+        },
+        "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/mainMap.tmj#blokM": {
+            "scaleInDock": 1.5,
+            "scaleInEditor": 1
+        },
+        "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/mainMap.tmj#flower": {
+            "scaleInDock": 1
+        },
+        "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/mainMap.tmj#home": {
+            "scaleInDock": 1
+        },
+        "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/pantai/pantai.tmx": {
+            "scale": 1.8445833333333332,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 239.89157442963634,
+                "y": 160.19878021233345
+            }
+        },
+        "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/pantai/pantai.tmx#beach": {
+            "scaleInDock": 1
+        },
+        "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/pantai/pantai.tmx#coba": {
+            "scaleInDock": 1
+        },
+        "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/pantai/pantai.tmx#toko": {
+            "scaleInDock": 1
+        },
+        "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/pantai/pantai.tmx#tree": {
+            "scaleInDock": 1
+        },
+        "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/tilesTest.tmj": {
+            "scale": 0.9222916666666666,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 479.78314885927267,
+                "y": 320.3975604246669
+            }
+        },
+        "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/tilesTest.tmj#grass": {
+            "scaleInDock": 1
+        },
+        "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/tilesTest.tmj#path": {
+            "scaleInDock": 1
+        },
+        "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/tilesTest.tmj#tree": {
+            "scaleInDock": 1
+        },
         "rumah.tmj": {
             "expandedObjectLayers": [
                 9
@@ -81,8 +139,8 @@
             "scale": 4,
             "selectedLayer": 7,
             "viewCenter": {
-                "x": 130.625,
-                "y": 125.875
+                "x": 205.625,
+                "y": 137.375
             }
         },
         "rumah.tmj#Tiles1": {
@@ -110,7 +168,7 @@
             "scaleInEditor": 1
         }
     },
-    "last.exportedFilePath": "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/flowerField",
+    "last.exportedFilePath": "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/pantai",
     "last.imagePath": "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/flowerField",
     "map.height": 32,
     "map.lastUsedExportFilter": "JSON map files (*.tmj *.json)",
@@ -124,6 +182,7 @@
     "project": "untitled.tiled-project",
     "property.type": "string",
     "recentFiles": [
+        "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/tilesTest.tmj",
         "rumah.tmj",
         "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/flowerField/project.tmx",
         "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/flowerField/flowerField.tmj",

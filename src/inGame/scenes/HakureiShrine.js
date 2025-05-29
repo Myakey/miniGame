@@ -17,6 +17,7 @@ export class HakureiShrine extends Phaser.Scene{
     preload(){
       this.posX = GameState.afterVN ? GameState.currentlocation.currentPosX : 768; // Default position if not set
       this.posY = GameState.afterVN ? GameState.currentlocation.currentPosY : 1392; // Default position if not set
+      GameState.currentlocation.currentLoc = "HakureiShrine";
     }
 
 
@@ -25,7 +26,7 @@ export class HakureiShrine extends Phaser.Scene{
 
     this.generateMap();
 
-    GameState.currentlocation = "HakureiShrine";
+   
 
     const button = this.add.text(100, 150, "Return to Main Scene", {
       fontSize: "18px",
