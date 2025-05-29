@@ -1,0 +1,52 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "project.tmx",
+    "expandedProjectPaths": [
+    ],
+    "fileStates": {
+        "": {
+            "scaleInDock": 2,
+            "scaleInEditor": 2
+        },
+        "project.tmx": {
+            "scale": 1.5,
+            "selectedLayer": 5,
+            "viewCenter": {
+                "x": 237,
+                "y": 204.99999999999997
+            }
+        },
+        "project.tmx#fence": {
+            "scaleInDock": 1
+        },
+        "project.tmx#field": {
+            "scaleInDock": 3
+        },
+        "project.tmx#flower": {
+            "scaleInDock": 4
+        },
+        "project.tmx#tree": {
+            "scaleInDock": 3
+        }
+    },
+    "last.imagePath": "C:/Users/ASUS/Visual Studio/Intro to Technology/projekAkhir/miniGame/public/assets/img/map/FlowerField",
+    "map.lastUsedFormat": "tmx",
+    "map.tileHeight": 16,
+    "map.tileWidth": 16,
+    "openFiles": [
+        "project.tmx"
+    ],
+    "project": "flowerField.tiled-project",
+    "property.type": "bool",
+    "recentFiles": [
+        "project.tmx"
+    ],
+    "tileset.embedInMap": true,
+    "tileset.tileSize": {
+        "height": 16,
+        "width": 16
+    }
+}
