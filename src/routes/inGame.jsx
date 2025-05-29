@@ -87,26 +87,41 @@ function MainGame() {
 
 
   //Use effect di sini buat stats nurun gradually supaya bisa ada penurunan, ntar disetting di sini aja penurunan perdetiknya berapa janlupp.
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (!isPaused) {
-        setStatus((prev) => ({
+ useEffect(() => {
+  const interval = setInterval(() => {
+    if (!isPaused) {
+      setStatus((prev) => {
+        // Calculate new time values
+        const newMinute = (prev.time.minute + 1) % 60;
+        const hourChanged = prev.time.minute === 59; // will increment hour after 59th minute
+        const newHour = hourChanged ? (prev.time.hour + 1) % 24 : prev.time.hour;
+        const newDay = hourChanged && prev.time.hour === 23 ? prev.time.day + 1 : prev.time.day;
+
+        // Emit event if hour changed
+        if (hourChanged && newHour !== prev.time.hour) {
+          EventBus.emit('phaser-time-update', { hour: newHour });
+        }
+
+        // Return updated status with new time and decreased stats
+        return {
           ...prev,
           hunger: Math.max(prev.hunger - 1, 0),
           energy: Math.max(prev.energy - 2, 0),
           happiness: Math.max(prev.happiness - 2, 0),
           time: {
             ...prev.time,
-            minute: (prev.time.minute + 1) % 60,
-            hour: prev.time.minute === 59 ? (prev.time.hour + 1) % 24 : prev.time.hour,
-            day: prev.time.minute === 59 && prev.time.hour === 23 ? prev.time.day + 1 : prev.time.day
+            minute: newMinute,
+            hour: newHour,
+            day: newDay
           }
-        }));
-      }
-    }, 1000);
+        };
+      });
+    }
+  }, 100);
 
-    return () => clearInterval(interval);
-  }, [setStatus]);
+  return () => clearInterval(interval);
+}, [setStatus]);
+
 
 
   //Mapping buat status bars, bakalan direrender semua nya waktu contextnya ganti, mempermudah animasi cuma butuh optimalisasi performa lebih lagi

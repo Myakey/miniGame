@@ -6,9 +6,30 @@
     "activeFile": "",
     "expandedProjectPaths": [
     ],
+    "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
         "": {
             "scaleInDock": 0.5
+        },
+        "pantai.tmx": {
+            "scale": 1.5,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 255,
+                "y": 202.99999999999997
+            }
+        },
+        "pantai.tmx#beach": {
+            "scaleInDock": 1.5
+        },
+        "pantai.tmx#coba": {
+            "scaleInDock": 2
+        },
+        "pantai.tmx#toko": {
+            "scaleInDock": 1
+        },
+        "pantai.tmx#tree": {
+            "scaleInDock": 3
         }
     },
     "last.imagePath": "C:/Users/ASUS/Visual Studio/Intro to Technology/projekAkhir/miniGame/public/assets/img/map/pantai",

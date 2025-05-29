@@ -187,34 +187,11 @@ function VN() {
         <div className="ui-buttons absolute top-5 right-5 flex flex-row space-x-3 z-30">
           <div className="ui-button relative">
             <img
-              src={backButton}
-              className="button-image w-10 h-10 md:w-12 md:h-12 object-contain cursor-pointer hover:opacity-80 transition-opacity filter invert" // Added filter invert for visibility on black
-              alt="Menu"
-              onClick={e => { e.stopPropagation(); }}
-            />
-          </div>
-          <div className="ui-button relative">
-            <img
               src={skipButton}
               className="button-image w-10 h-10 md:w-12 md:h-12 object-contain cursor-pointer hover:opacity-80 transition-opacity filter invert" // Added filter invert for visibility on black
               alt="Menu"
               onClick={e => { e.stopPropagation(); setShowModal(prev => !prev);}}
             />
-            {showModal && (
-              <div className="modal absolute top-full right-1/2 translate-x-1/2 mt-2 bg-white border border-gray-300 rounded-xl shadow-xl p-4 z-50 w-fit" onClick={e => e.stopPropagation()}>
-                <p className="text-sm font-semibold mb-3 text-gray-700 text-center">Select Act</p>
-                <div className="flex flex-row justify-center items-center space-x-4">
-                  {["act1", "act2", "act3", "act4"].map(actKey => (
-                     <Button
-                        key={actKey}
-                        className="bg-gray-300 hover:bg-gray-400 text-black font-semibold py-2 px-3 rounded-full w-16 h-16 flex items-center justify-center transition-all"
-                        text={`Act ${actKey.replace('act', '')}`}
-                        onClick={() => { setShowModal(false); navigate('/vn', { state: { act: actKey } }); }}
-                      />
-                  ))}
-                </div>
-              </div>
-            )}
           </div>
         </div>
       </div>
