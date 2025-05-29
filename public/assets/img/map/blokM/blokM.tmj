@@ -212,7 +212,7 @@
                  "y":499.5
                 }, 
                 {
-                 "height":23.25,
+                 "height":37,
                  "id":18,
                  "name":"",
                  "properties":[
@@ -224,9 +224,26 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":19.5,
-                 "x":688,
-                 "y":73.125
+                 "width":41.5,
+                 "x":678.25,
+                 "y":56.875
+                }, 
+                {
+                 "height":40,
+                 "id":20,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":true
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":80,
+                 "x":544,
+                 "y":340.727272727273
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -235,7 +252,7 @@
          "y":0
         }],
  "nextlayerid":5,
- "nextobjectid":19,
+ "nextobjectid":21,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",
@@ -42925,6 +42942,25 @@
          "spacing":0,
          "tilecount":1540,
          "tileheight":16,
+         "tiles":[
+                {
+                 "id":1370,
+                 "properties":[
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":1405,
+                 "properties":[
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }],
          "tilewidth":16
         }, 
         {

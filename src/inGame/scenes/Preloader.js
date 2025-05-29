@@ -56,9 +56,12 @@ export class Preloader extends Scene
 
         //Hakurei Shrine (Rumah)
         this.load.tilemapTiledJSON("rumah", "/assets/img/map/rumah/rumah.tmj");
-        this.load.image("BathroomFloor", "/assets/img/map/rumah/Tiles/bathFloor.png");
-        this.load.image("toiletFrontOpen", "/assets/img/map/rumah/Object/toiletFrontOpen.png");
-        this.load.image("walls", "/assets/img/map/rumah/Tiles/wallBorder.png")
+        this.load.image("Tiles1", "/assets/img/map/rumah/Tiles1.png");
+        this.load.image("Tiles2", "/assets/img/map/rumah/Tiles2.png");
+        this.load.image("Objects", "/assets/img/map/rumah/Objects.png");
+        this.load.image("4BigSet", "/assets/img/map/rumah/4BigSet.png");
+        // this.load.image("toiletFrontOpen", "/assets/img/map/rumah/Object/toiletFrontOpen.png");
+        // this.load.image("walls", "/assets/img/map/rumah/Tiles/wallBorder.png")
 
         //FLowerField
 

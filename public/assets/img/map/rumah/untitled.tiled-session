@@ -1,0 +1,70 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "rumah.tmj",
+    "expandedProjectPaths": [
+        "."
+    ],
+    "fileStates": {
+        "": {
+            "scaleInDock": 3,
+            "scaleInEditor": 3
+        },
+        "#floor": {
+            "dynamicWrapping": false
+        },
+        "rumah.tmj": {
+            "scale": 3,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 87.16666666666664,
+                "y": 201.16666666666669
+            }
+        },
+        "rumah.tmj#Tiles1": {
+            "scaleInDock": 1
+        },
+        "rumah.tmj#Tiles2": {
+            "scaleInDock": 1
+        },
+        "rumah.tmj#Tiles3": {
+            "scaleInDock": 4,
+            "scaleInEditor": 1
+        },
+        "rumah.tmj#object": {
+            "scaleInDock": 4
+        },
+        "rumah.tmj#object1": {
+            "scaleInDock": 4,
+            "scaleInEditor": 5.5
+        },
+        "rumah.tmj#toilet": {
+            "scaleInDock": 0.5
+        },
+        "rumah.tmj#walls": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        }
+    },
+    "last.imagePath": "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/rumah",
+    "map.height": 32,
+    "map.lastUsedFormat": "json",
+    "map.tileHeight": 16,
+    "map.tileWidth": 16,
+    "map.width": 50,
+    "openFiles": [
+        "rumah.tmj"
+    ],
+    "project": "untitled.tiled-project",
+    "property.type": "bool",
+    "recentFiles": [
+        "rumah.tmj"
+    ],
+    "tileset.embedInMap": true,
+    "tileset.tileSize": {
+        "height": 16,
+        "width": 16
+    }
+}

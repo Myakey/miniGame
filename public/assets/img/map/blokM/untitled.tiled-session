@@ -3,16 +3,45 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "GUGUGAGA.tmx",
+    "activeFile": "",
     "expandedProjectPaths": [
+        "."
     ],
+    "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
-        "GUGUGAGA.tmx": {
-            "scale": 3,
-            "selectedLayer": 1,
+        "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/rumah/rumah.tmj": {
+            "scale": 2.0715277777777774,
+            "selectedLayer": 0,
             "viewCenter": {
-                "x": 96.66666666666666,
-                "y": 134.49999999999997
+                "x": 160.0268186389541,
+                "y": 144.0965471002347
+            }
+        },
+        "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/rumah/rumah.tmj#Tiles1": {
+            "scaleInDock": 1
+        },
+        "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/rumah/rumah.tmj#Tiles2": {
+            "scaleInDock": 1
+        },
+        "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/rumah/rumah.tmj#Tiles3": {
+            "scaleInDock": 1
+        },
+        "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/rumah/rumah.tmj#object": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/rumah/rumah.tmj#object1": {
+            "scaleInDock": 1
+        },
+        "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/rumah/rumah.tmj#walls": {
+            "scaleInDock": 1
+        },
+        "GUGUGAGA.tmx": {
+            "scale": 1.6391,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 514.6116771398938,
+                "y": 266.9147703007748
             }
         },
         "GUGUGAGA.tmx#LibraryBlokM": {
@@ -30,13 +59,37 @@
         "GUGUGAGA.tmx#tileBlokM": {
             "scaleInDock": 1
         },
+        "blokM.tmj": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 4,
+            "selectedLayer": 3,
+            "viewCenter": {
+                "x": 638.125,
+                "y": 49.375
+            }
+        },
         "blokM.tmj#Kosuzu": {
+            "scaleInDock": 1,
             "scaleInEditor": 1
         },
         "blokM.tmj#LibraryBlokM": {
+            "scaleInDock": 1,
             "scaleInEditor": 1.5
         },
+        "blokM.tmj#decorationBlokM": {
+            "scaleInDock": 0.5,
+            "scaleInEditor": 3
+        },
+        "blokM.tmj#furnitureBlokM": {
+            "scaleInDock": 1
+        },
+        "blokM.tmj#storeBlokM": {
+            "scaleInDock": 1
+        },
         "blokM.tmj#tileBlokM": {
+            "scaleInDock": 1,
             "scaleInEditor": 1
         }
     },
@@ -49,12 +102,13 @@
     "map.tileWidth": 16,
     "map.width": 50,
     "openFiles": [
-        "GUGUGAGA.tmx"
     ],
     "project": "untitled.tiled-project",
     "property.type": "bool",
     "recentFiles": [
-        "GUGUGAGA.tmx"
+        "GUGUGAGA.tmx",
+        "blokM.tmj",
+        "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/rumah/rumah.tmj"
     ],
     "tileset.embedInMap": true,
     "tileset.tileSize": {
