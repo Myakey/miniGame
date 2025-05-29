@@ -15,10 +15,13 @@ export const GameState = {
     },
     time: {
         hour : 17,
-        day: 0
+        day: 0,
+        minute: 0,
     },
     isVampire : false,
     previousAct: "prologue",
     currentAct: "prologue",
     afterVN: false,
+    difficulties: "normal",
+    score: 0,
 }

@@ -22,8 +22,6 @@ export class Dieng extends Phaser.Scene{
     
     this.generateMap();
 
-    GameState.currentlocation = "Dieng";
-
     const button = this.add.text(100, 150, "Return to Main Scene", {
       fontSize: "18px",
       fill: "#0f0",
@@ -57,93 +55,204 @@ export class Dieng extends Phaser.Scene{
     GameState.currentlocation.currentLoc = "Dieng";
   }
 
-  checkOverlap(){
-          let stillOverlapping = false;
+  // checkOverlap(){
+  //         let stillOverlapping = false;
       
-        this.interactables.children.iterate(obj => {
-          if (this.physics.overlap(this.player, obj)) {
-            this.currentInteractable = obj;
-            stillOverlapping = true;
-          }
-        });
+  //       this.interactables.children.iterate(obj => {
+  //         if (this.physics.overlap(this.player, obj)) {
+  //           this.currentInteractable = obj;
+  //           stillOverlapping = true;
+  //         }
+  //       });
       
-        if (!stillOverlapping) {
-          this.currentInteractable = null;
-        }
+  //       if (!stillOverlapping) {
+  //         this.currentInteractable = null;
+  //       }
       
-        // Check for E press only if still overlapping
-        if (this.currentInteractable && Phaser.Input.Keyboard.JustDown(this.eKey)) {
-          const id = this.currentInteractable.properties?.id;
-          console.log("YA!");
-          if (id != "out") {
-            console.log("Pressing E near:", id);
-            EventBus.emit("callObjective", "Done");
-            EventBus.emit("show-dialog", { id });
+  //       // Check for E press only if still overlapping
+  //       if (this.currentInteractable && Phaser.Input.Keyboard.JustDown(this.eKey)) {
+  //         const id = this.currentInteractable.properties?.id;
+  //         console.log("YA!");
+  //         if (id != "out") {
+  //           console.log("Pressing E near:", id);
+  //           EventBus.emit("callObjective", "Done");
+  //           EventBus.emit("show-dialog", { id });
             
-          }else if(id == "out"){
-            const enteringText = this.add
-              .text(
-                this.cameras.main.centerX,
-                -50,
-                "Exiting....",
-                {
-                  fontSize: "48px",
-                  fill: "#ffffff",
-                  fontStyle: "bold",
-                  resolution: 2
-                }
+  //         }else if(id == "out"){
+  //           const enteringText = this.add
+  //             .text(
+  //               this.cameras.main.centerX,
+  //               -50,
+  //               "Exiting....",
+  //               {
+  //                 fontSize: "48px",
+  //                 fill: "#ffffff",
+  //                 fontStyle: "bold",
+  //                 resolution: 2
+  //               }
                 
-              )
-              .setOrigin(0.5)
-              .setDepth(1000)
-              .setScrollFactor(0);
-            GameState.afterVN = false;
-            this.cameras.main.fadeOut(1000, 0, 0, 0);
+  //             )
+  //             .setOrigin(0.5)
+  //             .setDepth(1000)
+  //             .setScrollFactor(0);
+  //           GameState.afterVN = false;
+  //           this.cameras.main.fadeOut(1000, 0, 0, 0);
       
-            this.cameras.main.once("camerafadeoutcomplete", () => {
-              enteringText.destroy(); 
-              this.scene.start("MainGame");
-            });
-          }
-          switch(id){
-            case "prologue" : 
-              this.handleSaveVN();  
-              EventBus.emit("performVN", "prologueData");
-              break;
-            case "intro" :
-              this.handleSaveVN();
-              EventBus.emit("performVN", "introData");
-              break;
-            case "act1" :
-              this.handleSaveVN();
-              EventBus.emit("performVN", "act1Data");
-              break;
-            case "act2" :
-              this.handleSaveVN();
-              EventBus.emit("performVN", "act2Data");
-              break;
-            case "act3" :
-              this.handleSaveVN();
-              EventBus.emit("performVN", "act3Data");
-              break;
-            case "act3_1" :
-              this.handleSaveVN();
-              EventBus.emit("performVN", "act3_1Data");
-              break;
-            case "act3_2" :
-              this.handleSaveVN();
-              EventBus.emit("performVN", "act3_2Data");
-              break;
-            case "act4" :
-              this.handleSaveVN();
-              EventBus.emit("performVN", "act4Data");
-              break;
+  //           this.cameras.main.once("camerafadeoutcomplete", () => {
+  //             enteringText.destroy(); 
+  //             this.scene.start("MainGame");
+  //           });
+  //         }
+  //         switch(id){
+  //           case "prologue" : 
+  //             this.handleSaveVN();  
+  //             EventBus.emit("performVN", "prologueData");
+  //             break;
+  //           case "intro" :
+  //             this.handleSaveVN();
+  //             EventBus.emit("performVN", "introData");
+  //             break;
+  //           case "act1" :
+  //             this.handleSaveVN();
+  //             EventBus.emit("performVN", "act1Data");
+  //             break;
+  //           case "act2" :
+  //             this.handleSaveVN();
+  //             EventBus.emit("performVN", "act2Data");
+  //             break;
+  //           case "act3" :
+  //             this.handleSaveVN();
+  //             EventBus.emit("performVN", "act3Data");
+  //             break;
+  //           case "act3_1" :
+  //             this.handleSaveVN();
+  //             EventBus.emit("performVN", "act3_1Data");
+  //             break;
+  //           case "act3_2" :
+  //             this.handleSaveVN();
+  //             EventBus.emit("performVN", "act3_2Data");
+  //             break;
+  //           case "act4" :
+  //             this.handleSaveVN();
+  //             EventBus.emit("performVN", "act4Data");
+  //             break;
 
-          }
-          if(id === "Kosuzu1"){
-            this.handleSaveVN();
-            EventBus.emit("performVN", "act3Data");
-          }
+  //         }
+  //         if(id === "Kosuzu1"){
+  //           this.handleSaveVN();
+  //           EventBus.emit("performVN", "act3Data");
+  //         }
+  //       }
+  //   }
+  checkOverlap() {
+        if (!this.player || !this.interactables) return;
+
+        let stillOverlapping = false;
+        this.currentInteractable = null; 
+
+        this.interactables.children.iterate(obj => {
+            if (obj && this.physics.overlap(this.player, obj)) {
+                this.currentInteractable = obj;
+                stillOverlapping = true;
+            }
+        });
+
+        if (this.currentInteractable && Phaser.Input.Keyboard.JustDown(this.eKey)) {
+            const id = this.currentInteractable.properties?.id;
+            console.log("Player pressed E near object with ID:", id);
+
+            // Example for "jalan2" needing confirmation ini TEST doang
+            if (id === "jalan2") { // Or any other ID that should trigger a "jalan-jalan" action
+              this.handleSaveVN(); // If you want to save player state before modal
+              EventBus.emit("showCustomModal", {
+                  modalId: "jalanConfirmation_" + GameState.currentlocation.currentLoc, // Make modalId unique if content depends on location
+                  title: `Jalan-jalan di ${GameState.currentlocation.currentLoc}?`, // Dynamic title
+                  description: "Do you want to take a walk to increase Happiness ?",
+                  // You can add specific gains/losses text if you want to display them
+                  // gainsText: "...",
+                  // lossesText: "...",
+                  actionType: "jalan", // <<< This is CRUCIAL for triggering jalan.js later
+                  actionParams: { /* No specific params needed by jalan.js directly, but structure is there */ } 
+              });
+              this.currentInteractable = null; // Prevent immediate re-trigger
+          } 
+            // // Example for a "work" spot needing confirmation
+            // else if (id === "work_spot_mcd") { // Assuming you have an object with this ID in Tiled
+            //     this.handleSaveVN();
+            //     EventBus.emit("showCustomModal", {
+            //         modalId: "workConfirmationMcd",
+            //         title: "Kerja di McD?",
+            //         description: "Kerja shift selama 4 jam.",
+            //         gainsText: "Uang +50 (bisa lebih jika bahagia).",
+            //         lossesText: "Energi -30, Kelaparan -10.",
+            //         actionType: "work",
+            //         actionParams: { jobId: "blokm_mcd" } // Parameters for the work action
+            //     });
+            //     this.currentInteractable = null;
+            // }
+            // ... (your existing else if for "out", and switch for VN triggers) ...
+            else if (id === "out") {
+              const enteringText = this.add
+                .text(
+                  this.cameras.main.centerX,
+                  -50,
+                  "Exiting....",
+                  {
+                    fontSize: "48px",
+                    fill: "#ffffff",
+                    fontStyle: "bold",
+                    resolution: 2
+                  }
+                  
+                )
+                .setOrigin(0.5)
+                .setDepth(1000)
+                .setScrollFactor(0);
+              GameState.afterVN = false;
+              this.cameras.main.fadeOut(1000, 0, 0, 0);
+              this.cameras.main.once("camerafadeoutcomplete", () => {
+                enteringText.destroy(); 
+                this.scene.start("MainGame");
+              });
+            } else if (id) {
+                switch (id) {
+                  case "prologue" : 
+                    this.handleSaveVN();  
+                    EventBus.emit("performVN", "prologueData");
+                    break;
+                  case "intro" :
+                    this.handleSaveVN();
+                    EventBus.emit("performVN", "introData");
+                    break;
+                  case "act1" :
+                    this.handleSaveVN();
+                    EventBus.emit("performVN", "act1Data");
+                    break;
+                  case "act2" :
+                    this.handleSaveVN();
+                    EventBus.emit("performVN", "act2Data");
+                    break;
+                  case "act3" :
+                    this.handleSaveVN();
+                    EventBus.emit("performVN", "act3Data");
+                    break;
+                  case "act3_1" :
+                    this.handleSaveVN();
+                    EventBus.emit("performVN", "act3_1Data");
+                    break;
+                  case "act3_2" :
+                    this.handleSaveVN();
+                    EventBus.emit("performVN", "act3_2Data");
+                    break;
+                  case "act4" :
+                    this.handleSaveVN();
+                    EventBus.emit("performVN", "act4Data");
+                    break;
+                    default:
+                        console.log("unhandled ID for confirmation/VN:", id);
+                    break;
+                }
+            }
         }
     }
 
@@ -160,8 +269,7 @@ export class Dieng extends Phaser.Scene{
         .sprite(this.posX, this.posY, "Yukari")
         .setScale(0.3);
       this.player.body.setCollideWorldBounds(true);
-  
-  
+
       const scale = 3;
       const mapWidth = map.widthInPixels;
       const mapHeight = map.heightInPixels;

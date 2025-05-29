@@ -3,7 +3,7 @@ import { jobList } from './jobList';
 import { EventBus } from '../EventBus';
 
 export default function work(currentStatus, jobId) {
-  const location = GameState.currentlocation;
+  const location = GameState.currentlocation.currentLoc;
   const job = jobList[location]?.find(job => job.Id === jobId);
   if (!job) {
     console.error("Invalid job or location");
@@ -40,6 +40,7 @@ export default function work(currentStatus, jobId) {
     energy: Math.max(currentStatus.energy + energy, 0),
     hunger: Math.max(currentStatus.hunger + hunger, 0),
     happiness: Math.max(currentStatus.happiness + happiness, 0),
-    hygiene: Math.max(currentStatus.hygiene + hygiene, 0)
+    hygiene: Math.max(currentStatus.hygiene + hygiene, 0),
+    score: currentStatus.score + 10,
   };
 }

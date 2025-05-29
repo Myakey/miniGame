@@ -15,7 +15,8 @@ export function GameStatusProvider({ children }){
             hour: GameState.time.hour,
             day: GameState.time.day,
             minute: GameState.time.minute || 0
-        }
+        },
+        score: GameState.score,
     })
 
     const updateStatus = (changes) => {
