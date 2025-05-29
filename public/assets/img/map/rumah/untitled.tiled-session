@@ -10,17 +10,17 @@
     "fileStates": {
         "": {
             "scaleInDock": 3,
-            "scaleInEditor": 3
+            "scaleInEditor": 4
         },
         "#floor": {
             "dynamicWrapping": false
         },
         "rumah.tmj": {
-            "scale": 3,
-            "selectedLayer": 1,
+            "scale": 4,
+            "selectedLayer": 7,
             "viewCenter": {
-                "x": 87.16666666666664,
-                "y": 201.16666666666669
+                "x": 96.875,
+                "y": 96.625
             }
         },
         "rumah.tmj#Tiles1": {
@@ -34,7 +34,7 @@
             "scaleInEditor": 1
         },
         "rumah.tmj#object": {
-            "scaleInDock": 4
+            "scaleInDock": 1.5
         },
         "rumah.tmj#object1": {
             "scaleInDock": 4,
