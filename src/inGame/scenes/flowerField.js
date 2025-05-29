@@ -10,7 +10,7 @@ export class FlowerField extends Phaser.Scene{
     }
 
     preload(){
-      GameState.currentlocation = "flowerField";
+      GameState.currentlocation.currentLoc = "flowerField";
       this.posX = GameState.afterVN ? GameState.currentlocation.currentPosX : 747; // Default position if not set
       this.posY = GameState.afterVN ? GameState.currentlocation.currentPosY : 859; // Default position if not set
     }
@@ -51,9 +51,6 @@ export class FlowerField extends Phaser.Scene{
 
   update(){
     handleMovement(this);
-    
-    console.log(this.player.x);
-    console.log(this.player.y);
 
     this.checkOverlap();
   }
@@ -119,12 +116,15 @@ export class FlowerField extends Phaser.Scene{
       const sunflowers = map.addTilesetImage("flower", "sunflowers");
       const tree = map.addTilesetImage("tree", "flowerFieldTree");
       const fence = map.addTilesetImage("fence", "flowerFieldFence");
+      const Yuuka = map.addTilesetImage("Yuuka", "Yuuka");
   
       const groundLayer = map.createLayer("ground", tree);
       const grassLayer = map.createLayer("grass", [grass, tree]);
       const flowerLayer = map.createLayer("flower", [sunflowers, tree]);
       const fenceHouseLayer = map.createLayer("house&Fence", [fence, tree]);
       const treeLayer = map.createLayer("tree", [tree, grass]);
+
+      const YuukaLayer = map.createLayer("Yuuka", Yuuka);
   
       this.player = this.physics.add
         .sprite(this.posX, this.posY, "Yukari")
@@ -141,18 +141,21 @@ export class FlowerField extends Phaser.Scene{
       flowerLayer.setScale(scale);
       fenceHouseLayer.setScale(scale);
       treeLayer.setScale(scale);
+      YuukaLayer.setScale(scale);
   
       fenceHouseLayer.setCollisionByProperty({ collides: true });
       treeLayer.setCollisionByProperty({ collides: true });
       flowerLayer.setCollisionByProperty({ collides: true });
       grassLayer.setCollisionByProperty({ collides: true });
       groundLayer.setCollisionByProperty({ collides: true });
+      YuukaLayer.setCollisionByProperty({ collides: true });
 
       this.physics.add.collider(this.player, fenceHouseLayer);
       this.physics.add.collider(this.player, treeLayer);
       this.physics.add.collider(this.player, flowerLayer);
       this.physics.add.collider(this.player, grassLayer);
       this.physics.add.collider(this.player, groundLayer);
+      this.physics.add.collider(this.player, YuukaLayer);
   
       this.physics.world.setBounds(0, 0, mapWidth * scale, mapHeight * scale);
       this.cameras.main.setBounds(0, 0, mapWidth * scale, mapHeight * scale);

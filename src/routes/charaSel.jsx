@@ -223,16 +223,15 @@ export default function CharSel() {
   <div className="fixed top-0 left-0 w-full h-full bg-black z-50 animate-fadeOut"></div>
 )}
       <div className="charaSelect">
-        <div className="flex flex-row h-screen w-screen overflow-hidden">
-          <div className="flex flex-col h-screen w-screen overflow-hidden justify-center">
-            {/*Left Column CharButton*/}
-            <div className="flex items-center justify-center pb-10">
-              <div className="flex flex-row gap-8 ">
+        <div className="flex flex-col lg:flex-row h-screen w-screen overflow-hidden">
+          {/*Character Selection Grid*/}
+          <div className="flex order-2 lg:order-1 flex-col h-[60vh] lg:h-screen w-full justify-center">
+            {/*1st Row CharButton*/}
+            <div className="flex items-center justify-center pb-4 lg:pb-10">
+              <div className="flex flex-row gap-4 lg:gap-8">
                 <div
-                  className={`border-4 rounded-tl-2xl rounded-br-2xl border-red-500 bg-red-100 overflow-hidden shadow-lg w-35 h-45 transform -skew-x-6 transition-transform duration-200 hover:scale-110 active:scale-110  ${
-                    (currentIndex + char.length) % char.length === 0
-                      ? "scale-110"
-                      : "scale-100"
+                  className={`border-4 rounded-tl-2xl rounded-br-2xl border-red-500 bg-red-100 overflow-hidden shadow-lg transform -skew-x-6 transition-transform duration-200 hover:scale-110 active:scale-110 w-28 h-36 lg:w-36 lg:h-48 ${
+                    (currentIndex + char.length) % char.length === 0 ? "scale-110" : "scale-100"
                   }`}
                   onClick={() => changeCharacter(0)}
                   onDoubleClick={() => {
@@ -241,17 +240,11 @@ export default function CharSel() {
                     navigate("/inGame");
                   }}
                 >
-                  <img
-                    src={charButtons[0]}
-                    alt="Character 1"
-                    className="object-cover w-full h-full"
-                  />
+                  <img src={charButtons[0]} alt="Character 1" className="object-cover w-full h-full" />
                 </div>
                 <div
-                  className={`rounded-tl-2xl rounded-br-2xl border-4 border-blue-400 bg-blue-200 overflow-hidden shadow-lg w-35 h-45 -skew-x-6 transform duration-200 hover:scale-110 active:scale-110 ${
-                    (currentIndex + char.length) % char.length === 1
-                      ? "scale-110"
-                      : "scale-100"
+                  className={`rounded-tl-2xl rounded-br-2xl border-4 border-blue-400 bg-blue-200 overflow-hidden shadow-lg -skew-x-6 transform duration-200 hover:scale-110 active:scale-110 w-28 h-36 lg:w-36 lg:h-48 ${
+                    (currentIndex + char.length) % char.length === 1 ? "scale-110" : "scale-100"
                   }`}
                   onClick={() => changeCharacter(1)}
                   onDoubleClick={() => {
@@ -260,17 +253,11 @@ export default function CharSel() {
                     navigate("/inGame");
                   }}
                 >
-                  <img
-                    src={charButtons[1]}
-                    alt="Character 2"
-                    className="object-cover w-full h-full"
-                  />
+                  <img src={charButtons[1]} alt="Character 2" className="object-cover w-full h-full" />
                 </div>
                 <div
-                  className={`rounded-tl-2xl rounded-br-2xl border-4 border-gray-500 bg-gray-300 overflow-hidden shadow-lg w-35 h-45 -skew-x-6 transform transition-transform duration-200 hover:scale-110 active:scale-110  ${
-                    (currentIndex + char.length) % char.length === 2
-                      ? "scale-110"
-                      : "scale-100"
+                  className={`rounded-tl-2xl rounded-br-2xl border-4 border-gray-500 bg-gray-300 overflow-hidden shadow-lg -skew-x-6 hover:scale-110 active:scale-110 w-28 h-36 lg:w-36 lg:h-48 ${
+                    (currentIndex + char.length) % char.length === 2 ? "scale-110" : "scale-100"
                   }`}
                   onClick={() => changeCharacter(2)}
                   onDoubleClick={() => {
@@ -279,23 +266,17 @@ export default function CharSel() {
                     navigate("/inGame");
                   }}
                 >
-                  <img
-                    src={charButtons[2]}
-                    alt="Character 3"
-                    className="object-cover w-full h-full"
-                  />
+                  <img src={charButtons[2]} alt="Character 3" className="object-cover w-full h-full" />
                 </div>
               </div>
             </div>
 
-            {/*Middle Column CharButton*/}
-            <div className="flex items-center justify-center pb-10">
-              <div className="flex flex-row gap-8  ">
+            {/*2nd Row CharButton*/}
+            <div className="flex items-center justify-center">
+              <div className="flex flex-row gap-4 lg:gap-8">
                 <div
-                  className={`border-4 rounded-tl-2xl rounded-br-2xl border-yellow-500 bg-yellow-100 overflow-hidden shadow-lg w-35 h-45 transform transition-transform duration-200 -skew-x-6 hover:scale-110 active:scale-110 ${
-                    (currentIndex + char.length) % char.length === 3
-                      ? "scale-110"
-                      : "scale-100"
+                  className={`border-4 rounded-tl-2xl rounded-br-2xl border-yellow-500 bg-yellow-100 overflow-hidden shadow-lg transform -skew-x-6 hover:scale-110 active:scale-110 w-28 h-36 lg:w-36 lg:h-48 ${
+                    (currentIndex + char.length) % char.length === 3 ? "scale-110" : "scale-100"
                   }`}
                   onClick={() => changeCharacter(3)}
                   onDoubleClick={() => {
@@ -304,23 +285,17 @@ export default function CharSel() {
                     navigate("/inGame");
                   }}
                 >
-                  <img
-                    src={charButtons[3]}
-                    alt="Character 1"
-                    className="object-cover w-full h-full"
-                  />
+                  <img src={charButtons[3]} alt="Character 4" className="object-cover w-full h-full" />
                 </div>
                 <div
-                  className={`rounded-tl-2xl rounded-br-2xl border-4 border-pink-400 overflow-hidden shadow-lg w-35 h-45 -skew-x-6 transform transition-transform duration-200 hover:scale-110 active:scale-110 ${
-                    (currentIndex + char.length) % char.length === 4
-                      ? "scale-110"
-                      : "scale-100"
+                  className={`rounded-tl-2xl rounded-br-2xl border-4 border-pink-400 overflow-hidden shadow-lg -skew-x-6 transform hover:scale-110 active:scale-110 w-28 h-36 lg:w-36 lg:h-48 ${
+                    (currentIndex + char.length) % char.length === 4 ? "scale-110" : "scale-100"
                   }`}
                   onClick={() => changeCharacter(4)}
                   onDoubleClick={() => {
                     let selectedCharacter = charNames[currentIndex];
                     GameState.char = selectedCharacter.split(" ")[0];
-                    navigate("/inGame");
+                    navigate("/inGame"); 
                   }}
                 >
                   <img
@@ -331,36 +306,41 @@ export default function CharSel() {
                 </div>
               </div>
             </div>
+
           </div>
+
           {/*The Large Image of Characters*/}
-          <div className="flex justify-end items-end h-full w-full ">
-            <img
-              key={chara}
-              src={chara}
-              alt="Selected Character"
-              className="h-full w-max mask-image-left animate-slide-in"
-            />
-            {/*Name Bar*/}
-            <div
-              key={currentIndex}
-              className="fixed flex z-40 h-15 w-70 bg-black/70 justify-center items-center text-center bottom-55 right-12 rounded-tl-2xl rounded-br-2xl mask-image-left animate-slide-in"
-            >
-              <h1 className="text-white text-3xl ">
-                {charNames[currentIndex]}
-              </h1>
+          <div className="flex order-1 lg:order-2 lg:justify-end lg:items-end justify-center items-end h-[40vh] lg:h-full w-full">
+            <div className="relative w-max h-full">
+              <img
+                key={chara}
+                src={chara}
+                alt="Selected Character"
+                className="h-full w-max mask-image-left animate-slide-in object-contain translate-y-10 lg:translate-y-0"
+              />
+              {/*Name Bar*/}
+              <div
+                key={currentIndex}
+                className="absolute flex z-40 h-15 w-60 bg-black/70 justify-center items-center text-center bottom-5 lg:w-70 lg:bottom-55 lg:right-12  rounded-tl-2xl rounded-br-2xl mask-image-left animate-slide-in"
+              >
+                <h1 className="text-white text-3xl">
+                  {charNames[currentIndex]}
+                </h1>
+              </div>
             </div>
           </div>
         </div>
-        {/*Middle Bottom Text*/}
-        <div className="flex pb-10 bottom-0 absolute z-10 justify-center items-center text-center w-full animate-pulse ">
-          <h1 className="text-white italic text-2xl drop-shadow-[2px_2px_rgba(0,0,0,0.9)]">
+
+        {/*Bottom Text*/}
+        <div className="flex bottom-2 lg:bottom-10 absolute z-10 justify-center items-center text-center w-full animate-pulse">
+          <h1 className="text-white italic text-xl lg:text-2xl drop-shadow-[2px_2px_rgba(0,0,0,0.9)]">
             Double click or press A to choose...
           </h1>
         </div>
 
         {/*Title*/}
-        <div className="flex pb-10 top-8 absolute z-10 justify-center items-center text-center w-full ">
-          <h1 className="text-orange-300 text-6xl drop-shadow-[3px_2px_rgba(0,0,0,0.9)]">
+        <div className="flex top-2 lg:top-5 absolute z-10 justify-center items-center text-center w-full">
+          <h1 className="text-orange-300 text-4xl lg:text-6xl drop-shadow-[3px_2px_rgba(0,0,0,0.9)]">
             Character Select
           </h1>
         </div>
