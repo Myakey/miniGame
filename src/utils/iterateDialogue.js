@@ -20,7 +20,6 @@ export const usedialogueIterator = (actName = "act1", onComplete = () => {}, cus
 
     if (soundKey === "none") {
       stopAllSounds(); 
-      console.log("YES!");
       currentSoundRef.current = null;
     } else if (soundKey && soundKey !== currentSoundRef.current) {
       playSound(soundKey); // play new sound
@@ -71,6 +70,7 @@ export const usedialogueIterator = (actName = "act1", onComplete = () => {}, cus
       if (typeof onComplete === 'function') {
         onComplete(); 
       }
+      
     }
   }, [index, scenes.length, isHalted, onComplete]);
 

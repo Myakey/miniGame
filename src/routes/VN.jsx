@@ -43,10 +43,11 @@ function VN() {
   const location = useLocation();
   const isMobile = useIsMobile();
   const actName = location.state?.act || "act1";
-  const [customActData, setCustomActData] = useState(null);
+  const customDataFromNav = location.state?.data;
+  const [customActData, setCustomActData] = useState(customDataFromNav || null);
   const { current, displayedText, handleNext, autoPlay, setAutoPlay, logHistory, isHalted, isTyping, skipTyping } = usedialogueIterator(
     customActData ? "custom" : actName,
-    undefined,
+    () => navigate('/inGame'),
     customActData
   ); //routes
 
@@ -197,7 +198,7 @@ function VN() {
               src={skipButton}
               className="button-image w-10 h-10 md:w-12 md:h-12 object-contain cursor-pointer hover:opacity-80 transition-opacity filter invert" // Added filter invert for visibility on black
               alt="Menu"
-              onClick={e => { e.stopPropagation(); setShowModal(prev => !prev); }}
+              onClick={e => { e.stopPropagation(); setShowModal(prev => !prev);}}
             />
             {showModal && (
               <div className="modal absolute top-full right-1/2 translate-x-1/2 mt-2 bg-white border border-gray-300 rounded-xl shadow-xl p-4 z-50 w-fit" onClick={e => e.stopPropagation()}>
@@ -260,7 +261,7 @@ function VN() {
               </div>
             )}
         </div>
-        <div onClick={() => navigate("/")} className="ui-button">
+        <div onClick={() => navigate("/inGame")} className="ui-button">
           <img src= {backButton} alt="Back" className="button-image"/>
         </div>
       </div>

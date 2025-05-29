@@ -1,0 +1,64 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "GUGUGAGA.tmx",
+    "expandedProjectPaths": [
+    ],
+    "fileStates": {
+        "GUGUGAGA.tmx": {
+            "scale": 3,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 96.66666666666666,
+                "y": 134.49999999999997
+            }
+        },
+        "GUGUGAGA.tmx#LibraryBlokM": {
+            "scaleInDock": 2
+        },
+        "GUGUGAGA.tmx#decorationBlokM": {
+            "scaleInDock": 0.75
+        },
+        "GUGUGAGA.tmx#furnitureBlokM": {
+            "scaleInDock": 1.5
+        },
+        "GUGUGAGA.tmx#storeBlokM": {
+            "scaleInDock": 1.5
+        },
+        "GUGUGAGA.tmx#tileBlokM": {
+            "scaleInDock": 1
+        },
+        "blokM.tmj#Kosuzu": {
+            "scaleInEditor": 1
+        },
+        "blokM.tmj#LibraryBlokM": {
+            "scaleInEditor": 1.5
+        },
+        "blokM.tmj#tileBlokM": {
+            "scaleInEditor": 1
+        }
+    },
+    "last.exportedFilePath": "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/blokM",
+    "last.imagePath": "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/blokM",
+    "map.height": 32,
+    "map.lastUsedExportFilter": "JSON map files (*.tmj *.json)",
+    "map.lastUsedFormat": "tmx",
+    "map.tileHeight": 16,
+    "map.tileWidth": 16,
+    "map.width": 50,
+    "openFiles": [
+        "GUGUGAGA.tmx"
+    ],
+    "project": "untitled.tiled-project",
+    "property.type": "bool",
+    "recentFiles": [
+        "GUGUGAGA.tmx"
+    ],
+    "tileset.embedInMap": true,
+    "tileset.tileSize": {
+        "height": 23,
+        "width": 20
+    }
+}

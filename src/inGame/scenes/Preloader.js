@@ -2,6 +2,7 @@ import { Scene } from 'phaser';
 import { useNavigate } from 'react-router-dom';
 import { GameState } from '../../hooks/gamestate';
 import { charaList } from '../mechanics/charaList';
+import CreatePlayerAnimation from "../movements/animation";
 
 export class Preloader extends Scene
 {
@@ -42,6 +43,15 @@ export class Preloader extends Scene
         this.load.image("Tree", '/assets/img/map/Tree01a.png');
         this.load.image("GroundTile", '/assets/img/map/TILEMAPS.png');
 
+        //BLOKM
+        this.load.tilemapTiledJSON("blokM", "/assets/img/map/blokM/blokM.tmj");
+        this.load.image("decorationBlokM", "/assets/img/map/blokM/decorationBlokM.png");
+        this.load.image("furnitureBlokM", "/assets/img/map/blokM/furnitureBlokM.png");
+        this.load.image("LibraryBlokM", "/assets/img/map/blokM/LibraryBlokM.png");
+        this.load.image("storeBlokM", "/assets/img/map/blokM/storeBlokM.png");
+        this.load.image("tileBlokM", "/assets/img/map/blokM/tileBlokM.png");
+        this.load.image("Kosuzu", "/assets/img/map/blokM/Kosuzu.png");
+
         //Dieng
 
         //Hakurei Shrine (Rumah)
@@ -73,10 +83,39 @@ export class Preloader extends Scene
 
     create ()
     {
+        CreatePlayerAnimation(this);
         //  When all the assets have loaded, it's often worth creating global objects here that the rest of the game can use.
         //  For example, you can define global animations here, so we can use them in other scenes.
 
         //  Move to the MainMenu. You could also swap this for a Scene Transition, such as a camera fade.
-        this.scene.start('MainGame');
+        console.log(GameState.afterVN);
+        if(GameState.afterVN){
+             switch(GameState.currentlocation.currentLoc){
+            case "MainGame":
+                this.scene.start('MainGame');
+                break;
+            case "BlokM":
+                this.scene.start('BlokM');
+                break;
+            case "HakureiShrine":
+                this.scene.start('HakureiShrine');
+                break;
+            case "FlowerField":
+                this.scene.start('FlowerField');
+                break;
+            case "Pantai":
+                this.scene.start('Pantai');
+                break;
+            case "Dieng":
+                this.scene.start('Dieng');
+                break;
+            default:
+                this.scene.start('MainGame');
+                break;
+        }
+        }else{
+            this.scene.start("MainGame");
+        }
+       
     }
 }

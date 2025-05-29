@@ -8,9 +8,17 @@ export const GameState = {
     energy: 50,
     inventory: [],
     money: 100000,
-    currentlocation:"",
+    currentlocation: {
+        currentLoc: "MainGame",
+        currentPosX: 0,
+        currentPosY: 0,
+    },
     time: {
         hour : 6,
         day: 0
     },
+    isVampire : false,
+    previousAct: "prologue",
+    currentAct: "prologue",
+    afterVN: false,
 }
