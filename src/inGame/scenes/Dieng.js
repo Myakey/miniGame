@@ -15,13 +15,14 @@ export class Dieng extends Phaser.Scene{
     preload(){
       this.posX = GameState.afterVN ? GameState.currentlocation.currentPosX : 1130; // Default position if not set
       this.posY = GameState.afterVN ? GameState.currentlocation.currentPosY : 1356; // Default position if not set
+      GameState.currentlocation.currentLoc = "Dieng";
     }
 
     create(data) {
     this.cameras.main.fadeIn(1000, 0, 0, 0);
     
     this.generateMap();
-
+      
     const button = this.add.text(100, 150, "Return to Main Scene", {
       fontSize: "18px",
       fill: "#0f0",

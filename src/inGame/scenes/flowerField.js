@@ -10,44 +10,22 @@ export class FlowerField extends Phaser.Scene{
     }
 
     preload(){
-      GameState.currentlocation.currentLoc = "flowerField";
+      GameState.currentlocation.currentLoc = "FlowerField";
       this.posX = GameState.afterVN ? GameState.currentlocation.currentPosX : 747; // Default position if not set
       this.posY = GameState.afterVN ? GameState.currentlocation.currentPosY : 859; // Default position if not set
     }
 
     create(data) {
     this.cameras.main.fadeIn(1000, 0, 0, 0);
+
     this.generateMap();
-
-    this.add.text(100, 100, "FlowerField", { fontSize: "20px", fill: "#fff" });
-
-    const button = this.add.text(100, 150, "Return to Main Scene", {
-      fontSize: "18px",
-      fill: "#0f0",
-      backgroundColor: "#000",
-      padding: { x: 10, y: 5 }
-    })
-    .setInteractive()
-    .on("pointerdown", () => {
-      this.scene.start("MainGame");
-    });
-
-    const button2 = this.add.text(300, 150, "Return to Main Scene", {
-      fontSize: "18px",
-      fill: "#0f0",
-      backgroundColor: "#000",
-      padding: { x: 10, y: 5 }
-    })
-    .setInteractive()
-    .on("pointerdown", () => {
-      this.scene.start("DanMakuTrial");
-    });
 
      this.cursors = this.input.keyboard.createCursorKeys();
         this.shiftKey = this.input.keyboard.addKey(
           Phaser.Input.Keyboard.KeyCodes.SHIFT
         );
   }
+
 
   update(){
     handleMovement(this);

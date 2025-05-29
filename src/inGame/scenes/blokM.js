@@ -11,14 +11,12 @@ export class BlokM extends Phaser.Scene{
     preload(){
       this.posX = GameState.afterVN ? GameState.currentlocation.currentPosX : 1200; // Default position if not set
       this.posY = GameState.afterVN ? GameState.currentlocation.currentPosY : 1500; // Default position if not set
-      GameState.currentlocation = "BlokM";
+      GameState.currentlocation.currentLoc = "BlokM";
     }
 
     create(data) {
     this.cameras.main.fadeIn(1000, 0, 0, 0);
     this.generateMap();
-    GameState.currentlocation = "blokM";
-    console.log("You are now in:", GameState.currentlocation);
   }
 
   update() {

@@ -42,6 +42,8 @@ export class Preloader extends Scene
         this.load.image("Path", '/assets/img/map/path.png');
         this.load.image("Tree", '/assets/img/map/Tree01a.png');
         this.load.image("GroundTile", '/assets/img/map/TILEMAPS.png');
+        this.load.image("Home", '/assets/img/map/home.png');
+        this.load.image("MainDetails", '/assets/img/map/decoration.png');
 
         //BLOKM
         this.load.tilemapTiledJSON("blokM", "/assets/img/map/blokM/blokM.tmj");
@@ -66,13 +68,19 @@ export class Preloader extends Scene
         // this.load.image("walls", "/assets/img/map/rumah/Tiles/wallBorder.png")
 
         //FLowerField
-        this.load.tilemapTiledJSON("flowerField", "/assets/img/map/flowerField/flowerField.tmj");
-        this.load.image("flowerFieldTiles", "/assets/img/map/flowerField/grass.png");
-        this.load.image("sunflowers", "/assets/img/map/flowerField/SUNFLOWERS.png");
-        this.load.image("flowerFieldTree", "/assets/img/map/flowerField/tree.png");
-        this.load.image("flowerFieldFence", "/assets/img/map/flowerField/fence_00.png");
-        this.load.image("Yuuka", "/assets/img/map/flowerField/Yuuka.png");
+        this.load.tilemapTiledJSON("flowerField", "/assets/img/map/FlowerField/flowerField.tmj");
+        this.load.image("flowerFieldTiles", "/assets/img/map/FlowerField/grass.png");
+        this.load.image("sunflowers", "/assets/img/map/FlowerField/SUNFLOWERS.png");
+        this.load.image("flowerFieldTree", "/assets/img/map/FlowerField/tree.png");
+        this.load.image("flowerFieldFence", "/assets/img/map/FlowerField/fence_00.png");
+        this.load.image("Yuuka", "/assets/img/map/FlowerField/Yuuka.png");
+
+
         //Beach
+        this.load.tilemapTiledJSON("pantai", "/assets/img/map/pantai/pantai.tmj");
+        this.load.image("beachTiles", "/assets/img/map/pantai/rpg.png");
+        this.load.image("treePantai", "/assets/img/map/pantai/Trees.png");
+
 
 
         //Character SpriteSheets

@@ -20,8 +20,8 @@ export const charaList = [
     },
     {
         name: "Reimu",
-        width: 167,
-        height: 222,
+        width: 144,
+        height: 208,
         path: Reimu
     },
     {
@@ -32,7 +32,7 @@ export const charaList = [
     },
     {
         name: "Sakuya",
-        width: 160,
+        width: 128,
         height: 208,
         path: Sakuya
     }
