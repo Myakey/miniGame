@@ -53,6 +53,8 @@ export class Preloader extends Scene
         this.load.image("Kosuzu", "/assets/img/map/blokM/Kosuzu.png");
 
         //Dieng
+        this.load.tilemapTiledJSON("dieng", "/assets/img/map/dieng/diengsz.tmj");
+        this.load.image("diengTiles", "/assets/img/map/dieng/free_pixel_16_woods.png");
 
         //Hakurei Shrine (Rumah)
         this.load.tilemapTiledJSON("rumah", "/assets/img/map/rumah/rumah.tmj");
