@@ -17,8 +17,6 @@ export class BlokM extends Phaser.Scene{
     create(data) {
     this.cameras.main.fadeIn(1000, 0, 0, 0);
     this.generateMap();
-    GameState.currentlocation = "blokM";
-    console.log("You are now in:", GameState.currentlocation);
   }
 
   update() {
