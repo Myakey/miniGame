@@ -95,6 +95,26 @@
         "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/mainMap.tmj#home": {
             "scaleInDock": 1
         },
+        "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/pantai/pantai.tmj": {
+            "scale": 1.8445833333333332,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 239.89157442963634,
+                "y": 160.19878021233345
+            }
+        },
+        "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/pantai/pantai.tmj#beach": {
+            "scaleInDock": 1
+        },
+        "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/pantai/pantai.tmj#coba": {
+            "scaleInDock": 1
+        },
+        "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/pantai/pantai.tmj#toko": {
+            "scaleInDock": 1
+        },
+        "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/pantai/pantai.tmj#tree": {
+            "scaleInDock": 1
+        },
         "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/pantai/pantai.tmx": {
             "scale": 1.8445833333333332,
             "selectedLayer": 2,
@@ -137,10 +157,10 @@
                 9
             ],
             "scale": 4,
-            "selectedLayer": 7,
+            "selectedLayer": 6,
             "viewCenter": {
                 "x": 205.625,
-                "y": 137.375
+                "y": 225.125
             }
         },
         "rumah.tmj#Tiles1": {
