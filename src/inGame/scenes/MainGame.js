@@ -6,6 +6,7 @@ import { GameState } from "../../hooks/gamestate";
 import { useNavigate } from "react-router-dom";
 import { handleMovement } from "../movements/handleMovement";
 import setupPlayerMovement from "../movements/pathFinding";
+import { SceneRegistry } from "../SceneRegistry";
 
 
 
@@ -117,6 +118,7 @@ export class MainGame extends Phaser.Scene {
   }
 
   create() {
+    SceneRegistry.setScene(this.scene.key, this);
     this.cameras.main.fadeIn(1000, 0, 0, 0);
     const map = this.add.tilemap("map");
     const ground = map.addTilesetImage("TILEMAPS", "GroundTile");
