@@ -120,10 +120,10 @@ export class HakureiShrine extends Phaser.Scene{
 
     this.player = this.physics.add
       .sprite(this.posX, this.posY, "Yukari")
-      .setScale(0.28);
+      .setScale(0.28);//character scale
     this.player.body.setCollideWorldBounds(true);
 
-    const scale = 3;
+    const scale = 5; //map scale
     const mapWidth = map.widthInPixels;
     const mapHeight = map.heightInPixels;
 
@@ -145,7 +145,7 @@ export class HakureiShrine extends Phaser.Scene{
     this.cameras.main.startFollow(this.player);
 
     const objects = map.getObjectLayer("door").objects;
-         const SCALE = 3;
+         const SCALE = 5;//object scale
     
         this.interactables = this.physics.add.group();
     
