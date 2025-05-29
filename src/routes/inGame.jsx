@@ -18,7 +18,8 @@ import handleActionLogic from "../inGame/handleAction";
 import { useGameContext } from "../hooks/GameStatusContext";
 import { pauseGame, resumeGame, isPaused } from "../inGame/gameController";
 import ArrowControls from "../inGame/movements/arrows";
-//test modal
+//test modal && Action scene
+import ActionFlow from "../components/Game/Actionscene";
 import Modal from "../components/UI/ModalBox";
 import Shop from "../components/Game/Shop";
 import ObjectivePanel from "../components/Game/Objective";
@@ -55,7 +56,9 @@ function MainGame() {
   const [spritePosition, setSpritePosition] = useState({ x: 0, y: 0 });
   const [Time, setTime] = useState(GameState.time);
   const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
-  const [confirmationModalData, setConfirmationModalData] = useState({
+  const [isActionPlaying, setIsActionPlaying] = useState(false);
+  const [currentActionTypeForAnimation, setCurrentActionTypeForAnimation] = useState(null); // To pass to ActionFlow
+  const [actionAnimationTimeoutId, setActionAnimationTimeoutId] = useState(null);  const [confirmationModalData, setConfirmationModalData] = useState({
     title: "",
     description: "",
     gainsText: "",
@@ -187,32 +190,78 @@ function MainGame() {
 
   // ##########################################################
   const handleConfirmCurrentAction = () => {
+    setIsConfirmationModalOpen(false); // Close confirmation modal first
+
     if (confirmationModalData.actionType) {
       console.log(
-        "Action confirmed:",
-        confirmationModalData.actionType,
-        confirmationModalData.actionParams
+        "Action confirmed, preparing to play animation for:",
+        confirmationModalData.actionType
       );
-      // Emit the "performAction" event that your game logic (handleExecuteAction) already handles
-      EventBus.emit("performAction", {
-        type: confirmationModalData.actionType,
-        // Pass actionParams directly, or destructure if handleExecuteAction expects specific fields
-        jobId: confirmationModalData.actionParams?.jobId, // Example if expecting jobId
-        // If handleActionLogic was changed to take (type, prev, actionParams), then:
-        // actionParams: confirmationModalData.actionParams
-      });
+      
+      // Set state to show animation
+      setCurrentActionTypeForAnimation(confirmationModalData.actionType); // Pass the type for GIF selection
+      setIsActionPlaying(true);
+      // Game should already be paused by handleShowCustomModal, keep it paused
+
+      // Automatically stop animation and perform action after a delay (e.g., 5 seconds for animation)
+      // The original ActionFlow had 10 seconds, this one has 15 seconds in your snippet.
+      // Let's make it shorter for the animation itself, actual game logic duration is separate.
+      const animationDuration = 5000; // 5 seconds for GIF display, adjust as needed
+      
+      if (actionAnimationTimeoutId) { // Clear any existing timeout
+          clearTimeout(actionAnimationTimeoutId);
+      }
+
+      const timeoutId = setTimeout(() => {
+        setIsActionPlaying(false);
+        setCurrentActionTypeForAnimation(null); // Clear action type
+
+        // Now, emit the event to actually perform the game logic action
+        console.log("Animation finished, emitting performAction for:", confirmationModalData.actionType);
+        EventBus.emit("performAction", {
+          type: confirmationModalData.actionType,
+          jobId: confirmationModalData.actionParams?.jobId,
+          itemId: confirmationModalData.actionParams?.itemId,
+        });
+        // Game will be resumed by handleExecuteAction or if action takes time, after that
+        // For now, let's assume the action itself is quick or handles resume.
+        // If not, resumeGame() should be called after the action's effects are applied.
+        // resumeGame(); // Resume game AFTER action logic is processed if action is instant
+      }, animationDuration);
+
+      setActionAnimationTimeoutId(timeoutId);
+    } else {
+      resumeGame(); // If no action type, just resume game
     }
-    setIsConfirmationModalOpen(false);
-    resumeGame();
-    console.log("Confirmation modal closed, action performed, game resumed");
+  };
+
+  const handleSkipActionAnimation = () => {
+    if (actionAnimationTimeoutId) {
+      clearTimeout(actionAnimationTimeoutId);
+    }
+    setIsActionPlaying(false);
+    setCurrentActionTypeForAnimation(null);
+
+    // Immediately perform the action when skipping animation
+    if (confirmationModalData.actionType) {
+        console.log("Animation skipped, emitting performAction for:", confirmationModalData.actionType);
+        EventBus.emit("performAction", {
+            type: confirmationModalData.actionType,
+            jobId: confirmationModalData.actionParams?.jobId,
+            itemId: confirmationModalData.actionParams?.itemId,
+        });
+    }
+    resumeGame(); // Resume game AFTER action logic is processed if action is instant
+    console.log("Action animation skipped, action performed, attempting to resume game (if action is instant)");
   };
 
   const handleCancelCurrentAction = () => {
     console.log("Action cancelled for modalId:", confirmationModalData.modalId);
     setIsConfirmationModalOpen(false);
-    resumeGame();
-    console.log("Confirmation modal closed, action performed, game resumed");
+    resumeGame(); // Resume game if action is cancelled
+    console.log("Confirmation modal closed, action cancelled, game resumed");
   };
+
   // ##########################################################
 
   return (
@@ -254,7 +303,11 @@ function MainGame() {
         </div>
       </Modal>
       {/* ############################################ */}
-
+      <ActionFlow 
+        isPlaying={isActionPlaying} 
+        currentActionType={currentActionTypeForAnimation} 
+        onSkip={handleSkipActionAnimation} 
+      />
       <div className="flex flex-col items-center w-full">
         <div className="fixed right-4 top-1/4 transform -translate-y-1/2 z-20 bg-gray-900/75 text-center">
           <div className="w-75 hidden text-4xl text-center text-lime-400 mb-2">OBJECTIVE</div>
@@ -290,6 +343,30 @@ function MainGame() {
       </div>
         <ArrowControls />
       </div>
+      {/* ######################################################################### */}
+      {/* {isActionPlaying && (
+      <div className="fixed inset-0 flex items-center justify-center bg-black/60 z-50">
+        <div className="bg-white rounded-xl shadow-lg p-6 text-center max-w-sm">
+          <p className="text-lg font-semibold mb-4">Doing the action...</p>
+          <img src="/action.gif" alt="Action in progress" className="w-full h-auto mb-4" />
+          <button
+            onClick={() => {
+              clearTimeout(actionTimeoutId);
+              setIsActionPlaying(false);
+              setCurrentActionType(null); 
+              EventBus.emit("performAction", {
+                type: confirmationModalData.actionType,
+                jobId: confirmationModalData.actionParams?.jobId,
+              });
+              resumeGame();
+            }}
+          >
+            Skip
+          </button>
+        </div>
+      </div>
+    )} */}
+    {/* ######################################################################### */}
     </>
   );
 }
