@@ -15,8 +15,8 @@ export class HakureiShrine extends Phaser.Scene{
     }
 
     preload(){
-      this.posX = GameState.afterVN ? GameState.currentlocation.currentPosX : 459; // Default position if not set
-            this.posY = GameState.afterVN ? GameState.currentlocation.currentPosY : 782; // Default position if not set
+      this.posX = GameState.afterVN ? GameState.currentlocation.currentPosX : 768; // Default position if not set
+      this.posY = GameState.afterVN ? GameState.currentlocation.currentPosY : 1392; // Default position if not set
     }
 
 

@@ -7,6 +7,7 @@
     "expandedProjectPaths": [
         "."
     ],
+    "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
         "": {
             "scaleInDock": 3,
@@ -15,11 +16,26 @@
         "#floor": {
             "dynamicWrapping": false
         },
+        "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/dieng/diengsz.tmx": {
+            "expandedObjectLayers": [
+                5
+            ],
+            "scale": 4,
+            "selectedLayer": 3,
+            "viewCenter": {
+                "x": 537.375,
+                "y": 210.625
+            }
+        },
+        "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/dieng/diengsz.tmx#tiles": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
         "rumah.tmj": {
             "scale": 3,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 87.16666666666664,
+                "x": 87.16666666666667,
                 "y": 201.16666666666669
             }
         },
@@ -48,8 +64,10 @@
             "scaleInEditor": 1
         }
     },
+    "last.exportedFilePath": "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/dieng",
     "last.imagePath": "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/rumah",
     "map.height": 32,
+    "map.lastUsedExportFilter": "JSON map files (*.tmj *.json)",
     "map.lastUsedFormat": "json",
     "map.tileHeight": 16,
     "map.tileWidth": 16,
@@ -58,8 +76,9 @@
         "rumah.tmj"
     ],
     "project": "untitled.tiled-project",
-    "property.type": "bool",
+    "property.type": "string",
     "recentFiles": [
+        "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/dieng/diengsz.tmx",
         "rumah.tmj"
     ],
     "tileset.embedInMap": true,
