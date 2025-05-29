@@ -18,38 +18,7 @@ export class FlowerField extends Phaser.Scene{
     create(data) {
     this.cameras.main.fadeIn(1000, 0, 0, 0);
 
-    GameState.currentlocation = "flowerField";
-    console.log("You are now in:", GameState.currentlocation);
-
-    const startX = 300;
-    const startY = 400;
-
-    this.player = this.physics.add.sprite(startX, startY, "Yukari");
-    this.player.setScale(0.3);
-
-    this.add.text(100, 100, "FlowerField", { fontSize: "20px", fill: "#fff" });
-
-    const button = this.add.text(100, 150, "Return to Main Scene", {
-      fontSize: "18px",
-      fill: "#0f0",
-      backgroundColor: "#000",
-      padding: { x: 10, y: 5 }
-    })
-    .setInteractive()
-    .on("pointerdown", () => {
-      this.scene.start("MainGame");
-    });
-
-    const button2 = this.add.text(300, 150, "Return to Main Scene", {
-      fontSize: "18px",
-      fill: "#0f0",
-      backgroundColor: "#000",
-      padding: { x: 10, y: 5 }
-    })
-    .setInteractive()
-    .on("pointerdown", () => {
-      this.scene.start("DanMakuTrial");
-    });
+    this.generateMap();
 
      this.cursors = this.input.keyboard.createCursorKeys();
         this.shiftKey = this.input.keyboard.addKey(
