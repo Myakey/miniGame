@@ -71,9 +71,9 @@ export class Preloader extends Scene
         this.load.image("sunflowers", "/assets/img/map/flowerField/SUNFLOWERS.png");
         this.load.image("flowerFieldTree", "/assets/img/map/flowerField/tree.png");
         this.load.image("flowerFieldFence", "/assets/img/map/flowerField/fence_00.png");
-
+        this.load.image("Yuuka", "/assets/img/map/flowerField/Yuuka.png");
         //Beach
-        
+
 
         //Character SpriteSheets
         this.load.spritesheet(
