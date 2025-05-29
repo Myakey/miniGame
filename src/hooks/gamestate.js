@@ -14,7 +14,7 @@ export const GameState = {
         currentPosY: 0,
     },
     time: {
-        hour : 6,
+        hour : 17,
         day: 0
     },
     isVampire : false,

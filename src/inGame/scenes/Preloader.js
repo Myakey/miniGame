@@ -66,9 +66,14 @@ export class Preloader extends Scene
         // this.load.image("walls", "/assets/img/map/rumah/Tiles/wallBorder.png")
 
         //FLowerField
+        this.load.tilemapTiledJSON("flowerField", "/assets/img/map/flowerField/flowerField.tmj");
+        this.load.image("flowerFieldTiles", "/assets/img/map/flowerField/grass.png");
+        this.load.image("sunflowers", "/assets/img/map/flowerField/SUNFLOWERS.png");
+        this.load.image("flowerFieldTree", "/assets/img/map/flowerField/tree.png");
+        this.load.image("flowerFieldFence", "/assets/img/map/flowerField/fence_00.png");
 
         //Beach
-
+        
 
         //Character SpriteSheets
         this.load.spritesheet(

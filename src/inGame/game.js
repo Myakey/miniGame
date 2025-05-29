@@ -9,6 +9,8 @@ import { HakureiShrine } from "./scenes/HakureiShrine";
 import { debugScene } from "./scenes/debugScene";
 import DanmakuScene from "./scenes/danMaku";
 
+import OverlayScene from "./scenes/OverlayScene";
+
 import DanMakuTrial from "./danMakuSpecific/scenes/Game";
 
 import Phaser from "phaser";
@@ -36,6 +38,7 @@ const config = {
     },
     scene: [
         Boot,
+        OverlayScene,
         Preloader,
         MainGame,
         BlokM,
