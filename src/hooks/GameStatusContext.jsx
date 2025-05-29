@@ -10,7 +10,12 @@ export function GameStatusProvider({ children }){
         energy: GameState.energy,
         hygiene: GameState.hygiene,
         happiness: GameState.happiness,
-        money: GameState.money
+        money: GameState.money,
+        time: {
+            hour: GameState.time.hour,
+            day: GameState.time.day,
+            minute: GameState.time.minute || 0
+        }
     })
 
     const updateStatus = (changes) => {

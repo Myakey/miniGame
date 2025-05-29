@@ -6,9 +6,26 @@
     "activeFile": "",
     "expandedProjectPaths": [
     ],
+    "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
         "": {
-            "scaleInDock": 3
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/mainMap.tmj": {
+            "scale": 2,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 115.75,
+                "y": 67.5
+            }
+        },
+        "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/mainMap.tmj#Flowerfield": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/mainMap.tmj#TILEMAPS": {
+            "scaleInDock": 1
         },
         "rumah.tmj": {
             "scale": 4,
@@ -25,7 +42,8 @@
             "scaleInDock": 1
         },
         "rumah.tmj#toiletFrontOpen": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "rumah.tmj#wallBorder": {
             "scaleInDock": 1,
@@ -51,7 +69,7 @@
         }
     },
     "last.exportedFilePath": "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/rumah",
-    "last.imagePath": "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/rumah",
+    "last.imagePath": "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map",
     "map.height": 30,
     "map.lastUsedExportFilter": "JSON map files (*.tmj *.json)",
     "map.lastUsedFormat": "tmx",
@@ -63,6 +81,7 @@
     "project": "Rumah.tiled-project",
     "property.type": "bool",
     "recentFiles": [
+        "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/mainMap.tmj"
     ],
     "tileset.embedInMap": true,
     "tileset.tileSize": {

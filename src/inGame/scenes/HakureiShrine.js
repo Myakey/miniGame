@@ -19,6 +19,10 @@ export class HakureiShrine extends Phaser.Scene{
 
 
     create(data){
+    this.cameras.main.fadeIn(1000, 0, 0, 0);
+
+    GameState.currentlocation = "HakureiShrine";
+    
     //MAP INITIALIZER
     const map = this.add.tilemap("rumah");
     const floor = map.addTilesetImage("bathFloor", "BathroomFloor");
@@ -62,14 +66,14 @@ export class HakureiShrine extends Phaser.Scene{
 
 
     const startX = GameState.pos_x;
-        const startY = GameState.pos_y;
+    const startY = GameState.pos_y;
     
-        this.player = this.physics.add.sprite(startX, startY, "Yukari");
-        this.player.setScale(0.3);
+    this.player = this.physics.add.sprite(startX, startY, "Yukari");
+    this.player.setScale(0.3);
 
-        this.physics.add.collider(this.player, wallsLayer);
+    this.physics.add.collider(this.player, wallsLayer);
     
-        this.cameras.main.setZoom(1);
+    this.cameras.main.setZoom(1);
 
         this.input.gamepad.once(
           "connected",

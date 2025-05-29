@@ -10,27 +10,27 @@ import ShopOne from "../../assets/image/InGame/shopOne.jpeg"
 
 import { itemsList } from "../../inGame/mechanics/itemsList";
 
-export default function Shop() {
+export default function Shop( { onClose }) {
   const place = GameState.currentlocation;
-  const [show, setShow] = useState(false);
+  // const [show, setShow] = useState(false);
   const NitoriSound = new Audio(NitoriShopSound);
   const [displayedText, setDisplayedText] = useState("");
   // const shopLine = "Oh, you came by again today? Come over here -- I've got something to show you! Let me know what you think."
 
   // const ItemsShop = itemsListDebug.filter()
 
-  useEffect(() => {
-    const handleAction = () => {
-      setShow(true);
-      //SFX nyalain nanti aja kalo udh production
-      // NitoriSound.play();
-    };
+  // useEffect(() => {
+  //   const handleAction = () => {
+  //     setShow(true);
+  //     //SFX nyalain nanti aja kalo udh production
+  //     // NitoriSound.play();
+  //   };
 
-    EventBus.on("showShop", handleAction);
-    return () => {
-      EventBus.off("showShop", handleAction);
-    };
-  }, []);
+  //   EventBus.on("showShop", handleAction);
+  //   return () => {
+  //     EventBus.off("showShop", handleAction);
+  //   };
+  // }, []);
 
 
   const handleBuy = (item) => {
@@ -44,43 +44,13 @@ export default function Shop() {
   alert(`You bought ${item.name}!`);
   };
 
-
-  // useEffect(() => {
-    
-
-  //   if(!show){
-  //     setDisplayedText("");
-  //     return;
-  //   }
-
-  //   setDisplayedText("");
-
-  //   if(!shopLine)return;
-
-  //   let charIndex = 0;
-  //   let typingInterval = setInterval(() => {
-  //     charIndex++;
-  //     setDisplayedText(shopLine.slice(0, charIndex));
-  //     if(charIndex >= shopLine.length){
-  //       clearInterval(typingInterval);
-  //     }
-
-
-      
-  //   }, 50);
-
-
-  //   return () => clearInterval(typingInterval)
-  // }, [show])
-
   return (
     <>
-      {show && (
         <div
           className="fixed inset-0 bg-opacity-50 flex items-center justify-center animate-fade-in z-50"
           onClick={() => setShow(false)}>
           <div className="absolute top-4 left-4 z-30">
-            <Button text="Back" onClick={() => {setShow(false);}} />
+           <Button text="Back" onClick={onClose} />
           </div>
           {/* Inner content container */}
           <div
@@ -148,7 +118,6 @@ export default function Shop() {
 
           </div>
         </div>
-      )}
     </>
   );
 }

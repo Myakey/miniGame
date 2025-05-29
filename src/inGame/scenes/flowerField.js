@@ -13,6 +13,7 @@ export class FlowerField extends Phaser.Scene{
     }
 
     create(data) {
+    this.cameras.main.fadeIn(1000, 0, 0, 0);
 
     GameState.currentlocation = "flowerField";
     console.log("You are now in:", GameState.currentlocation);

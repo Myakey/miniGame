@@ -1,4 +1,7 @@
+import { isPaused } from "../gameController";
+
 export function handleMovement(scene) {
+  if(!scene || isPaused) return;
   const { player, cursors, gamepad, shiftKey } = scene;
   let baseSpeed = 100;
   let velocityX = 0;

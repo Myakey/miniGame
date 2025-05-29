@@ -73,6 +73,11 @@ export default function CharSel() {
 
   function handleCharacterSelect(index) {
     GameState.char = charNames[index].split(" ")[0];
+    if (charNames[index].split(" ")[0] === "Remilia" || charNames[index].split(" ")[0] === "Flandre") {
+      GameState.isVampire = true;
+    } else {
+      GameState.isVampire = false;
+    }
     const audio = new Audio(charSelectSounds[index]);
     const selected = new Audio(Selected);
     selected.play();
@@ -179,9 +184,7 @@ export default function CharSel() {
         !prevButtonsPressedRef.current.has(0) &&
         now > nextAllowedInputTimeRef.current
       ) {
-        GameState.char = charNames[currentIndex].split(" ")[0];
-        navigate("/inGame");
-        nextAllowedInputTimeRef.current = now + 500;
+        handleCharacterSelect(currentIndex);
 
         gp.vibrationActuator?.playEffect?.("dual-rumble", {
           duration: 1000,

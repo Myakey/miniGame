@@ -1,4 +1,4 @@
-export default function StatusBars({ icon, num, max = 100, label }) {
+export default function StatusBars({ icon, num, color = 'blue', max = 100, label,  }) {
   const percent = (num / max) * 100;
 
   return (
@@ -8,9 +8,9 @@ export default function StatusBars({ icon, num, max = 100, label }) {
         className="w-5 h-5 mb-1"
         alt={icon}
       />
-      <div className="relative w-full h-7 bg-gray-300 rounded-full overflow-hidden">
+      <div className="relative w-full h-7 rounded-full overflow-hidden bg-yellow-50">
         <div
-          className="absolute h-full bg-blue-500 transition-all duration-300 ease-in-out"
+          className={`absolute h-full ${color} transition-all duration-300 ease-in-out`}
           style={{ width: `${percent}%` }}
         />
       </div>

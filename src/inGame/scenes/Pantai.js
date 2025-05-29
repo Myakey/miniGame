@@ -11,7 +11,8 @@ export class Pantai extends Phaser.Scene{
     }
 
     create(data) {
-    GameState.currentlocation = "blokM";
+    this.cameras.main.fadeIn(1000, 0, 0, 0);
+    GameState.currentlocation = "Pantai";
     console.log("You are now in:", GameState.currentlocation);
     this.add.text(100, 100, "Pantai", { fontSize: "20px", fill: "#fff" });
 

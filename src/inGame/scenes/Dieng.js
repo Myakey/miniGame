@@ -11,6 +11,7 @@ export class Dieng extends Phaser.Scene{
     }
 
     create(data) {
+    this.cameras.main.fadeIn(1000, 0, 0, 0);
     GameState.currentlocation = "Dieng";
     console.log("You are now in:", GameState.currentlocation);
     this.add.text(100, 100, "Dieng", { fontSize: "20px", fill: "#fff" });
