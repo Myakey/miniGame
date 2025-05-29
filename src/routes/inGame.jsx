@@ -18,7 +18,8 @@ import handleActionLogic from "../inGame/handleAction";
 import { useGameContext } from "../hooks/GameStatusContext";
 import { pauseGame, resumeGame, isPaused } from "../inGame/gameController";
 import ArrowControls from "../inGame/movements/arrows";
-
+//test modal
+import Modal from "../components/UI/ModalBox";
 import Shop from "../components/Game/Shop";
 import ObjectivePanel from "../components/Game/Objective";
 
@@ -53,6 +54,16 @@ function MainGame() {
   const phaserRef = useRef();
   const [spritePosition, setSpritePosition] = useState({ x: 0, y: 0 });
   const [Time, setTime] = useState(GameState.time);
+  const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
+  const [confirmationModalData, setConfirmationModalData] = useState({
+    title: "",
+    description: "",
+    gainsText: "",
+    lossesText: "",
+    actionType: null,
+    actionParams: null,
+    modalId: null,
+  });
 
   const currentScene = (scene) => {
     setCanMoveSprite(scene.scene.key !== "InGame");
@@ -61,29 +72,54 @@ function MainGame() {
   //Use Effect buat ngehubungin React sama Action di Phaser. Jadi waktu ada action tertentu di Phaser, maka React akan nerima dan akan update context di sini yaa
   //Update ini supaya logic jobId bisa di pass
   useEffect(() => {
-    const handleAction = (payload) => {
-      console.log("Received performAction event:", payload);
-      const { type, jobId, itemId } = payload;
+    // This is the handler that will actually execute game logic
+    const handleExecuteAction = (payload) => {
+      console.log("Received performAction event to execute:", payload);
+      // Assuming payload is { type, jobId, itemId } as emitted by handleConfirmCurrentAction
+      const { type, jobId, itemId } = payload; 
       setStatus((prev) => {
         const newStatus = handleActionLogic(type, prev, jobId, itemId);
-        console.log("Old status:", prev);
-        console.log("New status:", newStatus);
+        console.log("Old status after action:", prev);
+        console.log("New status after action:", newStatus);
         return newStatus;
       });
     };
 
-    const handleVN = (chapter) =>{
-      console.log("Yep");
+    const handlePerformVN = (chapter) => {
+      console.log("Received performVN event with chapter:", chapter);
       VNSelector(chapter);
-    }
-
-    EventBus.on("performVN", handleVN);
-    EventBus.on("performAction", handleAction);
-    return () => {
-      EventBus.off("performAction", handleAction);
-      EventBus.off("performVN", handleVN);
+      // Consider pausing game here:
+      // pauseGame(); // or GameState.isGamePaused = true; EventBus.emit("pausePhaserScene");
     };
-  }, []);
+
+    // ##### NEW: Handler for showing the confirmation modal #####
+    const handleShowCustomModal = (data) => {
+      console.log("React: Received showCustomModal event with data:", data);
+      setConfirmationModalData({
+        title: data.title || "Konfirmasi",
+        description: data.description || "Apakah kamu yakin?",
+        gainsText: data.gainsText || "",
+        lossesText: data.lossesText || "",
+        actionType: data.actionType,
+        actionParams: data.actionParams, // Store the whole actionParams
+        modalId: data.modalId,
+      });
+      setIsConfirmationModalOpen(true);
+      pauseGame();
+      console.log("Game paused for confirmation modal:", data.modalId);
+    };
+    // ######################################################
+
+    EventBus.on("performAction", handleExecuteAction); // Renamed for clarity
+    EventBus.on("performVN", handlePerformVN);
+    EventBus.on("showCustomModal", handleShowCustomModal); // ##### MODIFIED: Added listener #####
+
+    return () => {
+      EventBus.off("performAction", handleExecuteAction);
+      EventBus.off("performVN", handlePerformVN);
+      EventBus.off("showCustomModal", handleShowCustomModal); // ##### MODIFIED: Added cleanup #####
+    };
+  }, [setStatus, VNSelector]);
 
 
   //Use effect di sini buat stats nurun gradually supaya bisa ada penurunan, ntar disetting di sini aja penurunan perdetiknya berapa janlupp.
@@ -95,7 +131,8 @@ function MainGame() {
         const newMinute = (prev.time.minute + 1) % 60;
         const hourChanged = prev.time.minute === 59; // will increment hour after 59th minute
         const newHour = hourChanged ? (prev.time.hour + 1) % 24 : prev.time.hour;
-        const newDay = hourChanged && prev.time.hour === 23 ? prev.time.day + 1 : prev.time.day;
+        const isNewDay = hourChanged && prev.time.hour === 23 
+        const newDay = isNewDay? prev.time.day + 1 : prev.time.day;
 
         // Emit event if hour changed
         if (hourChanged && newHour !== prev.time.hour) {
@@ -103,18 +140,36 @@ function MainGame() {
         }
 
         // Return updated status with new time and decreased stats
-        return {
-          ...prev,
-          hunger: Math.max(prev.hunger - 1, 0),
-          energy: Math.max(prev.energy - 2, 0),
-          happiness: Math.max(prev.happiness - 2, 0),
-          time: {
-            ...prev.time,
-            minute: newMinute,
-            hour: newHour,
-            day: newDay
-          }
-        };
+        if(GameState.difficulties === "normal"){
+          return {
+            ...prev,
+            hunger: Math.max(prev.hunger - 1, 0),
+            energy: Math.max(prev.energy - 2, 0),
+            happiness: Math.max(prev.happiness - 2, 0),
+            time: {
+              ...prev.time,
+              minute: newMinute,
+              hour: newHour,
+              day: newDay
+            },
+            score: isNewDay ? prev.score + 50 : prev.score
+          };
+        }else if(GameState.difficulties === "hard"){
+          return {
+            ...prev,
+            hunger: Math.max(prev.hunger - 2, 0),
+            energy: Math.max(prev.energy - 3, 0),
+            happiness: Math.max(prev.happiness - 2, 0),
+            hygiene: Math.max(prev.hygiene - 1,0),
+            time: {
+              ...prev.time,
+              minute: newMinute,
+              hour: newHour,
+              day: newDay
+            },
+            score: isNewDay ? prev.score + 75 : prev.score
+          };
+        }
       });
     }
   }, 100);
@@ -130,6 +185,36 @@ function MainGame() {
     return <StatusBars icon={text.name} num={status[text.name]} color={text.color} />;
   }
 
+  // ##########################################################
+  const handleConfirmCurrentAction = () => {
+    if (confirmationModalData.actionType) {
+      console.log(
+        "Action confirmed:",
+        confirmationModalData.actionType,
+        confirmationModalData.actionParams
+      );
+      // Emit the "performAction" event that your game logic (handleExecuteAction) already handles
+      EventBus.emit("performAction", {
+        type: confirmationModalData.actionType,
+        // Pass actionParams directly, or destructure if handleExecuteAction expects specific fields
+        jobId: confirmationModalData.actionParams?.jobId, // Example if expecting jobId
+        // If handleActionLogic was changed to take (type, prev, actionParams), then:
+        // actionParams: confirmationModalData.actionParams
+      });
+    }
+    setIsConfirmationModalOpen(false);
+    resumeGame();
+    console.log("Confirmation modal closed, action performed, game resumed");
+  };
+
+  const handleCancelCurrentAction = () => {
+    console.log("Action cancelled for modalId:", confirmationModalData.modalId);
+    setIsConfirmationModalOpen(false);
+    resumeGame();
+    console.log("Confirmation modal closed, action performed, game resumed");
+  };
+  // ##########################################################
+
   return (
     <>
         <ObjectivePanel />
@@ -140,6 +225,35 @@ function MainGame() {
         <PauseMenu />
         
       </div>
+      {/* ##### NEW: Render the Confirmation Modal ##### */}
+      <Modal
+        isOpen={isConfirmationModalOpen}
+        onClose={handleCancelCurrentAction} // 'x' button or backdrop click defaults to cancel
+        title={confirmationModalData.title}
+      >
+        <p className="text-sm text-gray-700 mb-3">{confirmationModalData.description}</p>
+        {confirmationModalData.gainsText && (
+          <p className="text-sm text-green-600 font-semibold">Gains: {confirmationModalData.gainsText}</p>
+        )}
+        {confirmationModalData.lossesText && (
+          <p className="text-sm text-red-600 font-semibold mb-4">Loses: {confirmationModalData.lossesText}</p>
+        )}
+        <div className="flex justify-end space-x-3 mt-5">
+          <button
+            onClick={handleCancelCurrentAction}
+            className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-lg border border-gray-300 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-400"
+          >
+            No / Cancel
+          </button>
+          <button
+            onClick={handleConfirmCurrentAction}
+            className="px-4 py-2 text-sm font-medium text-white bg-green-600 rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500"
+          >
+            Yes / Confirm
+          </button>
+        </div>
+      </Modal>
+      {/* ############################################ */}
 
       <div className="flex flex-col items-center w-full">
         <div className="fixed right-4 top-1/4 transform -translate-y-1/2 z-20 bg-gray-900/75 text-center">
@@ -153,8 +267,11 @@ function MainGame() {
             </div>
           </div>
             <div className="hidden md:flex md:flex-col md:items-center md:max-w-full md:px-1 z-10">
-              <div className="text-2xl mt-1"> {status.time.hour.toString().padStart(2, "0")}:
-  {status.time.minute.toString().padStart(2, "0")} | Day {status.time.day}</div>
+              <div className="text-2xl mt-1"> 
+                {status.time.hour.toString().padStart(2, "0")}:
+                {status.time.minute.toString().padStart(2, "0")} | Day {status.time.day}
+                <div className="text-lg mt-1">Score: {status.score}</div>
+              </div>
             </div>
             <div className="hidden md:flex md: md:px-1 z-10 md:fixed md:bottom-7 md:right-4 bg-yellow-400/75 p-3 rounded-full text-center flex-row border-4 font-semibold">
               <div className="text-4xl">💰</div>

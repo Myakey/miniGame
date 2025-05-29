@@ -23,5 +23,6 @@ export default function hunt(currentStatus) {
         hunger: newHunger,
         happiness: newHappiness,
         energy: currentStatus.energy - 5, // Hunting consumes some energy
+        score: currentStatus.score + 10,
     };
 }

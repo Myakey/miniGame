@@ -2,7 +2,7 @@ import { GameState } from '../../hooks/gamestate';
 import { EventBus } from '../EventBus';
 export default function jalan(currentStatus) {
     // Check if the character is already clean
-    const location = GameState.currentlocation;
+    const location = GameState.currentlocation.currentLoc;
     if (currentStatus.energy >= 100 && currentStatus.happiness >= 100 ) {
         return currentStatus; // No change needed
     }
@@ -41,15 +41,12 @@ export default function jalan(currentStatus) {
         GameState.time.hour -= 24;
         GameState.time.day += 1;
     }
-    
-    EventBus.emit("timeTick", { time: GameState.time });
-
     GameState.money -= cost;
     
     return {
         ...currentStatus,
         happiness: newHappiness,
         energy: newEnergy,
-        money: Math.max(currentStatus.money - cost, 0)
+        money: Math.max(currentStatus.money - cost, 0),
     };
 }

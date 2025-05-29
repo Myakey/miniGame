@@ -97,25 +97,27 @@ export default function Shop( { onClose }) {
             <div className="flex flex-col items-center justify-center w-full md:w-1/2">
               <div className="p-4 bg-gray-100 rounded w-full h-full text-center overflow-auto">
                 <h2 className="text-xl font-bold mb-2">SHOP BOX!</h2>
-                <div className="grid grid-cols-3 gap-4"> {/* grid container */}
-                      {itemsList
-                      .filter(item => item.places === place)
-                      .map(item => (
-                        <div key={item.id} className="border rounded p-3 bg-white shadow-sm">
-                          <h3 className="font-semibold">{item.name}</h3>
-                          <img src={item.image} />
-                          <button
-                            onClick={() => handleBuy(item)}
-                            className="px-2 py-1 bg-blue-500 text-white text-sm rounded hover:bg-blue-600"
-                          >BUY</button>
-                          {/* You can add a buy button or image here */}
-                        </div>
-                      ))}
-
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6"> {/* responsive grid */}
+                  {itemsList
+                    .filter(item => item.places === place)
+                    .map(item => (
+                      <div
+                        key={item.id}
+                        className="border rounded-lg p-4 bg-white shadow-md flex flex-col items-center justify-between w-full h-64"
+                      >
+                        <h3 className="font-semibold text-lg mb-2">{item.name}</h3>
+                        <img src={item.image} className="w-24 h-24 object-contain mb-4" />
+                        <button
+                          onClick={() => handleBuy(item)}
+                          className="px-4 py-2 bg-blue-500 text-white text-sm rounded hover:bg-blue-600"
+                        >
+                          💵 {item.money}
+                        </button>
+                      </div>
+                    ))}
                 </div>
               </div>
             </div>
-
           </div>
         </div>
     </>
