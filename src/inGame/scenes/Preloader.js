@@ -70,7 +70,7 @@ export class Preloader extends Scene
         //FLowerField
         this.load.tilemapTiledJSON("flowerField", "/assets/img/map/FlowerField/flowerField.tmj");
         this.load.image("flowerFieldTiles", "/assets/img/map/FlowerField/grass.png");
-        this.load.image("sunflowers", "/assets/img/map/FlowerField/sunflowers.png");
+        this.load.image("sunflowers", "/assets/img/map/FlowerField/SUNFLOWERS.png");
         this.load.image("flowerFieldTree", "/assets/img/map/FlowerField/tree.png");
         this.load.image("flowerFieldFence", "/assets/img/map/FlowerField/fence_00.png");
         this.load.image("Yuuka", "/assets/img/map/FlowerField/Yuuka.png");
