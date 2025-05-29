@@ -17,7 +17,15 @@ export class FlowerField extends Phaser.Scene{
 
     create(data) {
     this.cameras.main.fadeIn(1000, 0, 0, 0);
-    this.generateMap();
+
+    GameState.currentlocation = "flowerField";
+    console.log("You are now in:", GameState.currentlocation);
+
+    const startX = 300;
+    const startY = 400;
+
+    this.player = this.physics.add.sprite(startX, startY, "Yukari");
+    this.player.setScale(0.3);
 
     this.add.text(100, 100, "FlowerField", { fontSize: "20px", fill: "#fff" });
 
@@ -48,6 +56,7 @@ export class FlowerField extends Phaser.Scene{
           Phaser.Input.Keyboard.KeyCodes.SHIFT
         );
   }
+
 
   update(){
     handleMovement(this);

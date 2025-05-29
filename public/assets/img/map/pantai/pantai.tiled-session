@@ -3,16 +3,89 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "",
+    "activeFile": "C:/Users/ASUS/Visual Studio/Intro to Technology/projekAkhir/miniGame/public/assets/img/map/FlowerField/project.tmx",
     "expandedProjectPaths": [
+        "."
     ],
+    "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
+        "": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "C:/Users/ASUS/Visual Studio/Intro to Technology/projekAkhir/miniGame/public/assets/img/map/FlowerField/project.tmx": {
+            "scale": 1.7654166666666666,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 239.88671229643617,
+                "y": 160.0188812839273
+            }
+        },
+        "C:/Users/ASUS/Visual Studio/Intro to Technology/projekAkhir/miniGame/public/assets/img/map/FlowerField/project.tmx#fence": {
+            "scaleInDock": 1
+        },
+        "C:/Users/ASUS/Visual Studio/Intro to Technology/projekAkhir/miniGame/public/assets/img/map/FlowerField/project.tmx#field": {
+            "scaleInDock": 1
+        },
+        "C:/Users/ASUS/Visual Studio/Intro to Technology/projekAkhir/miniGame/public/assets/img/map/FlowerField/project.tmx#flower": {
+            "scaleInDock": 1
+        },
+        "C:/Users/ASUS/Visual Studio/Intro to Technology/projekAkhir/miniGame/public/assets/img/map/FlowerField/project.tmx#tree": {
+            "scaleInDock": 1
+        },
+        "C:/Users/ASUS/Visual Studio/Intro to Technology/projekAkhir/miniGame/public/assets/img/map/mainMap.tmj": {
+            "scale": 3,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 130.5,
+                "y": 295.16666666666663
+            }
+        },
+        "C:/Users/ASUS/Visual Studio/Intro to Technology/projekAkhir/miniGame/public/assets/img/map/mainMap.tmj#TILEMAPS": {
+            "scaleInDock": 1
+        },
+        "C:/Users/ASUS/Visual Studio/Intro to Technology/projekAkhir/miniGame/public/assets/img/map/mainMap.tmj#home": {
+            "scaleInDock": 1
+        },
+        "pantai.tmx": {
+            "scale": 1.5,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 240.33333333333331,
+                "y": 159.66666666666663
+            }
+        },
+        "pantai.tmx#beach": {
+            "scaleInDock": 1.5
+        },
+        "pantai.tmx#coba": {
+            "scaleInDock": 2
+        },
+        "pantai.tmx#toko": {
+            "scaleInDock": 1
+        },
+        "pantai.tmx#tree": {
+            "scaleInDock": 3
+        }
     },
+    "last.imagePath": "C:/Users/ASUS/Visual Studio/Intro to Technology/projekAkhir/miniGame/public/assets/img/map",
+    "map.lastUsedFormat": "tmx",
     "map.tileHeight": 16,
     "map.tileWidth": 16,
     "openFiles": [
+        "pantai.tmx",
+        "C:/Users/ASUS/Visual Studio/Intro to Technology/projekAkhir/miniGame/public/assets/img/map/FlowerField/project.tmx"
     ],
     "project": "pantai.tiled-project",
+    "property.type": "bool",
     "recentFiles": [
-    ]
+        "C:/Users/ASUS/Visual Studio/Intro to Technology/projekAkhir/miniGame/public/assets/img/map/FlowerField/project.tmx",
+        "pantai.tmx",
+        "C:/Users/ASUS/Visual Studio/Intro to Technology/projekAkhir/miniGame/public/assets/img/map/mainMap.tmj"
+    ],
+    "tileset.embedInMap": true,
+    "tileset.tileSize": {
+        "height": 16,
+        "width": 16
+    }
 }
