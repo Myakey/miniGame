@@ -7,12 +7,23 @@
     "expandedProjectPaths": [
     ],
     "fileStates": {
+        "": {
+            "scaleInDock": 0.5
+        }
     },
+    "last.imagePath": "C:/Users/ASUS/Visual Studio/Intro to Technology/projekAkhir/miniGame/public/assets/img/map/pantai",
+    "map.lastUsedFormat": "tmx",
     "map.tileHeight": 16,
     "map.tileWidth": 16,
     "openFiles": [
     ],
     "project": "pantai.tiled-project",
+    "property.type": "bool",
     "recentFiles": [
-    ]
+    ],
+    "tileset.embedInMap": true,
+    "tileset.tileSize": {
+        "height": 16,
+        "width": 16
+    }
 }
