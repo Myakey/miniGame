@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "",
+    "activeFile": "blokM.tmj",
     "expandedProjectPaths": [
         "."
     ],
@@ -63,11 +63,11 @@
             "expandedObjectLayers": [
                 4
             ],
-            "scale": 4,
+            "scale": 8,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 638.125,
-                "y": 49.375
+                "x": 196,
+                "y": 423.0625
             }
         },
         "blokM.tmj#Kosuzu": {
@@ -102,12 +102,13 @@
     "map.tileWidth": 16,
     "map.width": 50,
     "openFiles": [
+        "blokM.tmj"
     ],
     "project": "untitled.tiled-project",
-    "property.type": "bool",
+    "property.type": "string",
     "recentFiles": [
-        "GUGUGAGA.tmx",
         "blokM.tmj",
+        "GUGUGAGA.tmx",
         "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/rumah/rumah.tmj"
     ],
     "tileset.embedInMap": true,

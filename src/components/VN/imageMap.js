@@ -142,6 +142,7 @@ import blokM2_TS from "../../assets/image/vn/Blok_M_2_TS.png";
 import blokM3_TS from "../../assets/image/vn/Blok_M_3_TS.png";
 import Suzunaan_TS from "../../assets/image/vn/Suzunaan_TS.png";
 import classRoom from "../../assets/image/CG/sumirekoClass.jpg";
+import shrineNight from "../../assets/image/vn/ShrineNight.png"
 
 //Title Background
 import actBackground from "../../assets/image/vn/actBG.jpg";
@@ -281,6 +282,7 @@ export const backgroundImages = {
     blokM3_TS: blokM3_TS,
     Suzunaan_TS: Suzunaan_TS,
     classRoom: classRoom,
+    shrineNight : shrineNight,
 };
 
 export const titleBackground = {
