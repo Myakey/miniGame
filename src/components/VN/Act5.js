@@ -31,7 +31,7 @@ export const act5Data = [
         text: "Yep. There’s no safer place in all of Gensokyo besides this. You’re lucky I’m letting you do this here.",
         background: "shrine",
         characters: [
-        { name: "Sumireko", sprite: "sumireko9", position: "right" },
+        { name: "Sumireko", sprite: "sumireko4", position: "right" },
         { name: "Reimu", sprite: "reimu", position: "left" }
         ],
         halt: false
@@ -55,7 +55,7 @@ export const act5Data = [
         text: "Alright, everyone—put some distance between yourselves and the orbs. Don’t get too close. We don’t want another accident like last time.",
         background: "shrine",
         characters: [
-        { name: "Sumireko", sprite: "sumireko6", position: "right" },
+        { name: "Sumireko", sprite: "sumireko1", position: "right" },
         ],
     },
     {
@@ -63,7 +63,7 @@ export const act5Data = [
         text: "Just focus on your little ritual. I’ll keep an eye out for any weird stuff happening around here.",
         background: "shrine",
         characters: [
-        { name: "Sumireko", sprite: "sumireko6", position: "right" },
+        { name: "Sumireko", sprite: "sumireko1", position: "right" },
         { name: "Marisa", sprite: "marisa8", position: "left" }
         ],
         halt: false
@@ -73,7 +73,7 @@ export const act5Data = [
         text: "Same here. You just do your part properly!",
         background: "shrine",
         characters: [
-        { name: "Sumireko", sprite: "sumireko6", position: "right" },
+        { name: "Sumireko", sprite: "sumireko1", position: "right" },
         { name: "Reimu", sprite: "reimu6", position: "left" }
         ],
         halt: false
@@ -83,7 +83,7 @@ export const act5Data = [
         text: "Okay… here I go!",
         background: "shrine",
         characters: [
-        { name: "Sumireko", sprite: "sumireko6", position: "right" },
+        { name: "Sumireko", sprite: "sumireko1", position: "right" },
         { name: "Reimu", sprite: "reimu6", position: "left" }
         ],
         halt: true
@@ -138,7 +138,7 @@ export const act5Data = [
         text: "Nngh…",
         background: "shrineNight",
         characters: [
-        { name: "Sumireko", sprite: "sumireko6", position: "right" },
+        { name: "Sumireko", sprite: "sumireko1", position: "right" },
         ],
         halt: false
     },
@@ -164,7 +164,7 @@ export const act5Data = [
         background: "shrine",
         characters: [
         { name: "Reimu", sprite: "reimu2", position: "left" },
-        { name: "Sumireko", sprite: "sumireko8", position: "right" },
+        { name: "Sumireko", sprite: "sumireko3", position: "right" },
 
         ],
         halt: false
@@ -175,7 +175,7 @@ export const act5Data = [
         background: "shrine",
         characters: [
         { name: "Reimu", sprite: "reimu2", position: "left" },
-        { name: "Sumireko", sprite: "sumireko8", position: "right" },
+        { name: "Sumireko", sprite: "sumireko3", position: "right" },
         ],
         halt: false
     },
@@ -185,7 +185,7 @@ export const act5Data = [
         background: "shrine",
         characters: [
         { name: "Reimu", sprite: "reimu2", position: "left" },
-        { name: "Sumireko", sprite: "sumireko7", position: "right" },
+        { name: "Sumireko", sprite: "sumireko2", position: "right" },
         ],
         halt: false
     },
@@ -202,7 +202,7 @@ export const act5Data = [
         background: "shrine",
         characters: [
         { name: "Reimu", sprite: "reimu", position: "left" },
-        { name: "Sumireko", sprite: "sumireko7", position: "right" },
+        { name: "Sumireko", sprite: "sumireko2", position: "right" },
         ],
         halt: false
     },
@@ -212,7 +212,7 @@ export const act5Data = [
         background: "shrine",
         characters: [
         { name: "Reimu", sprite: "reimu8", position: "left" },
-        { name: "Sumireko", sprite: "sumireko7", position: "right" },
+        { name: "Sumireko", sprite: "sumireko2", position: "right" },
         ],
         halt: false
     },
@@ -222,7 +222,7 @@ export const act5Data = [
         background: "shrine",
         characters: [
         { name: "Reimu", sprite: "reimu8", position: "left" },
-        { name: "Sumireko", sprite: "sumireko8", position: "right" },
+        { name: "Sumireko", sprite: "sumireko3", position: "right" },
         ],
         halt: false
     },
@@ -232,7 +232,7 @@ export const act5Data = [
         background: "shrine",
         characters: [
         { name: "Reimu", sprite: "reimu1", position: "left" },
-        { name: "Sumireko", sprite: "sumireko8", position: "right" },
+        { name: "Sumireko", sprite: "sumireko3", position: "right" },
         ],
         halt: false
     },
@@ -242,7 +242,7 @@ export const act5Data = [
         background: "shrine",
         characters: [
         { name: "Reimu", sprite: "reimu1", position: "left" },
-        { name: "Sumireko", sprite: "sumireko8", position: "right" },
+        { name: "Sumireko", sprite: "sumireko3", position: "right" },
         ],
         halt: false
     },
