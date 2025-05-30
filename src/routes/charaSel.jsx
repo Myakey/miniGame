@@ -24,7 +24,12 @@ import {
 } from "../assets/assetsPreLoad";
 import { Selected } from "../assets/assetsPreLoad";
 
+import { useVNSelector } from "../components/VN/VNSELECTOR";
+import { Game } from "phaser";
+
 export default function CharSel() {
+  let VNSelector = useVNSelector();
+
   const audioTest = new Audio(soundAssets[0]);
   const charSelectSounds = [
     ReimuSelect,
@@ -89,7 +94,10 @@ export default function CharSel() {
     audio.onloadedmetadata = () => {
       const duration = audio.duration * 1000;
       setTimeout(() => {
-        navigate("/inGame");
+        GameState.currentAct = "prologue";
+        GameState.afterVN = true;
+        VNSelector("prologueData")
+        // navigate("/inGame");
       }, duration);
   };
   }

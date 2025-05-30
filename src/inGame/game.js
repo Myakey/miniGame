@@ -30,7 +30,7 @@ const config = {
       default: 'arcade',
       arcade: {
         gravity: { y: 0 },
-        debug: true, // optional
+        debug: false, // optional
       },
     },
     input:{

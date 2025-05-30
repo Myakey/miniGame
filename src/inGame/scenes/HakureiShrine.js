@@ -18,6 +18,7 @@ export class HakureiShrine extends Phaser.Scene{
       this.posX = GameState.afterVN ? GameState.currentlocation.currentPosX : 768; // Default position if not set
       this.posY = GameState.afterVN ? GameState.currentlocation.currentPosY : 1392; // Default position if not set
       GameState.currentlocation.currentLoc = "HakureiShrine";
+      GameState.afterVN = false;
     }
 
 
@@ -99,7 +100,56 @@ export class HakureiShrine extends Phaser.Scene{
           this.handleSaveVN();
           EventBus.emit("performVN", "act3Data");
         }
+        if (id === "bath") { // Or any other ID that should trigger a "jalan-jalan" action
+              // If you want to save player state before modal
+              EventBus.emit("showCustomModal", {
+                  // modalId: "jalanConfirmation_" + GameState.currentlocation.currentLoc, // Make modalId unique if content depends on location
+                  title: `Is Bathing!`, // Dynamic title
+                  description: "Do you want to bath to clean yourself up?",
+                  // You can add specific gains/losses text if you want to display them
+                  // gainsText: "...",
+                  // lossesText: "...",
+                  actionType: "bath", // <<< This is CRUCIAL for triggering jalan.js later
+                  actionParams: { /* No specific params needed by jalan.js directly, but structure is there */ } 
+              });
+              this.currentInteractable = null; // Prevent immediate re-trigger
+          } 
+
+          if (id === "sleep") { // Or any other ID that should trigger a "jalan-jalan" action
+              // If you want to save player state before modal
+               this.handleSaveVN(); // If you want to save player state before modal
+              EventBus.emit("showCustomModal", {
+                  modalId: "jalanConfirmation_rumah", // Make modalId unique if content depends on location
+                  title: `Jalan-jalan di ${GameState.currentlocation.currentLoc}?`, // Dynamic title
+                  description: "Do you want to take a walk to increase Happiness ?",
+                  // You can add specific gains/losses text if you want to display them
+                  // gainsText: "...",
+                  // lossesText: "...",
+                  actionType: "jalan", // <<< This is CRUCIAL for triggering jalan.js later
+                  actionParams: { /* No specific params needed by jalan.js directly, but structure is there */ } 
+              });
+              this.currentInteractable = null; // Prevent immediate re-trigger
+          }
+          if (id === "act1"){
+            GameState.currentAct = "act1";
+            this.handleSaveVN();
+            EventBus.emit("performVN", "act1Data");q
+          }
       }
+  }
+
+  handleSaveVN(){
+    if (typeof GameState.currentlocation !== 'object') {
+        GameState.currentlocation = {
+            currentPosX: 0,
+            currentPosY: 0,
+            currentLoc: ''
+        };
+    }
+
+    GameState.currentlocation.currentPosX = this.player.x;
+    GameState.currentlocation.currentPosY = this.player.y;
+    GameState.currentlocation.currentLoc = "rumah";
   }
 
   generateMap(){

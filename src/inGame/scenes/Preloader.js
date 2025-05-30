@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { GameState } from '../../hooks/gamestate';
 import { charaList } from '../mechanics/charaList';
 import CreatePlayerAnimation from "../movements/animation";
+import { EventBus } from '../EventBus';
 
 export class Preloader extends Scene
 {
@@ -57,6 +58,7 @@ export class Preloader extends Scene
         //Dieng
         this.load.tilemapTiledJSON("dieng", "/assets/img/map/dieng/diengsz.tmj");
         this.load.image("diengTiles", "/assets/img/map/dieng/free_pixel_16_woods.png");
+        this.load.image("Sanae", "/assets/img/map/dieng/Sanae.png");
 
         //Hakurei Shrine (Rumah)
         this.load.tilemapTiledJSON("rumah", "/assets/img/map/rumah/rumah.tmj");
@@ -104,10 +106,28 @@ export class Preloader extends Scene
         CreatePlayerAnimation(this);
         //  When all the assets have loaded, it's often worth creating global objects here that the rest of the game can use.
         //  For example, you can define global animations here, so we can use them in other scenes.
-
-        //  Move to the MainMenu. You could also swap this for a Scene Transition, such as a camera fade.
         console.log(GameState.afterVN);
+        console.log(GameState.currentAct);
+        //  Move to the MainMenu. You could also swap this for a Scene Transition, such as a camera fade.
+        if (GameState.currentAct === "intro"){
+                EventBus.emit("callObjective", 
+                "Go to house to talk about it with Yukari. You can also talk to other characters in the map, and interact with objects. Enjoy your adventure!");
+        }
+        if (GameState.currentAct === "act1"){;
+                EventBus.emit("callObjective", 
+                "Find Sanae in Dieng and talk about the incident.");
+        }
+        if( GameState.currentAct === "act2"){
+                EventBus.emit("callObjective", 
+                "Find Kosuzu in Blok M and talk about the incident.");
+        }
+
         if(GameState.afterVN){
+            if(GameState.currentAct === "prologue"){
+                GameState.currentAct = "intro";
+                EventBus.emit("performVN", "introData");
+                GameState.afterVN = true;
+            }
              switch(GameState.currentlocation.currentLoc){
             case "MainGame":
                 this.scene.start('MainGame');

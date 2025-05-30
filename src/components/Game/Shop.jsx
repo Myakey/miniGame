@@ -11,7 +11,7 @@ import ShopOne from "../../assets/image/InGame/shopOne.jpeg"
 import { itemsList } from "../../inGame/mechanics/itemsList";
 
 export default function Shop( { onClose }) {
-  const place = GameState.currentlocation;
+  const place = GameState.currentlocation.currentLoc;
   // const [show, setShow] = useState(false);
   const NitoriSound = new Audio(NitoriShopSound);
   const [displayedText, setDisplayedText] = useState("");

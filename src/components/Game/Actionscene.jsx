@@ -1,6 +1,8 @@
 // src/components/Game/Actionscene.jsx (or your path to ActionFlow.jsx)
 import React from 'react'; // Removed useState, useEffect, animationTimeout if managed by parent
 
+import { bath, sleep, work, eat, jalan } from '../../assets/assetsPreLoad';
+
 // This component now primarily displays the animation when told to.
 // The logic for *when* to play, for *how long*, and *what action* is determined by the parent (MainGame.jsx).
 function ActionFlow({ isPlaying, currentActionType, onSkip }) {
@@ -10,12 +12,13 @@ function ActionFlow({ isPlaying, currentActionType, onSkip }) {
     // Ensure these keys match what confirmationModalData.actionType will be.
     const actionGifs = {
         eat: "https://tenor.com/view/reimu-touhou-watermelon-gif-20351061", // Key changed to 'eat'
-        bath: "https://tenor.com/view/fumo-touhou-gif-24551614", // Key changed to 'bath'
-        jalan: "https://tenor.com/view/touhou-what-is-love-satori-komeiji-satori-komeiji-gif-24921584", // Key changed to 'jalan'
+        bath: bath, // Key changed to 'bath'
+        jalan: jalan, // Key changed to 'jalan'
         hunt: "https://tenor.com/view/touhou-gif-19771546", // Key changed to 'hunt'
-        work: "https://tenor.com/bdLLC.gif", // Key changed to 'work'
+        work: work, // Key changed to 'work'
         sunflower: "https://tenor.com/view/yuuka-kazami-touhou-shrug-walk-away-shake-my-head-gif-4858239798115821323", // Key for 'sunflower'
         // Add other action types and their corresponding GIFs here
+        sleep: sleep,
     };
 
     if (!isPlaying || !currentActionType) {

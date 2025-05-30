@@ -11,7 +11,7 @@ export class BlokM extends Phaser.Scene{
     preload(){
       this.posX = GameState.afterVN ? GameState.currentlocation.currentPosX : 1200; // Default position if not set
       this.posY = GameState.afterVN ? GameState.currentlocation.currentPosY : 1500; // Default position if not set
-      GameState.currentlocation.currentLoc = "BlokM";
+      GameState.currentlocation.currentLoc = "blokM";
     }
 
     create(data) {
@@ -77,6 +77,21 @@ export class BlokM extends Phaser.Scene{
     if(id === "Kosuzu1"){
       this.handleSaveVN();
       EventBus.emit("performVN", "act3Data");
+    }
+    if( id === "cashierMCD"){
+              EventBus.emit("showCustomModal", {
+                  modalId: "jalanConfirmation_" + GameState.currentlocation.currentLoc, // Make modalId unique if content depends on location
+                  title: `Apakah ingin kerja di MCD?`, // Dynamic title
+                  description: "Do you want to work to increase money ?",
+                  // You can add specific gains/losses text if you want to display them
+                  // gainsText: "...",
+                  // lossesText: "...",
+                  actionType: "work", // <<< This is CRUCIAL for triggering jalan.js later
+                  actionParams:{
+                    jobId: "blokm_mcd", 
+                  }
+              });
+              this.currentInteractable = null; // Prevent immediate re-trigger
     }
   }
   }

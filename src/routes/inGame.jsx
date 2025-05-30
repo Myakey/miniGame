@@ -75,7 +75,7 @@ function MainGame() {
   //Use Effect buat ngehubungin React sama Action di Phaser. Jadi waktu ada action tertentu di Phaser, maka React akan nerima dan akan update context di sini yaa
   //Update ini supaya logic jobId bisa di pass
   useEffect(() => {
-    // This is the handler that will actually execute game logic
+    
     const handleExecuteAction = (payload) => {
       console.log("Received performAction event to execute:", payload);
       // Assuming payload is { type, jobId, itemId } as emitted by handleConfirmCurrentAction
@@ -95,7 +95,7 @@ function MainGame() {
       // pauseGame(); // or GameState.isGamePaused = true; EventBus.emit("pausePhaserScene");
     };
 
-    // ##### NEW: Handler for showing the confirmation modal #####
+   
     const handleShowCustomModal = (data) => {
       console.log("React: Received showCustomModal event with data:", data);
       setConfirmationModalData({
@@ -147,8 +147,8 @@ function MainGame() {
           return {
             ...prev,
             hunger: Math.max(prev.hunger - 1, 0),
-            energy: Math.max(prev.energy - 2, 0),
-            happiness: Math.max(prev.happiness - 2, 0),
+            energy: Math.max(prev.energy - 1, 0),
+            happiness: Math.max(prev.happiness - 1, 0),
             time: {
               ...prev.time,
               minute: newMinute,
@@ -175,7 +175,7 @@ function MainGame() {
         }
       });
     }
-  }, 100);
+  }, 1000);
 
   return () => clearInterval(interval);
 }, [setStatus]);
@@ -221,12 +221,12 @@ function MainGame() {
         EventBus.emit("performAction", {
           type: confirmationModalData.actionType,
           jobId: confirmationModalData.actionParams?.jobId,
-          itemId: confirmationModalData.actionParams?.itemId,
         });
         // Game will be resumed by handleExecuteAction or if action takes time, after that
         // For now, let's assume the action itself is quick or handles resume.
         // If not, resumeGame() should be called after the action's effects are applied.
         // resumeGame(); // Resume game AFTER action logic is processed if action is instant
+        resumeGame();
       }, animationDuration);
 
       setActionAnimationTimeoutId(timeoutId);
@@ -319,13 +319,14 @@ function MainGame() {
               {icons.map(createStatus)}
             </div>
           </div>
-            <div className="hidden md:flex md:flex-col md:items-center md:max-w-full md:px-1 z-10">
-              <div className="text-2xl mt-1"> 
-                {status.time.hour.toString().padStart(2, "0")}:
-                {status.time.minute.toString().padStart(2, "0")} | Day {status.time.day}
-                <div className="text-lg mt-1">Score: {status.score}</div>
-              </div>
-            </div>
+           <div className="hidden md:flex md:flex-col md:items-center md:max-w-full md:px-1 z-10">
+  <div className="bg-white/30 backdrop-blur-md rounded-xl shadow-md p-3 text-2xl mt-1">
+    {status.time.hour.toString().padStart(2, "0")}:
+    {status.time.minute.toString().padStart(2, "0")} | Day {status.time.day}
+    <div className="text-lg mt-1">Score: {status.score}</div>
+  </div>
+</div>
+
             <div className="hidden md:flex md: md:px-1 z-10 md:fixed md:bottom-7 md:right-4 bg-yellow-400/75 p-3 rounded-full text-center flex-row border-4 font-semibold">
               <div className="text-4xl">💰</div>
               <div className="text-3xl m-2 text-center">{GameState.money}</div>

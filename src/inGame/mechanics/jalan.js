@@ -24,7 +24,12 @@ export default function jalan(currentStatus) {
         energyGain = 25;
         happinessGain = 5;
         cost = 10;
-        duration = 10;
+        duration = 3;
+    }else if(location === "rumah"){
+        energyGain = 20;
+        happinessGain = 20;
+        cost = 0;
+        duration = 5;
     }
     // Calculate new status
     const newEnergy = Math.min(currentStatus.energy + energyGain, 100); // Cap at 100
