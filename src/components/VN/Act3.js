@@ -3,10 +3,10 @@ import {characterSprites, backgroundImages } from "./imageMap";
 export const act3Data = [
   {
     isTitleScreen: true,
-    title: "ACT III: Blok M & Suzunaan",
+    title: "ACT 3 - Blok M & Suzunaan",
     background: "titleBG",
     halt: true,
-    haltDuration: 3000,
+    haltDuration: 500,
   },
   {
     speaker: "Reimu",
@@ -112,6 +112,7 @@ export const act3Data = [
     background: "blokM",
     characters: [
       { name: "Kosuzu", sprite: "kosuzu", position: "right" }
+      
     ],
     halt: false
   },
@@ -120,7 +121,7 @@ export const act3Data = [
     text: "Hm? That voice...",
     background: "blokM",
     characters: [
-      { name: "Reimu", sprite: "reimu", position: "right" }
+      { name: "Reimu", sprite: "reimu", position: "left" }
     ],
     halt: false
   },
@@ -129,7 +130,8 @@ export const act3Data = [
     text: "Welcome to blokM! Are you looking for any books?",
     background: "blokM",
     characters: [
-      { name: "Kosuzu", sprite: "kosuzu", position: "right" }
+      { name: "Kosuzu", sprite: "kosuzu", position: "right" },
+      { name: "Reimu", sprite: "reimu", position: "left" }
     ],
     halt: false
   },
@@ -138,8 +140,8 @@ export const act3Data = [
     text: "Kosuzu?! Wait, this is blokM? When did you—",
     background: "blokM",
     characters: [
-      { name: "Reimu", sprite: "reimu", position: "right" },
-      { name: "Kosuzu", sprite: "kosuzu", position: "left" }
+      { name: "Reimu", sprite: "reimu", position: "left" },
+      { name: "Kosuzu", sprite: "kosuzu", position: "right" }
     ],
     halt: false
   },
@@ -148,16 +150,17 @@ export const act3Data = [
     text: "Ahh, no, never mind. It’s because of the teleporting shenanigans again, isn’t it?",
     background: "blokM",
     characters: [
-      { name: "Reimu", sprite: "reimu", position: "right" }
+      { name: "Reimu", sprite: "reimu", position: "left" },
+      { name: "Kosuzu", sprite: "kosuzu", position: "right" }
     ],
     halt: false
   },
   {
-    speaker: "hieda",
+    speaker: "Hieda",
     text: "You’re right. Is that why you’re here, Reimu?",
     background: "blokM",
     characters: [
-      { name: "hieda", sprite: "hieda", position: "right" }
+      { name: "hieda", sprite: "hieda", position: "left" }
     ],
     halt: false
   },
@@ -176,7 +179,8 @@ export const act3Data = [
     text: "It’s difficult to say for sure. Why don’t we talk inside first?",
     background: "blokM",
     characters: [
-      { name: "hieda", sprite: "hieda", position: "right" }
+      { name: "hieda", sprite: "hieda", position: "left" },
+       { name: "Reimu", sprite: "reimu", position: "right" }
     ],
     halt: false
   },
@@ -195,7 +199,8 @@ export const act3Data = [
     text: "Hehe, thank you! So, what brings all of you here?",
     background: "suzunaan",
     characters: [
-      { name: "Kosuzu", sprite: "kosuzu", position: "right" }
+      { name: "Kosuzu", sprite: "kosuzu", position: "left" },
+      { name: "Remilia", sprite: "remilia", position: "right" }
     ],
     halt: false
   },
@@ -219,7 +224,7 @@ export const act3Data = [
     halt: false
   },
   {
-    speaker: "hieda",
+    speaker: "Hieda",
     text: "To some extent, yes. It seems someone tried to force their way into Gensokyo. But something went wrong, and it disrupted the balance of the Great Barrier.",
     background: "suzunaan",
     characters: [
