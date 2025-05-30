@@ -1,9 +1,14 @@
-import { EsotericistPiano } from "../assets/assetsPreLoad";
-import { Alice } from "../assets/assetsPreLoad";
+import { EsotericistPiano, Alice, EsotericistNonPiano, EmptyTown, OtherWorldlyEmotions, SeptetteForTheDeadPrincess, DichromaticLotus } from "../assets/assetsPreLoad";
+
 
 const sounds = {
   background1: new Audio(EsotericistPiano),
   Alice: new Audio(Alice),
+  EsotericistNonPiano: new Audio(EsotericistNonPiano),
+  EmptyTown: new Audio(EmptyTown),
+  OtherWorldlyEmotions: new Audio(OtherWorldlyEmotions),
+  SeptetteForTheDeadPrincess: new Audio(SeptetteForTheDeadPrincess),
+  DichromaticLotus: new Audio(DichromaticLotus),
 };
 
 const fadeIntervals = {};

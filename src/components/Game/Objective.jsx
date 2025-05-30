@@ -2,8 +2,8 @@ import React, { useState, useEffect, useRef } from "react";
 import { EventBus } from "../../inGame/EventBus";
 
 function ObjectivePanel() {
-  const [isVisible, setIsVisible] = useState(true);
-  const [shouldRender, setShouldRender] = useState(true);
+  const [isVisible, setIsVisible] = useState(false);
+  const [shouldRender, setShouldRender] = useState(false);
   const hideTimeoutRef = useRef(null);
   const [objectiveText, setObjectiveText] = useState("Complete the main quest to save the world!");
 

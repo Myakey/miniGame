@@ -13,7 +13,8 @@ export const prologueData = [
         background: "classRoom",
         characters: [
         ],
-        halt: false
+        halt: false,
+        sound: "background1"
     },
     {
         speaker: "???",
@@ -88,7 +89,8 @@ export const prologueData = [
         background: "classRoom",
         characters: [
         ],
-        halt: false
+        halt: false,
+        sound: "none"
     },
     {
         text: "(Meanwhile in another place..)",
@@ -105,7 +107,8 @@ export const prologueData = [
         characters: [
             { name: "Reimu", sprite: "reimu7", position: "right" },
         ],
-        halt: false
+        halt: false,
+        sound: "DichromaticLotus",
     },
     {
         text: "(Suddenly, a loud whoosh breaks the silence. Marisa Kirisame flies in on her broom, looking frantic.)",
@@ -211,7 +214,8 @@ export const prologueData = [
             { name: "Marisa", sprite: "marisa6", position: "left" }
 
         ],
-        halt: false
+        halt: false,
+        sound: "none",
     },
     {
         text: "(Marisa groans and speeds off into the sky. Reimu continues sweeping, but her brow furrows slightly. A moment later, a familiar rip in space opens in the air. Yukari Yakumo steps through elegantly, holding her parasol.)",
@@ -227,7 +231,8 @@ export const prologueData = [
         characters: [
             { name: "Reimu", sprite: "reimu9", position: "right" },
         ],
-        halt: false
+        halt: false,
+        sound: "OtherWorldlyEmotions"
     },
     {
         speaker: "Reimu",
@@ -370,6 +375,7 @@ export const prologueData = [
         background: "shrineInterior",
         characters: [
         ],
-        halt: true
+        halt: true,
+        sound: "none",
     },
 ];

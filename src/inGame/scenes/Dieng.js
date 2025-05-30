@@ -16,6 +16,7 @@ export class Dieng extends Phaser.Scene{
       this.posX = GameState.afterVN ? GameState.currentlocation.currentPosX : 1130; // Default position if not set
       this.posY = GameState.afterVN ? GameState.currentlocation.currentPosY : 1356; // Default position if not set
       GameState.currentlocation.currentLoc = "Dieng";
+      GameState.afterVN = false;
     }
 
     create(data) {
@@ -230,6 +231,7 @@ export class Dieng extends Phaser.Scene{
                     EventBus.emit("performVN", "act1Data");
                     break;
                   case "act2" :
+                    GameState.currentAct = "act2";
                     this.handleSaveVN();
                     EventBus.emit("performVN", "act2Data");
                     break;
@@ -260,11 +262,13 @@ export class Dieng extends Phaser.Scene{
   generateMap(){
       const map = this.add.tilemap("dieng");
       const tiles = map.addTilesetImage("tiles", "diengTiles");
+      const Sanae = map.addTilesetImage("Sanae", "Sanae");
 
       const tileLayer1 = map.createLayer("Tile Layer 1", tiles);
       const tileLayer2 = map.createLayer("Tile Layer 2", tiles);
       const tileLayer3 = map.createLayer("Tile Layer 3", tiles);
       const tree = map.createLayer("tree", tiles);
+      const SanaeLayer = map.createLayer("Sanae", Sanae);
   
       this.player = this.physics.add
         .sprite(this.posX, this.posY, "Yukari")
@@ -279,15 +283,19 @@ export class Dieng extends Phaser.Scene{
       tileLayer2.setScale(scale);
       tileLayer3.setScale(scale);
       tree.setScale(scale);
+      SanaeLayer.setScale(scale);
 
       tileLayer1.setCollisionByProperty({ collides: true });
       tileLayer2.setCollisionByProperty({ collides: true });
       tileLayer3.setCollisionByProperty({ collides: true });
       tree.setCollisionByProperty({ collides: true });
+      SanaeLayer.setCollisionByProperty({ collides: true });
+
       this.physics.add.collider(this.player, tileLayer1);
       this.physics.add.collider(this.player, tileLayer2);
       this.physics.add.collider(this.player, tileLayer3);
       this.physics.add.collider(this.player, tree);
+      this.physics.add.collider(this.player, SanaeLayer);
   
       this.physics.world.setBounds(0, 0, mapWidth * scale, mapHeight * scale);
       this.cameras.main.setBounds(0, 0, mapWidth * scale, mapHeight * scale);

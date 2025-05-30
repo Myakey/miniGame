@@ -10,8 +10,8 @@ export class Pantai extends Phaser.Scene {
   }
 
   preload() {
-    this.posX = GameState.afterVN ? GameState.currentlocation.currentPosX : 1200; // Default position if not set
-    this.posY = GameState.afterVN ? GameState.currentlocation.currentPosY : 1500; // Default position if not set
+    this.posX = GameState.afterVN ? GameState.currentlocation.currentPosX : 1200; 
+    this.posY = GameState.afterVN ? GameState.currentlocation.currentPosY : 1500; 
     GameState.currentlocation.currentLoc = "Pantai";
   }
 
@@ -49,7 +49,7 @@ export class Pantai extends Phaser.Scene {
       padding: { x: 10, y: 5 }
     }).setInteractive()
       .on("pointerdown", () => {
-        EventBus.emit("showShop");
+       
       });
 
     this.cursors = this.input.keyboard.createCursorKeys();
@@ -115,6 +115,9 @@ export class Pantai extends Phaser.Scene {
       if (id === "Kosuzu1") {
         this.handleSaveVN();
         EventBus.emit("performVN", "act3Data");
+      }
+      if (id === "shop"){
+         EventBus.emit("showShop");
       }
     }
   }

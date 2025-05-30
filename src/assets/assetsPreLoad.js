@@ -23,16 +23,27 @@ import NitoriShopSound from "../assets/sound/inGame/nitoriShopLine.mp3";
 
 import EsotericistPiano from "../assets/sound/VN/Esotericist.mp3"
 import Alice from "../assets/sound/VN/Alice.mp3"
+import EmptyTown from "../assets/sound/VN/EmptyTown.mp3"
+import OtherWorldlyEmotions from "../assets/sound/VN/OtherWorldlyEmotions.mp3"
+import SeptetteForTheDeadPrincess from "../assets/sound/VN/SeptetteJazz.mp3"
+import DichromaticLotus from "../assets/sound/VN/DichromaticLotus.mp3"
+import EsotericistNonPiano from "../assets/sound/VN/EsotericistNonPiano.mp3"
 
 import { useEffect } from "react";
 
+import bath from "../assets/gif/AnimasiAction/AnimasiAction/Bath.gif";
+import eat from "../assets/gif/AnimasiAction/AnimasiAction/Eat.gif";
+// import sleep from "../assets/gif/AnimasiAction/sleep.gif";
+import work from "../assets/gif/AnimasiAction/AnimasiAction/Work.gif";
+import sleep from "../assets/gif/AnimasiAction/AnimasiAction/Sleep.gif";
+
+import jalan from "../assets/gif/AnimasiAction/AnimasiAction/JalanDieng.gif";
 
 
+export const assetsLoadImg = [ReimuRight, RemiliaRight, SakuyaRight, YukariRight, FlandreRight, FlandreButton, ReimuButton, RemiliaButton, SakuyaButton, YukariButton, NitoriShop, bath, eat, work, sleep, jalan];
 
-export const assetsLoadImg = [ReimuRight, RemiliaRight, SakuyaRight, YukariRight, FlandreRight, FlandreButton, ReimuButton, RemiliaButton, SakuyaButton, YukariButton, NitoriShop];
+export const soundAssets = [CharaSelectSound, NitoriShopSound, EsotericistPiano, Alice, FlandreSelect, ReimuSelect, RemiliaSelect, SakuyaSelect, YukariSelect, Selected, EsotericistNonPiano, EmptyTown, OtherWorldlyEmotions, SeptetteForTheDeadPrincess, DichromaticLotus];
 
-export const soundAssets = [CharaSelectSound, NitoriShopSound, EsotericistPiano, Alice, FlandreSelect, ReimuSelect, RemiliaSelect, SakuyaSelect, YukariSelect];
-
-export { NitoriShopSound, EsotericistPiano, Alice, FlandreSelect, ReimuSelect, RemiliaSelect, SakuyaSelect, YukariSelect, Selected };
+export { NitoriShopSound, EsotericistPiano, Alice, FlandreSelect, ReimuSelect, RemiliaSelect, SakuyaSelect, YukariSelect, Selected, EsotericistNonPiano, EmptyTown, OtherWorldlyEmotions, SeptetteForTheDeadPrincess, DichromaticLotus, bath, eat,  work, sleep, jalan };
 
 export { RemiliaButton, SakuyaButton, YukariButton, FlandreButton, ReimuButton, ReimuRight, RemiliaRight, SakuyaRight, YukariRight, FlandreRight, NitoriShop };

@@ -218,6 +218,9 @@ export class MainGame extends Phaser.Scene {
   update() {
     handleMovement(this);
 
+    console.log(this.player.x);
+    console.log(this.player.y);
+
     const playerBounds = this.player.getBounds();
     let inAnyZone = false;
     let currentZoneId = null;
