@@ -59,11 +59,6 @@ import yuuka4 from "../../assets/image/Characters/spriteYuuka/4.png";
 import yuuka5 from "../../assets/image/Characters/spriteYuuka/5.png";
 
 //Sprite Sumireko
-import sumireko from "../../assets/image/Characters/spriteSumireko/0.png";
-import sumireko1 from "../../assets/image/Characters/spriteSumireko/1.png";
-import sumireko2 from "../../assets/image/Characters/spriteSumireko/2.png";
-import sumireko3 from "../../assets/image/Characters/spriteSumireko/3.png";
-import sumireko4 from "../../assets/image/Characters/spriteSumireko/4.png";
 import sumireko5 from "../../assets/image/Characters/spriteSumireko/5.png";
 import sumireko6 from "../../assets/image/Characters/spriteSumireko/6.png";
 import sumireko7 from "../../assets/image/Characters/spriteSumireko/7.png";
@@ -203,16 +198,11 @@ export const characterSprites = {
     yuuka4: yuuka4,
     yuuka5: yuuka5,
 
-    sumireko: sumireko,
-    sumireko1: sumireko1,
-    sumireko2: sumireko2,
-    sumireko3: sumireko3,
-    sumireko4: sumireko4,
-    sumireko5: sumireko5,
-    sumireko6: sumireko6,
-    sumireko7: sumireko7,
-    sumireko8: sumireko8,
-    sumireko9: sumireko9,
+    sumireko: sumireko5,
+    sumireko1: sumireko6,
+    sumireko2: sumireko7,
+    sumireko3: sumireko8,
+    sumireko4: sumireko9,
 
     kosuzu: kosuzu,
     kosuzu1: kosuzu1,

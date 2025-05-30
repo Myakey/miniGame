@@ -2,11 +2,16 @@ import { characterSprites, backgroundImages } from "./imageMap";
 
 export const act3_2Data = [
   {
-    text: "(After a short walk, they finally reach Flandre, who’s crouched on the ground holding something.)",
+        isTitleScreen: true,
+        title: "ACT 3.2 - Blok M Clue",
+        background: "titleBG",
+        halt: true,
+        haltDuration: 500,
+    },
+  {
+    text: "After a short walk, they finally reach Flandre, who’s crouched on the ground holding something.",
     background: "suzunaan",
     characters: [
-      { name: "Flandre", sprite: "flandre", position: "left" },
-      { name: "Remilia", sprite: "remilia", position: "right" }
     ],
     halt: true,
     haltDuration: 1500
