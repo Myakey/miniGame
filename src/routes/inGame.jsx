@@ -55,8 +55,6 @@ function MainGame() {
   const [countTest, setCountTest] = useState(0);
   const [canMoveSprite, setCanMoveSprite] = useState(true);
   const phaserRef = useRef();
-  const [spritePosition, setSpritePosition] = useState({ x: 0, y: 0 });
-  const [Time, setTime] = useState(GameState.time);
   const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
   const [isActionPlaying, setIsActionPlaying] = useState(false);
   const [currentActionTypeForAnimation, setCurrentActionTypeForAnimation] = useState(null); // To pass to ActionFlow
@@ -142,6 +140,9 @@ function MainGame() {
         // Emit event if hour changed
         if (hourChanged && newHour !== prev.time.hour) {
           EventBus.emit('phaser-time-update', { hour: newHour });
+          console.log(newHour);
+          GameState.time.hour = newHour; 
+          console.log(GameState.time.hour);
         }
 
         // Return updated status with new time and decreased stats

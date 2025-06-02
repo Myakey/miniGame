@@ -9,7 +9,9 @@ import setupPlayerMovement from "../movements/pathFinding";
 import { SceneRegistry } from "../SceneRegistry";
 import { FlowerField } from "./flowerField";
 
-
+import { LightingManager } from "../lighting/LightingManager";
+import { PlayerLightManager } from "../lighting/PlayerLightManager";
+import { LightSource } from "../lighting/lightSource";
 
 export class MainGame extends Phaser.Scene {
   constructor() {
@@ -128,18 +130,60 @@ export class MainGame extends Phaser.Scene {
     const home = map.addTilesetImage("home", "Home")
 
 
-    const groundLayer = map.createLayer("Ground", ground);
-    const tempatLayer = map.createLayer("tempat", [home, decoration, sunflowers]);
-    const detailsLayer = map.createLayer("details", [decoration, home]);
-    const grassLayer = map.createLayer("grass", ground);
+    const groundLayer = map.createLayer("Ground", ground).setPipeline("Light2D")
+    const tempatLayer = map.createLayer("tempat", [home, decoration, sunflowers]).setPipeline("Light2D")
+    const detailsLayer = map.createLayer("details", [decoration, home]).setPipeline("Light2D");
+    const grassLayer = map.createLayer("grass", ground).setPipeline("Light2D");
 
     const startX = GameState.pos_x;
     const startY = GameState.pos_y;
+
+//     // 👇 Add minimap camera BEFORE scaling layers
+// const miniCamera = this.cameras.add(
+//   this.scale.width - 210, // x
+//   10,                     // y
+//   200,                    // width
+//   150                     // height
+// );
+
+// miniCamera.setZoom(0.2); // Adjust as needed
+// miniCamera.setBackgroundColor(0x000000);
+// miniCamera.scrollX = 0;
+// miniCamera.scrollY = 0;
+
+// Optional: Draw border
+// this.add.graphics()
+//   .lineStyle(2, 0xffffff, 1)
+//   .strokeRect(this.scale.width - 210, 10, 200, 150)
+//   .setScrollFactor(0)
+//   .setDepth(1000); // Always on top
 
     this.player = this.physics.add
       .sprite(startX, startY, "Yukari")
       .setScale(0.3);
     this.player.body.setCollideWorldBounds(true);
+
+    if (this.sys.game.renderer instanceof Phaser.Renderer.WebGL.WebGLRenderer) {
+          this.lights.enable();
+          this.lights.setAmbientColor(0xffffff);
+    
+          this.lightingManager = new LightingManager(this);
+    
+          const currentHour = this.currentHour();
+    
+          // Add light source:
+          this.playerLightManager = new PlayerLightManager(this, this.player, {
+          radius: 200,
+          color: 0xffffff,
+          intensity: 1,
+        });
+    
+          this.lightingManager.initializeWithHour(currentHour);
+          this.playerLightManager.initializeWithHour(currentHour);
+        } else {
+          console.warn("WebGL not supported — skipping lights");
+      }
+
 
     const scale = 3;
     const mapWidth = map.widthInPixels;
@@ -198,12 +242,12 @@ export class MainGame extends Phaser.Scene {
       .setOrigin(0.5)
       .setVisible(false);
 
-    this.time.addEvent({
-      delay: 1000,
-      callback: this.tickGameTime,
-      callbackScope: this,
-      loop: true,
-    });
+    // this.time.addEvent({
+    //   delay: 1000,
+    //   callback: this.tickGameTime,
+    //   callbackScope: this,
+    //   loop: true,
+    // });
 
     this.cursors = this.input.keyboard.createCursorKeys();
     this.shiftKey = this.input.keyboard.addKey(
@@ -217,9 +261,6 @@ export class MainGame extends Phaser.Scene {
 
   update() {
     handleMovement(this);
-
-    console.log(this.player.x);
-    console.log(this.player.y);
 
     const playerBounds = this.player.getBounds();
     let inAnyZone = false;
@@ -287,14 +328,14 @@ export class MainGame extends Phaser.Scene {
     GameState.pos_y = this.player.y;
   }
 
-  tickGameTime() {
-    GameState.time.hour += 1;
-    if (GameState.time.hour >= 24) {
-      GameState.time.hour = 0;
-      GameState.time.day += 1;
-    }
-    EventBus.emit("timeTick", { time: GameState.time });
-  }
+  // tickGameTime() {
+  //   GameState.time.hour += 1;
+  //   if (GameState.time.hour >= 24) {
+  //     GameState.time.hour = 0;
+  //     GameState.time.day += 1;
+  //   }
+  //   EventBus.emit("timeTick", { time: GameState.time });
+  // }
 
   shutdown() {
     EventBus.off("move", this.handleMoveInput, this);
@@ -303,5 +344,10 @@ export class MainGame extends Phaser.Scene {
   interactWithArea() {
     console.log("Interacted with the special area!");
     // Add your interaction logic here
+  }
+
+  currentHour(){
+    console.log(GameState.time.hour);
+    return GameState.time.hour;
   }
 }

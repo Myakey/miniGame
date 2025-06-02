@@ -1,3 +1,4 @@
+const theTimeIs = new Date();
 export const GameState = {
     char: "Yukari",
     pos_x : 1273,
@@ -14,7 +15,7 @@ export const GameState = {
         currentPosY: 0,
     },
     time: {
-        hour : 17,
+        hour : theTimeIs.getHours() || 17,
         day: 0,
         minute: 0,
     },

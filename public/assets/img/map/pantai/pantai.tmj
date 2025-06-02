@@ -309,6 +309,23 @@
                  "width":33.25,
                  "x":215.25,
                  "y":0
+                }, 
+                {
+                 "height":35.8181818181818,
+                 "id":24,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"id",
+                         "type":"string",
+                         "value":"out"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":85.6363636363637,
+                 "x":263.636363636364,
+                 "y":-0.363636363636364
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -410,7 +427,7 @@
          "y":0
         }],
  "nextlayerid":7,
- "nextobjectid":24,
+ "nextobjectid":25,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",
