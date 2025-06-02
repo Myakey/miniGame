@@ -1,102 +1,90 @@
-import EasyStar from 'easystarjs';
+export default class Pathfinding {
+  constructor(tilemap, collidableLayers, tileSize, scale) {
+    this.tilemap = tilemap;
+    this.collidableLayers = collidableLayers;
+    this.tileSize = tileSize;
+    this.scale = scale;
 
-export default function setupPlayerMovement(scene, player, tilemap, walkableLayer) {
-  const finder = new EasyStar.js();
+    console.log("THE SCALE IS : " + scale)
 
-  const grid = [];
-  for (let y = 0; y < tilemap.height; y++) {
-    const row = [];
-    for (let x = 0; x < tilemap.width; x++) {
-      const tile = walkableLayer.getTileAt(x, y);
-      row.push(tile?.index ?? 0);
-    }
-    grid.push(row);
+    this.grid = this.createGrid();
+    
+    this.easystar = new EasyStar.js();
+    this.easystar.setGrid(this.grid);
+    this.easystar.setAcceptableTiles([0]); // assuming 0 = walkable
   }
 
-  finder.setGrid(grid);
-  finder.setAcceptableTiles([0]); // Adjust this based on walkable tile indices
-  finder.enableDiagonals();
+  createGrid() {
+    const width = this.tilemap.width;
+    const height = this.tilemap.height;
 
-  let path = [];
-  let moving = false;
-  let lastDirection = 'down';
+    // Create a 2D array with width x height
+    const grid = [];
+    for (let y = 0; y < height; y++) {
+      const row = [];
+      for (let x = 0; x < width; x++) {
+        // Check if any layer has collision at (x,y)
+        let collides = false;
+        for (const layer of this.collidableLayers) {
+          // Use getTileAt without scale, since tilemap tiles are not scaled, only the sprite layers are scaled
+          const tile = layer.hasTileAt(x, y);
+          if (tile) {
+            collides = true;
+            break;
+          }
+        }
+        row.push(collides ? 1 : 0);
+      }
+      grid.push(row);
+    }
+    return grid;
+  }
 
-  scene.input.on('pointerdown', (pointer) => {
-    const worldPoint = pointer.positionToCamera(scene.cameras.main);
-    const toX = walkableLayer.worldToTileX(worldPoint.x);
-    const toY = walkableLayer.worldToTileY(worldPoint.y);
+  worldToTile(x, y) {
+  const tileX = Math.floor(x / (this.tileSize * this.scale));
+  const tileY = Math.floor(y / (this.tileSize * this.scale));
+  return {
+    tileX: Phaser.Math.Clamp(tileX, 0, this.grid[0].length - 1),
+    tileY: Phaser.Math.Clamp(tileY, 0, this.grid.length - 1),
+  };
+}
 
-    const fromX = walkableLayer.worldToTileX(player.x);
-    const fromY = walkableLayer.worldToTileY(player.y);
+  tileToWorld(tileX, tileY) {
+    // Convert tile coordinates back to world coordinates (pixels)
+    // Use the scale factor here too
+    return {
+      x: tileX * this.tileSize * this.scale + (this.tileSize * this.scale) / 2,
+      y: tileY * this.tileSize * this.scale + (this.tileSize * this.scale) / 2,
+    };
+  }
 
-    finder.findPath(fromX, fromY, toX, toY, (p) => {
-      if (p === null) return;
-      path = p;
-      moving = true;
+  findPath(startX, startY, endX, endY) {
+    return new Promise((resolve) => {
+      // Check if start and end points are inside grid
+      if (
+        startX < 0 || startX >= this.tilemap.width ||
+        startY < 0 || startY >= this.tilemap.height ||
+        endX < 0 || endX >= this.tilemap.width ||
+        endY < 0 || endY >= this.tilemap.height
+      ) {
+        console.error("Start or end point outside grid bounds:", {
+          startX, startY, endX, endY
+        });
+        resolve(null);
+        return;
+      }
+
+      this.easystar.findPath(startX, startY, endX, endY, function(path) {
+        if (path === null) {
+          console.warn("Path was not found.");
+          resolve(null);
+        } else {
+          resolve(path);
+        }
+      });
+      this.easystar.calculate();
+      
     });
 
-    finder.calculate();
-  });
-
-  scene.events.on('update', () => {
-    if (!moving || path.length === 0) {
-      player.setVelocity(0);
-      player.anims.stop();
-
-      // Set idle frame
-      switch (lastDirection) {
-        case 'up': player.setFrame(0); break;
-        case 'right': player.setFrame(8); break;
-        case 'down': player.setFrame(16); break;
-        case 'left': player.setFrame(24); break;
-        // Add more if needed
-      }
-      return;
-    }
-
-    const next = path[0];
-    const targetX = walkableLayer.tileToWorldX(next.x) + tilemap.tileWidth / 2;
-    const targetY = walkableLayer.tileToWorldY(next.y) + tilemap.tileHeight / 2;
-
-    const dx = targetX - player.x;
-    const dy = targetY - player.y;
-
-    const dist = Phaser.Math.Distance.Between(player.x, player.y, targetX, targetY);
-
-    if (dist < 4) {
-      path.shift();
-      if (path.length === 0) {
-        moving = false;
-      }
-    } else {
-      scene.physics.moveTo(player, targetX, targetY, 120);
-
-      // Determine direction for animation
-      if (Math.abs(dx) > Math.abs(dy)) {
-        if (dx > 0) {
-          player.play('walkRight', true);
-          lastDirection = 'right';
-        } else {
-          player.play('walkLeft', true);
-          lastDirection = 'left';
-        }
-      } else {
-        if (dy > 0) {
-          player.play('walkDown', true);
-          lastDirection = 'down';
-        } else {
-          player.play('walkUp', true);
-          lastDirection = 'up';
-        }
-      }
-    }
-  });
-
-  return {
-    stop: () => {
-      moving = false;
-      path = [];
-      player.body.setVelocity(0);
-    },
-  };
+  }
 }

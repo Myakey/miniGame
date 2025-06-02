@@ -115,12 +115,15 @@
             "scaleInDock": 1
         },
         "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/mainMap.tmj": {
-            "scale": 1.8445833333333332,
+            "scale": 2,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 239.89157442963634,
-                "y": 160.19878021233345
+                "x": 92.75,
+                "y": 159.25
             }
+        },
+        "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/mainMap.tmj#Blank": {
+            "scaleInDock": 1
         },
         "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/mainMap.tmj#TILEMAPS": {
             "scaleInDock": 1
@@ -133,18 +136,18 @@
             "scaleInDock": 1
         },
         "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/mainMap.tmj#home": {
-            "scaleInDock": 1
+            "scaleInDock": 0.75
         },
         "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/pantai/pantai.tmj": {
-            "scale": 1.8445833333333332,
-            "selectedLayer": 1,
+            "scale": 5.5,
+            "selectedLayer": 0,
             "viewCenter": {
-                "x": 239.89157442963634,
-                "y": 160.19878021233345
+                "x": 52.63636363636364,
+                "y": 241
             }
         },
         "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/pantai/pantai.tmj#beach": {
-            "scaleInDock": 1
+            "scaleInDock": 1.5
         },
         "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/pantai/pantai.tmj#coba": {
             "scaleInDock": 1
@@ -199,8 +202,8 @@
             "scale": 4,
             "selectedLayer": 6,
             "viewCenter": {
-                "x": 164.375,
-                "y": 154.875
+                "x": 314.375,
+                "y": 177.875
             }
         },
         "rumah.tmj#Tiles1": {
@@ -228,8 +231,9 @@
             "scaleInEditor": 1
         }
     },
+    "frame.defaultDuration": 200,
     "last.exportedFilePath": "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/pantai",
-    "last.imagePath": "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/dieng",
+    "last.imagePath": "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map",
     "map.height": 32,
     "map.lastUsedExportFilter": "JSON map files (*.tmj *.json)",
     "map.lastUsedFormat": "json",

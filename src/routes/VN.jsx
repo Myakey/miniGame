@@ -21,6 +21,7 @@ import { act3_2Data } from "../components/VN/Act3_2.js";
 import { act3_3Data } from "../components/VN/Act3_3.js";
 import { act4Data } from "../components/VN/Act4.js";
 import { act5Data } from "../components/VN/Act5.js";
+import { stopAllSounds } from "../utils/soundHandler.js";
 
 const Button = ({ text, onClick }) => (
   <button className="text-xs bg-gray-300 px-3 py-1 rounded-full shadow hover:bg-gray-400 m-1" onClick={onClick}>{text}</button>
@@ -47,7 +48,10 @@ function VN() {
   const [customActData, setCustomActData] = useState(customDataFromNav || null);
   const { current, displayedText, handleNext, autoPlay, setAutoPlay, logHistory, isHalted, isTyping, skipTyping } = usedialogueIterator(
     customActData ? "custom" : actName,
-    () => navigate('/inGame'),
+    () => {
+      stopAllSounds();
+      navigate('/inGame');
+    },
     customActData
   ); //routes
 
@@ -238,7 +242,10 @@ function VN() {
               </div>
             )}
         </div>
-        <div onClick={() => navigate("/inGame")} className="ui-button">
+        <div onClick={() => {
+          stopAllSounds();
+          navigate("/inGame");
+        }} className="ui-button">
           <img src= {backButton} alt="Back" className="button-image"/>
         </div>
       </div>
