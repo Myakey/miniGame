@@ -6,6 +6,10 @@ import { GameState } from "../../hooks/gamestate";
 
 import Pathfinding from "../movements/npcTry";
 
+import { LightingManager } from "../lighting/LightingManager";
+import { PlayerLightManager } from "../lighting/PlayerLightManager";
+import { LightSource } from "../lighting/lightSource";
+
 export class FlowerField extends Phaser.Scene {
   constructor() {
     super({ key: "FlowerField" });
@@ -23,8 +27,29 @@ export class FlowerField extends Phaser.Scene {
 
     this.generateMap();
 
+    if (this.sys.game.renderer instanceof Phaser.Renderer.WebGL.WebGLRenderer) {
+      this.lights.enable();
+      this.lights.setAmbientColor(0xffffff);
+
+      this.lightingManager = new LightingManager(this);
+
+      const currentHour = this.currentHour();
+
+      // Add light source:
+      this.playerLightManager = new PlayerLightManager(this, this.player, {
+        radius: 200,
+        color: 0xffffff,
+        intensity: 1,
+      });
+
+      this.lightingManager.initializeWithHour(currentHour);
+      this.playerLightManager.initializeWithHour(currentHour);
+    } else {
+      console.warn("WebGL not supported — skipping lights");
+    }
+
     this.scaleFactor = 3; // same scale you used for map layers
-  
+
     this.pathfinder = new Pathfinding(
       this.map,
       [
@@ -49,11 +74,10 @@ export class FlowerField extends Phaser.Scene {
     });
 
     console.log("Tile size:", this.tileSize);
-console.log("Scale factor:", this.scaleFactor);
-console.log("Map size in tiles:", this.map.width, this.map.height);
-console.log("Player pos:", this.player.x, this.player.y);
-console.log("NPC pos:", this.npc.x, this.npc.y);
-
+    console.log("Scale factor:", this.scaleFactor);
+    console.log("Map size in tiles:", this.map.width, this.map.height);
+    console.log("Player pos:", this.player.x, this.player.y);
+    console.log("NPC pos:", this.npc.x, this.npc.y);
 
     this.cursors = this.input.keyboard.createCursorKeys();
     this.shiftKey = this.input.keyboard.addKey(
@@ -127,12 +151,24 @@ console.log("NPC pos:", this.npc.x, this.npc.y);
     const fence = this.map.addTilesetImage("fence", "flowerFieldFence");
     const Yuuka = this.map.addTilesetImage("Yuuka", "Yuuka");
 
-    this.groundLayer = this.map.createLayer("ground", tree);
-    this.grassLayer = this.map.createLayer("grass", [grass, tree]);
-    this.flowerLayer = this.map.createLayer("flower", [sunflowers, tree]);
-    this.fenceHouseLayer = this.map.createLayer("house&Fence", [fence, tree]);
-    this.treeLayer = this.map.createLayer("tree", [tree, grass]);
-    this.YuukaLayer = this.map.createLayer("Yuuka", Yuuka);
+    this.groundLayer = this.map
+      .createLayer("ground", tree)
+      .setPipeline("Light2D");
+    this.grassLayer = this.map
+      .createLayer("grass", [grass, tree])
+      .setPipeline("Light2D");
+    this.flowerLayer = this.map
+      .createLayer("flower", [sunflowers, tree])
+      .setPipeline("Light2D");
+    this.fenceHouseLayer = this.map
+      .createLayer("house&Fence", [fence, tree])
+      .setPipeline("Light2D");
+    this.treeLayer = this.map
+      .createLayer("tree", [tree, grass])
+      .setPipeline("Light2D");
+    this.YuukaLayer = this.map
+      .createLayer("Yuuka", Yuuka)
+      .setPipeline("Light2D");
 
     this.player = this.physics.add
       .sprite(this.posX, this.posY, "Yukari")
@@ -199,6 +235,16 @@ console.log("NPC pos:", this.npc.x, this.npc.y);
 
         this.interactables.add(sprite);
 
+        if (sprite.properties.light) {
+          new LightSource(this, x, y, {
+            radius: Number(sprite.properties.lightRadius) || 150,
+            color: sprite.properties.lightColor || "#ffffff",
+            intensity: Number(sprite.properties.lightIntensity) || 1.0,
+            nightOnly: sprite.properties.lightNightOnly === true,
+            initialHour: this.currentHour(), // you need to pass this in
+          });
+        }
+
         if (sprite.properties.collides) {
           sprite.body.setImmovable(true);
           sprite.body.setVelocity(0, 0);
@@ -224,6 +270,16 @@ console.log("NPC pos:", this.npc.x, this.npc.y);
         obj.properties?.forEach((prop) => {
           sprite.properties[prop.name] = prop.value;
         });
+
+        if (sprite.properties.light) {
+          new LightSource(this, x, y, {
+            radius: Number(sprite.properties.lightRadius) || 150,
+            color: sprite.properties.lightColor || "#ffffff",
+            intensity: Number(sprite.properties.lightIntensity) || 1.0,
+            nightOnly: sprite.properties.lightNightOnly === true,
+            initialHour: this.currentHour(), // you need to pass this in
+          });
+        }
 
         this.interactables.add(sprite);
         if (sprite.properties.collides) {
@@ -283,110 +339,120 @@ console.log("NPC pos:", this.npc.x, this.npc.y);
   }
 
   async moveAIAlongPath() {
-  const start = this.pathfinder.worldToTile(this.npc.x, this.npc.y);
-  const end = this.pathfinder.worldToTile(this.player.x, this.player.y);
+    const start = this.pathfinder.worldToTile(this.npc.x, this.npc.y);
+    const end = this.pathfinder.worldToTile(this.player.x, this.player.y);
 
-  const maxX = this.map.width;
-  const maxY = this.map.height;
+    const maxX = this.map.width;
+    const maxY = this.map.height;
 
-  if (
-    start.tileX < 0 || start.tileX >= maxX ||
-    start.tileY < 0 || start.tileY >= maxY ||
-    end.tileX < 0 || end.tileX >= maxX ||
-    end.tileY < 0 || end.tileY >= maxY
-  ) {
-    console.warn("🚫 Invalid path request", { start, end });
-    return;
+    if (
+      start.tileX < 0 ||
+      start.tileX >= maxX ||
+      start.tileY < 0 ||
+      start.tileY >= maxY ||
+      end.tileX < 0 ||
+      end.tileX >= maxX ||
+      end.tileY < 0 ||
+      end.tileY >= maxY
+    ) {
+      console.warn("🚫 Invalid path request", { start, end });
+      return;
+    }
+
+    const path = await this.pathfinder.findPath(start, end);
+
+    if (!path || path.length === 0) {
+      console.warn("❌ Path was not found.");
+      return;
+    }
+
+    this.aiPath = path;
+    this.aiStep = 0;
+    this.aiMoving = true;
+
+    this.followPath();
   }
 
-  const path = await this.pathfinder.findPath(start, end);
+  followPath() {
+    const NPC_SPEED = 100; // pixels per second
+    if (this.aiStep >= this.aiPath.length) {
+      this.aiMoving = false;
+      this.npc.anims.stop();
 
-  if (!path || path.length === 0) {
-    console.warn("❌ Path was not found.");
-    return;
+      // Optional: Face the last direction at the end
+      this.setIdleFrame(this.lastDirection);
+      return;
+    }
+
+    const point = this.aiPath[this.aiStep];
+    const worldPos = this.pathfinder.tileToWorld(point.x, point.y);
+
+    // Calculate direction
+    const dx = worldPos.x - this.npc.x;
+    const dy = worldPos.y - this.npc.y;
+    const direction = this.getDirection(dx, dy);
+
+    if (direction) {
+      this.npc.anims.play(direction, true);
+      this.lastDirection = direction;
+    }
+
+    const distance = Phaser.Math.Distance.Between(
+      this.npc.x,
+      this.npc.y,
+      worldPos.x,
+      worldPos.y
+    );
+    const duration = (distance / NPC_SPEED) * 1000;
+
+    this.tweens.add({
+      targets: this.npc,
+      x: worldPos.x,
+      y: worldPos.y,
+      duration: duration,
+      ease: "Linear",
+      onComplete: () => {
+        this.aiStep++;
+        this.followPath();
+      },
+    });
   }
-
-  this.aiPath = path;
-  this.aiStep = 0;
-  this.aiMoving = true;
-
-  this.followPath();
-}
-
-
-followPath() {
-   const NPC_SPEED = 100; // pixels per second
-  if (this.aiStep >= this.aiPath.length) {
-    this.aiMoving = false;
-    this.npc.anims.stop();
-
-    // Optional: Face the last direction at the end
-    this.setIdleFrame(this.lastDirection);
-    return;
-  }
-
-  const point = this.aiPath[this.aiStep];
-  const worldPos = this.pathfinder.tileToWorld(point.x, point.y);
-
-  // Calculate direction
-  const dx = worldPos.x - this.npc.x;
-  const dy = worldPos.y - this.npc.y;
-  const direction = this.getDirection(dx, dy);
-
-  if (direction) {
-    this.npc.anims.play(direction, true);
-    this.lastDirection = direction;
-  }
-
-  const distance = Phaser.Math.Distance.Between(this.npc.x, this.npc.y, worldPos.x, worldPos.y);
-  const duration = (distance / NPC_SPEED) * 1000;
-
-  this.tweens.add({
-    targets: this.npc,
-    x: worldPos.x,
-    y: worldPos.y,
-    duration: duration,
-    ease: 'Linear',
-    onComplete: () => {
-      this.aiStep++;
-      this.followPath();
-    },
-  });
-}
-
 
   getDirection(dx, dy) {
-  const absDx = Math.abs(dx);
-  const absDy = Math.abs(dy);
-  const threshold = 1; // small threshold to ignore jitter
+    const absDx = Math.abs(dx);
+    const absDy = Math.abs(dy);
+    const threshold = 1; // small threshold to ignore jitter
 
-  if (absDx < threshold && dy < 0) return "walkUp";
-  if (absDx < threshold && dy > 0) return "walkDown";
-  if (dx > 0 && absDy < threshold) return "walkRight";
-  if (dx < 0 && absDy < threshold) return "walkLeft";
-  if (dx > 0 && dy < 0) return "walkDiagRightUp";
-  if (dx > 0 && dy > 0) return "walkDiagRightDown";
-  if (dx < 0 && dy > 0) return "walkDiagLeftDown";
-  if (dx < 0 && dy < 0) return "walkDiagLeftUp";
+    if (absDx < threshold && dy < 0) return "walkUp";
+    if (absDx < threshold && dy > 0) return "walkDown";
+    if (dx > 0 && absDy < threshold) return "walkRight";
+    if (dx < 0 && absDy < threshold) return "walkLeft";
+    if (dx > 0 && dy < 0) return "walkDiagRightUp";
+    if (dx > 0 && dy > 0) return "walkDiagRightDown";
+    if (dx < 0 && dy > 0) return "walkDiagLeftDown";
+    if (dx < 0 && dy < 0) return "walkDiagLeftUp";
 
-  return null;
-}
-
-setIdleFrame(direction) {
-  const idleFrames = {
-    walkUp: 0,
-    walkRight: 8,
-    walkDown: 16,
-    walkLeft: 24,
-    walkDiagRightUp: 4,
-    walkDiagRightDown: 12,
-    walkDiagLeftDown: 20,
-    walkDiagLeftUp: 28,
-  };
-
-  if (direction && idleFrames[direction] !== undefined) {
-    this.npc.setFrame(idleFrames[direction]);
+    return null;
   }
-}
 
+  setIdleFrame(direction) {
+    const idleFrames = {
+      walkUp: 0,
+      walkRight: 8,
+      walkDown: 16,
+      walkLeft: 24,
+      walkDiagRightUp: 4,
+      walkDiagRightDown: 12,
+      walkDiagLeftDown: 20,
+      walkDiagLeftUp: 28,
+    };
+
+    if (direction && idleFrames[direction] !== undefined) {
+      this.npc.setFrame(idleFrames[direction]);
+    }
+  }
+
+  currentHour() {
+    return GameState.time.hour;
+  }
 }

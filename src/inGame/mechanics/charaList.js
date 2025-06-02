@@ -14,7 +14,7 @@ export const charaList = [
     },
     {
         name: "Flandre",
-        width: 172,
+        width: 160,
         height: 216,
         path: Flandre
     },
@@ -26,7 +26,7 @@ export const charaList = [
     },
     {
         name: "Remilia",
-        width: 168,
+        width: 136,
         height: 216,
         path: Remilia
     },

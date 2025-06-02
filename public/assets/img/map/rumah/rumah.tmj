@@ -299,6 +299,33 @@
                  "width":48,
                  "x":141.375,
                  "y":131.875
+                }, 
+                {
+                 "height":33.75,
+                 "id":31,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"light",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"lightIntensity",
+                         "type":"float",
+                         "value":5
+                        }, 
+                        {
+                         "name":"lightRadius",
+                         "type":"int",
+                         "value":10000
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":65.5,
+                 "x":239.5,
+                 "y":239.5
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -329,7 +356,7 @@
          "y":0
         }],
  "nextlayerid":12,
- "nextobjectid":31,
+ "nextobjectid":32,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",

@@ -1,8 +1,12 @@
-import Phaser from 'phaser';
+import Phaser from "phaser";
 import { EventBus } from "../EventBus";
-import { GameState } from '../../hooks/gamestate';
+import { GameState } from "../../hooks/gamestate";
 
-import { handleMovement } from '../movements/handleMovement';
+import { handleMovement } from "../movements/handleMovement";
+
+import { LightingManager } from "../lighting/LightingManager";
+import { PlayerLightManager } from "../lighting/PlayerLightManager";
+import { LightSource } from "../lighting/lightSource";
 
 export class Pantai extends Phaser.Scene {
   constructor() {
@@ -10,53 +14,76 @@ export class Pantai extends Phaser.Scene {
   }
 
   preload() {
-    this.posX = GameState.afterVN ? GameState.currentlocation.currentPosX : 1200; 
-    this.posY = GameState.afterVN ? GameState.currentlocation.currentPosY : 1500; 
+    this.posX = GameState.afterVN
+      ? GameState.currentlocation.currentPosX
+      : 1086;
+    this.posY = GameState.afterVN ? GameState.currentlocation.currentPosY : 80;
     GameState.currentlocation.currentLoc = "Pantai";
   }
 
   create(data) {
     this.cameras.main.fadeIn(1000, 0, 0, 0);
-    this.load.once('complete', () => {
-    this.generateMap();
+    this.load.once("complete", () => {
+      this.generateMap();
     });
     this.load.start();
 
+    if (this.sys.game.renderer instanceof Phaser.Renderer.WebGL.WebGLRenderer) {
+      this.lights.enable();
+      this.lights.setAmbientColor(0xffffff);
+
+      this.lightingManager = new LightingManager(this);
+
+      const currentHour = this.currentHour();
+
+      // Add light source:
+      this.playerLightManager = new PlayerLightManager(this, this.player, {
+        radius: 200,
+        color: 0xffffff,
+        intensity: 1.5,
+      });
+
+      this.lightingManager.initializeWithHour(currentHour);
+      this.playerLightManager.initializeWithHour(currentHour);
+    } else {
+      console.warn("WebGL not supported — skipping lights");
+    }
 
     this.add.text(100, 100, "Pantai", { fontSize: "20px", fill: "#fff" });
 
-
-    const button = this.add.text(100, 150, "Return to Main Scene", {
-      fontSize: "18px",
-      fill: "#0f0",
-      backgroundColor: "#000",
-      padding: { x: 10, y: 5 }
-    }).setInteractive()
+    const button = this.add
+      .text(100, 150, "Return to Main Scene", {
+        fontSize: "18px",
+        fill: "#0f0",
+        backgroundColor: "#000",
+        padding: { x: 10, y: 5 },
+      })
+      .setInteractive()
       .on("pointerdown", () => {
         this.scene.start("DanMakuTrial");
       });
 
-
-
-    const button1 = this.add.text(400, 150, "Bath", {
-      fontSize: "18px",
-      fill: "#0f0",
-      backgroundColor: "#000",
-      padding: { x: 10, y: 5 }
-    }).setInteractive()
+    const button1 = this.add
+      .text(400, 150, "Bath", {
+        fontSize: "18px",
+        fill: "#0f0",
+        backgroundColor: "#000",
+        padding: { x: 10, y: 5 },
+      })
+      .setInteractive()
       .on("pointerdown", () => {
         EventBus.emit("performAction", "bath");
       });
 
-    const button2 = this.add.text(600, 150, "Shop", {
-      fontSize: "18px",
-      fill: "#0f0",
-      backgroundColor: "#000",
-      padding: { x: 10, y: 5 }
-    }).setInteractive()
-      .on("pointerdown", () => {
-       
-      });
+    const button2 = this.add
+      .text(600, 150, "Shop", {
+        fontSize: "18px",
+        fill: "#0f0",
+        backgroundColor: "#000",
+        padding: { x: 10, y: 5 },
+      })
+      .setInteractive()
+      .on("pointerdown", () => {});
 
     this.cursors = this.input.keyboard.createCursorKeys();
     this.shiftKey = this.input.keyboard.addKey(
@@ -69,13 +96,12 @@ export class Pantai extends Phaser.Scene {
     console.log(this.player.x);
     console.log(this.player.y);
     this.checkOverlap();
-
   }
 
   checkOverlap() {
     let stillOverlapping = false;
 
-    this.interactables.children.iterate(obj => {
+    this.interactables.children.iterate((obj) => {
       if (this.physics.overlap(this.player, obj)) {
         this.currentInteractable = obj;
         stillOverlapping = true;
@@ -94,21 +120,14 @@ export class Pantai extends Phaser.Scene {
         console.log("Pressing E near:", id);
         EventBus.emit("callObjective", "Done");
         EventBus.emit("show-dialog", { id });
-
       } else if (id == "out") {
         const enteringText = this.add
-          .text(
-            this.cameras.main.centerX,
-            -50,
-            "Exiting....",
-            {
-              fontSize: "48px",
-              fill: "#ffffff",
-              fontStyle: "bold",
-              resolution: 2
-            }
-
-          )
+          .text(this.cameras.main.centerX, -50, "Exiting....", {
+            fontSize: "48px",
+            fill: "#ffffff",
+            fontStyle: "bold",
+            resolution: 2,
+          })
           .setOrigin(0.5)
           .setDepth(1000)
           .setScrollFactor(0);
@@ -124,8 +143,8 @@ export class Pantai extends Phaser.Scene {
         this.handleSaveVN();
         EventBus.emit("performVN", "act3Data");
       }
-      if (id === "shop"){
-         EventBus.emit("showShop");
+      if (id === "shop") {
+        EventBus.emit("showShop");
       }
     }
   }
@@ -136,18 +155,23 @@ export class Pantai extends Phaser.Scene {
     const toko = map.addTilesetImage("toko", "decorationBlokM");
     const tree = map.addTilesetImage("tree", "treePantai");
 
-    console.log(Phaser.VERSION)
+    console.log(Phaser.VERSION);
 
-    const groundLayer = map.createLayer("ground", mainTileset, 0, 0);
-    const detailsLayer = map.createLayer("details", [mainTileset, toko]);
-    const treeLayer = map.createLayer("trees", tree);
-    const payungLayer = map.createLayer("payung", mainTileset);
+    const groundLayer = map
+      .createLayer("ground", mainTileset, 0, 0)
+      .setPipeline("Light2D");
+    const detailsLayer = map
+      .createLayer("details", [mainTileset, toko])
+      .setPipeline("Light2D");
+    const treeLayer = map.createLayer("trees", tree).setPipeline("Light2D");
+    const payungLayer = map
+      .createLayer("payung", mainTileset)
+      .setPipeline("Light2D");
 
     this.player = this.physics.add
       .sprite(this.posX, this.posY, "Yukari")
       .setScale(0.3);
     this.player.body.setCollideWorldBounds(true);
-
 
     const scale = 3;
     const mapWidth = map.widthInPixels;
@@ -172,7 +196,6 @@ export class Pantai extends Phaser.Scene {
     this.cameras.main.setZoom(1);
     this.cameras.main.startFollow(this.player);
 
-
     //TODO Perbaikin Object Eclipse posisi
     //OBJECTS TRIAL
     //OBJECT TRIAL
@@ -181,7 +204,7 @@ export class Pantai extends Phaser.Scene {
 
     this.interactables = this.physics.add.group();
 
-    objects.forEach(obj => {
+    objects.forEach((obj) => {
       if (obj.ellipse) {
         // Position of the circle's center (Tiled's obj.x and obj.y are top-left of bounding box)
         const radius = (obj.width * SCALE) / 2;
@@ -197,17 +220,27 @@ export class Pantai extends Phaser.Scene {
         sprite.body.setCircle(radius);
 
         sprite.properties = {};
-        obj.properties?.forEach(prop => {
+        obj.properties?.forEach((prop) => {
           sprite.properties[prop.name] = prop.value;
         });
 
         this.interactables.add(sprite);
 
+        if (sprite.properties.light) {
+          new LightSource(this, x, y, {
+            radius: Number(sprite.properties.lightRadius) || 150,
+            color: sprite.properties.lightColor || "#ffffff",
+            intensity: Number(sprite.properties.lightIntensity) || 1.0,
+            nightOnly: sprite.properties.lightNightOnly === true,
+            initialHour: this.currentHour(), // you need to pass this in
+          });
+        }
+
         if (sprite.properties.collides) {
           sprite.body.setImmovable(true);
           sprite.body.setVelocity(0, 0);
           sprite.body.moves = false;
-          if ('pushable' in sprite.body) sprite.body.pushable = false; // Optional for Phaser 3.60+
+          if ("pushable" in sprite.body) sprite.body.pushable = false; // Optional for Phaser 3.60+
           this.physics.add.collider(this.player, sprite);
         }
       } else {
@@ -225,32 +258,45 @@ export class Pantai extends Phaser.Scene {
 
         // Copy object properties
         sprite.properties = {};
-        obj.properties?.forEach(prop => {
+        obj.properties?.forEach((prop) => {
           sprite.properties[prop.name] = prop.value;
         });
+
+        if (sprite.properties.light) {
+          new LightSource(this, x, y, {
+            radius: Number(sprite.properties.lightRadius) || 150,
+            color: sprite.properties.lightColor || "#ffffff",
+            intensity: Number(sprite.properties.lightIntensity) || 1.0,
+            nightOnly: sprite.properties.lightNightOnly === true,
+            initialHour: this.currentHour(), // you need to pass this in
+          });
+        }
 
         this.interactables.add(sprite);
         if (sprite.properties.collides) {
           sprite.body.setImmovable(true);
           sprite.body.setVelocity(0, 0);
           sprite.body.moves = false;
-          if ('pushable' in sprite.body) sprite.body.pushable = false; // Optional for Phaser 3.60+
+          if ("pushable" in sprite.body) sprite.body.pushable = false; // Optional for Phaser 3.60+
           this.physics.add.collider(this.player, sprite);
         }
       }
-
     });
 
-
-    //JUST USING FOR TRIAL 
+    //JUST USING FOR TRIAL
     this.eKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
 
-    this.physics.add.overlap(this.player, this.interactables, (player, obj) => {
-      console.log("Overlapping with:", obj.properties?.id); // 🔍 Debug here
-      this.currentInteractable = obj;
-    }, null, this);
+    this.physics.add.overlap(
+      this.player,
+      this.interactables,
+      (player, obj) => {
+        console.log("Overlapping with:", obj.properties?.id); // 🔍 Debug here
+        this.currentInteractable = obj;
+      },
+      null,
+      this
+    );
     //------------------------------
-
 
     this.input.gamepad.once("connected", (pad) => {
       this.gamepad = pad;
@@ -269,5 +315,9 @@ export class Pantai extends Phaser.Scene {
     this.shiftKey = this.input.keyboard.addKey(
       Phaser.Input.Keyboard.KeyCodes.SHIFT
     );
+  }
+
+  currentHour() {
+    return GameState.time.hour;
   }
 }

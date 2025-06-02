@@ -1,63 +1,51 @@
 import Phaser from 'phaser';
 import { EventBus } from '../EventBus';
 
-export default class OverlayScene extends Phaser.Scene {
+export default class LightingScene extends Phaser.Scene {
   constructor() {
     super({ key: 'OverlayScene', active: true });
+    this.currentPeriod = null;
+    this.currentAmbient = 0xffffff; // Track current color
   }
 
   create() {
-    this.scene.bringToTop();
-    console.log('OverlayScene create() called');
-    this.overlay = this.add.rectangle(0, 0, this.scale.width, this.scale.height, 0x000000)
-      .setOrigin(0)
-      .setAlpha(0)
-      .setDepth(999)
-      .setScrollFactor(0);
+    this.lights.enable().setAmbientColor(this.currentAmbient);
+    this.game.lightingScene = this;
 
-    this.scale.on('resize', (gameSize) => {
-    const { width, height } = gameSize;
-    this.overlay.setSize(width, height);
-  });
-
-    // Use global game event emitter for night/day tint events
-    this.game.events.on('set-night', () => {
-      this.tweens.add({
-        targets: this.overlay,
-        alpha: 0.5,
-        duration: 1000,
-        ease: 'Sine.easeInOut',
-      });
-    });
-
-    this.game.events.on('set-day', () => {
-      this.tweens.add({
-        targets: this.overlay,
-        alpha: 0,
-        duration: 1000,
-        ease: 'Sine.easeInOut',
-      });
-    });
-
-    // Listen to your external event bus for time updates
     EventBus.on('phaser-time-update', ({ hour }) => {
-        console.log(`OverlayScene received time update: ${hour}h`);
-      this.updateOverlayByHour(hour);
+      this.setTimeByHour(hour);
+      console.log("It enters the Event Bus!");
     });
 
     this.events.once('shutdown', () => {
-      this.game.events.off('set-night');
-      this.game.events.off('set-day');
       EventBus.off('phaser-time-update');
     });
   }
 
-  updateOverlayByHour(hour) {
-    if (hour >= 18 || hour < 6) {
-      this.game.events.emit('set-night');
-    } else {
-      this.game.events.emit('set-day');
+  setTimeByHour(hour) {
+    const isNight = hour >= 19 || hour < 6;
+    if (isNight && this.currentPeriod !== 'night') {
+      this.currentPeriod = 'night';
+      this.transitionAmbientColor(0x222244);
+    } else if (!isNight && this.currentPeriod !== 'day') {
+      this.currentPeriod = 'day';
+      this.transitionAmbientColor(0xffffff);
     }
   }
-}
 
+  transitionAmbientColor(toColor, duration = 1000) {
+    const fromColor = Phaser.Display.Color.ValueToColor(this.currentAmbient);
+    const target = Phaser.Display.Color.ValueToColor(toColor);
+
+    this.tweens.addCounter({
+      from: 0, to: 100, duration,
+      onUpdate: tween => {
+        const t = tween.getValue();
+        const { r, g, b } = Phaser.Display.Color.Interpolate.ColorWithColor(fromColor, target, 100, t);
+        const interpolated = Phaser.Display.Color.GetColor(r, g, b);
+        this.lights.setAmbientColor(interpolated);
+        this.currentAmbient = interpolated; // ✅ Track it here!
+      }
+    });
+  }
+}

@@ -20,7 +20,7 @@ const config = {
     width: 400,
     height: 300,
     parent: 'game-container',
-    backgroundColor: "#91b2c1",
+    backgroundColor: "#000000",
     pixelArt: true,
     scale: {
          mode: Phaser.Scale.RESIZE,
