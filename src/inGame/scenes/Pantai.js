@@ -17,8 +17,14 @@ export class Pantai extends Phaser.Scene {
 
   create(data) {
     this.cameras.main.fadeIn(1000, 0, 0, 0);
+    this.load.once('complete', () => {
     this.generateMap();
+    });
+    this.load.start();
+
+
     this.add.text(100, 100, "Pantai", { fontSize: "20px", fill: "#fff" });
+
 
     const button = this.add.text(100, 150, "Return to Main Scene", {
       fontSize: "18px",
@@ -27,7 +33,7 @@ export class Pantai extends Phaser.Scene {
       padding: { x: 10, y: 5 }
     }).setInteractive()
       .on("pointerdown", () => {
-        this.scene.start("MainGame");
+        this.scene.start("DanMakuTrial");
       });
 
 
@@ -60,6 +66,8 @@ export class Pantai extends Phaser.Scene {
 
   update() {
     handleMovement(this);
+    console.log(this.player.x);
+    console.log(this.player.y);
     this.checkOverlap();
 
   }
@@ -128,7 +136,9 @@ export class Pantai extends Phaser.Scene {
     const toko = map.addTilesetImage("toko", "decorationBlokM");
     const tree = map.addTilesetImage("tree", "treePantai");
 
-    const groundLayer = map.createLayer("ground", mainTileset);
+    console.log(Phaser.VERSION)
+
+    const groundLayer = map.createLayer("ground", mainTileset, 0, 0);
     const detailsLayer = map.createLayer("details", [mainTileset, toko]);
     const treeLayer = map.createLayer("trees", tree);
     const payungLayer = map.createLayer("payung", mainTileset);

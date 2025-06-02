@@ -82,7 +82,7 @@ export class Preloader extends Scene
         this.load.tilemapTiledJSON("pantai", "/assets/img/map/pantai/pantai.tmj");
         this.load.image("beachTiles", "/assets/img/map/pantai/rpg.png");
         this.load.image("treePantai", "/assets/img/map/pantai/Trees.png");
-
+        this.load.script('animatedTiles', '/utils/AnimatedTiles.js');
 
 
         //Character SpriteSheets
@@ -97,8 +97,8 @@ export class Preloader extends Scene
             //  Load the assets for the game - Replace with your own assets
         this.load.setPath('assets');
 
-        this.load.image('logo', 'logo.png');
-        this.load.image('star', 'star.png');
+
+        
     }
 
     create ()
@@ -123,6 +123,7 @@ export class Preloader extends Scene
         }
 
         if(GameState.afterVN){
+            GameState.afterVN = false;
             if(GameState.currentAct === "prologue"){
                 GameState.currentAct = "intro";
                 EventBus.emit("performVN", "introData");

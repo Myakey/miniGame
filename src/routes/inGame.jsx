@@ -31,6 +31,8 @@ import {useVNSelector} from "../components/VN/VNSELECTOR";
 
 import ShopInteraction from "../components/Game/ShopInteraction";
 
+import { stopAllSounds } from "../utils/soundHandler";
+
 function MainGame() {
   let navigate = useNavigate();
   let VNSelector = useVNSelector();
@@ -181,7 +183,6 @@ function MainGame() {
 }, [setStatus]);
 
 
-
   //Mapping buat status bars, bakalan direrender semua nya waktu contextnya ganti, mempermudah animasi cuma butuh optimalisasi performa lebih lagi
   function createStatus(text) {
     if (!status) return null;
@@ -271,7 +272,7 @@ function MainGame() {
         <Inventory />
       <div className="absolute 
       z-30">
-        <PauseMenu />
+      <PauseMenu onQuit={ () => {stopAllSounds(); resumeGame(); navigate("/")} }/>
         
       </div>
       {/* ##### NEW: Render the Confirmation Modal ##### */}
@@ -303,6 +304,8 @@ function MainGame() {
         </div>
       </Modal>
       {/* ############################################ */}
+
+      {/* Buat munculin gif waktu work */}
       <ActionFlow 
         isPlaying={isActionPlaying} 
         currentActionType={currentActionTypeForAnimation} 

@@ -89,7 +89,8 @@ export const prologueData = [
         background: "classRoom",
         characters: [
         ],
-        halt: false,
+        halt: true,
+        haltDuration: 1000,
         sound: "none"
     },
     {
