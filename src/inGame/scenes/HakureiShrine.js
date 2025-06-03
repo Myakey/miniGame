@@ -30,7 +30,7 @@ export class HakureiShrine extends Phaser.Scene {
   }
 
   create(data) {
-    this.cameras.main.fadeIn(1000, 0, 0, 0);
+    this.cameras.main.fadeIn(1500, 0, 0, 0);
 
     console.log("Renderer Type:", this.sys.game.renderer.type);
     this.generateMap();
@@ -47,7 +47,7 @@ export class HakureiShrine extends Phaser.Scene {
       this.playerLightManager = new PlayerLightManager(this, this.player, {
       radius: 200,
       color: 0xffffff,
-      intensity: 3,
+      intensity: 6,
     });
 
       this.lightingManager.initializeWithHour(currentHour);

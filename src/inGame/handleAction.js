@@ -3,12 +3,18 @@ import eat from './mechanics/eat';
 import jalan from './mechanics/jalan';
 import hunt from './mechanics/hunt';
 import work from './mechanics/work';
+import { EventBus } from './EventBus';
+import { GameState } from '../hooks/gamestate';
 // import other actions as needed
 // tambahin jobId & itemid karna 1 tempat bisa lebih dr 1 job
 export default function handleAction(type, currentStatus, jobId, itemId) {
   switch (type) {
     case 'bath':
-      return bath(currentStatus);
+      const updated = bath(currentStatus);
+      EventBus.emit('phaser-time-update', { hour: updated.time.hour });
+      GameState.time.hour = updated.time.hour; // Update global time state
+      GameState.time.day = updated.time.day; // Update global day state
+      return updated;
     case 'eat':
       return eat(currentStatus, itemId);
     case 'jalan':
