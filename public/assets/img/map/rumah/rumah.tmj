@@ -313,7 +313,7 @@
                         {
                          "name":"lightIntensity",
                          "type":"float",
-                         "value":5
+                         "value":3
                         }, 
                         {
                          "name":"lightRadius",
@@ -326,6 +326,38 @@
                  "width":65.5,
                  "x":239.5,
                  "y":239.5
+                }, 
+                {
+                 "height":27.0909090909091,
+                 "id":32,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"light",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"lightColor",
+                         "type":"string",
+                         "value":"#ffaa66"
+                        }, 
+                        {
+                         "name":"lightIntensity",
+                         "type":"float",
+                         "value":2
+                        }, 
+                        {
+                         "name":"lightRadius",
+                         "type":"int",
+                         "value":10000
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":38.9090909090909,
+                 "x":146.363636363636,
+                 "y":103.090909090909
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -356,7 +388,7 @@
          "y":0
         }],
  "nextlayerid":12,
- "nextobjectid":32,
+ "nextobjectid":33,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",

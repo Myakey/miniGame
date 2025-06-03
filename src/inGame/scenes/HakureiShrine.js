@@ -259,7 +259,7 @@ export class HakureiShrine extends Phaser.Scene {
             radius: Number(sprite.properties.lightRadius) || 150,
             color: sprite.properties.lightColor || "#ffffff",
             intensity: Number(sprite.properties.lightIntensity) || 1.0,
-            nightOnly: sprite.properties.lightNightOnly === true,
+            nightOnly: sprite.properties.lightNightOnly || true,
             initialHour: this.currentHour(), // you need to pass this in
           });
         }
@@ -291,11 +291,13 @@ export class HakureiShrine extends Phaser.Scene {
         });
 
         if (sprite.properties.light) {
+          console.log("Adding light source at:", x, y);
+          console.log("COLOR : " + sprite.properties.lightColor);
           new LightSource(this, x, y, {
             radius: Number(sprite.properties.lightRadius) || 150,
             color: sprite.properties.lightColor || "#ffffff",
             intensity: Number(sprite.properties.lightIntensity) || 1.0,
-            nightOnly: sprite.properties.lightNightOnly === true,
+            nightOnly: sprite.properties.lightNightOnly || true,
             initialHour: this.currentHour(), // you need to pass this in
           });
         }

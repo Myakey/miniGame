@@ -244,7 +244,7 @@
         "rumah.tmj"
     ],
     "project": "untitled.tiled-project",
-    "property.type": "string",
+    "property.type": "int",
     "recentFiles": [
         "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/tilesTest.tmj",
         "rumah.tmj",

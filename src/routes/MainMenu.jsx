@@ -21,6 +21,7 @@ function MainMenu() {
     if (option === "Play!") {
       navigate("/charaSel");
     } else if (option === "Debug Mode") {
+      console.log("Debug Mode activated");
       setShowModal(true);
     }
     navigator.vibrate?.(50);

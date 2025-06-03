@@ -1,5 +1,5 @@
 import { EventBus } from "../EventBus";
-
+import { GameState } from "../../hooks/gamestate";
 export class PlayerLightManager {
   constructor(scene, player, options = {}) {
     this.scene = scene;
@@ -8,9 +8,14 @@ export class PlayerLightManager {
     this.intensity = options.intensity || 3;
     this.enabled = true;
     this.temp = this.intensity; // Temporary variable for intensity
-
-    this.color = options.color || 0x222244;
-
+    console.log("Vampire mode:", GameState.isVampire);
+    if(GameState.isVampire){
+      console.log("Vampire mode enabled, setting light color to red");
+      this.color = "#aa0033";
+    }else{
+      this.color = options.color || 0x222244;
+    }
+    console.log("PlayerLightManager color:", this.color);
     this.light = this.scene.lights
       .addLight(player.x, player.y, this.radius)
       .setColor(this.color)
@@ -32,17 +37,22 @@ export class PlayerLightManager {
   }
 
   onTimeUpdate({ hour }) {
-    const periodColor = this.getColorForHour(hour);
-    this.transitionColor(periodColor);
+  const periodColor = this.getColorForHour(hour);
+  this.transitionColor(periodColor);
 
-    const isNight = hour >= 19 || hour < 5;
-    if (isNight) {
-      console.log("Night time detected, enabling light");
-      this.enable();
-    } else {
-      this.disable();
-    }
+  const isNight = hour >= 19 || hour < 5;
+  if (isNight) {
+    // Wait for ambient transition before enabling player light
+    EventBus.once("ambient-transition-complete", (period) => {
+      if (period === "night" || period === "sunrise") {
+        this.enable();
+      }
+    });
+  } else {
+    this.disable(); // immediately disable during day/sunset
   }
+}
+
 
   getColorForHour(hour) {
     if (hour >= 6 && hour < 17) {
@@ -50,7 +60,11 @@ export class PlayerLightManager {
     } else if (hour >= 17 && hour < 19) {
       return 0xff9966;
     } else if (hour >= 19 || hour < 5) {
-      return 0x222244;
+      if(GameState.isVampire) {
+        return 0xaa0033; // Vampire red
+      }else{
+        return 0x222244;
+      }
     } else if (hour >= 5 && hour < 6) {
       return 0xffcc99;
     }
@@ -80,7 +94,7 @@ export class PlayerLightManager {
     this.color = toColor;
   }
 
-  transitionIntensity(toIntensity, duration = 1000, onComplete = null) {
+  transitionIntensity(toIntensity, duration = 100000, onComplete = null) {
     const fromIntensity = this.light.intensity;
     console.log(
       "Transitioning intensity from",
@@ -127,15 +141,14 @@ export class PlayerLightManager {
 
   enable() {
   if (!this.enabled || this.light.intensity === 0) {
-    console.log("Enabling PlayerLightManager light");
-
     // Mark light as not yet active to avoid render flash
+    this.enabled = true;
     this.light.setIntensity(0);
-    this.player.setPipeline("Light2D");
+
 
     // Transition in FIRST, then mark as enabled
     this.setIntensity(this.temp, true, 1000, () => {
-      this.enabled = true;
+      
       this.intensity = this.temp;
       console.log("Light fade-in complete");
     });
@@ -160,7 +173,6 @@ export class PlayerLightManager {
   }
 
   initializeWithHour(hour) {
-    console.log("Initializing PlayerLightManager with hour:", hour);
     const isNight = hour >= 19 || hour < 5;
 
     // Immediately apply correct state

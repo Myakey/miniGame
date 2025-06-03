@@ -5,6 +5,8 @@ import { charaList } from "../mechanics/charaList";
 import CreatePlayerAnimation from "../movements/animation";
 import { EventBus } from "../EventBus";
 
+import { playSound } from "../../utils/soundHandler";
+
 export class Preloader extends Scene {
   constructor() {
     super("Preloader");
@@ -158,6 +160,7 @@ export class Preloader extends Scene {
         EventBus.emit("performVN", "introData");
         GameState.afterVN = true;
       }
+      playSound("mainAmbience");
       switch (GameState.currentlocation.currentLoc) {
         case "MainGame":
           this.scene.start("MainGame");
