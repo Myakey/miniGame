@@ -66,6 +66,13 @@ export class FlowerField extends Phaser.Scene {
 
     this.setupNPC();
 
+    this.physics.add.collider(this.npc, this.fenceHouseLayer);
+    this.physics.add.collider(this.npc, this.treeLayer);
+    this.physics.add.collider(this.npc, this.flowerLayer);
+    this.physics.add.collider(this.npc, this.grassLayer);
+    this.physics.add.collider(this.npc, this.groundLayer);
+    this.physics.add.collider(this.npc, this.YuukaLayer);
+
     this.time.addEvent({
       delay: 1000,
       callback: this.moveAIAlongPath,
@@ -200,6 +207,7 @@ export class FlowerField extends Phaser.Scene {
     this.physics.add.collider(this.player, this.groundLayer);
     this.physics.add.collider(this.player, this.YuukaLayer);
 
+
     this.physics.world.setBounds(0, 0, mapWidth * scale, mapHeight * scale);
     this.cameras.main.setBounds(0, 0, mapWidth * scale, mapHeight * scale);
     this.cameras.main.setZoom(1);
@@ -331,6 +339,7 @@ export class FlowerField extends Phaser.Scene {
     this.npc = this.physics.add.sprite(this.posX, this.posY, "Yukari");
     this.npc.setScale(0.3);
     this.npc.setCollideWorldBounds(true);
+    this.npc.body.enable = true;
 
     // AI path state
     this.aiPath = [];

@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import titleScreen from "../assets/image/titleScreen/title.png";
 import Button from "../components/UI/Buttons";
 import Modal from "../components/UI/ModalBox";
+import DebugBox from "../components/UI/DebugBox";
+import { handleDebugInGame, clearSessionStorage } from "../utils/debugHandler";
 
 const menuOptions = ["Play!", "Debug Mode"];
 
@@ -10,6 +12,11 @@ function MainMenu() {
   const navigate = useNavigate();
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [showModal, setShowModal] = useState(false);
+
+  const scenes = ["MainGame", "BlokM", "FlowerField", "Pantai", "Dieng", "Reset"];
+
+  const [debugModal, setDebugModal] = useState(false);
+  const toggleDebugModal = () => setDebugModal(!debugModal);
 
   const [isActive, setIsActive] = useState(true);
 
@@ -21,8 +28,7 @@ function MainMenu() {
     if (option === "Play!") {
       navigate("/charaSel");
     } else if (option === "Debug Mode") {
-      console.log("Debug Mode activated");
-      setShowModal(true);
+      toggleDebugModal();
     }
     navigator.vibrate?.(50);
   };
@@ -82,6 +88,24 @@ function MainMenu() {
     };
   }, [selectedIndex]);
 
+  function mapDebug(){
+    return(
+    scenes.map((text) => {
+      return(
+        <Button text={text} onClick={() => {
+          if(text != "Reset"){
+            handleDebugInGame(text);
+            navigate("/inGame");
+          }else{
+            clearSessionStorage();
+          }
+          
+        }}/>
+      )
+    })
+    )
+  }
+
   return (
     <div className="mainMenu h-screen w-screen flex justify-center items-center bg-black">
       <div className="flex flex-col items-center">
@@ -107,7 +131,7 @@ function MainMenu() {
           })}
         </div>
 
-        {showModal && (
+        {/* {showModal && (
           <Modal
             text={
               <div className="flex flex-col gap-4 mt-4">
@@ -122,7 +146,9 @@ function MainMenu() {
             button="Close Debug"
             onClose={() => setShowModal(false)}
           />
-        )}
+        )} */}
+
+        <DebugBox modal={debugModal} toggleModal={toggleDebugModal} innerText={mapDebug()}/>
       </div>
     </div>
   );

@@ -137,7 +137,10 @@ export class Preloader extends Scene {
     // console.log(GameState.afterVN);
     // console.log(GameState.currentAct);
     //  Move to the MainMenu. You could also swap this for a Scene Transition, such as a camera fade.
-    if (GameState.currentAct === "intro") {
+    if(sessionStorage.getItem("debugMode") != null){
+      this.scene.start(sessionStorage.getItem("currentPlace"));
+    }else{
+      if (GameState.currentAct === "intro") {
       EventBus.emit(
         "callObjective",
         "Go to house to talk about it with Yukari. You can also talk to other characters in the map, and interact with objects. Enjoy your adventure!"
@@ -190,5 +193,7 @@ export class Preloader extends Scene {
     } else {
       this.scene.start("MainGame");
     }
+    }
+    
   }
 }

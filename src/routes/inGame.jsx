@@ -33,6 +33,8 @@ import ShopInteraction from "../components/Game/ShopInteraction";
 
 import { stopAllSounds } from "../utils/soundHandler";
 
+import DebugBox from "../components/UI/DebugBox";
+
 function MainGame() {
   let navigate = useNavigate();
   let VNSelector = useVNSelector();
@@ -71,6 +73,15 @@ function MainGame() {
   const currentScene = (scene) => {
     setCanMoveSprite(scene.scene.key !== "InGame");
   };
+
+  const [debugModal, setDebugModal] = useState(false);
+  const toggleDebugModal = () => {
+    console.log(debugModal)
+    setDebugModal(!debugModal);
+  }
+  const toggleModalFalse = () =>{
+    setDebugModal(false);
+  }
 
   //Use Effect buat ngehubungin React sama Action di Phaser. Jadi waktu ada action tertentu di Phaser, maka React akan nerima dan akan update context di sini yaa
   //Update ini supaya logic jobId bisa di pass
@@ -124,7 +135,7 @@ function MainGame() {
     };
   }, [setStatus, VNSelector]);
 
-
+e
   //Use effect di sini buat stats nurun gradually supaya bisa ada penurunan, ntar disetting di sini aja penurunan perdetiknya berapa janlupp.
  useEffect(() => {
   const interval = setInterval(() => {
@@ -273,9 +284,15 @@ function MainGame() {
         <Inventory />
       <div className="absolute 
       z-30">
-      <PauseMenu onQuit={ () => {stopAllSounds(); resumeGame(); navigate("/")} }/>
+      <PauseMenu onQuit={ () => {stopAllSounds(); resumeGame(); navigate("/")} } onSetTime={() => {toggleDebugModal()}}/>
         
       </div>
+      <DebugBox modal={debugModal} toggleModal={()=>{toggleDebugModal()}} toggleModalFalse={() =>{toggleModalFalse()}} innerText={
+        <>
+          <Button text="Day" onClick={() => {EventBus.emit("performAction", {type:"debug", jobId:"day"})}}/>
+          <Button text="Night" onClick={() => {EventBus.emit("performAction", {type:"debug", jobId:"night"})}}/>
+        </>
+        }/>
       {/* ##### NEW: Render the Confirmation Modal ##### */}
       <Modal
         isOpen={isConfirmationModalOpen}

@@ -94,7 +94,7 @@ export class PlayerLightManager {
     this.color = toColor;
   }
 
-  transitionIntensity(toIntensity, duration = 100000, onComplete = null) {
+  transitionIntensity(toIntensity, duration = 1000, onComplete = null) {
     const fromIntensity = this.light.intensity;
     console.log(
       "Transitioning intensity from",
