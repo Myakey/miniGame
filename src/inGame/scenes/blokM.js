@@ -137,9 +137,11 @@ export class BlokM extends Phaser.Scene {
     const storeBlokM = map.addTilesetImage("storeBlokM");
     const LibraryBlokM = map.addTilesetImage("LibraryBlokM");
     const Kosuzu = map.addTilesetImage("Kosuzu");
+    const floor1 = map.addTilesetImage("Floor1BlokM");
+    const floor2 = map.addTilesetImage("Floor2BlokM");
 
     const groundLayer = map
-      .createLayer("Ground", [mainTileset, LibraryBlokM])
+      .createLayer("Ground", [mainTileset, LibraryBlokM, floor1, floor2])
       .setPipeline("Light2D");
     const wallLayer = map
       .createLayer("Wall", mainTileset)
@@ -147,7 +149,7 @@ export class BlokM extends Phaser.Scene {
     const objectLayer = map
       .createLayer(
         "Object", // The name of your layer in Tiled
-        [decorationBlokM, furnitureBlokM, storeBlokM, LibraryBlokM, Kosuzu]
+        [decorationBlokM, furnitureBlokM, storeBlokM, LibraryBlokM, Kosuzu, floor1, floor2]
       )
       .setPipeline("Light2D");
 

@@ -3,12 +3,35 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "blokM.tmj",
+    "activeFile": "C:/Users/Jovan/miniGame/public/assets/img/map/pantai/pantai.tmj",
     "expandedProjectPaths": [
         "."
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
+        "": {
+            "scaleInEditor": 1
+        },
+        "C:/Users/Jovan/miniGame/public/assets/img/map/pantai/pantai.tmj": {
+            "scale": 1.5,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 273,
+                "y": 94.33333333333331
+            }
+        },
+        "C:/Users/Jovan/miniGame/public/assets/img/map/pantai/pantai.tmj#beach": {
+            "scaleInDock": 1.5
+        },
+        "C:/Users/Jovan/miniGame/public/assets/img/map/pantai/pantai.tmj#coba": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Jovan/miniGame/public/assets/img/map/pantai/pantai.tmj#toko": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Jovan/miniGame/public/assets/img/map/pantai/pantai.tmj#tree": {
+            "scaleInDock": 1
+        },
         "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/rumah/rumah.tmj": {
             "scale": 2.0715277777777774,
             "selectedLayer": 0,
@@ -94,7 +117,7 @@
         }
     },
     "last.exportedFilePath": "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/blokM",
-    "last.imagePath": "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/blokM",
+    "last.imagePath": "C:/Users/Jovan/miniGame/public/assets/img/map/blokM",
     "map.height": 32,
     "map.lastUsedExportFilter": "JSON map files (*.tmj *.json)",
     "map.lastUsedFormat": "tmx",
@@ -102,18 +125,19 @@
     "map.tileWidth": 16,
     "map.width": 50,
     "openFiles": [
-        "blokM.tmj"
+        "C:/Users/Jovan/miniGame/public/assets/img/map/pantai/pantai.tmj"
     ],
     "project": "untitled.tiled-project",
     "property.type": "string",
     "recentFiles": [
+        "C:/Users/Jovan/miniGame/public/assets/img/map/pantai/pantai.tmj",
         "blokM.tmj",
         "GUGUGAGA.tmx",
         "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/rumah/rumah.tmj"
     ],
     "tileset.embedInMap": true,
     "tileset.tileSize": {
-        "height": 23,
-        "width": 20
+        "height": 16,
+        "width": 16
     }
 }

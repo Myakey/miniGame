@@ -77,6 +77,9 @@ export class Preloader extends Scene {
     this.load.image("storeBlokM", "/assets/img/map/blokM/storeBlokM.png");
     this.load.image("tileBlokM", "/assets/img/map/blokM/tileBlokM.png");
     this.load.image("Kosuzu", "/assets/img/map/blokM/Kosuzu.png");
+    this.load.image("Floor1BlokM", "/assets/img/map/blokM/Floor1BlokM.png");
+    this.load.image("Floor2BlokM", "/assets/img/map/blokM/Floor2BlokM.png");
+
 
     //Dieng
     this.load.tilemapTiledJSON("dieng", "/assets/img/map/dieng/diengsz.tmj");
