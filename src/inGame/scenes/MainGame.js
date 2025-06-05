@@ -128,10 +128,10 @@ export class MainGame extends Phaser.Scene {
     const sunflowers = map.addTilesetImage("flower", "sunflowers");
     const decoration = map.addTilesetImage("blokM","MainDetails");
     const home = map.addTilesetImage("home", "Home")
-
+    const galletcity = map.addTilesetImage("blokM2", "galletcity");
 
     const groundLayer = map.createLayer("Ground", ground).setPipeline("Light2D")
-    const tempatLayer = map.createLayer("tempat", [home, decoration, sunflowers]).setPipeline("Light2D")
+    const tempatLayer = map.createLayer("tempat", [home, decoration, sunflowers, galletcity]).setPipeline("Light2D")
     const detailsLayer = map.createLayer("details", [decoration, home]).setPipeline("Light2D");
     const grassLayer = map.createLayer("grass", ground).setPipeline("Light2D");
 
