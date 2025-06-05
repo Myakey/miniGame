@@ -62,6 +62,7 @@ export class Preloader extends Scene {
     this.load.image("GroundTile", "/assets/img/map/TILEMAPS.png");
     this.load.image("Home", "/assets/img/map/home.png");
     this.load.image("MainDetails", "/assets/img/map/decoration.png");
+    this.load.image("galletcity", "/assets/img/map/galletcity.png");
 
     //BLOKM
     this.load.tilemapTiledJSON("blokM", "/assets/img/map/blokM/blokM.tmj");
