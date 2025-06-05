@@ -13,7 +13,7 @@ function MainMenu() {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [showModal, setShowModal] = useState(false);
 
-  const scenes = ["MainGame", "BlokM", "FlowerField", "Pantai", "Dieng", "Reset"];
+  const scenes = ["MainGame", "BlokM", "FlowerField", "Pantai", "Dieng", "HakureiShrine", "Reset"];
 
   const [debugModal, setDebugModal] = useState(false);
   const toggleDebugModal = () => setDebugModal(!debugModal);
