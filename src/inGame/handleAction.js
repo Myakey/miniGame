@@ -5,6 +5,8 @@ import hunt from './mechanics/hunt';
 import work from './mechanics/work';
 import { EventBus } from './EventBus';
 import { GameState } from '../hooks/gamestate';
+
+import { SetTime } from '../utils/debugHandler';
 // import other actions as needed
 // tambahin jobId & itemid karna 1 tempat bisa lebih dr 1 job
 export default function handleAction(type, currentStatus, jobId, itemId) {
@@ -24,6 +26,8 @@ export default function handleAction(type, currentStatus, jobId, itemId) {
     case 'work':
         return work(currentStatus, jobId);
     // Add more cases like 'sleep', 'work', etc.
+    case "debug" :
+        return SetTime(currentStatus, jobId);
     default:
       return currentStatus;
   }
