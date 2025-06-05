@@ -135,7 +135,7 @@ function MainGame() {
     };
   }, [setStatus, VNSelector]);
 
-e
+
   //Use effect di sini buat stats nurun gradually supaya bisa ada penurunan, ntar disetting di sini aja penurunan perdetiknya berapa janlupp.
  useEffect(() => {
   const interval = setInterval(() => {
