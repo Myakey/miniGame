@@ -178,7 +178,7 @@ function MainGame() {
         }
       });
     }
-  }, 1000);
+  }, 100);
 
   return () => clearInterval(interval);
 }, [setStatus]);

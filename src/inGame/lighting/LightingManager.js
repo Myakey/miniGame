@@ -55,6 +55,9 @@ export class LightingManager {
         this.scene.lights.setAmbientColor(interpolated);
         this.currentAmbient = interpolated;
       },
+      onComplete: () => {
+      EventBus.emit("ambient-transition-complete", this.currentPeriod);
+    },
     });
   }
 

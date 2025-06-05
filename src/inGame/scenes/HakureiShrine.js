@@ -30,7 +30,7 @@ export class HakureiShrine extends Phaser.Scene {
   }
 
   create(data) {
-    this.cameras.main.fadeIn(1000, 0, 0, 0);
+    this.cameras.main.fadeIn(1500, 0, 0, 0);
 
     console.log("Renderer Type:", this.sys.game.renderer.type);
     this.generateMap();
@@ -47,7 +47,7 @@ export class HakureiShrine extends Phaser.Scene {
       this.playerLightManager = new PlayerLightManager(this, this.player, {
       radius: 200,
       color: 0xffffff,
-      intensity: 3,
+      intensity: 6,
     });
 
       this.lightingManager.initializeWithHour(currentHour);
@@ -259,7 +259,7 @@ export class HakureiShrine extends Phaser.Scene {
             radius: Number(sprite.properties.lightRadius) || 150,
             color: sprite.properties.lightColor || "#ffffff",
             intensity: Number(sprite.properties.lightIntensity) || 1.0,
-            nightOnly: sprite.properties.lightNightOnly === true,
+            nightOnly: sprite.properties.lightNightOnly || true,
             initialHour: this.currentHour(), // you need to pass this in
           });
         }
@@ -291,11 +291,13 @@ export class HakureiShrine extends Phaser.Scene {
         });
 
         if (sprite.properties.light) {
+          console.log("Adding light source at:", x, y);
+          console.log("COLOR : " + sprite.properties.lightColor);
           new LightSource(this, x, y, {
             radius: Number(sprite.properties.lightRadius) || 150,
             color: sprite.properties.lightColor || "#ffffff",
             intensity: Number(sprite.properties.lightIntensity) || 1.0,
-            nightOnly: sprite.properties.lightNightOnly === true,
+            nightOnly: sprite.properties.lightNightOnly || true,
             initialHour: this.currentHour(), // you need to pass this in
           });
         }

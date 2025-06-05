@@ -175,9 +175,13 @@ export class MainGame extends Phaser.Scene {
           this.playerLightManager = new PlayerLightManager(this, this.player, {
           radius: 200,
           color: 0xffffff,
-          intensity: 1,
+          intensity: 6,
         });
-    
+
+        this.lights.addLight(this.scale.width / 4, this.scale.height / 4, 600)
+        .setColor(0x6688cc)
+        .setIntensity(0.9);
+          
           this.lightingManager.initializeWithHour(currentHour);
           this.playerLightManager.initializeWithHour(currentHour);
         } else {

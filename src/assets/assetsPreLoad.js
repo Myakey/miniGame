@@ -29,6 +29,8 @@ import SeptetteForTheDeadPrincess from "../assets/sound/VN/SeptetteJazz.mp3"
 import DichromaticLotus from "../assets/sound/VN/DichromaticLotus.mp3"
 import EsotericistNonPiano from "../assets/sound/VN/EsotericistNonPiano.mp3"
 
+import mainAmbience from "../assets/sound/inGame/mainAmbience.mp3";
+
 import { useEffect } from "react";
 
 import bath from "../assets/gif/AnimasiAction/AnimasiAction/Bath.gif";
@@ -42,8 +44,8 @@ import jalan from "../assets/gif/AnimasiAction/AnimasiAction/JalanDieng.gif";
 
 export const assetsLoadImg = [ReimuRight, RemiliaRight, SakuyaRight, YukariRight, FlandreRight, FlandreButton, ReimuButton, RemiliaButton, SakuyaButton, YukariButton, NitoriShop, bath, eat, work, sleep, jalan];
 
-export const soundAssets = [CharaSelectSound, NitoriShopSound, EsotericistPiano, Alice, FlandreSelect, ReimuSelect, RemiliaSelect, SakuyaSelect, YukariSelect, Selected, EsotericistNonPiano, EmptyTown, OtherWorldlyEmotions, SeptetteForTheDeadPrincess, DichromaticLotus];
+export const soundAssets = [CharaSelectSound, NitoriShopSound, EsotericistPiano, Alice, FlandreSelect, ReimuSelect, RemiliaSelect, SakuyaSelect, YukariSelect, Selected, EsotericistNonPiano, EmptyTown, OtherWorldlyEmotions, SeptetteForTheDeadPrincess, DichromaticLotus, mainAmbience];
 
-export { NitoriShopSound, EsotericistPiano, Alice, FlandreSelect, ReimuSelect, RemiliaSelect, SakuyaSelect, YukariSelect, Selected, EsotericistNonPiano, EmptyTown, OtherWorldlyEmotions, SeptetteForTheDeadPrincess, DichromaticLotus, bath, eat,  work, sleep, jalan };
+export { NitoriShopSound, EsotericistPiano, Alice, FlandreSelect, ReimuSelect, RemiliaSelect, SakuyaSelect, YukariSelect, Selected, EsotericistNonPiano, EmptyTown, OtherWorldlyEmotions, SeptetteForTheDeadPrincess, DichromaticLotus, bath, eat,  work, sleep, jalan, mainAmbience };
 
 export { RemiliaButton, SakuyaButton, YukariButton, FlandreButton, ReimuButton, ReimuRight, RemiliaRight, SakuyaRight, YukariRight, FlandreRight, NitoriShop };
