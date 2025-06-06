@@ -255,3 +255,78 @@ export const soundAssets = [CharaSelectSound, NitoriShopSound, EsotericistPiano,
 export { NitoriShopSound, EsotericistPiano, Alice, FlandreSelect, ReimuSelect, RemiliaSelect, SakuyaSelect, YukariSelect, Selected, EsotericistNonPiano, EmptyTown, OtherWorldlyEmotions, SeptetteForTheDeadPrincess, DichromaticLotus, bath, eat,  work, sleep, jalan, mainAmbience };
 
 export { RemiliaButton, SakuyaButton, YukariButton, FlandreButton, ReimuButton, ReimuRight, RemiliaRight, SakuyaRight, YukariRight, FlandreRight, NitoriShop };
+
+
+
+export {
+  reimuSmile, reimuNervous, reimuShock, reimuChill, reimuOrb, reimuOrbSad,
+  reimuAngry, reimuHappy, reimuSad, reimuNeutral, reimuOrbNervous
+};
+
+// Sakuya
+export {
+  sakuyaSmile, sakuyaAngry, sakuyaBored, sakuyaDis, sakuyaShock, sakuyaHappy
+};
+
+// Flandre
+export {
+  flandre, flandre1, flandre2, flandreHappy, flandre4, flandre5, flandre6, flandre7
+};
+
+// Nitori
+export { nitori, nitori1, nitori2, nitori3, nitori4 };
+
+// Remilia
+export { remilia, remilia1, remilia2, remilia3, remilia4, remilia5 };
+
+// Yukari
+export { yukari, yukari1, yukari2, yukari3 };
+
+// Yuuka
+export { yuuka, yuuka1, yuuka2, yuuka3, yuuka4, yuuka5 };
+
+// Sumireko
+export { sumireko5, sumireko6, sumireko7, sumireko8, sumireko9 };
+
+// Kosuzu
+export { kosuzu, kosuzu1, kosuzu2, kosuzu3, kosuzu4, kosuzu5 };
+
+// Sanae
+export {
+  sanae, sanae1, sanae2, sanae3, sanae4,
+  sanae5, sanae6, sanae7, sanae8
+};
+
+// Marisa
+export {
+  marisa, marisa1, marisa2, marisa3,
+  marisa4, marisa5, marisa6, marisa7, marisa8
+};
+
+// Hong Meiling
+export {
+  meiling, meiling1, meiling2, meiling3,
+  meiling4, meiling5, meiling6, meiling7
+};
+
+// Hieda no Akyuu
+export {
+  hieda, hieda1, hieda2, hieda3, hieda4,
+  hieda5, hieda6, hieda7, hieda8, hieda9
+};
+
+// Backgrounds
+export {
+  blokM, shrineBG, houseNoon, tangerang, tangNoon,
+  shrineInterior, Suzunaan, beach, dieng,
+  flandreRoom, moriyaShrine, mansionInterior, mansionOutside,
+  blokM1_TS, blokM2_TS, blokM3_TS, Suzunaan_TS, classRoom,
+  shrineNight, actBackground
+};
+
+// UI Elements
+export {
+  ReimuRight, RemiliaRight, SakuyaRight, YukariRight, FlandreRight,
+  FlandreButton, ReimuButton, RemiliaButton, SakuyaButton, YukariButton,
+  NitoriShop, bath, eat, work, sleep, jalan
+};
