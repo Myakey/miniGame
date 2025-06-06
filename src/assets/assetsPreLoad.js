@@ -323,10 +323,3 @@ export {
   blokM1_TS, blokM2_TS, blokM3_TS, Suzunaan_TS, classRoom,
   shrineNight, actBackground
 };
-
-// UI Elements
-export {
-  ReimuRight, RemiliaRight, SakuyaRight, YukariRight, FlandreRight,
-  FlandreButton, ReimuButton, RemiliaButton, SakuyaButton, YukariButton,
-  NitoriShop, bath, eat, work, sleep, jalan
-};
