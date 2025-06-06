@@ -3,15 +3,34 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "C:/Users/ASUS/Visual Studio/Intro to Technology/projekAkhir/miniGame/public/assets/img/map/mainMap.tmj",
+    "activeFile": "C:/Users/ASUS/Visual Studio/Intro to Technology/projekAkhir/miniGame/public/assets/img/map/rumah/rumah.tmj",
     "expandedProjectPaths": [
-        "."
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
         "": {
             "scaleInDock": 2,
             "scaleInEditor": 0.5
+        },
+        "C:/Users/ASUS/Downloads/maps/rumah/rumah.tmx": {
+            "scale": 0.5254687499999999,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 799.2863514719002,
+                "y": 255.96193874516803
+            }
+        },
+        "C:/Users/ASUS/Downloads/maps/rumah/rumah.tmx#Tiles1": {
+            "scaleInDock": 1
+        },
+        "C:/Users/ASUS/Downloads/maps/rumah/rumah.tmx#Tiles2": {
+            "scaleInDock": 1
+        },
+        "C:/Users/ASUS/Downloads/maps/rumah/rumah.tmx#Tiles3": {
+            "scaleInDock": 1
+        },
+        "C:/Users/ASUS/Downloads/maps/rumah/rumah.tmx#toilet": {
+            "scaleInDock": 1
         },
         "C:/Users/ASUS/Visual Studio/Intro to Technology/projekAkhir/miniGame/public/assets/img/map/FlowerField/project.tmx": {
             "scale": 1.7654166666666666,
@@ -35,10 +54,10 @@
         },
         "C:/Users/ASUS/Visual Studio/Intro to Technology/projekAkhir/miniGame/public/assets/img/map/mainMap.tmj": {
             "scale": 1,
-            "selectedLayer": 1,
+            "selectedLayer": 0,
             "viewCenter": {
-                "x": 349,
-                "y": 40.5
+                "x": 240,
+                "y": 159.5
             }
         },
         "C:/Users/ASUS/Visual Studio/Intro to Technology/projekAkhir/miniGame/public/assets/img/map/mainMap.tmj#TILEMAPS": {
@@ -56,12 +75,61 @@
         "C:/Users/ASUS/Visual Studio/Intro to Technology/projekAkhir/miniGame/public/assets/img/map/mainMap.tmj#home": {
             "scaleInDock": 2
         },
-        "pantai.tmx": {
+        "C:/Users/ASUS/Visual Studio/Intro to Technology/projekAkhir/miniGame/public/assets/img/map/rumah/rumah.tmj": {
+            "expandedObjectLayers": [
+                8
+            ],
             "scale": 1.5,
+            "selectedLayer": 6,
+            "viewCenter": {
+                "x": 177.33333333333331,
+                "y": 184.99999999999997
+            }
+        },
+        "C:/Users/ASUS/Visual Studio/Intro to Technology/projekAkhir/miniGame/public/assets/img/map/rumah/rumah.tmj#Tiles1": {
+            "scaleInDock": 1
+        },
+        "C:/Users/ASUS/Visual Studio/Intro to Technology/projekAkhir/miniGame/public/assets/img/map/rumah/rumah.tmj#Tiles2": {
+            "scaleInDock": 1
+        },
+        "C:/Users/ASUS/Visual Studio/Intro to Technology/projekAkhir/miniGame/public/assets/img/map/rumah/rumah.tmj#Tiles3": {
+            "scaleInDock": 1
+        },
+        "C:/Users/ASUS/Visual Studio/Intro to Technology/projekAkhir/miniGame/public/assets/img/map/rumah/rumah.tmj#object": {
+            "scaleInDock": 1
+        },
+        "C:/Users/ASUS/Visual Studio/Intro to Technology/projekAkhir/miniGame/public/assets/img/map/rumah/rumah.tmj#object1": {
+            "scaleInDock": 1
+        },
+        "C:/Users/ASUS/Visual Studio/Intro to Technology/projekAkhir/miniGame/public/assets/img/map/rumah/rumah.tmj#walls": {
+            "scaleInDock": 1
+        },
+        "C:/Users/ASUS/Visual Studio/Intro to Technology/projekAkhir/miniGame/public/assets/img/map/rumah/rumah.tmx": {
+            "scale": 0.45540624999999996,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 799.2863514719002,
+                "y": 254.7176284910451
+            }
+        },
+        "C:/Users/ASUS/Visual Studio/Intro to Technology/projekAkhir/miniGame/public/assets/img/map/rumah/rumah.tmx#Tiles1": {
+            "scaleInDock": 1
+        },
+        "C:/Users/ASUS/Visual Studio/Intro to Technology/projekAkhir/miniGame/public/assets/img/map/rumah/rumah.tmx#Tiles2": {
+            "scaleInDock": 1
+        },
+        "C:/Users/ASUS/Visual Studio/Intro to Technology/projekAkhir/miniGame/public/assets/img/map/rumah/rumah.tmx#Tiles3": {
+            "scaleInDock": 1
+        },
+        "C:/Users/ASUS/Visual Studio/Intro to Technology/projekAkhir/miniGame/public/assets/img/map/rumah/rumah.tmx#toilet": {
+            "scaleInDock": 1
+        },
+        "pantai.tmx": {
+            "scale": 1,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 239.33333333333331,
-                "y": 162.33333333333337
+                "x": 223,
+                "y": 59.5
             }
         },
         "pantai.tmx#beach": {
@@ -83,13 +151,17 @@
     "map.tileWidth": 16,
     "openFiles": [
         "C:/Users/ASUS/Visual Studio/Intro to Technology/projekAkhir/miniGame/public/assets/img/map/mainMap.tmj",
-        "pantai.tmx"
+        "pantai.tmx",
+        "C:/Users/ASUS/Visual Studio/Intro to Technology/projekAkhir/miniGame/public/assets/img/map/rumah/rumah.tmj"
     ],
     "project": "pantai.tiled-project",
     "property.type": "bool",
     "recentFiles": [
-        "pantai.tmx",
         "C:/Users/ASUS/Visual Studio/Intro to Technology/projekAkhir/miniGame/public/assets/img/map/mainMap.tmj",
+        "pantai.tmx",
+        "C:/Users/ASUS/Visual Studio/Intro to Technology/projekAkhir/miniGame/public/assets/img/map/rumah/rumah.tmj",
+        "C:/Users/ASUS/Visual Studio/Intro to Technology/projekAkhir/miniGame/public/assets/img/map/rumah/rumah.tmx",
+        "C:/Users/ASUS/Downloads/maps/rumah/rumah.tmx",
         "C:/Users/ASUS/Visual Studio/Intro to Technology/projekAkhir/miniGame/public/assets/img/map/FlowerField/project.tmx"
     ],
     "tileset.embedInMap": true,
