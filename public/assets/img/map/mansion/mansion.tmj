@@ -281,8 +281,8 @@
          "name":"lights",
          "objects":[
                 {
-                 "height":64.25,
-                 "id":3,
+                 "height":80.0833333333334,
+                 "id":7,
                  "name":"",
                  "properties":[
                         {
@@ -303,9 +303,36 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":109.5,
-                 "x":219.75,
-                 "y":533.125
+                 "width":99.6666666666667,
+                 "x":63.0504694835681,
+                 "y":489.443075117371
+                }, 
+                {
+                 "height":80.0833,
+                 "id":9,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"light",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"lightIntensity",
+                         "type":"float",
+                         "value":3
+                        }, 
+                        {
+                         "name":"lightRadius",
+                         "type":"int",
+                         "value":10000
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":99.6667,
+                 "x":351.66665,
+                 "y":490.95835
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -314,7 +341,7 @@
          "y":0
         }],
  "nextlayerid":8,
- "nextobjectid":4,
+ "nextobjectid":10,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",

@@ -135,6 +135,7 @@ export class Pantai extends Phaser.Scene {
     const mainTileset = map.addTilesetImage("beach", "beachTiles");
     const toko = map.addTilesetImage("toko", "decorationBlokM");
     const tree = map.addTilesetImage("tree", "treePantai");
+    const torches = map.addTilesetImage("obor", "torches");
 
     console.log(Phaser.VERSION);
 
@@ -144,7 +145,7 @@ export class Pantai extends Phaser.Scene {
     const detailsLayer = map
       .createLayer("details", [mainTileset, toko])
       .setPipeline("Light2D");
-    const treeLayer = map.createLayer("trees", tree).setPipeline("Light2D");
+    const treeLayer = map.createLayer("trees", [tree, torches]).setPipeline("Light2D");
     const payungLayer = map
       .createLayer("payung", mainTileset)
       .setPipeline("Light2D");

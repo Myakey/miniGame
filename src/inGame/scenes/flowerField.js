@@ -140,6 +140,7 @@ export class FlowerField extends Phaser.Scene {
     const tree = this.map.addTilesetImage("tree", "flowerFieldTree");
     const fence = this.map.addTilesetImage("fence", "flowerFieldFence");
     const Yuuka = this.map.addTilesetImage("Yuuka", "Yuuka");
+    const torches = this.map.addTilesetImage("obor", "torches");
 
     this.groundLayer = this.map
       .createLayer("ground", tree)
@@ -154,7 +155,7 @@ export class FlowerField extends Phaser.Scene {
       .createLayer("house&Fence", [fence, tree])
       .setPipeline("Light2D");
     this.treeLayer = this.map
-      .createLayer("tree", [tree, grass])
+      .createLayer("tree", [tree, grass, torches])
       .setPipeline("Light2D");
     this.YuukaLayer = this.map
       .createLayer("Yuuka", Yuuka)
@@ -199,7 +200,7 @@ export class FlowerField extends Phaser.Scene {
     //OBJECTS TRIAL
     //OBJECT TRIAL
     const objects = this.map.getObjectLayer("Interactables").objects;
-    const lights = map.getObjectLayer("lights").objects;
+    const lights = this.map.getObjectLayer("lights").objects;
     const SCALE = 3;
 
     this.interactables = this.physics.add.group();

@@ -128,6 +128,7 @@ export class MainGame extends Phaser.Scene {
     const decoration = map.addTilesetImage("blokM", "MainDetails");
     const home = map.addTilesetImage("home", "Home");
     const galletcity = map.addTilesetImage("blokM2", "galletcity");
+    const torches = map.addTilesetImage("obor", "torches");
 
     const groundLayer = map
       .createLayer("Ground", ground)
@@ -138,7 +139,7 @@ export class MainGame extends Phaser.Scene {
     const detailsLayer = map
       .createLayer("details", [decoration, home])
       .setPipeline("Light2D");
-    const grassLayer = map.createLayer("grass", ground).setPipeline("Light2D");
+    const grassLayer = map.createLayer("grass", [ground, torches]).setPipeline("Light2D");
 
     const startX = GameState.pos_x;
     const startY = GameState.pos_y;

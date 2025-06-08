@@ -205,8 +205,8 @@
                  "type":"",
                  "visible":true,
                  "width":31.5682,
-                 "x":144.2159,
-                 "y":159.51135
+                 "x":143.852263636364,
+                 "y":160.965895454545
                 }, 
                 {
                  "height":41.1023,
@@ -239,8 +239,8 @@
                  "type":"",
                  "visible":true,
                  "width":31.5682,
-                 "x":288.2159,
-                 "y":159.76135
+                 "x":288.9659,
+                 "y":160.26135
                 }, 
                 {
                  "height":40.7273,
@@ -273,8 +273,8 @@
                  "type":"",
                  "visible":true,
                  "width":31.5682,
-                 "x":399.5909,
-                 "y":175.63635
+                 "x":400.3409,
+                 "y":176.13635
                 }, 
                 {
                  "height":40.3523,
@@ -366,14 +366,14 @@
         }, 
         {
          "data":[773, 774, 775, 0, 0, 0, 804, 805, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            780, 781, 782, 0, 0, 0, 811, 812, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 773, 774, 775, 0, 0, 0,
-            787, 788, 789, 0, 0, 773, 774, 775, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 780, 781, 782, 0, 0, 0,
-            794, 795, 796, 0, 0, 780, 781, 782, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 787, 788, 789, 0, 0, 0,
+            780, 781, 782, 0, 0, 0, 811, 812, 0, 2457, 2458, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 773, 774, 775, 0, 2457, 2458,
+            787, 788, 789, 0, 0, 773, 774, 775, 0, 2489, 2490, 0, 0, 0, 0, 0, 0, 2457, 2458, 0, 0, 0, 0, 0, 780, 781, 782, 0, 2489, 2490,
+            794, 795, 796, 0, 0, 780, 781, 782, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2489, 2490, 0, 0, 0, 0, 0, 787, 788, 789, 0, 0, 0,
             0, 0, 0, 0, 0, 787, 788, 789, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 794, 795, 796, 0, 0, 0,
             0, 776, 777, 778, 0, 794, 795, 796, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 783, 784, 785, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 790, 791, 792, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 797, 798, 799, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 790, 791, 792, 0, 0, 0, 2457, 2458, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2457, 2458, 0,
+            0, 797, 798, 799, 0, 0, 0, 2489, 2490, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2489, 2490, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -430,7 +430,167 @@
          "draworder":"topdown",
          "id":7,
          "name":"lights",
-         "objects":[],
+         "objects":[
+                {
+                 "height":39.3333333333333,
+                 "id":25,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"light",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"lightColor",
+                         "type":"string",
+                         "value":"#ffd700"
+                        }, 
+                        {
+                         "name":"lightIntensity",
+                         "type":"float",
+                         "value":1
+                        }, 
+                        {
+                         "name":"lightRadius",
+                         "type":"int",
+                         "value":1000
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":48,
+                 "x":138,
+                 "y":12.6666666666667
+                }, 
+                {
+                 "height":39.3333,
+                 "id":26,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"light",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"lightColor",
+                         "type":"string",
+                         "value":"#ffd700"
+                        }, 
+                        {
+                         "name":"lightIntensity",
+                         "type":"float",
+                         "value":1
+                        }, 
+                        {
+                         "name":"lightRadius",
+                         "type":"int",
+                         "value":1000
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":48,
+                 "x":100.666666666667,
+                 "y":111.666683333333
+                }, 
+                {
+                 "height":39.3333,
+                 "id":27,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"light",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"lightColor",
+                         "type":"string",
+                         "value":"#ffd700"
+                        }, 
+                        {
+                         "name":"lightIntensity",
+                         "type":"float",
+                         "value":1
+                        }, 
+                        {
+                         "name":"lightRadius",
+                         "type":"int",
+                         "value":1000
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":48,
+                 "x":261.333333333333,
+                 "y":25.0000166666667
+                }, 
+                {
+                 "height":39.3333,
+                 "id":28,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"light",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"lightColor",
+                         "type":"string",
+                         "value":"#ffd700"
+                        }, 
+                        {
+                         "name":"lightIntensity",
+                         "type":"float",
+                         "value":1
+                        }, 
+                        {
+                         "name":"lightRadius",
+                         "type":"int",
+                         "value":1000
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":48,
+                 "x":437.333333333333,
+                 "y":14.33335
+                }, 
+                {
+                 "height":39.3333,
+                 "id":29,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"light",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"lightColor",
+                         "type":"string",
+                         "value":"#ffd700"
+                        }, 
+                        {
+                         "name":"lightIntensity",
+                         "type":"float",
+                         "value":1
+                        }, 
+                        {
+                         "name":"lightRadius",
+                         "type":"int",
+                         "value":1000
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":48,
+                 "x":424,
+                 "y":109.666683333333
+                }],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
@@ -438,7 +598,7 @@
          "y":0
         }],
  "nextlayerid":8,
- "nextobjectid":25,
+ "nextobjectid":37,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",
@@ -7192,6 +7352,19 @@
          "name":"toko",
          "spacing":0,
          "tilecount":1540,
+         "tileheight":16,
+         "tilewidth":16
+        }, 
+        {
+         "columns":32,
+         "firstgid":2376,
+         "image":"torches.png",
+         "imageheight":320,
+         "imagewidth":512,
+         "margin":0,
+         "name":"obor",
+         "spacing":0,
+         "tilecount":640,
          "tileheight":16,
          "tilewidth":16
         }],
