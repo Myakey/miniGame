@@ -14,10 +14,12 @@ export default function DialogueBox({ speaker, text, onNext, autoPlay, setAutoPl
             cursor-pointer max-h-[60vh] overflow-visible"
             onClick={handleDialogueClick}
         >
-            <div className="absolute -top-5 left-8 z-30 bg-gray-800 text-white px-10 py-2 rounded-3xl text-base 
+            {speaker && (
+                <div className="absolute -top-5 left-8 z-30 bg-gray-800 text-white px-10 py-2 rounded-3xl text-base 
                 font-bold shadow pointer-events-none select-none">
-                {speaker}
-            </div>
+                    {speaker}
+                </div>
+            )}
 
             <p className="text-gray-900 font-medium text-lg mt-0 mb-0 leading-snug whitespace-pre-line">{text}</p>
 
