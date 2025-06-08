@@ -17,8 +17,9 @@ export function SetTime(currentStatus, id){
  if(id == "day"){
     newHour = 12;
  }else{
-    newHour = 19;
+    newHour = 21;
  }
+ GameState.time.hour = newHour;
  EventBus.emit("phaser-time-update", {hour : newHour});
  return {
         ...currentStatus,

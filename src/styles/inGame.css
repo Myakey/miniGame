@@ -94,6 +94,60 @@ html, body {
   animation: fadeInUp 0.3s ease-out forwards;
 }
 
+@font-face {
+  font-family: 'MyFont';
+  src: url('../assets/fonts/novem___.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.inGameWrapper{
+ font-family: 'MyFont', sans-serif;
+}
+
+
+@keyframes tvOn {
+  0% {
+    transform: scaleY(0.1) scaleX(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scaleY(1.2) scaleX(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.tv-on {
+  animation: tvOn 0.5s ease-out forwards;
+  transform-origin: center;
+}
+
+
+@keyframes tvOff {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scaleY(1.2) scaleX(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: scaleY(0.1) scaleX(0);
+    opacity: 0;
+  }
+}
+
+.tv-off {
+  animation: tvOff 0.4s ease-in forwards;
+  transform-origin: center;
+}
+
+
 
 
 

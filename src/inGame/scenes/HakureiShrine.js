@@ -13,7 +13,11 @@ import { LightingManager } from "../lighting/LightingManager";
 import { PlayerLightManager } from "../lighting/PlayerLightManager";
 import { LightSource } from "../lighting/lightSource";
 
-import { GameStatusProvider } from "../../hooks/GameStatusContext";
+import { GameStatusProvider } from "../../context/GameStatusContext";
+
+import { setupInteractionHandler } from "../../utils/interactionManager";
+
+import { BathImage, SleepImage } from "../../assets/assetsPreLoad";
 
 export class HakureiShrine extends Phaser.Scene {
   constructor() {
@@ -45,10 +49,10 @@ export class HakureiShrine extends Phaser.Scene {
 
       // Add light source:
       this.playerLightManager = new PlayerLightManager(this, this.player, {
-      radius: 200,
-      color: 0xffffff,
-      intensity: 6,
-    });
+        radius: 200,
+        color: 0xffffff,
+        intensity: 6,
+      });
 
       this.lightingManager.initializeWithHour(currentHour);
       this.playerLightManager.initializeWithHour(currentHour);
@@ -67,99 +71,77 @@ export class HakureiShrine extends Phaser.Scene {
       .on("pointerdown", () => {
         this.scene.start("MainGame");
       });
+
+    //Past this point is the modified version of the modularity
+    setupInteractionHandler(this, {
+      getPlayer: () => this.player,
+      getInteractables: () => this.interactables,
+      getKey: () => this.eKey,
+      handleSaveVN: () => this.handleSaveVN(),
+
+      handlers: {
+        out: ({ scene }) => {
+          const enteringText = this.add
+            .text(this.cameras.main.centerX, -50, "Exiting....", {
+              fontSize: "48px",
+              fill: "#ffffff",
+              fontStyle: "bold",
+              resolution: 2,
+            })
+            .setOrigin(0.5)
+            .setDepth(1000)
+            .setScrollFactor(0);
+          GameState.afterVN = false;
+          this.cameras.main.fadeOut(1000, 0, 0, 0);
+
+          this.cameras.main.once("camerafadeoutcomplete", () => {
+            enteringText.destroy();
+            this.scene.start("MainGame");
+          });
+        },
+        bath: ({ scene }) => {
+          EventBus.emit("showCustomModal", {
+            // modalId: "jalanConfirmation_" + GameState.currentlocation.currentLoc, // Make modalId unique if content depends on location
+            title: `Bath?`, // Dynamic title
+            description: "Do you want to bath to clean yourself up?",
+            image : BathImage,
+            // gainsText: "8",
+            // lossesText: "0",
+            actionType: "bath", // <<< This is CRUCIAL for triggering jalan.js later
+            actionParams: {
+              /* No specific params needed by jalan.js directly, but structure is there */
+            },
+          });
+        },
+        sleep: ({ scene }) => {
+          this.handleSaveVN(); // If you want to save player state before modal
+          EventBus.emit("showCustomModal", {
+            modalId: "jalanConfirmation_rumah", // Make modalId unique if content depends on location
+            title: `Sleep?`, // Dynamic title
+            description: "Do you want to sleep to increase energy?",
+            image: SleepImage,
+            // You can add specific gains/losses text if you want to display them
+            // gainsText: "...",
+            // lossesText: "...",
+            actionType: "sleep", //TRIGERRING THE ACTION
+            actionParams: {
+              /* No specific params needed by jalan.js directly, but structure is there */
+            },
+          });
+          this.currentInteractable = null;
+        },
+        act1: ({ scene, handleSaveVN }) => {
+          GameState.currentAct = "act1";
+          handleSaveVN();
+          EventBus.emit("performVN", "act1Data");
+        },
+      },
+    });
   }
 
   update() {
     handleMovement(this);
     this.checkOverlap();
-  }
-
-  checkOverlap() {
-    let stillOverlapping = false;
-
-    this.interactables.children.iterate((obj) => {
-      if (this.physics.overlap(this.player, obj)) {
-        this.currentInteractable = obj;
-        stillOverlapping = true;
-      }
-    });
-
-    if (!stillOverlapping) {
-      this.currentInteractable = null;
-    }
-
-    // Check for E press only if still overlapping
-    if (this.currentInteractable && Phaser.Input.Keyboard.JustDown(this.eKey)) {
-      const id = this.currentInteractable.properties?.id;
-      if (id != "out") {
-        console.log("Pressing E near:", id);
-        EventBus.emit("callObjective", "Done");
-        EventBus.emit("show-dialog", { id });
-      } else if (id == "out") {
-        const enteringText = this.add
-          .text(this.cameras.main.centerX, -50, "Exiting....", {
-            fontSize: "48px",
-            fill: "#ffffff",
-            fontStyle: "bold",
-            resolution: 2,
-          })
-          .setOrigin(0.5)
-          .setDepth(1000)
-          .setScrollFactor(0);
-        GameState.afterVN = false;
-        this.cameras.main.fadeOut(1000, 0, 0, 0);
-
-        this.cameras.main.once("camerafadeoutcomplete", () => {
-          enteringText.destroy();
-          this.scene.start("MainGame");
-        });
-      }
-      if (id === "Kosuzu1") {
-        this.handleSaveVN();
-        EventBus.emit("performVN", "act3Data");
-      }
-      if (id === "bath") {
-        // Or any other ID that should trigger a "jalan-jalan" action
-        // If you want to save player state before modal
-        EventBus.emit("showCustomModal", {
-          // modalId: "jalanConfirmation_" + GameState.currentlocation.currentLoc, // Make modalId unique if content depends on location
-          title: `Is Bathing!`, // Dynamic title
-          description: "Do you want to bath to clean yourself up?",
-          // You can add specific gains/losses text if you want to display them
-          // gainsText: "...",
-          // lossesText: "...",
-          actionType: "bath", // <<< This is CRUCIAL for triggering jalan.js later
-          actionParams: {
-            /* No specific params needed by jalan.js directly, but structure is there */
-          },
-        });
-        this.currentInteractable = null; // Prevent immediate re-trigger
-      }
-
-      if (id === "sleep") {
-        // Or any other ID that should trigger a "jalan-jalan" action
-        // If you want to save player state before modal
-        this.handleSaveVN(); // If you want to save player state before modal
-        EventBus.emit("showCustomModal", {
-          modalId: "jalanConfirmation_rumah", // Make modalId unique if content depends on location
-          title: `Jalan-jalan di ${GameState.currentlocation.currentLoc}?`, // Dynamic title
-          description: "Do you want to take a walk to increase Happiness ?",
-          // You can add specific gains/losses text if you want to display them
-          // gainsText: "...",
-          // lossesText: "...",
-          actionType: "jalan", // <<< This is CRUCIAL for triggering jalan.js later
-          actionParams: {
-            /* No specific params needed by jalan.js directly, but structure is there */
-          },
-        });
-        this.currentInteractable = null; // Prevent immediate re-trigger
-      }
-      if (id === "act1") {
-        GameState.currentAct = "act1";
-        this.handleSaveVN();
-        EventBus.emit("performVN", "act1Data");
-      }
-    }
   }
 
   handleSaveVN() {
@@ -347,8 +329,43 @@ export class HakureiShrine extends Phaser.Scene {
     );
   }
 
-  currentHour(){
+  currentHour() {
     console.log(GameState.time.hour);
     return GameState.time.hour;
   }
+
+}
+
+
+function playEyeOpeningTransition(scene, onComplete) {
+  // Create a full-screen transparent graphics object
+  const maskShape = scene.make.graphics({ x: 0, y: 0, add: false });
+
+  // Draw an eye-like ellipse (in white, used as a mask)
+  maskShape.fillStyle(0xffffff);
+  maskShape.fillEllipse(scene.cameras.main.centerX, scene.cameras.main.centerY, 20, 5); // Small to start
+
+  // Create a mask from that graphics
+  const eyeMask = maskShape.createGeometryMask();
+
+  // Apply the mask to the camera
+  scene.cameras.main.setMask(eyeMask);
+
+  // Tween to scale up the ellipse (eye opening)
+  scene.tweens.add({
+    targets: maskShape,
+    props: {
+      scaleX: { value: 100, duration: 1000, ease: 'Sine.easeOut' },
+      scaleY: { value: 100, duration: 1000, ease: 'Sine.easeOut' },
+    },
+    onUpdate: () => {
+      maskShape.clear();
+      maskShape.fillStyle(0xffffff);
+      maskShape.fillEllipse(scene.cameras.main.centerX, scene.cameras.main.centerY, 20 * maskShape.scaleX, 5 * maskShape.scaleY);
+    },
+    onComplete: () => {
+      scene.cameras.main.clearMask(true); // Remove mask after transition
+      if (onComplete) onComplete();
+    },
+  });
 }

@@ -3,32 +3,46 @@ import eat from './mechanics/eat';
 import jalan from './mechanics/jalan';
 import hunt from './mechanics/hunt';
 import work from './mechanics/work';
+import sleep from './mechanics/sleep'
 import { EventBus } from './EventBus';
 import { GameState } from '../hooks/gamestate';
 
 import { SetTime } from '../utils/debugHandler';
 // import other actions as needed
 // tambahin jobId & itemid karna 1 tempat bisa lebih dr 1 job
+
+const emitEventBus = (updated) =>{
+    EventBus.emit('phaser-time-update', { hour: updated.time.hour });
+    GameState.time.hour = updated.time.hour; // Update global time state
+    GameState.time.day = updated.time.day;
+}
+
 export default function handleAction(type, currentStatus, jobId, itemId) {
+  let updated;
   switch (type) {
     case 'bath':
-      const updated = bath(currentStatus);
-      EventBus.emit('phaser-time-update', { hour: updated.time.hour });
-      GameState.time.hour = updated.time.hour; // Update global time state
-      GameState.time.day = updated.time.day; // Update global day state
-      return updated;
+      updated = bath(currentStatus);
+      break;
     case 'eat':
-      return eat(currentStatus, itemId);
+      updated = eat(currentStatus, itemId);
+      break;
     case 'jalan':
-      return jalan(currentStatus);
+      updated = jalan(currentStatus);
+      break;
     case 'hunt':
-      return hunt(currentStatus);
+      updated = hunt(currentStatus);
+      break;
     case 'work':
-        return work(currentStatus, jobId);
-    // Add more cases like 'sleep', 'work', etc.
+      updated = work(currentStatus, jobId);
+      break;
+    case 'sleep' :
+      updated = sleep(currentStatus);
+      break;
     case "debug" :
-        return SetTime(currentStatus, jobId);
+      updated = SetTime(currentStatus, jobId);
+      break;
     default:
-      return currentStatus;
+      updated = currentStatus;
   }
+  return updated;
 }

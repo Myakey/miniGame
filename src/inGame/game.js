@@ -7,18 +7,21 @@ import { FlowerField } from "./scenes/flowerField";
 import { BlokM } from "./scenes/blokM";
 import { HakureiShrine } from "./scenes/HakureiShrine";
 import { debugScene } from "./scenes/debugScene";
+import { Mansion } from "./scenes/Mansion";
 import DanmakuScene from "./scenes/danMaku";
 
 import OverlayScene from "./scenes/OverlayScene";
 
 import DanMakuTrial from "./danMakuSpecific/scenes/Game";
 
+import DrawScene from "./scenes/drawYourself";
+
 import Phaser from "phaser";
 
 const config = {
     type: Phaser.AUTO,
-    width: 400,
-    height: 300,
+    width: window.innerWidth,
+    height: window.innerHeight,
     parent: 'game-container',
     backgroundColor: "#000000",
     pixelArt: true,
@@ -48,7 +51,9 @@ const config = {
         FlowerField,
         debugScene,
         DanmakuScene,
-        DanMakuTrial
+        DanMakuTrial,
+        DrawScene,
+        Mansion,
     ]
 };
 
