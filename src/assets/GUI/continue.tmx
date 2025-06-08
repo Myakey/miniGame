@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="3" height="1" tilewidth="16" tileheight="16" infinite="0" nextlayerid="2" nextobjectid="1">
+ <tileset firstgid="1" name="Red_Buttons_Pixel" tilewidth="16" tileheight="16" tilecount="200" columns="20">
+  <image source="../../../../../../Downloads/Red_Buttons_Pixel.png" width="320" height="160"/>
+ </tileset>
+ <layer id="1" name="Tile Layer 1" width="3" height="1">
+  <data encoding="csv">
+101,102,103
+</data>
+ </layer>
+</map>

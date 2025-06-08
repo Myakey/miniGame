@@ -30,22 +30,38 @@
 // export default Modal;
 // src/components/Modal.jsx (or your preferred path)
 // src/components/Modal.jsx (ensure this is your current version)
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { GUITry } from '../../assets/assetsPreLoad';
 
 function Modal({ isOpen, onClose, title, children }) {
-  if (!isOpen) {
-    return null;
-  }
+  const [isVisible, setIsVisible] = useState(false);
+  const [isAnimatingOut, setIsAnimatingOut] = useState(false);
+
+  // Mount when isOpen becomes true
+  useEffect(() => {
+    if (isOpen) {
+      setIsVisible(true);
+      setIsAnimatingOut(false);
+    } else if (isVisible) {
+      // Trigger closing animation before unmount
+      setIsAnimatingOut(true);
+      const timeout = setTimeout(() => {
+        setIsVisible(false);
+        setIsAnimatingOut(false);
+      }, 400); // must match tvOff duration
+      return () => clearTimeout(timeout);
+    }
+  }, [isOpen]);
 
   const handleBackdropClick = () => {
-    if (onClose) {
-      onClose();
-    }
+    if (onClose) onClose();
   };
 
   const handleModalContentClick = (e) => {
     e.stopPropagation();
   };
+
+  if (!isVisible) return null;
 
   return (
     <div
@@ -53,18 +69,35 @@ function Modal({ isOpen, onClose, title, children }) {
       onClick={handleBackdropClick}
     >
       <div
-        className="relative bg-white rounded-xl shadow-xl p-6 w-full max-w-md transition-transform transform scale-100 hover:scale-[1.01]"
+        className={`relative rounded-xl shadow-xl p-6 w-full h-120 max-w-md transform ${
+          isAnimatingOut ? 'tv-off' : 'tv-on'
+        }`}
         onClick={handleModalContentClick}
+        style={{
+          backgroundImage: `url(${GUITry})`,
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: '100% 100%',
+          backgroundPosition: 'center',
+          imageRendering: 'pixelated',
+        }}
       >
+        {/* Close button */}
         <button
-          onClick={onClose} // The 'x' button will act as a "No" or "Cancel"
-          className="absolute top-3 right-3 text-gray-400 hover:text-gray-600 text-2xl font-bold hover:cursor-pointer"
+          onClick={onClose}
+          className="absolute top-3 right-3 z-10 text-white hover:text-yellow-200 text-2xl font-bold hover:cursor-pointer"
           aria-label="Close modal"
         >
           &times;
         </button>
-        {title && <h2 className="text-xl font-semibold mb-4">{title}</h2>}
-        {children} {/* Description and Yes/No buttons will go here */}
+
+        {/* Content with optional black overlay behind children only */}
+        <div className="relative z-10 flex flex-col justify-center items-center">
+          <div className="absolute rounded-xl z-0" />
+          <div className="relative z-10 text-white drop-shadow flex flex-col justify-center items-center">
+            {title && <h2 className="text-3xl mb-4 mt-4">{title}</h2>}
+            {children}
+          </div>
+        </div>
       </div>
     </div>
   );

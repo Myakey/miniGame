@@ -1,0 +1,237 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/mansion/mansion.tmx",
+    "expandedProjectPaths": [
+    ],
+    "file.lastUsedOpenFilter": "All Files (*)",
+    "fileStates": {
+        "": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "#GUITry": {
+            "scaleInDock": 16
+        },
+        "#GuiTest": {
+            "scaleInDock": 1
+        },
+        "C:/Users/golde/AppData/Local/Temp/2b92ac27-bb7f-4775-b0d5-0c2ce2c047f2_mansion_revisi.zip.mansion_revisi.zip/mansion/mansion.tmx": {
+            "scale": 1,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 236.5,
+                "y": 301.5
+            }
+        },
+        "C:/Users/golde/AppData/Local/Temp/2b92ac27-bb7f-4775-b0d5-0c2ce2c047f2_mansion_revisi.zip.mansion_revisi.zip/mansion/mansion.tmx#mansion": {
+            "scaleInDock": 1
+        },
+        "C:/Users/golde/AppData/Local/Temp/2b92ac27-bb7f-4775-b0d5-0c2ce2c047f2_mansion_revisi.zip.mansion_revisi.zip/mansion/mansion.tmx#nobg": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "C:/Users/golde/AppData/Local/Temp/30b7c651-9724-42cb-abc4-4dfb38a90d80_mansion_revisi.zip.mansion_revisi.zip/mansion/mansion.tmx": {
+            "scale": 0.98125,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 240,
+                "y": 304.20382165605093
+            }
+        },
+        "C:/Users/golde/AppData/Local/Temp/30b7c651-9724-42cb-abc4-4dfb38a90d80_mansion_revisi.zip.mansion_revisi.zip/mansion/mansion.tmx#mansion": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "C:/Users/golde/AppData/Local/Temp/30b7c651-9724-42cb-abc4-4dfb38a90d80_mansion_revisi.zip.mansion_revisi.zip/mansion/mansion.tmx#nobg": {
+            "scaleInDock": 1
+        },
+        "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/blokM/blokM.tmj": {
+            "scale": 0.75,
+            "selectedLayer": 3,
+            "viewCenter": {
+                "x": 518,
+                "y": 164.66666666666663
+            }
+        },
+        "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/blokM/blokM.tmj#Floor1BlokM": {
+            "scaleInDock": 1
+        },
+        "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/blokM/blokM.tmj#Floor2BlokM": {
+            "scaleInDock": 1
+        },
+        "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/blokM/blokM.tmj#Kosuzu": {
+            "scaleInDock": 1
+        },
+        "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/blokM/blokM.tmj#LibraryBlokM": {
+            "scaleInDock": 1
+        },
+        "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/blokM/blokM.tmj#decorationBlokM": {
+            "scaleInDock": 1
+        },
+        "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/blokM/blokM.tmj#furnitureBlokM": {
+            "scaleInDock": 1
+        },
+        "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/blokM/blokM.tmj#storeBlokM": {
+            "scaleInDock": 1
+        },
+        "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/blokM/blokM.tmj#tileBlokM": {
+            "scaleInDock": 1
+        },
+        "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/mainMap.tmj": {
+            "expandedObjectLayers": [
+                6
+            ],
+            "scale": 5.5,
+            "selectedLayer": 5,
+            "viewCenter": {
+                "x": 234.2727272727273,
+                "y": 160.0909090909091
+            }
+        },
+        "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/mainMap.tmj#TILEMAPS": {
+            "scaleInDock": 2
+        },
+        "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/mainMap.tmj#blokM": {
+            "scaleInDock": 1
+        },
+        "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/mainMap.tmj#blokM2": {
+            "scaleInDock": 1
+        },
+        "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/mainMap.tmj#flower": {
+            "scaleInDock": 1
+        },
+        "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/mainMap.tmj#home": {
+            "scaleInDock": 1
+        },
+        "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/mansion/mansion.tmj": {
+            "scale": 2,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 256,
+                "y": 304.25
+            }
+        },
+        "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/mansion/mansion.tmj#grass": {
+            "scaleInDock": 1
+        },
+        "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/mansion/mansion.tmj#mansion": {
+            "scaleInDock": 1
+        },
+        "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/mansion/mansion.tmj#mansion_nobg": {
+            "scaleInDock": 1
+        },
+        "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/mansion/mansion.tmj#meiLing": {
+            "scaleInDock": 1
+        },
+        "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/mansion/mansion.tmj#nobg": {
+            "scaleInDock": 1
+        },
+        "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/mansion/mansion.tmj#road": {
+            "scaleInDock": 1
+        },
+        "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/mansion/mansion.tmx": {
+            "scale": 1.5,
+            "selectedLayer": 4,
+            "viewCenter": {
+                "x": 437.66666666666663,
+                "y": 353.66666666666663
+            }
+        },
+        "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/mansion/mansion.tmx#grass": {
+            "scaleInDock": 1
+        },
+        "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/mansion/mansion.tmx#mansion": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/mansion/mansion.tmx#mansion_nobg": {
+            "scaleInDock": 1
+        },
+        "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/mansion/mansion.tmx#meiLing": {
+            "scaleInDock": 1
+        },
+        "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/mansion/mansion.tmx#nobg": {
+            "scaleInDock": 1
+        },
+        "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/mansion/mansion.tmx#road": {
+            "scaleInDock": 3
+        },
+        "C:/Users/golde/Downloads/mansion (2)/mansion/mansion.tmx": {
+            "scale": 1.3102083333333332,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 240.03816186993166,
+                "y": 409.47686436635394
+            }
+        },
+        "C:/Users/golde/Downloads/mansion (2)/mansion/mansion.tmx#grass": {
+            "scaleInDock": 1
+        },
+        "C:/Users/golde/Downloads/mansion (2)/mansion/mansion.tmx#mansion": {
+            "scaleInDock": 1
+        },
+        "C:/Users/golde/Downloads/mansion (2)/mansion/mansion.tmx#nobg": {
+            "scaleInDock": 1
+        },
+        "C:/Users/golde/Downloads/mansion (2)/mansion/mansion.tmx#road": {
+            "scaleInDock": 1
+        },
+        "GUI MODAL BOX.tmx": {
+            "scale": 2,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 132.75,
+                "y": 159.25
+            }
+        },
+        "GUI MODAL BOX.tmx#GuiTest": {
+            "scaleInDock": 2
+        },
+        "continue.tmx": {
+            "scale": 8,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 12.8125,
+                "y": 6.6875
+            }
+        },
+        "continue.tmx#Green_Buttons_Pixel": {
+            "scaleInDock": 4
+        },
+        "continue.tmx#Red_Buttons_Pixel": {
+            "scaleInDock": 3
+        }
+    },
+    "last.exportedFilePath": "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/mansion",
+    "last.imagePath": "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map",
+    "map.height": 1,
+    "map.lastUsedExportFilter": "JSON map files (*.tmj *.json)",
+    "map.lastUsedFormat": "tmx",
+    "map.tileHeight": 16,
+    "map.tileWidth": 16,
+    "map.width": 2,
+    "openFiles": [
+        "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/mansion/mansion.tmx",
+        "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/mainMap.tmj",
+        "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/mansion/mansion.tmj"
+    ],
+    "project": "activityModalBox.tiled-project",
+    "property.type": "string",
+    "recentFiles": [
+        "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/blokM/blokM.tmj",
+        "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/mansion/mansion.tmj",
+        "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/mainMap.tmj",
+        "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/mansion/mansion.tmx",
+        "C:/Users/golde/Downloads/mansion (2)/mansion/mansion.tmx",
+        "C:/Users/golde/AppData/Local/Temp/30b7c651-9724-42cb-abc4-4dfb38a90d80_mansion_revisi.zip.mansion_revisi.zip/mansion/mansion.tmx",
+        "C:/Users/golde/AppData/Local/Temp/2b92ac27-bb7f-4775-b0d5-0c2ce2c047f2_mansion_revisi.zip.mansion_revisi.zip/mansion/mansion.tmx"
+    ],
+    "tileset.embedInMap": true,
+    "tileset.tileSize": {
+        "height": 24,
+        "width": 16
+    }
+}

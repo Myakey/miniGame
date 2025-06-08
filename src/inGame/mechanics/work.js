@@ -22,14 +22,13 @@ export default function work(currentStatus, jobId) {
     moneyMult = 0.75;
   }
 
-  GameState.time.hour += duration;
+  // Update time based on job duration
+  const newHour = (currentStatus.time.hour + duration) % 24;
+  const newMinute = (currentStatus.time.minute + (duration % 60)) % 60;
+  const crossedMidnight = (currentStatus.time.hour + duration) >= 60;
+  const newDay = crossedMidnight ? currentStatus.time.day + 1 : currentStatus.time.day;
 
-  while (GameState.time.hour >= 24) {
-    GameState.time.hour -= 24;
-    GameState.time.day += 1;
-  }
 
-   EventBus.emit("timeTick", { time: GameState.time });
 
    GameState.money += money * moneyMult;
    console.log("Your money:", GameState.money);
@@ -42,5 +41,11 @@ export default function work(currentStatus, jobId) {
     happiness: Math.max(currentStatus.happiness + happiness, 0),
     hygiene: Math.max(currentStatus.hygiene + hygiene, 0),
     score: currentStatus.score + 10,
+    time: {
+      ...currentStatus.time,
+      hour: newHour,
+      minute: currentStatus.time.minute,
+      day: newDay,
+    }
   };
 }

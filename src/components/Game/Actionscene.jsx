@@ -1,6 +1,8 @@
 // src/components/Game/Actionscene.jsx (or your path to ActionFlow.jsx)
 import React from 'react'; // Removed useState, useEffect, animationTimeout if managed by parent
 
+import { GUITry } from '../../assets/assetsPreLoad';
+
 import { bath, sleep, work, eat, jalan } from '../../assets/assetsPreLoad';
 
 // This component now primarily displays the animation when told to.
@@ -31,7 +33,7 @@ function ActionFlow({ isPlaying, currentActionType, onSkip }) {
         console.warn("ActionFlow: No GIF found for action type:", currentActionType);
         // Optionally, return a default "action in progress" or placeholder
         return (
-            <div className="fixed inset-0 flex items-center justify-center bg-black/60 z-[60]"> {/* Ensure z-index is high enough */}
+            <div className="fixed inset-0 flex items-center justify-center bg-black/60 z-[0]"> {/* Ensure z-index is high enough */}
                 <div className="relative bg-white rounded-xl p-6 shadow-xl text-center">
                     <p className="text-lg font-semibold mb-2">Performing: {currentActionType}...</p>
                     <p className="text-sm text-gray-600">Animation not available.</p>
@@ -48,7 +50,16 @@ function ActionFlow({ isPlaying, currentActionType, onSkip }) {
 
     return (
         <div className="fixed inset-0 flex items-center justify-center bg-black/60 z-[60]"> {/* Ensure z-index is appropriately high */}
-            <div className="relative bg-white rounded-xl p-6 shadow-xl text-center max-w-sm w-full">
+           <div
+               className="relative rounded-xl shadow-xl p-6 w-full max-w-md tv-on"
+               style={{
+                 backgroundImage: `url(${GUITry})`,
+                 backgroundRepeat: 'no-repeat',
+                 backgroundSize: '100% 100%',
+                 backgroundPosition: 'center',
+                 imageRendering: 'pixelated',
+               }}
+             >
                 {/* Dynamically set the GIF source */}
                 <img src={currentGif} alt={`${currentActionType} in progress...`} className="w-full h-auto object-contain max-h-64 mb-4 rounded-md" />
                 <p className="text-lg font-semibold mb-2">Performing: {currentActionType}...</p>

@@ -33,6 +33,12 @@ import mainAmbience from "../assets/sound/inGame/mainAmbience.mp3";
 
 import { useEffect } from "react";
 
+import jalanDiengImage from "../assets/image/InGame/Actions/jalanDieng.png";
+import BathImage from "./image/InGame/Actions/Bath.png";
+import SleepImage from "./image/InGame/Actions/Sleep.png";
+import jalanBeachImage from "./image/InGame/Actions/jalanBeach.png";
+import jalanMCDImage from "./image/InGame/Actions/jalanMCD.png";
+
 import bath from "../assets/gif/AnimasiAction/AnimasiAction/Bath.gif";
 import eat from "../assets/gif/AnimasiAction/AnimasiAction/Eat.gif";
 // import sleep from "../assets/gif/AnimasiAction/sleep.gif";
@@ -184,6 +190,15 @@ import shrineNight from "../assets/image/vn/ShrineNight.png";
 //Title Background
 import actBackground from "../assets/image/vn/actBG.jpg";
 
+//GUI ASSETS
+import GUITry from "../assets/GUI/map.png";
+import Yes from "../assets/GUI/Yes.png";
+import No from "../assets/GUI/No.png"
+import hunger from "../assets/image/InGame/icons/hunger.png";
+import energy from "../assets/image/InGame/icons/energy.png";
+import hygiene from "../assets/image/InGame/icons/hygiene.png";
+import happiness from "../assets/image/InGame/icons/happiness.png";
+
 
 
 export const assetsLoadImg = [
@@ -203,6 +218,12 @@ export const assetsLoadImg = [
   work,
   sleep,
   jalan,
+
+  GUITry,
+  hunger,happiness,energy,hygiene,
+  Yes,No,
+
+  jalanDiengImage, BathImage, SleepImage, jalanBeachImage, jalanMCDImage,
 
   // Reimu
   reimuSmile, reimuNervous, reimuShock, reimuChill, reimuOrb, reimuOrbSad, reimuAngry, reimuHappy, reimuSad, reimuNeutral, reimuOrbNervous,
@@ -256,7 +277,9 @@ export { NitoriShopSound, EsotericistPiano, Alice, FlandreSelect, ReimuSelect, R
 
 export { RemiliaButton, SakuyaButton, YukariButton, FlandreButton, ReimuButton, ReimuRight, RemiliaRight, SakuyaRight, YukariRight, FlandreRight, NitoriShop };
 
+export { GUITry, hunger, happiness, energy, hygiene, Yes, No }
 
+export {jalanDiengImage, jalanMCDImage, jalanBeachImage, SleepImage, BathImage}
 
 export {
   reimuSmile, reimuNervous, reimuShock, reimuChill, reimuOrb, reimuOrbSad,

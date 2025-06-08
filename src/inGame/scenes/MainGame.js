@@ -13,6 +13,8 @@ import { LightingManager } from "../lighting/LightingManager";
 import { PlayerLightManager } from "../lighting/PlayerLightManager";
 import { LightSource } from "../lighting/lightSource";
 
+import { setupInteractionHandler } from "../../utils/interactionManager";
+
 export class MainGame extends Phaser.Scene {
   constructor() {
     super({ key: "MainGame" });
@@ -86,28 +88,25 @@ export class MainGame extends Phaser.Scene {
             fontSize: "48px",
             fill: "#ffffff",
             fontStyle: "bold",
-            resolution: 2
+            resolution: 2,
           }
-          
         )
         .setOrigin(0.5)
         .setDepth(1000)
         .setScrollFactor(0);
 
+      this.tweens.add({
+        targets: enteringText,
+        y: this.cameras.main.centerY,
+        duration: 400,
+        ease: "Sine.easeOut",
+      });
 
-        this.tweens.add({
-    targets: enteringText,
-    y: this.cameras.main.centerY,
-    duration: 400,
-    ease: "Sine.easeOut"
-  });
-
-  
       this.cameras.main.fadeOut(1000, 0, 0, 0);
 
       this.cameras.main.once("camerafadeoutcomplete", () => {
         this.SaveState();
-        enteringText.destroy(); 
+        enteringText.destroy();
         this.scene.start(targetScene);
       });
     };
@@ -126,37 +125,23 @@ export class MainGame extends Phaser.Scene {
     const map = this.add.tilemap("map");
     const ground = map.addTilesetImage("TILEMAPS", "GroundTile");
     const sunflowers = map.addTilesetImage("flower", "sunflowers");
-    const decoration = map.addTilesetImage("blokM","MainDetails");
-    const home = map.addTilesetImage("home", "Home")
+    const decoration = map.addTilesetImage("blokM", "MainDetails");
+    const home = map.addTilesetImage("home", "Home");
     const galletcity = map.addTilesetImage("blokM2", "galletcity");
 
-    const groundLayer = map.createLayer("Ground", ground).setPipeline("Light2D")
-    const tempatLayer = map.createLayer("tempat", [home, decoration, sunflowers, galletcity]).setPipeline("Light2D")
-    const detailsLayer = map.createLayer("details", [decoration, home]).setPipeline("Light2D");
+    const groundLayer = map
+      .createLayer("Ground", ground)
+      .setPipeline("Light2D");
+    const tempatLayer = map
+      .createLayer("tempat", [home, decoration, sunflowers, galletcity])
+      .setPipeline("Light2D");
+    const detailsLayer = map
+      .createLayer("details", [decoration, home])
+      .setPipeline("Light2D");
     const grassLayer = map.createLayer("grass", ground).setPipeline("Light2D");
 
     const startX = GameState.pos_x;
     const startY = GameState.pos_y;
-
-//     // 👇 Add minimap camera BEFORE scaling layers
-// const miniCamera = this.cameras.add(
-//   this.scale.width - 210, // x
-//   10,                     // y
-//   200,                    // width
-//   150                     // height
-// );
-
-// miniCamera.setZoom(0.2); // Adjust as needed
-// miniCamera.setBackgroundColor(0x000000);
-// miniCamera.scrollX = 0;
-// miniCamera.scrollY = 0;
-
-// Optional: Draw border
-// this.add.graphics()
-//   .lineStyle(2, 0xffffff, 1)
-//   .strokeRect(this.scale.width - 210, 10, 200, 150)
-//   .setScrollFactor(0)
-//   .setDepth(1000); // Always on top
 
     this.player = this.physics.add
       .sprite(startX, startY, "Yukari")
@@ -164,30 +149,30 @@ export class MainGame extends Phaser.Scene {
     this.player.body.setCollideWorldBounds(true);
 
     if (this.sys.game.renderer instanceof Phaser.Renderer.WebGL.WebGLRenderer) {
-          this.lights.enable();
-          this.lights.setAmbientColor(0xffffff);
-    
-          this.lightingManager = new LightingManager(this);
-    
-          const currentHour = this.currentHour();
-    
-          // Add light source:
-          this.playerLightManager = new PlayerLightManager(this, this.player, {
-          radius: 200,
-          color: 0xffffff,
-          intensity: 6,
-        });
+      this.lights.enable();
+      this.lights.setAmbientColor(0xffffff);
 
-        this.lights.addLight(this.scale.width / 4, this.scale.height / 4, 600)
+      this.lightingManager = new LightingManager(this);
+
+      const currentHour = this.currentHour();
+
+      // Add light source:
+      this.playerLightManager = new PlayerLightManager(this, this.player, {
+        radius: 200,
+        color: 0xffffff,
+        intensity: 6,
+      });
+
+      this.lights
+        .addLight(this.scale.width / 4, this.scale.height / 4, 600)
         .setColor(0x6688cc)
         .setIntensity(0.9);
-          
-          this.lightingManager.initializeWithHour(currentHour);
-          this.playerLightManager.initializeWithHour(currentHour);
-        } else {
-          console.warn("WebGL not supported — skipping lights");
-      }
 
+      this.lightingManager.initializeWithHour(currentHour);
+      this.playerLightManager.initializeWithHour(currentHour);
+    } else {
+      console.warn("WebGL not supported — skipping lights");
+    }
 
     const scale = 3;
     const mapWidth = map.widthInPixels;
@@ -241,7 +226,7 @@ export class MainGame extends Phaser.Scene {
         fontSize: "16px",
         fill: "#ffffff",
         align: "center",
-        resolution: 2
+        resolution: 2,
       })
       .setOrigin(0.5)
       .setVisible(false);
@@ -257,6 +242,101 @@ export class MainGame extends Phaser.Scene {
     this.shiftKey = this.input.keyboard.addKey(
       Phaser.Input.Keyboard.KeyCodes.SHIFT
     );
+    const objects = map.getObjectLayer("Interactables").objects;
+    const SCALE = 3;
+
+    this.interactables = this.physics.add.group();
+
+    objects.forEach((obj) => {
+      if (obj.ellipse) {
+        // Position of the circle's center (Tiled's obj.x and obj.y are top-left of bounding box)
+        const radius = (obj.width * SCALE) / 2;
+        const centerX = (obj.x + obj.width / 2) * SCALE;
+        const centerY = (obj.y + obj.height / 2) * SCALE;
+
+        const sprite = this.physics.add.sprite(centerX, centerY, null);
+        sprite.setOrigin(0.5, 0.5);
+        sprite.setVisible(false);
+        sprite.body.setAllowGravity(false);
+
+        // Set the body to a circle
+        sprite.body.setCircle(radius);
+
+        sprite.properties = {};
+        obj.properties?.forEach((prop) => {
+          sprite.properties[prop.name] = prop.value;
+        });
+
+        this.interactables.add(sprite);
+
+        if (sprite.properties.light) {
+          new LightSource(this, x, y, {
+            radius: Number(sprite.properties.lightRadius) || 150,
+            color: sprite.properties.lightColor || "#ffffff",
+            intensity: Number(sprite.properties.lightIntensity) || 1.0,
+            nightOnly: sprite.properties.lightNightOnly === true,
+            initialHour: this.currentHour(), // you need to pass this in
+          });
+        }
+
+        if (sprite.properties.collides) {
+          sprite.body.setImmovable(true);
+          sprite.body.setVelocity(0, 0);
+          sprite.body.moves = false;
+          if ("pushable" in sprite.body) sprite.body.pushable = false; // Optional for Phaser 3.60+
+          this.physics.add.collider(this.player, sprite);
+        }
+      } else {
+        const x = (obj.x + obj.width / 2) * SCALE;
+        const y = (obj.y + obj.height / 2) * SCALE;
+
+        const sprite = this.physics.add.sprite(x, y, null);
+        sprite.setVisible(false); // Still invisible trigger zone
+        sprite.body.setAllowGravity(false);
+
+        // 👇 Scale the physics body to match map scale
+        sprite.body.setSize(obj.width * SCALE, obj.height * SCALE);
+        // 👇 Do NOT call sprite.setScale() unless you want a visible sprite scaled
+        // sprite.setScale(SCALE); // ❌ Not needed for invisible area
+
+        // Copy object properties
+        sprite.properties = {};
+        obj.properties?.forEach((prop) => {
+          sprite.properties[prop.name] = prop.value;
+        });
+
+        if (sprite.properties.light) {
+          new LightSource(this, x, y, {
+            radius: Number(sprite.properties.lightRadius) || 150,
+            color: sprite.properties.lightColor || "#ffffff",
+            intensity: Number(sprite.properties.lightIntensity) || 1.0,
+            nightOnly: sprite.properties.lightNightOnly === true,
+            initialHour: this.currentHour(), // you need to pass this in
+          });
+        }
+
+        this.interactables.add(sprite);
+        if (sprite.properties.collides) {
+          sprite.body.setImmovable(true);
+          sprite.body.setVelocity(0, 0);
+          sprite.body.moves = false;
+          if ("pushable" in sprite.body) sprite.body.pushable = false; // Optional for Phaser 3.60+
+          this.physics.add.collider(this.player, sprite);
+        }
+      }
+    });
+
+    this.physics.add.overlap(
+      this.player,
+      this.interactables,
+      (player, obj) => {
+        this.currentInteractable = obj;
+      },
+      null,
+      this
+    );
+
+    this.generateInteractions();
 
     EventBus.on("move", this.handleMove, this);
     EventBus.on("stop", this.handleStopInput, this);
@@ -265,6 +345,7 @@ export class MainGame extends Phaser.Scene {
 
   update() {
     handleMovement(this);
+    this.checkOverlap()
 
     const playerBounds = this.player.getBounds();
     let inAnyZone = false;
@@ -332,17 +413,30 @@ export class MainGame extends Phaser.Scene {
     GameState.pos_y = this.player.y;
   }
 
-  // tickGameTime() {
-  //   GameState.time.hour += 1;
-  //   if (GameState.time.hour >= 24) {
-  //     GameState.time.hour = 0;
-  //     GameState.time.day += 1;
-  //   }
-  //   EventBus.emit("timeTick", { time: GameState.time });
-  // }
+  handleSaveVN(){
+    console.log("Saving state!");
+    GameState.pos_x = this.player.x;
+    GameState.pos_y = this.player.y;
+  }
 
   shutdown() {
     EventBus.off("move", this.handleMoveInput, this);
+  }
+
+  generateInteractions() {
+    setupInteractionHandler(this, {
+      getPlayer: () => this.player,
+      getInteractables: () => this.interactables,
+      getKey: () => this.interactKey,
+      handleSaveVN: () => this.handleSaveVN(),
+
+      handlers: {
+        Mansion: ({ scene }) => {
+          this.handleSaveVN();
+          this.scene.start("Mansion");
+        },
+      },
+    });
   }
 
   interactWithArea() {
@@ -350,7 +444,7 @@ export class MainGame extends Phaser.Scene {
     // Add your interaction logic here
   }
 
-  currentHour(){
+  currentHour() {
     console.log(GameState.time.hour);
     return GameState.time.hour;
   }
