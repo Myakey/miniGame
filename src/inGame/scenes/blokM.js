@@ -180,6 +180,7 @@ export class BlokM extends Phaser.Scene {
     //OBJECTS TRIAL
     //OBJECT TRIAL
     const objects = map.getObjectLayer("Interactables").objects;
+    const lights = map.getObjectLayer("lights").objects;
     const SCALE = 3;
 
     this.interactables = this.physics.add.group();
@@ -260,6 +261,46 @@ export class BlokM extends Phaser.Scene {
           if ("pushable" in sprite.body) sprite.body.pushable = false; // Optional for Phaser 3.60+
           this.physics.add.collider(this.player, sprite);
         }
+      }
+    });
+
+    lights.forEach((obj) => {
+        const x = (obj.x + obj.width / 2) * SCALE;
+        const y = (obj.y + obj.height / 2) * SCALE;
+
+        const sprite = this.physics.add.sprite(x, y, null);
+        sprite.setVisible(false); // Still invisible trigger zone
+        sprite.body.setAllowGravity(false);
+
+        // 👇 Scale the physics body to match map scale
+        sprite.body.setSize(obj.width * SCALE, obj.height * SCALE);
+        // 👇 Do NOT call sprite.setScale() unless you want a visible sprite scaled
+        // sprite.setScale(SCALE); // ❌ Not needed for invisible area
+
+        // Copy object properties
+        sprite.properties = {};
+        obj.properties?.forEach((prop) => {
+          sprite.properties[prop.name] = prop.value;
+        });
+
+        if (sprite.properties.light) {
+          console.log("Adding light source at:", x, y);
+          console.log("COLOR : " + sprite.properties.lightColor);
+          new LightSource(this, x, y, {
+            radius: Number(sprite.properties.lightRadius) || 150,
+            color: sprite.properties.lightColor || "#ffffff",
+            intensity: Number(sprite.properties.lightIntensity) || 1.0,
+            nightOnly: sprite.properties.lightNightOnly || true,
+            initialHour: this.currentHour(), // you need to pass this in
+          });
+        }
+
+        if (sprite.properties.collides) {
+          sprite.body.setImmovable(true);
+          sprite.body.setVelocity(0, 0);
+          sprite.body.moves = false;
+          if ("pushable" in sprite.body) sprite.body.pushable = false; // Optional for Phaser 3.60+
+          this.physics.add.collider(this.player, sprite);
       }
     });
 
