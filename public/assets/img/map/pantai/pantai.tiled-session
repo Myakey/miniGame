@@ -9,8 +9,17 @@
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
         "": {
-            "scaleInDock": 2,
+            "scaleInDock": 3,
             "scaleInEditor": 0.5
+        },
+        "#asset": {
+            "scaleInDock": 0.015625
+        },
+        "#ground": {
+            "scaleInDock": 3
+        },
+        "#mansion": {
+            "scaleInDock": 1
         },
         "C:/Users/ASUS/Downloads/maps/rumah/rumah.tmx": {
             "scale": 0.5254687499999999,
@@ -53,11 +62,11 @@
             "scaleInDock": 1
         },
         "C:/Users/ASUS/Visual Studio/Intro to Technology/projekAkhir/miniGame/public/assets/img/map/mainMap.tmj": {
-            "scale": 1,
+            "scale": 1.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 240,
-                "y": 159.5
+                "x": 418.33333333333337,
+                "y": 198.33333333333337
             }
         },
         "C:/Users/ASUS/Visual Studio/Intro to Technology/projekAkhir/miniGame/public/assets/img/map/mainMap.tmj#TILEMAPS": {
@@ -67,7 +76,7 @@
             "scaleInDock": 0.75
         },
         "C:/Users/ASUS/Visual Studio/Intro to Technology/projekAkhir/miniGame/public/assets/img/map/mainMap.tmj#blokM2": {
-            "scaleInDock": 1.5
+            "scaleInDock": 0.75
         },
         "C:/Users/ASUS/Visual Studio/Intro to Technology/projekAkhir/miniGame/public/assets/img/map/mainMap.tmj#flower": {
             "scaleInDock": 1
@@ -82,7 +91,7 @@
             "scale": 1.5,
             "selectedLayer": 6,
             "viewCenter": {
-                "x": 177.33333333333331,
+                "x": 99.66666666666663,
                 "y": 184.99999999999997
             }
         },
@@ -128,8 +137,8 @@
             "scale": 1,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 223,
-                "y": 59.5
+                "x": 507.5,
+                "y": 217.5
             }
         },
         "pantai.tmx#beach": {
@@ -145,10 +154,13 @@
             "scaleInDock": 3
         }
     },
-    "last.imagePath": "C:/Users/ASUS/Downloads",
+    "last.imagePath": "C:/Users/ASUS/Visual Studio/Intro to Technology/projekAkhir/miniGame/public/assets/img/map",
+    "map.fixedSize": true,
+    "map.height": 20,
     "map.lastUsedFormat": "tmx",
     "map.tileHeight": 16,
     "map.tileWidth": 16,
+    "map.width": 30,
     "openFiles": [
         "C:/Users/ASUS/Visual Studio/Intro to Technology/projekAkhir/miniGame/public/assets/img/map/mainMap.tmj",
         "pantai.tmx",
