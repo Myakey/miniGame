@@ -204,6 +204,7 @@ export class Dieng extends Phaser.Scene {
     const map = this.add.tilemap("dieng");
     const tiles = map.addTilesetImage("tiles", "diengTiles");
     const Sanae = map.addTilesetImage("Sanae", "Sanae");
+    const torches = map.addTilesetImage("obor", "torches");
 
     const tileLayer1 = map
       .createLayer("Tile Layer 1", tiles)
@@ -214,7 +215,7 @@ export class Dieng extends Phaser.Scene {
     const tileLayer3 = map
       .createLayer("Tile Layer 3", tiles)
       .setPipeline("Light2D");
-    const tree = map.createLayer("tree", tiles).setPipeline("Light2D");
+    const tree = map.createLayer("tree", [tiles, torches]).setPipeline("Light2D");
     const SanaeLayer = map.createLayer("Sanae", Sanae).setPipeline("Light2D");
 
     this.player = this.physics.add

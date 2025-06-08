@@ -174,8 +174,8 @@
                  "type":"",
                  "visible":true,
                  "width":32.1818181818182,
-                 "x":384.363636363636,
-                 "y":347.636363636364
+                 "x":383.636363636363,
+                 "y":348.181818181819
                 }, 
                 {
                  "height":64,
@@ -1125,8 +1125,8 @@
          "name":"lights",
          "objects":[
                 {
-                 "height":217,
-                 "id":83,
+                 "height":47.8245614035088,
+                 "id":84,
                  "name":"",
                  "properties":[
                         {
@@ -1137,12 +1137,236 @@
                         {
                          "name":"lightColor",
                          "type":"string",
-                         "value":"#ffaa66"
+                         "value":"#ffd700"
                         }, 
                         {
                          "name":"lightIntensity",
                          "type":"float",
-                         "value":2
+                         "value":1
+                        }, 
+                        {
+                         "name":"lightRadius",
+                         "type":"int",
+                         "value":1000
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":52.9824561403509,
+                 "x":315.122807017544,
+                 "y":269.578947368421
+                }, 
+                {
+                 "height":47.8246,
+                 "id":86,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"light",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"lightColor",
+                         "type":"string",
+                         "value":"#ffd700"
+                        }, 
+                        {
+                         "name":"lightIntensity",
+                         "type":"float",
+                         "value":1
+                        }, 
+                        {
+                         "name":"lightRadius",
+                         "type":"int",
+                         "value":1000
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":52.9825,
+                 "x":426.175416666667,
+                 "y":342.754366666667
+                }, 
+                {
+                 "height":47.8246,
+                 "id":87,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"light",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"lightColor",
+                         "type":"string",
+                         "value":"#ffd700"
+                        }, 
+                        {
+                         "name":"lightIntensity",
+                         "type":"float",
+                         "value":1
+                        }, 
+                        {
+                         "name":"lightRadius",
+                         "type":"int",
+                         "value":1000
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":52.9825,
+                 "x":304.175416666667,
+                 "y":417.421033333333
+                }, 
+                {
+                 "height":47.8246,
+                 "id":88,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"light",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"lightColor",
+                         "type":"string",
+                         "value":"#ffd700"
+                        }, 
+                        {
+                         "name":"lightIntensity",
+                         "type":"float",
+                         "value":1
+                        }, 
+                        {
+                         "name":"lightRadius",
+                         "type":"int",
+                         "value":1000
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":52.9825,
+                 "x":119.50875,
+                 "y":282.754366666667
+                }, 
+                {
+                 "height":47.8246,
+                 "id":89,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"light",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"lightColor",
+                         "type":"string",
+                         "value":"#ffd700"
+                        }, 
+                        {
+                         "name":"lightIntensity",
+                         "type":"float",
+                         "value":1
+                        }, 
+                        {
+                         "name":"lightRadius",
+                         "type":"int",
+                         "value":1000
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":52.9825,
+                 "x":505.50875,
+                 "y":248.754366666667
+                }, 
+                {
+                 "height":47.8246,
+                 "id":90,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"light",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"lightColor",
+                         "type":"string",
+                         "value":"#ffd700"
+                        }, 
+                        {
+                         "name":"lightIntensity",
+                         "type":"float",
+                         "value":1
+                        }, 
+                        {
+                         "name":"lightRadius",
+                         "type":"int",
+                         "value":1000
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":52.9825,
+                 "x":559.50875,
+                 "y":424.754366666667
+                }, 
+                {
+                 "height":47.8246,
+                 "id":91,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"light",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"lightColor",
+                         "type":"string",
+                         "value":"#ffd700"
+                        }, 
+                        {
+                         "name":"lightIntensity",
+                         "type":"float",
+                         "value":1
+                        }, 
+                        {
+                         "name":"lightRadius",
+                         "type":"int",
+                         "value":1000
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":52.9825,
+                 "x":97.50875,
+                 "y":423.421033333333
+                }, 
+                {
+                 "height":133.657933333333,
+                 "id":92,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"light",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"lightColor",
+                         "type":"string",
+                         "value":"#f5f5dc"
+                        }, 
+                        {
+                         "name":"lightIntensity",
+                         "type":"float",
+                         "value":3
                         }, 
                         {
                          "name":"lightRadius",
@@ -1152,9 +1376,73 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":219,
-                 "x":580,
-                 "y":300
+                 "width":156.4825,
+                 "x":621.50875,
+                 "y":72.0877
+                }, 
+                {
+                 "height":162.8246,
+                 "id":93,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"light",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"lightColor",
+                         "type":"string",
+                         "value":"#f5f5dc"
+                        }, 
+                        {
+                         "name":"lightIntensity",
+                         "type":"float",
+                         "value":3
+                        }, 
+                        {
+                         "name":"lightRadius",
+                         "type":"int",
+                         "value":10000
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":199.9825,
+                 "x":299.50875,
+                 "y":29.0877
+                }, 
+                {
+                 "height":146.991266666667,
+                 "id":94,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"light",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"lightColor",
+                         "type":"string",
+                         "value":"#f5f5dc"
+                        }, 
+                        {
+                         "name":"lightIntensity",
+                         "type":"float",
+                         "value":3
+                        }, 
+                        {
+                         "name":"lightRadius",
+                         "type":"int",
+                         "value":10000
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":178.4825,
+                 "x":10.6754166666666,
+                 "y":46.7543666666667
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1163,7 +1451,7 @@
          "y":0
         }],
  "nextlayerid":6,
- "nextobjectid":84,
+ "nextobjectid":126,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",
