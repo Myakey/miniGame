@@ -268,8 +268,19 @@
          "width":40,
          "x":0,
          "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":7,
+         "name":"lights",
+         "objects":[],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
         }],
- "nextlayerid":7,
+ "nextlayerid":8,
  "nextobjectid":12,
  "orientation":"orthogonal",
  "renderorder":"right-down",

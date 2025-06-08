@@ -89,95 +89,6 @@ export class Dieng extends Phaser.Scene {
     GameState.currentlocation.currentLoc = "Dieng";
   }
 
-  // checkOverlap(){
-  //         let stillOverlapping = false;
-
-  //       this.interactables.children.iterate(obj => {
-  //         if (this.physics.overlap(this.player, obj)) {
-  //           this.currentInteractable = obj;
-  //           stillOverlapping = true;
-  //         }
-  //       });
-
-  //       if (!stillOverlapping) {
-  //         this.currentInteractable = null;
-  //       }
-
-  //       // Check for E press only if still overlapping
-  //       if (this.currentInteractable && Phaser.Input.Keyboard.JustDown(this.eKey)) {
-  //         const id = this.currentInteractable.properties?.id;
-  //         console.log("YA!");
-  //         if (id != "out") {
-  //           console.log("Pressing E near:", id);
-  //           EventBus.emit("callObjective", "Done");
-  //           EventBus.emit("show-dialog", { id });
-
-  //         }else if(id == "out"){
-  //           const enteringText = this.add
-  //             .text(
-  //               this.cameras.main.centerX,
-  //               -50,
-  //               "Exiting....",
-  //               {
-  //                 fontSize: "48px",
-  //                 fill: "#ffffff",
-  //                 fontStyle: "bold",
-  //                 resolution: 2
-  //               }
-
-  //             )
-  //             .setOrigin(0.5)
-  //             .setDepth(1000)
-  //             .setScrollFactor(0);
-  //           GameState.afterVN = false;
-  //           this.cameras.main.fadeOut(1000, 0, 0, 0);
-
-  //           this.cameras.main.once("camerafadeoutcomplete", () => {
-  //             enteringText.destroy();
-  //             this.scene.start("MainGame");
-  //           });
-  //         }
-  //         switch(id){
-  //           case "prologue" :
-  //             this.handleSaveVN();
-  //             EventBus.emit("performVN", "prologueData");
-  //             break;
-  //           case "intro" :
-  //             this.handleSaveVN();
-  //             EventBus.emit("performVN", "introData");
-  //             break;
-  //           case "act1" :
-  //             this.handleSaveVN();
-  //             EventBus.emit("performVN", "act1Data");
-  //             break;
-  //           case "act2" :
-  //             this.handleSaveVN();
-  //             EventBus.emit("performVN", "act2Data");
-  //             break;
-  //           case "act3" :
-  //             this.handleSaveVN();
-  //             EventBus.emit("performVN", "act3Data");
-  //             break;
-  //           case "act3_1" :
-  //             this.handleSaveVN();
-  //             EventBus.emit("performVN", "act3_1Data");
-  //             break;
-  //           case "act3_2" :
-  //             this.handleSaveVN();
-  //             EventBus.emit("performVN", "act3_2Data");
-  //             break;
-  //           case "act4" :
-  //             this.handleSaveVN();
-  //             EventBus.emit("performVN", "act4Data");
-  //             break;
-
-  //         }
-  //         if(id === "Kosuzu1"){
-  //           this.handleSaveVN();
-  //           EventBus.emit("performVN", "act3Data");
-  //         }
-  //       }
-  //   }
   checkOverlap() {
     if (!this.player || !this.interactables) return;
 
@@ -342,6 +253,7 @@ export class Dieng extends Phaser.Scene {
     //OBJECTS TRIAL
     //OBJECT TRIAL
     const objects = map.getObjectLayer("Interactables").objects;
+    const lights = map.getObjectLayer("lights").objects;
     const SCALE = 3;
 
     this.interactables = this.physics.add.group();
@@ -422,6 +334,46 @@ export class Dieng extends Phaser.Scene {
           if ("pushable" in sprite.body) sprite.body.pushable = false; // Optional for Phaser 3.60+
           this.physics.add.collider(this.player, sprite);
         }
+      }
+    });
+
+    lights.forEach((obj) => {
+        const x = (obj.x + obj.width / 2) * SCALE;
+        const y = (obj.y + obj.height / 2) * SCALE;
+
+        const sprite = this.physics.add.sprite(x, y, null);
+        sprite.setVisible(false); // Still invisible trigger zone
+        sprite.body.setAllowGravity(false);
+
+        // 👇 Scale the physics body to match map scale
+        sprite.body.setSize(obj.width * SCALE, obj.height * SCALE);
+        // 👇 Do NOT call sprite.setScale() unless you want a visible sprite scaled
+        // sprite.setScale(SCALE); // ❌ Not needed for invisible area
+
+        // Copy object properties
+        sprite.properties = {};
+        obj.properties?.forEach((prop) => {
+          sprite.properties[prop.name] = prop.value;
+        });
+
+        if (sprite.properties.light) {
+          console.log("Adding light source at:", x, y);
+          console.log("COLOR : " + sprite.properties.lightColor);
+          new LightSource(this, x, y, {
+            radius: Number(sprite.properties.lightRadius) || 150,
+            color: sprite.properties.lightColor || "#ffffff",
+            intensity: Number(sprite.properties.lightIntensity) || 1.0,
+            nightOnly: sprite.properties.lightNightOnly || true,
+            initialHour: this.currentHour(), // you need to pass this in
+          });
+        }
+
+        if (sprite.properties.collides) {
+          sprite.body.setImmovable(true);
+          sprite.body.setVelocity(0, 0);
+          sprite.body.moves = false;
+          if ("pushable" in sprite.body) sprite.body.pushable = false; // Optional for Phaser 3.60+
+          this.physics.add.collider(this.player, sprite);
       }
     });
 
