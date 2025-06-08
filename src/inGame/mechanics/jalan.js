@@ -1,5 +1,6 @@
 import { GameState } from '../../hooks/gamestate';
 import { EventBus } from '../EventBus';
+
 export default function jalan(currentStatus) {
     // Check if the character is already clean
     const location = GameState.currentlocation.currentLoc;
@@ -40,18 +41,19 @@ export default function jalan(currentStatus) {
     }
     // Return the updated status
 
-    GameState.time.hour += duration;
-
-    while (GameState.time.hour >= 24) {
-        GameState.time.hour -= 24;
-        GameState.time.day += 1;
-    }
-    GameState.money -= cost;
+    const newHour = (currentStatus.time.hour + duration) % 24; // Increment hour, wrap around at 24
+    const pastMidnight = (currentStatus.time.hour + duration) >= 24;
+    const newDay = pastMidnight ? currentStatus.time.day + 1 : currentStatus.time.day; // Increment day if hour wraps around
     
     return {
         ...currentStatus,
         happiness: newHappiness,
         energy: newEnergy,
         money: Math.max(currentStatus.money - cost, 0),
+        time: {
+            minute: currentStatus.time.minute, // Keep the minute unchanged
+            hour: newHour,
+            day: newDay
+        }
     };
 }

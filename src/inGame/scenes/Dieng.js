@@ -11,6 +11,8 @@ import { LightingManager } from "../lighting/LightingManager";
 import { PlayerLightManager } from "../lighting/PlayerLightManager";
 import { LightSource } from "../lighting/lightSource";
 
+import { jalanDiengImage } from "../../assets/assetsPreLoad"
+
 export class Dieng extends Phaser.Scene {
   constructor() {
     super({ key: "Dieng" });
@@ -199,6 +201,7 @@ export class Dieng extends Phaser.Scene {
         this.handleSaveVN(); // If you want to save player state before modal
         EventBus.emit("showCustomModal", {
           modalId: "jalanConfirmation_" + GameState.currentlocation.currentLoc, // Make modalId unique if content depends on location
+          image: jalanDiengImage,
           title: `Jalan-jalan di ${GameState.currentlocation.currentLoc}?`, // Dynamic title
           description: "Do you want to take a walk to increase Happiness ?",
           // You can add specific gains/losses text if you want to display them

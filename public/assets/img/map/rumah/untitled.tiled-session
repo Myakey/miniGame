@@ -202,8 +202,8 @@
             "scale": 4,
             "selectedLayer": 6,
             "viewCenter": {
-                "x": 292.875,
-                "y": 278.25
+                "x": 334.125,
+                "y": 287.125
             }
         },
         "rumah.tmj#Tiles1": {
@@ -246,8 +246,8 @@
     "project": "untitled.tiled-project",
     "property.type": "int",
     "recentFiles": [
-        "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/tilesTest.tmj",
         "rumah.tmj",
+        "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/tilesTest.tmj",
         "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/flowerField/project.tmx",
         "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/flowerField/flowerField.tmj",
         "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/dieng/diengsz.tmx"

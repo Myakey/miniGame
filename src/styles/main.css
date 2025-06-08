@@ -1,5 +1,18 @@
 @import "tailwindcss";
 
+/* src/assets/fonts.css or in App.css */
+/* @font-face {
+  font-family: 'MyFont';
+  src: url('../assets/fonts/novem___.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  font-family: 'MyFont', sans-serif
+} */
+
+
 
 .mainMenu{
     background-image: url(../assets/image/titleScreen/titleGame.jpg);

@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { EventBus } from "../../inGame/EventBus";
 
 export default function debugBox({ innerText, modal, toggleModal, toggleModalFalse }) {
     

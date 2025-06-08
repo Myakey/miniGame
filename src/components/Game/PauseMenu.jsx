@@ -1,29 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { pauseGame, resumeGame } from "../../inGame/gameController";
+import { GUITry } from "../../assets/assetsPreLoad";
+import Continue from "../../assets/GUI/continue.png";
+import Quit from "../../assets/GUI/quit.png";
 
 export default function PauseMenu({ onQuit, onSetTime }) {
   const [openModal, setOpenModal] = useState(false);
+  const [selectedIndex, setSelectedIndex] = useState(0); // 0 = Resume, 1 = Quit
 
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === "Escape") {
-        // Add your logic here
-        if (openModal) {
-          setOpenModal(false);
-          resumeGame();
-        } else {
-          setOpenModal(true);
-          pauseGame();
-        }
-      }
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [openModal]);
+  const buttons = [
+    { label: "Resume", action: handleResume },
+    { label: "Quit", action: onQuit },
+  ];
 
   function handleResume() {
     setOpenModal(false);
@@ -35,9 +23,70 @@ export default function PauseMenu({ onQuit, onSetTime }) {
     pauseGame();
   }
 
+  function handleSelect() {
+    buttons[selectedIndex]?.action?.();
+  }
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") {
+        if (openModal) {
+          setOpenModal(false);
+          resumeGame();
+        } else {
+          setOpenModal(true);
+          pauseGame();
+        }
+      }
+
+      if (!openModal) return;
+
+      if (e.key === "ArrowUp") {
+        setSelectedIndex((prev) => (prev - 1 + buttons.length) % buttons.length);
+      } else if (e.key === "ArrowDown") {
+        setSelectedIndex((prev) => (prev + 1) % buttons.length);
+      } else if (e.key === "Enter") {
+        handleSelect();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [openModal, selectedIndex]);
+
+  // Gamepad support
+  useEffect(() => {
+    let lastY = 0;
+    let lastPressed = false;
+
+    const pollGamepad = () => {
+      const gamepads = navigator.getGamepads?.();
+      const gp = gamepads?.[0];
+      if (!gp || !openModal) return;
+
+      const yAxis = gp.axes[1]; // vertical stick or D-pad
+      const aPressed = gp.buttons[0]?.pressed;
+
+      if (yAxis < -0.5 && lastY >= -0.5) {
+        setSelectedIndex((prev) => (prev - 1 + buttons.length) % buttons.length);
+      } else if (yAxis > 0.5 && lastY <= 0.5) {
+        setSelectedIndex((prev) => (prev + 1) % buttons.length);
+      }
+
+      if (aPressed && !lastPressed) {
+        handleSelect();
+      }
+
+      lastY = yAxis;
+      lastPressed = aPressed;
+    };
+
+    const interval = setInterval(pollGamepad, 100);
+    return () => clearInterval(interval);
+  }, [openModal, selectedIndex]);
+
   return (
     <>
-      {/* Pause Button */}
       <div className="absolute top-4 right-4 z-50">
         <button
           onClick={handlePause}
@@ -47,7 +96,6 @@ export default function PauseMenu({ onQuit, onSetTime }) {
         </button>
       </div>
 
-      {/* Modal */}
       {openModal && (
         <div className="fixed inset-0 flex items-center justify-center z-50">
           <div
@@ -62,26 +110,53 @@ export default function PauseMenu({ onQuit, onSetTime }) {
             }}
           />
 
-          <div className="bg-white rounded-2xl p-6 w-80 text-center shadow-2xl fade-in-up">
-            <h2 className="text-2xl font-bold mb-4">Game Paused</h2>
+          <div
+            className="relative w-65 h-60 text-center flex flex-col items-center justify-center shadow-2xl fade-in-up"
+            style={{
+              backgroundImage: `url(${GUITry})`,
+              backgroundSize: "100% 100%",
+              backgroundRepeat: "no-repeat",
+              backgroundPosition: "center",
+              imageRendering: "pixelated",
+            }}
+          >
+            <h2 className="text-2xl font-bold text-white mb-4 drop-shadow">Game Paused</h2>
+
             <button
               onClick={handleResume}
-              className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-full mb-2 w-full transition"
-            >
-              Resume
-            </button>
+              className={`w-40 h-12 bg-no-repeat bg-center bg-contain mb-2 transition ${
+                selectedIndex === 0 ? "scale-110" : "hover:scale-105"
+              }`}
+              style={{
+                backgroundImage: `url(${Continue})`,
+                border: "none",
+                imageRendering: "pixelated",
+              }}
+            />
+
             <button
               onClick={onQuit}
-              className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 mb-2 rounded-full w-full transition"
-            >
-              Quit
-            </button>
+              className={`w-40 h-12 bg-no-repeat bg-center bg-contain mb-2 transition ${
+                selectedIndex === 1 ? "scale-110" : "hover:scale-105"
+              }`}
+              style={{
+                backgroundImage: `url(${Quit})`,
+                border: "none",
+                imageRendering: "pixelated",
+              }}
+            />
+
             <button
               onClick={onSetTime}
-              className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-full w-full transition"
-            >
-              Set Time
-            </button>
+              className={`w-40 h-12 bg-no-repeat bg-center bg-contain mb-2 transition ${
+                selectedIndex === 1 ? "scale-110" : "hover:scale-105"
+              }`}
+              style={{
+                backgroundImage: `url(${Quit})`,
+                border: "none",
+                imageRendering: "pixelated",
+              }}
+            />
           </div>
         </div>
       )}

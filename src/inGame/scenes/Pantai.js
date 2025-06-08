@@ -8,6 +8,8 @@ import { LightingManager } from "../lighting/LightingManager";
 import { PlayerLightManager } from "../lighting/PlayerLightManager";
 import { LightSource } from "../lighting/lightSource";
 
+import { setupInteractionHandler } from "../../utils/interactionManager";
+
 export class Pantai extends Phaser.Scene {
   constructor() {
     super({ key: "Pantai" });
@@ -60,7 +62,7 @@ export class Pantai extends Phaser.Scene {
       })
       .setInteractive()
       .on("pointerdown", () => {
-        this.scene.start("DanMakuTrial");
+        this.scene.start("DrawScene");
       });
 
     const button1 = this.add
@@ -89,64 +91,43 @@ export class Pantai extends Phaser.Scene {
     this.shiftKey = this.input.keyboard.addKey(
       Phaser.Input.Keyboard.KeyCodes.SHIFT
     );
+
+    setupInteractionHandler(this, {
+      getPlayer: () => this.player,
+      getInteractables: () => this.interactables,
+      getKey: () => this.eKey,
+      handleSaveVN: () => console.log("Saved at pantai"),
+
+      handlers: {
+        out: ({ scene }) => {
+          const enteringText = this.add
+            .text(this.cameras.main.centerX, -50, "Exiting....", {
+              fontSize: "48px",
+              fill: "#ffffff",
+              fontStyle: "bold",
+              resolution: 2,
+            })
+            .setOrigin(0.5)
+            .setDepth(1000)
+            .setScrollFactor(0);
+          GameState.afterVN = false;
+          this.cameras.main.fadeOut(1000, 0, 0, 0);
+
+          this.cameras.main.once("camerafadeoutcomplete", () => {
+            enteringText.destroy();
+            this.scene.start("MainGame");
+          });
+        },
+        shop: ({scene}) =>{
+          EventBus.emit("showShop");
+        }
+      },
+    });
   }
 
   update() {
     handleMovement(this);
-    console.log(this.player.x);
-    console.log(this.player.y);
     this.checkOverlap();
-  }
-
-  checkOverlap() {
-    let stillOverlapping = false;
-
-    this.interactables.children.iterate((obj) => {
-      if (this.physics.overlap(this.player, obj)) {
-        this.currentInteractable = obj;
-        stillOverlapping = true;
-      }
-    });
-
-    if (!stillOverlapping) {
-      this.currentInteractable = null;
-    }
-
-    // Check for E press only if still overlapping
-    if (this.currentInteractable && Phaser.Input.Keyboard.JustDown(this.eKey)) {
-      const id = this.currentInteractable.properties?.id;
-      console.log("YA!");
-      if (id != "out") {
-        console.log("Pressing E near:", id);
-        EventBus.emit("callObjective", "Done");
-        EventBus.emit("show-dialog", { id });
-      } else if (id == "out") {
-        const enteringText = this.add
-          .text(this.cameras.main.centerX, -50, "Exiting....", {
-            fontSize: "48px",
-            fill: "#ffffff",
-            fontStyle: "bold",
-            resolution: 2,
-          })
-          .setOrigin(0.5)
-          .setDepth(1000)
-          .setScrollFactor(0);
-        GameState.afterVN = false;
-        this.cameras.main.fadeOut(1000, 0, 0, 0);
-
-        this.cameras.main.once("camerafadeoutcomplete", () => {
-          enteringText.destroy();
-          this.scene.start("MainGame");
-        });
-      }
-      if (id === "Kosuzu1") {
-        this.handleSaveVN();
-        EventBus.emit("performVN", "act3Data");
-      }
-      if (id === "shop") {
-        EventBus.emit("showShop");
-      }
-    }
   }
 
   generateMap() {

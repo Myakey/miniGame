@@ -122,6 +122,11 @@ export class Preloader extends Scene {
     this.load.image("treePantai", "/assets/img/map/pantai/Trees.png");
     this.load.script("animatedTiles", "/utils/AnimatedTiles.js");
 
+    //Mansion
+    this.load.tilemapTiledJSON("mansionMap", "/assets/img/map/mansion/mansion.tmj");
+    this.load.image("mansionHouse", "/assets/img/map/mansion/nobg.png");
+    this.load.image("meiLing", "/assets/img/map/mansion/meiLing.png");
+
     //Character SpriteSheets
     this.load.spritesheet("Yukari", foundChara.path, {
       frameWidth: foundChara.width,
