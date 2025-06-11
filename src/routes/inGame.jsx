@@ -42,7 +42,7 @@ import useTimeAndStatsUpdater from "../hooks/useTimeAndStatsUpdater";
 import ModalBoxGUIs from "../components/ModalBoxGUIs";
 
 import AnalogClock from "../components/UI/Clock";
-import ShowCurrentPlace from "../components/UI/currentPlace";
+import ShowCurrentPlace from "../components/UI/CurrentPlace";
 
 import VampireWarning from "../components/UI/WarningVamp";
 
