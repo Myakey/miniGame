@@ -3,7 +3,7 @@ import { pauseGame, resumeGame } from "../../inGame/gameController";
 import { GUITry } from "../../assets/assetsPreLoad";
 import Continue from "../../assets/GUI/continue.png";
 import Quit from "../../assets/GUI/quit.png";
-import { Pause } from "../../assets/assetsPreLoad";
+import { Pause, Save } from "../../assets/assetsPreLoad";
 import { useSaveSlotModal } from "../UI/SlotModal";
 import { useGameContext } from "../../context/GameStatusContext";
 import { GameState } from "../../hooks/gamestate";
@@ -148,6 +148,18 @@ export default function PauseMenu({ onQuit, onSetTime }) {
             />
 
             <button
+              onClick={() => openModalSave()}
+              className={`w-40 h-12 bg-no-repeat bg-center bg-contain mb-2 transition ${
+                selectedIndex === 1 ? "scale-110" : "hover:scale-105"
+              }`}
+              style={{
+                backgroundImage: `url(${Save})`,
+                border: "none",
+                imageRendering: "pixelated",
+              }}
+            />
+
+            <button
               onClick={onQuit}
               className={`w-40 h-12 bg-no-repeat bg-center bg-contain mb-2 transition ${
                 selectedIndex === 1 ? "scale-110" : "hover:scale-105"
@@ -171,17 +183,7 @@ export default function PauseMenu({ onQuit, onSetTime }) {
               }}
             />
 
-            <button
-              onClick={() => openModalSave()}
-              className={`w-40 h-12 bg-no-repeat bg-center bg-contain mb-2 transition ${
-                selectedIndex === 1 ? "scale-110" : "hover:scale-105"
-              }`}
-              style={{
-                backgroundImage: `url(${Quit})`,
-                border: "none",
-                imageRendering: "pixelated",
-              }}
-            />
+            
           </div>
           {SaveSlotModalComponent}
         </div>

@@ -8,6 +8,7 @@ import { handleDebugInGame, clearSessionStorage } from "../utils/debugHandler";
 import { useSaveSlotModal } from "../components/UI/SlotModal";
 import { GameState } from "../hooks/gamestate";
 import { useGameContext } from "../context/GameStatusContext";
+import { InitialGameState } from "../hooks/gamestate";
 
 const menuOptions = ["New Game", "Continue", "Debug Mode"];
 
@@ -15,6 +16,7 @@ function MainMenu() {
   const navigate = useNavigate();
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [showModal, setShowModal] = useState(false);
+  const { syncFromGameState } = useGameContext();
 
   const { openModalSave, SaveSlotModalComponent } = useSaveSlotModal();
 
@@ -31,6 +33,9 @@ function MainMenu() {
   const handleSelect = (option) => {
     setIsActive(false);
     if (option === "New Game") {
+      Object.assign(GameState, InitialGameState);
+      
+      syncFromGameState();
       navigate("/charaSel");
     }else if (option === "Continue"){
       openModalSave();

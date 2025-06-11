@@ -130,11 +130,11 @@
                 8,
                 5
             ],
-            "scale": 2,
+            "scale": 5.5,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 275.75,
-                "y": 395.75
+                "x": 238.45454545454547,
+                "y": 125.36363636363636
             }
         },
         "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/dieng/diengsz.tmj#Mark": {
@@ -353,7 +353,7 @@
         }
     },
     "last.exportedFilePath": "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/mansion",
-    "last.imagePath": "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/QuestPurposes",
+    "last.imagePath": "C:/Users/golde/Downloads",
     "map.height": 1,
     "map.lastUsedExportFilter": "JSON map files (*.tmj *.json)",
     "map.lastUsedFormat": "tmx",
