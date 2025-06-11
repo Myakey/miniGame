@@ -26,7 +26,7 @@ export class Dieng extends Phaser.Scene {
       ? GameState.currentlocation.currentPosY
       : 1356; // Default position if not set
     GameState.currentlocation.currentLoc = "Dieng";
-    GameState.afterVN = false;
+    EventBus.emit("OnLocationChange", { location: "Dieng" });
   }
 
   create(data) {
@@ -55,17 +55,16 @@ export class Dieng extends Phaser.Scene {
       console.warn("WebGL not supported — skipping lights");
     }
 
-    const button = this.add
-      .text(100, 150, "Return to Main Scene", {
-        fontSize: "18px",
-        fill: "#0f0",
-        backgroundColor: "#000",
-        padding: { x: 10, y: 5 },
-      })
-      .setInteractive()
-      .on("pointerdown", () => {
-        this.scene.start("MainGame");
-      });
+    if(GameState.currentAct === "Act2"){
+      this.loadStoryCharacters(2);
+      this.act31.body.enable = false;
+    }else if(GameState.currentAct === "Act3M"){
+      this.loadStoryCharacters(2);
+      this.act2.body.enable = false;
+    }else {
+      this.act2.body.enable = false;
+      this.act31.body.enable = false;
+    }
   }
 
   update() {
@@ -172,7 +171,7 @@ export class Dieng extends Phaser.Scene {
             EventBus.emit("performVN", "act1Data");
             break;
           case "act2":
-            GameState.currentAct = "act2";
+            GameState.currentAct = "Act3";
             this.handleSaveVN();
             EventBus.emit("performVN", "act2Data");
             break;
@@ -180,11 +179,11 @@ export class Dieng extends Phaser.Scene {
             this.handleSaveVN();
             EventBus.emit("performVN", "act3Data");
             break;
-          case "act3_1":
+          case "act31":
             this.handleSaveVN();
             EventBus.emit("performVN", "act3_1Data");
             break;
-          case "act3_2":
+          case "act32":
             this.handleSaveVN();
             EventBus.emit("performVN", "act3_2Data");
             break;
@@ -205,6 +204,7 @@ export class Dieng extends Phaser.Scene {
     const tiles = map.addTilesetImage("tiles", "diengTiles");
     const Sanae = map.addTilesetImage("Sanae", "Sanae");
     const torches = map.addTilesetImage("obor", "torches");
+    this.map = map;
 
     const tileLayer1 = map
       .createLayer("Tile Layer 1", tiles)
@@ -335,6 +335,12 @@ export class Dieng extends Phaser.Scene {
           if ("pushable" in sprite.body) sprite.body.pushable = false; // Optional for Phaser 3.60+
           this.physics.add.collider(this.player, sprite);
         }
+
+        if (sprite.properties.id === "act2"){
+          this.act2 = sprite;
+        }else if (sprite.properties.id === "act31"){
+          this.act31 = sprite;
+        }
       }
     });
 
@@ -415,4 +421,49 @@ export class Dieng extends Phaser.Scene {
   currentHour() {
     return GameState.time.hour;
   }
+
+  loadStoryCharacters(currentAct) {
+  const characterObjects = this.map.getObjectLayer("characters")?.objects || [];
+  const SCALE = 3;
+
+  this.storyCharacters = this.physics.add.group();
+
+  characterObjects.forEach((obj) => {
+    const props = {};
+    obj.properties?.forEach(p => props[p.name] = p.value);
+
+    const visibleActs = (props.actVisible || "")
+      .split(",")
+      .map(str => Number(str.trim()))
+      .filter(n => !isNaN(n));
+
+    if (!visibleActs.includes(currentAct)) return; // Skip if not for this act
+
+    const x = (obj.x + obj.width / 2) * SCALE;
+    const y = (obj.y + obj.height / 2) * SCALE;
+    const spriteKey = props.spriteKey || "defaultNPC";
+
+    const sprite = this.physics.add.sprite(x, y, spriteKey);
+    sprite.setOrigin(0.5);
+    sprite.setDepth(10);
+    sprite.body.setImmovable(true);
+    sprite.body.setAllowGravity(false);
+    sprite.body.setVelocity(0, 0);
+    sprite.setDisplaySize(obj.width * SCALE, obj.height * SCALE);
+
+    // Optional: set body size explicitly if needed
+   
+
+    sprite.characterId = obj.name;
+    sprite.properties = props;
+
+    // // 👤 Handle interaction, handled outside by you
+    // this.storyCharacters.add(sprite);
+
+    // 🚧 Collisions
+    if (props.collides !== false) {
+      this.physics.add.collider(this.player, sprite);
+    }
+  });
+}
 }

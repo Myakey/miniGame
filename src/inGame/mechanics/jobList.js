@@ -1,5 +1,5 @@
 export const jobList = {
-  "blokM": [
+  "BlokM": [
     {
       Id: "blokm_mcd",
       name: "Kerja di MCD",

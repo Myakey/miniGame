@@ -5,13 +5,18 @@ import Button from "../components/UI/Buttons";
 import Modal from "../components/UI/ModalBox";
 import DebugBox from "../components/UI/DebugBox";
 import { handleDebugInGame, clearSessionStorage } from "../utils/debugHandler";
+import { useSaveSlotModal } from "../components/UI/SlotModal";
+import { GameState } from "../hooks/gamestate";
+import { useGameContext } from "../context/GameStatusContext";
 
-const menuOptions = ["Play!", "Debug Mode"];
+const menuOptions = ["New Game", "Continue", "Debug Mode"];
 
 function MainMenu() {
   const navigate = useNavigate();
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [showModal, setShowModal] = useState(false);
+
+  const { openModalSave, SaveSlotModalComponent } = useSaveSlotModal();
 
   const scenes = ["MainGame", "BlokM", "FlowerField", "Pantai", "Dieng", "HakureiShrine", "Reset"];
 
@@ -25,13 +30,15 @@ function MainMenu() {
 
   const handleSelect = (option) => {
     setIsActive(false);
-    if (option === "Play!") {
+    if (option === "New Game") {
       navigate("/charaSel");
-    } else if (option === "Debug Mode") {
+    }else if (option === "Continue"){
+      openModalSave();
+    }else if (option === "Debug Mode") {
       toggleDebugModal();
     }
     navigator.vibrate?.(50);
-  };
+  }; 
 
   const handleKeyDown = (e) => {
     if (!isActive) return;
@@ -106,6 +113,13 @@ function MainMenu() {
     )
   }
 
+  const handleLoadGame = (loadedState) => {
+    Object.assign(GameState, loadedState);
+    
+    const { syncFromGameState } = useGameContext();
+    syncFromGameState();
+  };
+
   return (
     <div className="mainMenu h-screen w-screen flex justify-center items-center bg-black">
       <div className="flex flex-col items-center">
@@ -149,6 +163,7 @@ function MainMenu() {
         )} */}
 
         <DebugBox modal={debugModal} toggleModal={toggleDebugModal} innerText={mapDebug()}/>
+        {SaveSlotModalComponent}
       </div>
     </div>
   );

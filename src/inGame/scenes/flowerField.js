@@ -12,6 +12,8 @@ import { LightSource } from "../lighting/lightSource";
 
 import { setupInteractionHandler } from "../../utils/interactionManager";
 
+import { EventBus } from "../EventBus";
+
 export class FlowerField extends Phaser.Scene {
   constructor() {
     super({ key: "FlowerField" });
@@ -21,7 +23,7 @@ export class FlowerField extends Phaser.Scene {
     GameState.currentlocation.currentLoc = "FlowerField";
     this.posX = GameState.afterVN ? GameState.currentlocation.currentPosX : 747; // Default position if not set
     this.posY = GameState.afterVN ? GameState.currentlocation.currentPosY : 859; // Default position if not set
-    GameState.afterVN = false;
+    EventBus.emit("OnLocationChange", { location: "Yuuka's Field" });
   }
 
   create(data) {

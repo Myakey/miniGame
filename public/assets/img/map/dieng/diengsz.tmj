@@ -49,7 +49,7 @@
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 145, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -137,8 +137,102 @@
                  "type":"",
                  "visible":true,
                  "width":32.5833333333334,
-                 "x":280.166666666667,
-                 "y":63.75
+                 "x":280.712121212122,
+                 "y":90.6590909090909
+                }, 
+                {
+                 "height":69.6363636363636,
+                 "id":25,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"id",
+                         "type":"string",
+                         "value":"act31"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":42.1818181818182,
+                 "x":275.636363636364,
+                 "y":86.7272727272727
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":8,
+         "name":"characters",
+         "objects":[
+                {
+                 "gid":145,
+                 "height":24,
+                 "id":23,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"actVisible",
+                         "type":"string",
+                         "value":"2"
+                        }, 
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"name",
+                         "type":"string",
+                         "value":"Reimu"
+                        }, 
+                        {
+                         "name":"spriteKey",
+                         "type":"string",
+                         "value":"Sanae"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":288.727272727273,
+                 "y":104.909090909091
+                }, 
+                {
+                 "gid":1426,
+                 "height":16,
+                 "id":24,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"actVisible",
+                         "type":"string",
+                         "value":"2"
+                        }, 
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"name",
+                         "type":"string",
+                         "value":"Sanae"
+                        }, 
+                        {
+                         "name":"spriteKey",
+                         "type":"string",
+                         "value":"questMarker"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":288.727272727273,
+                 "y":90.1818181818182
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -568,8 +662,8 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":8,
- "nextobjectid":21,
+ "nextlayerid":9,
+ "nextobjectid":26,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",
@@ -1727,6 +1821,19 @@
          "name":"obor",
          "spacing":0,
          "tilecount":640,
+         "tileheight":16,
+         "tilewidth":16
+        }, 
+        {
+         "columns":1,
+         "firstgid":1426,
+         "image":"..\/..\/QuestPurposes\/Mark.png",
+         "imageheight":16,
+         "imagewidth":16,
+         "margin":0,
+         "name":"Mark",
+         "spacing":0,
+         "tilecount":1,
          "tileheight":16,
          "tilewidth":16
         }],

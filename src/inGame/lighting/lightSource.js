@@ -23,10 +23,11 @@ export class LightSource {
     this.light = scene.lights.addLight(x, y, this.baseRadius, this.baseColor, 0);
 
     // Init based on initial hour
-    this.updateLightByHour(config.initialHour || 12);
+    this.updateLightByHour(config.initialHour);
 
     // Listen for hour updates
     EventBus.on("phaser-time-update", ({ hour }) => {
+      console.log("current hour for light: " + hour);
       this.updateLightByHour(hour);
     });
   }
@@ -58,6 +59,7 @@ export class LightSource {
   }
 
   getPeriodForHour(hour) {
+    console.log("Hour : " + hour);
     if (hour >= 5 && hour < 17) return "day";
     if (hour >= 17 && hour < 19) return "sunset";
     if (hour >= 19 || hour < 5) return "night";

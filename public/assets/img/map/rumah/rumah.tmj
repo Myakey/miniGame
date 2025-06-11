@@ -102,9 +102,9 @@
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 595, 595, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 597, 597, 595, 0, 0, 0, 0, 0, 0, 0, 223, 224, 0,
-            0, 0, 0, 0, 0, 610, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 108, 0,
-            0, 0, 602, 0, 0, 0, 0, 0, 0, 593, 593, 0, 0, 0, 0, 0, 0, 0, 137, 0,
-            0, 608, 0, 0, 593, 0, 593, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 292, 293, 0, 0, 610, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 108, 0,
+            0, 321, 322, 0, 0, 0, 0, 0, 0, 593, 593, 0, 0, 0, 0, 0, 0, 0, 137, 0,
+            0, 0, 0, 0, 593, 0, 593, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 591, 0, 0, 0, 0, 0, 0, 0, 0, 602, 0, 0, 602, 0,
             0, 602, 0, 0, 0, 0, 0, 599, 0, 616, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 554, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -169,6 +169,35 @@
          "height":18,
          "id":6,
          "name":"object1",
+         "opacity":1,
+         "type":"tilelayer",
+         "visible":true,
+         "width":20,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 1439, 0, 0, 0, 0, 0, 0, 0, 0, 1439, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 1439, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1439, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 1439, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 1439, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 1440, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+         "height":18,
+         "id":13,
+         "name":"legends",
          "opacity":1,
          "type":"tilelayer",
          "visible":true,
@@ -322,7 +351,7 @@
                         {
                          "name":"lightIntensity",
                          "type":"float",
-                         "value":3
+                         "value":1.5
                         }, 
                         {
                          "name":"lightRadius",
@@ -482,7 +511,7 @@
                  "y":269.75
                 }, 
                 {
-                 "height":30.875,
+                 "height":21.5,
                  "id":29,
                  "name":"",
                  "properties":[
@@ -494,9 +523,9 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":48,
-                 "x":141.375,
-                 "y":132.875
+                 "width":31.625,
+                 "x":139.75,
+                 "y":123.125
                 }, 
                 {
                  "height":27.0909090909091,
@@ -527,8 +556,93 @@
                  "type":"",
                  "visible":true,
                  "width":38.9090909090909,
-                 "x":150.545454545455,
-                 "y":104.545454545455
+                 "x":153.670454545455,
+                 "y":101.795454545455
+                }, 
+                {
+                 "height":25.75,
+                 "id":47,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":true
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":25.75,
+                 "x":14.75,
+                 "y":199.25
+                }, 
+                {
+                 "height":16.5454545454545,
+                 "id":49,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":true
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":30,
+                 "x":15.2727272727273,
+                 "y":79.7272727272727
+                }, 
+                {
+                 "height":14.5454545454545,
+                 "id":50,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":true
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":9.72727272727273,
+                 "x":31.5454545454545,
+                 "y":18.8181818181818
+                }, 
+                {
+                 "height":16.4545454545455,
+                 "id":51,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":true
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":29.4545454545454,
+                 "x":272.181818181818,
+                 "y":175.909090909091
+                }, 
+                {
+                 "height":13.0909090909091,
+                 "id":52,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":true
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":12.0909090909091,
+                 "x":288.090909090909,
+                 "y":196.181818181818
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -557,9 +671,152 @@
          "visible":true,
          "x":0,
          "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":14,
+         "name":"characters",
+         "objects":[
+                {
+                 "gid":2182,
+                 "height":14.1818181818182,
+                 "id":53,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"actVisible",
+                         "type":"string",
+                         "value":"1"
+                        }, 
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"name",
+                         "type":"string",
+                         "value":"Yukari"
+                        }, 
+                        {
+                         "name":"spriteKey",
+                         "type":"string",
+                         "value":"YukariStand"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":10.2727272727273,
+                 "x":143,
+                 "y":142.363636363636
+                }, 
+                {
+                 "gid":1491,
+                 "height":9.25,
+                 "id":54,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"actVisible",
+                         "type":"string",
+                         "value":"1"
+                        }, 
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"name",
+                         "type":"string",
+                         "value":"Yukari"
+                        }, 
+                        {
+                         "name":"spriteKey",
+                         "type":"string",
+                         "value":"questMarker"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":9.75,
+                 "x":143.125,
+                 "y":133.625
+                }, 
+                {
+                 "gid":2183,
+                 "height":13.125,
+                 "id":55,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"actVisible",
+                         "type":"string",
+                         "value":"10"
+                        }, 
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"name",
+                         "type":"string",
+                         "value":"Reimu"
+                        }, 
+                        {
+                         "name":"spriteKey",
+                         "type":"string",
+                         "value":"ReimuStand"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":9.75,
+                 "x":155.875,
+                 "y":136.375
+                }, 
+                {
+                 "gid":1491,
+                 "height":9.25,
+                 "id":56,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"actVisible",
+                         "type":"string",
+                         "value":"10"
+                        }, 
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"name",
+                         "type":"string",
+                         "value":"Yukari"
+                        }, 
+                        {
+                         "name":"spriteKey",
+                         "type":"string",
+                         "value":"questMarker"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":9.75,
+                 "x":155.875,
+                 "y":127.375
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
         }],
- "nextlayerid":13,
- "nextobjectid":46,
+ "nextlayerid":15,
+ "nextobjectid":57,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",
@@ -2788,6 +3045,45 @@
                         }]
                 }],
          "tilewidth":16
+        }, 
+        {
+         "columns":52,
+         "firstgid":622,
+         "image":"..\/legends.png",
+         "imageheight":480,
+         "imagewidth":832,
+         "margin":0,
+         "name":"legends",
+         "spacing":0,
+         "tilecount":1560,
+         "tileheight":16,
+         "tilewidth":16
+        }, 
+        {
+         "columns":1,
+         "firstgid":2182,
+         "image":"..\/..\/..\/..\/..\/src\/assets\/image\/QuestPurposes\/YukariStanding.png",
+         "imageheight":30,
+         "imagewidth":21,
+         "margin":0,
+         "name":"YukariStand",
+         "spacing":0,
+         "tilecount":1,
+         "tileheight":30,
+         "tilewidth":21
+        }, 
+        {
+         "columns":1,
+         "firstgid":2183,
+         "image":"..\/..\/QuestPurposes\/ReimuStanding.png",
+         "imageheight":26,
+         "imagewidth":18,
+         "margin":0,
+         "name":"Reimu",
+         "spacing":0,
+         "tilecount":1,
+         "tileheight":26,
+         "tilewidth":18
         }],
  "tilewidth":16,
  "type":"map",

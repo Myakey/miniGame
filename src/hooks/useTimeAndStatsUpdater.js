@@ -4,18 +4,26 @@ import { GameState } from "./gamestate";
 import { isPaused } from "../inGame/gameController";
 import { Game } from "phaser";
 
-export default function useTimeAndStatsUpdater({ setStatus }) {
+export default function useTimeAndStatsUpdater({
+  setStatus,
+  setVampireWarning,
+}) {
   const tickCounter = useRef(0); // Count total ticks (every 1 sec)
+  const vampireWarningCooldown = useRef(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
       if (!isPaused) {
         tickCounter.current += 1;
+        let shouldShowVampireWarning = false;
+
 
         setStatus((prev) => {
           const newMinute = (prev.time.minute + 1) % 60;
           const hourChanged = prev.time.minute === 59;
-          const newHour = hourChanged ? (prev.time.hour + 1) % 24 : prev.time.hour;
+          const newHour = hourChanged
+            ? (prev.time.hour + 1) % 24
+            : prev.time.hour;
           const isNewDay = hourChanged && prev.time.hour === 23;
           const newDay = isNewDay ? prev.time.day + 1 : prev.time.day;
 
@@ -32,13 +40,29 @@ export default function useTimeAndStatsUpdater({ setStatus }) {
               hour: newHour,
               day: newDay,
             },
-            score: isNewDay ? prev.score + (GameState.difficulties === "hard" ? 75 : 50) : prev.score,
+            score: isNewDay
+              ? prev.score + (GameState.difficulties === "hard" ? 75 : 50)
+              : prev.score,
           };
 
           // Stat depletion logic with different intervals
-          if (tickCounter.current % 5 === 0) {
-            // Every 5 seconds
-            newState.health = Math.max((prev.health || 100) - 1, 0);
+          if (GameState.isVampire) {
+            const isDay = newHour >= 6 && newHour <= 18;
+            const outdoorLocations = ["Dieng", "MainGame", "Pantai"];
+            const isOutside = outdoorLocations.includes(
+              GameState.currentlocation.currentLoc
+            );
+
+            if (isDay && isOutside) {
+              newState.energy = Math.max(prev.energy - 2, 0);
+              newState.happiness = Math.max(prev.happiness - 2, 0);
+              newState.hygiene = Math.max(prev.hygiene - 2, 0);
+              newState.hunger = Math.max(prev.hunger - 2, 0);
+
+              if (!vampireWarningCooldown.current) {
+                shouldShowVampireWarning = true;
+              }
+            }
           }
 
           if (tickCounter.current % 10 === 0) {
@@ -61,9 +85,19 @@ export default function useTimeAndStatsUpdater({ setStatus }) {
           GameState.time.hour = newHour; // Update global hour state
           return newState;
         });
+
+        if (shouldShowVampireWarning) {
+          console.log("Test");
+          vampireWarningCooldown.current = true;
+          setVampireWarning(true);
+
+          setTimeout(() => {
+            vampireWarningCooldown.current = false;
+          }, 10000);
+        }
       }
     }, 1000); // 1 second tick
 
     return () => clearInterval(interval);
-  }, [setStatus]);
+  }, [setStatus, setVampireWarning]);
 }

@@ -21,6 +21,7 @@ export class Pantai extends Phaser.Scene {
       : 1086;
     this.posY = GameState.afterVN ? GameState.currentlocation.currentPosY : 80;
     GameState.currentlocation.currentLoc = "Pantai";
+    EventBus.emit("OnLocationChange", { location: "South Beach" });
   }
 
   create(data) {
@@ -64,28 +65,6 @@ export class Pantai extends Phaser.Scene {
       .on("pointerdown", () => {
         this.scene.start("DrawScene");
       });
-
-    const button1 = this.add
-      .text(400, 150, "Bath", {
-        fontSize: "18px",
-        fill: "#0f0",
-        backgroundColor: "#000",
-        padding: { x: 10, y: 5 },
-      })
-      .setInteractive()
-      .on("pointerdown", () => {
-        EventBus.emit("performAction", "bath");
-      });
-
-    const button2 = this.add
-      .text(600, 150, "Shop", {
-        fontSize: "18px",
-        fill: "#0f0",
-        backgroundColor: "#000",
-        padding: { x: 10, y: 5 },
-      })
-      .setInteractive()
-      .on("pointerdown", () => {});
 
     this.cursors = this.input.keyboard.createCursorKeys();
     this.shiftKey = this.input.keyboard.addKey(

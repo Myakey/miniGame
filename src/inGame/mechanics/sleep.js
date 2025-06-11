@@ -2,21 +2,32 @@ import { GameState } from "../../hooks/gamestate";
 
 export default function sleep(currentStatus) {
   const currentHour = GameState.time.hour;
+  const isVampire = GameState.isVampire;
 
-  // Only allow sleep if it's 21:00–23:59 or 00:00–06:59
-  const canSleep = currentHour >= 21 || currentHour < 7;
+  // Define allowed sleep hours
+  const canSleep = isVampire
+    ? currentHour >= 7 && currentHour < 19  // Vampires: 07:00–18:59
+    : currentHour >= 21 || currentHour < 7; // Humans: 21:00–06:59
+
   if (!canSleep) return currentStatus;
 
-  // Calculate how many hours left until 7 AM
-  const sleepHours = currentHour >= 21
-    ? 24 - currentHour + 7 // e.g., 22 → 9 hours: (24 - 22 + 7 = 9)
-    : 7 - currentHour;     // e.g., 3 → 4 hours
+  // Calculate sleep duration
+  let sleepHours;
+  if (isVampire) {
+    // Vampires sleep until 19:00
+    sleepHours = 19 - currentHour;
+  } else {
+    // Humans sleep until 07:00
+    sleepHours = currentHour >= 21
+      ? 24 - currentHour + 7
+      : 7 - currentHour;
+  }
 
   const energyGained = sleepHours * 10;
   const newEnergy = Math.min(currentStatus.energy + energyGained, 100);
 
-  const newHour = 7;
-  const crossedMidnight = currentHour >= 21;
+  const newHour = isVampire ? 19 : 7;
+  const crossedMidnight = !isVampire && currentHour >= 21;
   const newDay = crossedMidnight ? currentStatus.time.day + 1 : currentStatus.time.day;
 
   return {

@@ -28,6 +28,7 @@ import { useVNSelector } from "../components/VN/VNSELECTOR";
 import { Game } from "phaser";
 
 export default function CharSel() {
+  console.log(GameState)
   let VNSelector = useVNSelector();
 
   const audioTest = new Audio(soundAssets[0]);

@@ -198,7 +198,8 @@ import hunger from "../assets/image/InGame/icons/hunger.png";
 import energy from "../assets/image/InGame/icons/energy.png";
 import hygiene from "../assets/image/InGame/icons/hygiene.png";
 import happiness from "../assets/image/InGame/icons/happiness.png";
-
+import currentPlace from "../assets/GUI/currentPlace.png"
+import Pause from "../assets/GUI/Pause.png"
 
 
 export const assetsLoadImg = [
@@ -222,6 +223,7 @@ export const assetsLoadImg = [
   GUITry,
   hunger,happiness,energy,hygiene,
   Yes,No,
+  currentPlace, Pause,
 
   jalanDiengImage, BathImage, SleepImage, jalanBeachImage, jalanMCDImage,
 
@@ -277,7 +279,7 @@ export { NitoriShopSound, EsotericistPiano, Alice, FlandreSelect, ReimuSelect, R
 
 export { RemiliaButton, SakuyaButton, YukariButton, FlandreButton, ReimuButton, ReimuRight, RemiliaRight, SakuyaRight, YukariRight, FlandreRight, NitoriShop };
 
-export { GUITry, hunger, happiness, energy, hygiene, Yes, No }
+export { GUITry, hunger, happiness, energy, hygiene, Yes, No, currentPlace, Pause }
 
 export {jalanDiengImage, jalanMCDImage, jalanBeachImage, SleepImage, BathImage}
 
