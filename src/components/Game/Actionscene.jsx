@@ -35,7 +35,7 @@ function ActionFlow({ isPlaying, currentActionType, onSkip }) {
         console.warn("ActionFlow: No GIF found for action type:", currentActionType);
         // Optionally, return a default "action in progress" or placeholder
         return (
-            <div className="fixed inset-0 flex items-center justify-center bg-black/60 z-[0]"> {/* Ensure z-index is high enough */}
+            <div className="fixed inset-0 flex items-center justify-center bg-black/100 z-[0]"> {/* Ensure z-index is high enough */}
                 <AnalogClock />
                 <div className="relative bg-white rounded-xl p-6 shadow-xl text-center">
                     <p className="text-lg font-semibold mb-2">Performing: {currentActionType}...</p>
@@ -52,7 +52,7 @@ function ActionFlow({ isPlaying, currentActionType, onSkip }) {
     }
 
     return (
-        <div className="fixed inset-0 flex items-center justify-center bg-black z-[60]"> {/* Ensure z-index is appropriately high */}
+        <div className="fixed inset-0 flex items-center justify-center bg-black/70 z-[60]"> {/* Ensure z-index is appropriately high */}
         
            <div
                className="relative flex flex-col rounded-xl shadow-xl p-6 w-full max-w-md tv-on item-center justify-center text-center"
