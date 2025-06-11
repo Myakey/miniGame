@@ -13,7 +13,7 @@ export default function StatusBars({ icon, num, color = 'blue', max = 100, label
   
 
   return (
-   <div className="flex flex-row items-center w-50 mb-5 gap-4">
+   <div className="flex flex-row items-center w-full md:w-50 md:mb-5 md:gap-4 max-w-sm sm:max-w-md md:max-w-lg mb-3 gap-3 px-2">
   {/* Icon */}
   <div className="w-7 h-6 flex items-center justify-center rounded-full bg-amber-50">
     <img src={bars[icon]} className="w-4 h-4" alt={icon} />

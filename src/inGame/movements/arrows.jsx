@@ -1,8 +1,8 @@
 import { EventBus } from "../EventBus";
 import { useRef } from "react";
 
-export default function ArrowControls(){
-    const holdRef = useRef(null);
+export default function ArrowControls() {
+  const holdRef = useRef(null);
 
   const handleDown = (dir) => {
     EventBus.emit("move", dir);
@@ -16,36 +16,40 @@ export default function ArrowControls(){
     EventBus.emit("stop");
   };
 
+  const handleTap = (dir) => {
+    EventBus.emit("move", dir);
+    setTimeout(() => EventBus.emit("stop"), 100); // brief movement
+  };
+
+  const commonProps = (dir) => ({
+    onMouseDown: () => handleDown(dir),
+    onMouseUp: handleUp,
+    onMouseLeave: handleUp,
+    onClick: () => handleTap(dir),
+    onTouchStart: () => handleDown(dir),
+    onTouchEnd: handleUp,
+    onTouchCancel: handleUp,
+  });
+
   return (
     <div className="fixed bottom-4 left-4 flex flex-col gap-2 md:hidden">
-      <button
-        className="bg-gray-200 px-4 py-2 rounded"
-        onMouseDown={() => handleDown("up")}
-        onMouseUp={handleUp}
-        onMouseLeave={handleUp}
-      >↑</button>
+      <button className="bg-gray-200 px-4 py-2 rounded" {...commonProps("up")}>
+        ↑
+      </button>
 
       <div className="flex gap-2">
-        <button
-          className="bg-gray-200 px-4 py-2 rounded"
-          onMouseDown={() => handleDown("left")}
-          onMouseUp={handleUp}
-          onMouseLeave={handleUp}
-        >←</button>
-        <button
-          className="bg-gray-200 px-4 py-2 rounded"
-          onMouseDown={() => handleDown("right")}
-          onMouseUp={handleUp}
-          onMouseLeave={handleUp}
-        >→</button>
+        <button className="bg-gray-200 px-4 py-2 rounded" {...commonProps("left")}>
+          ←
+        </button>
+        <button className="bg-gray-200 px-4 py-2 rounded" {...commonProps("right")}>
+          →
+        </button>
       </div>
 
-      <button
-        className="bg-gray-200 px-4 py-2 rounded"
-        onMouseDown={() => handleDown("down")}
-        onMouseUp={handleUp}
-        onMouseLeave={handleUp}
-      >↓</button>
+      <button className="bg-gray-200 px-4 py-2 rounded" {...commonProps("down")}>
+        ↓
+      </button>
     </div>
   );
 }
+ 

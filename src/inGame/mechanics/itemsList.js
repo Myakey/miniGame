@@ -7,7 +7,7 @@ export const itemsList = [
     hygiene: -5,
     money: 5,
     image: "https://static.vecteezy.com/system/resources/previews/035/665/710/non_2x/burger-pixel-art-icon-vintage-8-bit-80s-90s-games-computer-arcade-game-item-nostalgic-old-games-style-hamburger-illustration-vector.jpg",
-    places: "blokM"
+    places: "BlokM"
   },
   {
     id: 1,
@@ -17,7 +17,7 @@ export const itemsList = [
     hygiene: -3,
     money: 10,
     image: "https://png.pngtree.com/png-clipart/20250207/original/pngtree-pixel-art-art-fried-rice-fried-rice-icon-for-culinary-projects-png-image_20392216.png",
-    places: "blokM"
+    places: "BlokM"
   },
   {
     id: 2,
@@ -27,7 +27,7 @@ export const itemsList = [
     hygiene: 0,
     money: 15,
     image: "https://i.pinimg.com/736x/56/4f/86/564f864073ffb5f160241a19eac7f936.jpg",
-    places: "blokM"
+    places: "BlokM"
   },
   {
     id: 3,
@@ -37,7 +37,7 @@ export const itemsList = [
     hygiene: 0,
     money: 5,
     image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuG1ajYlfMUemV4bdBvKECjGqJgByUlpmFPw&s",
-    places: "blokM"
+    places: "BlokM"
   },
   {
     id: 4,
@@ -48,7 +48,7 @@ export const itemsList = [
     money: 5,
     image: "https://i.pinimg.com/736x/f8/ed/f8/f8edf8d8e4fa64e65f766f8ca7561b26.jpg",
     effect: "Boosts bath resource gain",
-    places: "blokM"
+    places: "BlokM"
   },
   {
     id: 5,

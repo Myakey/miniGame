@@ -20,7 +20,10 @@ export class MainGame extends Phaser.Scene {
     super({ key: "MainGame" });
   }
 
-  preload() {}
+  preload() {
+    GameState.currentlocation.currentLoc = "MainGame";
+    EventBus.emit("OnLocationChange", { location: "Small Gensokyo" });
+  }
 
   generateTriggerZone() {
     this.inTriggerZone = null;
@@ -129,6 +132,7 @@ export class MainGame extends Phaser.Scene {
     const home = map.addTilesetImage("home", "Home");
     const galletcity = map.addTilesetImage("blokM2", "galletcity");
     const torches = map.addTilesetImage("obor", "torches");
+    const legends = map.addTilesetImage("legends", "legends");
 
     const groundLayer = map
       .createLayer("Ground", ground)
@@ -149,11 +153,17 @@ export class MainGame extends Phaser.Scene {
       .setScale(0.3);
     this.player.body.setCollideWorldBounds(true);
 
+    const legendsLayer = map.createLayer("legends", legends);
+    legendsLayer.setDepth(2);
+
+    tempatLayer.setDepth(2);
+
     if (this.sys.game.renderer instanceof Phaser.Renderer.WebGL.WebGLRenderer) {
       this.lights.enable();
       this.lights.setAmbientColor(0xffffff);
 
       this.lightingManager = new LightingManager(this);
+
 
       const currentHour = this.currentHour();
 
@@ -183,6 +193,7 @@ export class MainGame extends Phaser.Scene {
     tempatLayer.setScale(scale);
     detailsLayer.setScale(scale);
     grassLayer.setScale(scale);
+    legendsLayer.setScale(scale);
 
     this.physics.world.setBounds(0, 0, mapWidth * scale, mapHeight * scale);
     this.cameras.main.setBounds(0, 0, mapWidth * scale, mapHeight * scale);
@@ -475,8 +486,70 @@ export class MainGame extends Phaser.Scene {
       handlers: {
         Mansion: ({ scene }) => {
           this.handleSaveVN();
-          this.scene.start("Mansion");
+          const enteringText = this.add
+        .text(
+          this.cameras.main.centerX,
+          -50,
+          `Entering Mansion...`,
+          {
+            fontSize: "48px",
+            fill: "#ffffff",
+            fontStyle: "bold",
+            resolution: 2,
+          }
+        )
+        .setOrigin(0.5)
+        .setDepth(1000)
+        .setScrollFactor(0);
+
+      this.tweens.add({
+        targets: enteringText,
+        y: this.cameras.main.centerY,
+        duration: 400,
+        ease: "Sine.easeOut",
+      });
+
+      this.cameras.main.fadeOut(1000, 0, 0, 0);
+
+      this.cameras.main.once("camerafadeoutcomplete", () => {
+        this.SaveState();
+        enteringText.destroy();
+        this.scene.start("Mansion");
+      });
         },
+        house: ( { scene } ) =>{
+          this.handleSaveVN();
+          const enteringText = this.add
+        .text(
+          this.cameras.main.centerX,
+          -50,
+          `Entering House...`,
+          {
+            fontSize: "48px",
+            fill: "#ffffff",
+            fontStyle: "bold",
+            resolution: 2,
+          }
+        )
+        .setOrigin(0.5)
+        .setDepth(1000)
+        .setScrollFactor(0);
+
+      this.tweens.add({
+        targets: enteringText,
+        y: this.cameras.main.centerY,
+        duration: 400,
+        ease: "Sine.easeOut",
+      });
+
+      this.cameras.main.fadeOut(1000, 0, 0, 0);
+
+      this.cameras.main.once("camerafadeoutcomplete", () => {
+        this.SaveState();
+        enteringText.destroy();
+        this.scene.start("HakureiShrine");
+      });
+        }
       },
     });
   }

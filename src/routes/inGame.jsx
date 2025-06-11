@@ -1,5 +1,5 @@
 import React from "react";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useCallback } from "react";
 
 import Phaser from "phaser";
 import { PhaserGame } from "../inGame/PhaserGame";
@@ -41,6 +41,11 @@ import useActionHandlers from "../hooks/useActionHandlers";
 import useTimeAndStatsUpdater from "../hooks/useTimeAndStatsUpdater";
 import ModalBoxGUIs from "../components/ModalBoxGUIs";
 
+import AnalogClock from "../components/UI/Clock";
+import ShowCurrentPlace from "../components/UI/CurrentPlace";
+
+import VampireWarning from "../components/UI/WarningVamp";
+
 function MainGame() {
   let navigate = useNavigate();
   let VNSelector = useVNSelector();
@@ -59,7 +64,7 @@ function MainGame() {
     setCanMoveSprite(scene.scene.key !== "InGame");
   };
 
-
+  const [vampireWarning, setVampireWarning] = useState(false);
   const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
   const [isActionPlaying, setIsActionPlaying] = useState(false);
   const [currentActionTypeForAnimation, setCurrentActionTypeForAnimation] =
@@ -88,16 +93,16 @@ function MainGame() {
   //Use Effect buat ngehubungin React sama Action di Phaser. Jadi waktu ada action tertentu di Phaser, maka React akan nerima dan akan update context di sini yaa
   //Update ini supaya logic jobId bisa di pass
   useActionHandlers({
-  setStatus,
-  VNSelector,
-  setConfirmationModalData,
-  setIsConfirmationModalOpen,
-  setIsActionPlaying,
-  setCurrentActionTypeForAnimation,
-});
+    setStatus,
+    VNSelector,
+    setConfirmationModalData,
+    setIsConfirmationModalOpen,
+    setIsActionPlaying,
+    setCurrentActionTypeForAnimation,
+  });
 
   //Use effect di sini buat stats nurun gradually supaya bisa ada penurunan, ntar disetting di sini aja penurunan perdetiknya berapa janlupp.
-  useTimeAndStatsUpdater({isPaused, setStatus})
+  useTimeAndStatsUpdater({ setStatus, setVampireWarning });
 
   //Mapping buat status bars, bakalan direrender semua nya waktu contextnya ganti, mempermudah animasi cuma butuh optimalisasi performa lebih lagi
   function createStatus(text) {
@@ -107,13 +112,12 @@ function MainGame() {
     );
   }
 
-
   //Combine into one class?
   // ##########################################################
 
   const [isConfirmationClosing, setIsConfirmationClosing] = useState(false);
-  const handleConfirmationActions = new class{
-     handleConfirmCurrentAction = () => {
+  const handleConfirmationActions = new (class {
+    handleConfirmCurrentAction = () => {
       setIsConfirmationModalOpen(false); // Close confirmation modal first
 
       if (confirmationModalData.actionType) {
@@ -137,10 +141,9 @@ function MainGame() {
             setIsActionPlaying(true);
 
             EventBus.emit("performAction", {
-                type: confirmationModalData.actionType,
-                jobId: confirmationModalData.actionParams?.jobId,
+              type: confirmationModalData.actionType,
+              jobId: confirmationModalData.actionParams?.jobId,
             });
-
           }
         }, 400); // Match the .tv-off animation duration
       } else {
@@ -148,26 +151,33 @@ function MainGame() {
       }
     };
 
-    handleSkipActionAnimation(){
-    EventBus.emit("skipAction")
-    console.log(
-      "Action animation skipped, action performed, attempting to resume game (if action is instant)"
-    );
-    };
-    
-    handleCancelCurrentAction(){
-    console.log("Action cancelled for modalId:", confirmationModalData.modalId);
-    setIsConfirmationModalOpen(false);
-    resumeGame(); // Resume game if action is cancelled
-    console.log("Confirmation modal closed, action cancelled, game resumed");
-  };
+    handleSkipActionAnimation() {
+      EventBus.emit("skipAction");
+      console.log(
+        "Action animation skipped, action performed, attempting to resume game (if action is instant)"
+      );
+    }
 
-  };
+    handleCancelCurrentAction() {
+      console.log(
+        "Action cancelled for modalId:",
+        confirmationModalData.modalId
+      );
+      setIsConfirmationModalOpen(false);
+      resumeGame(); // Resume game if action is cancelled
+      console.log("Confirmation modal closed, action cancelled, game resumed");
+    }
+  })();
+
+  const handleCloseVampireWarning = useCallback(() => {
+    setVampireWarning(false);
+  }, []);
 
   // ##########################################################
 
   return (
     <div className="inGameWrapper">
+      <ShowCurrentPlace />
       <ObjectivePanel />
       <ShopInteraction />
       <Inventory />
@@ -182,22 +192,26 @@ function MainGame() {
         isActionPlaying={isActionPlaying}
         currentActionTypeForAnimation={currentActionTypeForAnimation}
       />
+      <VampireWarning
+        visible={vampireWarning}
+        onClose={handleCloseVampireWarning}
+      />
 
       <div className="flex flex-col items-center w-full">
         <div className="relative w-full flex justify-center mt-4">
-          <div className="hidden md:flex md:items-start md:fixed md:bottom-4 md:left-4 z-10 rounded-3xl p-3 gap-4">
+          <div className="hidden md:flex md:items-start md:fixed md:bottom-4 md:left-4 z-200 rounded-3xl p-3 gap-4">
             <div className="flex flex-col space-y-2">
               {icons.map(createStatus)}
             </div>
           </div>
           <div className="hidden md:flex md:flex-col md:items-center justify-center md:max-w-full md:px-1 z-10">
             <div className="bg-white/30 flex flex-col items-center backdrop-blur-md rounded-xl shadow-md p-3 text-2xl mt-1">
-            <div className="flex flex-row">
+              <div className="flex flex-row">
                 {status.time.hour.toString().padStart(2, "0")}:
                 {status.time.minute.toString().padStart(2, "0")} | 日{" "}
                 {status.time.day}
-            </div>
-            <div className="text-lg mt-1">得点: {status.score}</div>
+              </div>
+              <div className="text-lg mt-1">得点: {status.score}</div>
             </div>
           </div>
 
@@ -213,12 +227,13 @@ function MainGame() {
           </div>
         </div>
 
-        <div className="md:hidden grid grid-cols-2 gap-3 p-4 mt-4 bg-blue-400 rounded-3xl z-10">
+        <div className="md:hidden grid grid-cols-2 gap-3 p-4 mt-4 bg-blue-400 rounded-3xl z-10 w-full max-w-xs sm:max-w-sm">
           {icons.map(createStatus)}
-          <div className="flex flex-col items-center w-full max-w-[6rem] px-1">
+          <div className="flex flex-col items-center w-full px-1">
             <div className="text-xs mt-1">{GameState.money}</div>
           </div>
         </div>
+
         <ArrowControls />
       </div>
       {/* ######################################################################### */}

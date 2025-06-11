@@ -4,6 +4,7 @@ import { pauseGame, resumeGame } from "../inGame/gameController";
 import handleActionLogic from "../inGame/handleAction";
 import { GameState } from "./gamestate";
 import { Game } from "phaser";
+import { stopAllSounds } from "../utils/soundHandler";
 
 export default function useActionHandlers({
   setStatus,
@@ -176,6 +177,8 @@ const skipGradualUpdate = () => {
 
 
   const handlePerformVN = (chapter) => {
+    GameState.afterVN = true;
+    stopAllSounds();
     VNSelector(chapter);
   };
 

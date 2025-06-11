@@ -30,7 +30,7 @@ export class HakureiShrine extends Phaser.Scene {
       ? GameState.currentlocation.currentPosY
       : 1392; // Default position if not set
     GameState.currentlocation.currentLoc = "HakureiShrine";
-    GameState.afterVN = false;
+    EventBus.emit("OnLocationChange", { location: "House" });
   }
 
   create(data) {
@@ -59,18 +59,6 @@ export class HakureiShrine extends Phaser.Scene {
     } else {
       console.warn("WebGL not supported — skipping lights");
     }
-
-    const button = this.add
-      .text(100, 150, "Return to Main Scene", {
-        fontSize: "18px",
-        fill: "#0f0",
-        backgroundColor: "#000",
-        padding: { x: 10, y: 5 },
-      })
-      .setInteractive()
-      .on("pointerdown", () => {
-        this.scene.start("MainGame");
-      });
 
     //Past this point is the modified version of the modularity
     setupInteractionHandler(this, {
@@ -131,12 +119,22 @@ export class HakureiShrine extends Phaser.Scene {
           this.currentInteractable = null;
         },
         act1: ({ scene, handleSaveVN }) => {
-          GameState.currentAct = "act1";
+          GameState.currentAct = "Act2";
           handleSaveVN();
           EventBus.emit("performVN", "act1Data");
         },
       },
     });
+
+
+    if(GameState.currentAct === "Act1" && GameState.char != "Yukari"){
+      this.loadStoryCharacters(1);
+    }else if(GameState.currentAct === "Act1"){
+      this.loadStoryCharacters(10);
+    }else{
+      this.act1.body.enable = false;
+    }
+    
   }
 
   update() {
@@ -155,7 +153,7 @@ export class HakureiShrine extends Phaser.Scene {
 
     GameState.currentlocation.currentPosX = this.player.x;
     GameState.currentlocation.currentPosY = this.player.y;
-    GameState.currentlocation.currentLoc = "rumah";
+    GameState.currentlocation.currentLoc = "HakureiShrine";
   }
 
   generateMap() {
@@ -165,6 +163,8 @@ export class HakureiShrine extends Phaser.Scene {
     const Tiles2 = map.addTilesetImage("Tiles2", "Tiles2");
     const object1 = map.addTilesetImage("object1", "4BigSet");
     const object2 = map.addTilesetImage("object", "Objects");
+    const legends = map.addTilesetImage("legends", "legends");
+    this.map = map;
 
     const floorLayer = map
       .createLayer("ground", [Tiles1, Tiles2, object1])
@@ -185,8 +185,10 @@ export class HakureiShrine extends Phaser.Scene {
 
     this.player = this.physics.add
       .sprite(this.posX, this.posY, "Yukari")
-      .setScale(0.28); //character scale
+      .setScale(0.3); //character scale
     this.player.body.setCollideWorldBounds(true);
+
+    const legendsLayer = map.createLayer("legends", legends);
 
     const scale = 5; //map scale
     const mapWidth = map.widthInPixels;
@@ -198,6 +200,7 @@ export class HakureiShrine extends Phaser.Scene {
     door.setScale(scale);
     chestClosed.setScale(scale);
     object1Layer.setScale(scale);
+    legendsLayer.setScale(scale);
 
     wallLayer.setCollisionByProperty({ collides: true });
     objectLayer.setCollisionByProperty({ collides: true });
@@ -247,6 +250,10 @@ export class HakureiShrine extends Phaser.Scene {
           });
         }
 
+        if (sprite.properties.id === "Intro"){
+          this.meiLing = sprite;
+        }
+
         if (sprite.properties.collides) {
           sprite.body.setImmovable(true);
           sprite.body.setVelocity(0, 0);
@@ -283,6 +290,10 @@ export class HakureiShrine extends Phaser.Scene {
             nightOnly: sprite.properties.lightNightOnly || true,
             initialHour: this.currentHour(), // you need to pass this in
           });
+        }
+
+        if (sprite.properties.id === "act1"){
+          this.act1 = sprite;
         }
 
         this.interactables.add(sprite);
@@ -376,38 +387,51 @@ export class HakureiShrine extends Phaser.Scene {
     return GameState.time.hour;
   }
 
-}
 
+  loadStoryCharacters(currentAct) {
+  const characterObjects = this.map.getObjectLayer("characters")?.objects || [];
+  const SCALE = 5;
 
-function playEyeOpeningTransition(scene, onComplete) {
-  // Create a full-screen transparent graphics object
-  const maskShape = scene.make.graphics({ x: 0, y: 0, add: false });
+  this.storyCharacters = this.physics.add.group();
 
-  // Draw an eye-like ellipse (in white, used as a mask)
-  maskShape.fillStyle(0xffffff);
-  maskShape.fillEllipse(scene.cameras.main.centerX, scene.cameras.main.centerY, 20, 5); // Small to start
+  characterObjects.forEach((obj) => {
+    const props = {};
+    obj.properties?.forEach(p => props[p.name] = p.value);
 
-  // Create a mask from that graphics
-  const eyeMask = maskShape.createGeometryMask();
+    const visibleActs = (props.actVisible || "")
+      .split(",")
+      .map(str => Number(str.trim()))
+      .filter(n => !isNaN(n));
 
-  // Apply the mask to the camera
-  scene.cameras.main.setMask(eyeMask);
+    if (!visibleActs.includes(currentAct)) return; // Skip if not for this act
 
-  // Tween to scale up the ellipse (eye opening)
-  scene.tweens.add({
-    targets: maskShape,
-    props: {
-      scaleX: { value: 100, duration: 1000, ease: 'Sine.easeOut' },
-      scaleY: { value: 100, duration: 1000, ease: 'Sine.easeOut' },
-    },
-    onUpdate: () => {
-      maskShape.clear();
-      maskShape.fillStyle(0xffffff);
-      maskShape.fillEllipse(scene.cameras.main.centerX, scene.cameras.main.centerY, 20 * maskShape.scaleX, 5 * maskShape.scaleY);
-    },
-    onComplete: () => {
-      scene.cameras.main.clearMask(true); // Remove mask after transition
-      if (onComplete) onComplete();
-    },
+    const x = (obj.x + obj.width / 2) * SCALE;
+    const y = (obj.y + obj.height / 2) * SCALE;
+    const spriteKey = props.spriteKey || "defaultNPC";
+
+    const sprite = this.physics.add.sprite(x, y, spriteKey);
+    sprite.setOrigin(0.5);
+    sprite.setDepth(10);
+    sprite.body.setImmovable(true);
+    sprite.body.setAllowGravity(false);
+    sprite.body.setVelocity(0, 0);
+    sprite.setDisplaySize(obj.width * SCALE, obj.height * SCALE);
+
+    // Optional: set body size explicitly if needed
+   
+
+    sprite.characterId = obj.name;
+    sprite.properties = props;
+
+    // // 👤 Handle interaction, handled outside by you
+    // this.storyCharacters.add(sprite);
+
+    // 🚧 Collisions
+    if (props.collides !== false) {
+      this.physics.add.collider(this.player, sprite);
+    }
   });
 }
+
+}
+

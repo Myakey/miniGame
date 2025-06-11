@@ -21,6 +21,7 @@ export class Mansion extends Phaser.Scene {
       : 56;
     this.posY = GameState.afterVN ? GameState.currentlocation.currentPosY : 1723;
     GameState.currentlocation.currentLoc = "Mansion";
+    EventBus.emit("OnLocationChange", { location: "Scarlet Mansion" });
   }
 
   create() {
@@ -52,7 +53,7 @@ export class Mansion extends Phaser.Scene {
       getPlayer: () => this.player,
       getInteractables: () => this.interactables,
       getKey: () => this.eKey,
-      handleSaveVN: () => console.log("Saved at pantai"),
+      handleSaveVN: () => this.handleSaveVN(),
 
       handlers: {
         out: ({ scene }) => {
@@ -74,15 +75,34 @@ export class Mansion extends Phaser.Scene {
             this.scene.start("MainGame");
           });
         },
+        Intro: ({ scene, handleSaveVN }) =>{
+          GameState.currentAct = "Act1";
+          handleSaveVN();
+          EventBus.emit("performVN", "introData");
+        }
       },
     });
+
+    
   }
 
   update() {
     handleMovement(this);
     this.checkOverlap();
-    console.log("X :", this.player.x);
-    console.log("Y :", this.player.y);
+  }
+
+  handleSaveVN() {
+    if (typeof GameState.currentlocation !== "object") {
+      GameState.currentlocation = {
+        currentPosX: 0,
+        currentPosY: 0,
+        currentLoc: "",
+      };
+    }
+
+    GameState.currentlocation.currentPosX = this.player.x;
+    GameState.currentlocation.currentPosY = this.player.y;
+    GameState.currentlocation.currentLoc = "Mansion";
   }
 
   generateMap() {
@@ -91,6 +111,7 @@ export class Mansion extends Phaser.Scene {
     const galletCity = map.addTilesetImage("road", "galletcity");
     const ground = map.addTilesetImage("grass", "GroundTile");
     const meiLing = map.addTilesetImage("meiLing", "meiLing");
+    const legends = map.addTilesetImage("legends", "legends");
 
     const groundLayer = map
       .createLayer("ground", [ground, galletCity], 0, 0)
@@ -104,13 +125,16 @@ export class Mansion extends Phaser.Scene {
     const gerbangLayer = map
       .createLayer("gerbang", mansionTileSet)
       .setPipeline("Light2D");
+    
 
-    const meiLingLayer = map.createLayer("meiLing", meiLing).setPipeline("Light2D");
+    this.meiLingLayer = map.createLayer("meiLing", meiLing).setPipeline("Light2D");
 
     this.player = this.physics.add
       .sprite(this.posX, this.posY, "Yukari")
       .setScale(0.3);
     this.player.body.setCollideWorldBounds(true);
+    const legendsLayer = map.createLayer("legends", legends);
+    legendsLayer.setDepth(2);
 
     const scale = 3;
     const mapWidth = map.widthInPixels;
@@ -120,19 +144,20 @@ export class Mansion extends Phaser.Scene {
     detailsLayer.setScale(scale);
     objectsLayer.setScale(scale);
     gerbangLayer.setScale(scale);
-    meiLingLayer.setScale(scale);
+    this.meiLingLayer.setScale(scale);
+    legendsLayer.setScale(scale);
 
     groundLayer.setCollisionByProperty({ collides: true });
     detailsLayer.setCollisionByProperty({ collides: true });
     objectsLayer.setCollisionByProperty({ collides: true });
     gerbangLayer.setCollisionByProperty({ collides: true });
-    meiLingLayer.setCollisionByProperty({ collides: true });
+    this.meiLingLayer.setCollisionByProperty({ collides: true });
 
     this.physics.add.collider(this.player, groundLayer);
     this.physics.add.collider(this.player, detailsLayer);
     this.physics.add.collider(this.player, objectsLayer);
     this.physics.add.collider(this.player, gerbangLayer);
-    this.physics.add.collider(this.player, meiLingLayer);
+    const meiLingCollider = this.physics.add.collider(this.player, this.meiLingLayer);
 
     this.physics.world.setBounds(0, 0, mapWidth * scale, mapHeight * scale);
     this.cameras.main.setBounds(0, 0, mapWidth * scale, mapHeight * scale);
@@ -214,6 +239,10 @@ export class Mansion extends Phaser.Scene {
             nightOnly: sprite.properties.lightNightOnly === true,
             initialHour: this.currentHour(), // you need to pass this in
           });
+        }
+
+        if (sprite.properties.id === "Intro"){
+          this.meiLing = sprite;
         }
 
         this.interactables.add(sprite);
@@ -298,6 +327,14 @@ export class Mansion extends Phaser.Scene {
     this.shiftKey = this.input.keyboard.addKey(
       Phaser.Input.Keyboard.KeyCodes.SHIFT
     );
+
+
+    if(GameState.currentAct != "intro"){
+      this.meiLing.body.enable = false;
+      this.meiLingLayer.setVisible(false);
+      meiLingCollider.destroy();
+      legendsLayer.setVisible(false);
+    }
   }
 
   currentHour() {

@@ -10,6 +10,7 @@ import CharSel from './routes/charaSel'
 import LoadingScreen from './components/loadingScreen'
 
 
+
 function App() {
   const [loaded, setLoaded] = useState(false)
 

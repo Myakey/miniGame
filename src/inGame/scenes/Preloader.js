@@ -1,4 +1,4 @@
-import { Scene } from "phaser";
+import { Game, Scene } from "phaser";
 import { useNavigate } from "react-router-dom";
 import { GameState } from "../../hooks/gamestate";
 import { charaList } from "../mechanics/charaList";
@@ -64,6 +64,7 @@ export class Preloader extends Scene {
     this.load.image("MainDetails", "/assets/img/map/decoration.png");
     this.load.image("galletcity", "/assets/img/map/galletcity.png");
     this.load.image("torches", "/assets/img/map/torches.png");
+    this.load.image("legends", "/assets/img/map/legends.png");
 
     //BLOKM
     this.load.tilemapTiledJSON("blokM", "/assets/img/map/blokM/blokM.tmj");
@@ -82,7 +83,6 @@ export class Preloader extends Scene {
     this.load.image("Floor1BlokM", "/assets/img/map/blokM/Floor1BlokM.png");
     this.load.image("Floor2BlokM", "/assets/img/map/blokM/Floor2BlokM.png");
 
-
     //Dieng
     this.load.tilemapTiledJSON("dieng", "/assets/img/map/dieng/diengsz.tmj");
     this.load.image(
@@ -97,8 +97,11 @@ export class Preloader extends Scene {
     this.load.image("Tiles2", "/assets/img/map/rumah/Tiles2.png");
     this.load.image("Objects", "/assets/img/map/rumah/Objects.png");
     this.load.image("4BigSet", "/assets/img/map/rumah/4BigSet.png");
-    // this.load.image("toiletFrontOpen", "/assets/img/map/rumah/Object/toiletFrontOpen.png");
-    // this.load.image("walls", "/assets/img/map/rumah/Tiles/wallBorder.png")
+    this.load.image("YukariStand", "/assets/img/QuestPurposes/YukariStanding.png");
+    this.load.image("ReimuStand", "/assets/img/QuestPurposes/ReimuStanding.png");
+
+    this.load.image("questMarker", "/assets/img/QuestPurposes/Mark.png");
+    this.load.image("questMarker2", "/assets/img/QuestPurposes/Mark2.png");
 
     //FLowerField
     this.load.tilemapTiledJSON(
@@ -124,7 +127,10 @@ export class Preloader extends Scene {
     this.load.script("animatedTiles", "/utils/AnimatedTiles.js");
 
     //Mansion
-    this.load.tilemapTiledJSON("mansionMap", "/assets/img/map/mansion/mansion.tmj");
+    this.load.tilemapTiledJSON(
+      "mansionMap",
+      "/assets/img/map/mansion/mansion.tmj"
+    );
     this.load.image("mansionHouse", "/assets/img/map/mansion/nobg.png");
     this.load.image("meiLing", "/assets/img/map/mansion/meiLing.png");
 
@@ -144,63 +150,47 @@ export class Preloader extends Scene {
     // console.log(GameState.afterVN);
     // console.log(GameState.currentAct);
     //  Move to the MainMenu. You could also swap this for a Scene Transition, such as a camera fade.
-    if(sessionStorage.getItem("debugMode") != null){
+    if (sessionStorage.getItem("debugMode") != null) {
       this.scene.start(sessionStorage.getItem("currentPlace"));
-    }else{
-      if (GameState.currentAct === "intro") {
-      EventBus.emit(
-        "callObjective",
-        "Go to house to talk about it with Yukari. You can also talk to other characters in the map, and interact with objects. Enjoy your adventure!"
-      );
-    }
-    if (GameState.currentAct === "act1") {
-      EventBus.emit(
-        "callObjective",
-        "Find Sanae in Dieng and talk about the incident."
-      );
-    }
-    if (GameState.currentAct === "act2") {
-      EventBus.emit(
-        "callObjective",
-        "Find Kosuzu in Blok M and talk about the incident."
-      );
-    }
-
-    if (GameState.afterVN) {
-      GameState.afterVN = false;
-      if (GameState.currentAct === "prologue") {
-        GameState.currentAct = "intro";
-        EventBus.emit("performVN", "introData");
-        GameState.afterVN = true;
-      }
-      playSound("mainAmbience");
-      switch (GameState.currentlocation.currentLoc) {
-        case "MainGame":
-          this.scene.start("MainGame");
-          break;
-        case "BlokM":
-          this.scene.start("BlokM");
-          break;
-        case "HakureiShrine":
-          this.scene.start("HakureiShrine");
-          break;
-        case "FlowerField":
-          this.scene.start("FlowerField");
-          break;
-        case "Pantai":
-          this.scene.start("Pantai");
-          break;
-        case "Dieng":
-          this.scene.start("Dieng");
-          break;
-        default:
-          this.scene.start("MainGame");
-          break;
-      }
     } else {
-      this.scene.start("MainGame");
+      if (GameState.currentAct === "Act1") {
+        EventBus.emit(
+          "callObjective",
+          "Go to house to talk about it with Yukari/Reimu. You can also talk to other characters in the map, and interact with objects. Enjoy your adventure!"
+        );
+      }
+      if (GameState.currentAct === "Act2") {
+        EventBus.emit(
+          "callObjective",
+          "Find Sanae in Dieng and talk about the incident."
+        );
+      }
+      if (GameState.currentAct === "Act3") {
+        EventBus.emit(
+          "callObjective",
+          "Find Kosuzu in Blok M and talk about the incident."
+        );
+      }
+
+      // Setup location and act progression if coming from VN
+      if (GameState.afterVN) {
+
+        // Handle act progression
+        if (GameState.currentAct === "prologue") {
+          GameState.currentAct = "intro"; 
+          EventBus.emit("callObjective", "Proceed to the Scarlet Devil Mansion Accross the Map to Ask Remilia")
+          GameState.currentlocation.currentLoc = "HakureiShrine";
+          GameState.currentlocation.currentPosX = 153;
+          GameState.currentlocation.currentPosY = 1177;
+        }
+      }
+
+      // Scene load logic (consolidated)
+      const targetScene = GameState.currentlocation?.currentLoc || "MainGame";
+
+      // Start scene and play music
+      this.scene.start(targetScene);
+      playSound("mainAmbience");
     }
-    }
-    
   }
 }
