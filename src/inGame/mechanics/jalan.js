@@ -24,7 +24,7 @@ export default function jalan(currentStatus) {
         happinessGain = 15;
         cost =10;
         duration = 2;
-    }else if(location === "flowerField"){
+    }else if(location === "FlowerField"){
         hungerGain = 0;
         energyGain = 25;
         happinessGain = 5;

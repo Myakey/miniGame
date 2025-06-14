@@ -10,6 +10,9 @@ import { LightSource } from "../lighting/lightSource";
 import { setupInteractionHandler } from "../../utils/interactionManager";
 
 import { jalanMCDImage } from "../../assets/assetsPreLoad";
+import { workMCD } from "../../assets/assetsPreLoad";
+import { workLib } from "../../assets/assetsPreLoad";
+
 
 export class BlokM extends Phaser.Scene {
   constructor() {
@@ -87,6 +90,7 @@ export class BlokM extends Phaser.Scene {
               "jalanConfirmation_" + GameState.currentlocation.currentLoc, // Make modalId unique if content depends on location
             title: `Work in McDonald?`, // Dynamic title
             description: "Do you want to work to increase money ?",
+            image : workMCD,
             // You can add specific gains/losses text if you want to display them
             // gainsText: "...",
             // lossesText: "...",
@@ -107,6 +111,7 @@ export class BlokM extends Phaser.Scene {
               "jalanConfirmation_" + GameState.currentlocation.currentLoc,
             title: `Work in Book Store?`,
             description: "Do you want to work to increase money ?",
+            image: workLib,
             // You can add specific gains/losses text if you want to display them
             // gainsText: "...",
             // lossesText: "...",

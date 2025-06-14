@@ -3,9 +3,11 @@ import React from 'react'; // Removed useState, useEffect, animationTimeout if m
 
 import { GUITry } from '../../assets/assetsPreLoad';
 
-import { bath, sleep, work, eat, jalan } from '../../assets/assetsPreLoad';
+import { bath, sleep, work, eat, jalan,jalanBlokM, jalanSunFlower } from '../../assets/assetsPreLoad';
 
 import AnalogClock from '../UI/Clock';
+import { GameState } from '../../hooks/gamestate';
+
 
 // This component now primarily displays the animation when told to.
 // The logic for *when* to play, for *how long*, and *what action* is determined by the parent (MainGame.jsx).
@@ -20,16 +22,30 @@ function ActionFlow({ isPlaying, currentActionType, onSkip }) {
         jalan: jalan, // Key changed to 'jalan'
         hunt: "https://tenor.com/view/touhou-gif-19771546", // Key changed to 'hunt'
         work: work, // Key changed to 'work'
-        sunflower: "https://tenor.com/view/yuuka-kazami-touhou-shrug-walk-away-shake-my-head-gif-4858239798115821323", // Key for 'sunflower'
+        sunflower: jalanSunFlower, // Key for 'sunflower'
         // Add other action types and their corresponding GIFs here
         sleep: sleep,
+        jalan2blokm: jalanBlokM,
     };
 
     if (!isPlaying || !currentActionType) {
         return null; // Don't render if not playing or no action type
     }
 
-    const currentGif = actionGifs[currentActionType.toLowerCase()]; // Make lookup case-insensitive if needed
+    let gifs;
+
+    if(currentActionType == "jalan"){
+        switch(GameState.currentlocation.currentLoc){
+            case "BlokM" : gifs = "jalan2blokm";break;
+            case "FlowerField" : gifs = "sunflower"; break;
+            case "Dieng" : gifs = "jalan"; break;
+            default: gifs = "jalan";
+        }
+    }else{
+        gifs = currentActionType;
+    }
+
+    const currentGif = actionGifs[gifs.toLowerCase()]; // Make lookup case-insensitive if needed
 
     if (!currentGif) {
         console.warn("ActionFlow: No GIF found for action type:", currentActionType);

@@ -1,7 +1,10 @@
 import Phaser from "phaser";
 
 import CreatePlayerAnimation from "../movements/animation";
-import { handleMovement, registerMovementEvents } from "../movements/handleMovement";
+import {
+  handleMovement,
+  registerMovementEvents,
+} from "../movements/handleMovement";
 import { GameState } from "../../hooks/gamestate";
 
 import Pathfinding from "../movements/npcTry";
@@ -13,6 +16,8 @@ import { LightSource } from "../lighting/lightSource";
 import { setupInteractionHandler } from "../../utils/interactionManager";
 
 import { EventBus } from "../EventBus";
+
+import { jalanDiengImage } from "../../assets/assetsPreLoad";
 
 export class FlowerField extends Phaser.Scene {
   constructor() {
@@ -122,8 +127,28 @@ export class FlowerField extends Phaser.Scene {
             this.scene.start("MainGame");
           });
         },
+        jalan: ({ scene }) => {
+          EventBus.emit("showCustomModal", {
+            modalId:
+              "jalanConfirmation_" + GameState.currentlocation.currentLoc, // Make modalId unique if content depends on location
+            image: jalanDiengImage,
+            title: `Enjoy Yuuka's Field?`, // Dynamic title
+            description: "Do you want to take a walk to increase Happiness ?",
+            // You can add specific gains/losses text if you want to display them
+            // gainsText: "...",
+            // lossesText: "...",
+            actionType: "jalan", // <<< This is CRUCIAL for triggering jalan.js later
+            actionParams: {
+              /* No specific params needed by jalan.js directly, but structure is there */
+            },
+          });
+        },
       },
     });
+
+    if (GameState.currentlocation.currentLoc != "act3M") {
+      this.loadStoryCharacters(2);
+    }
   }
 
   update() {
@@ -288,42 +313,42 @@ export class FlowerField extends Phaser.Scene {
     });
 
     lights.forEach((obj) => {
-        const x = (obj.x + obj.width / 2) * SCALE;
-        const y = (obj.y + obj.height / 2) * SCALE;
+      const x = (obj.x + obj.width / 2) * SCALE;
+      const y = (obj.y + obj.height / 2) * SCALE;
 
-        const sprite = this.physics.add.sprite(x, y, null);
-        sprite.setVisible(false); // Still invisible trigger zone
-        sprite.body.setAllowGravity(false);
+      const sprite = this.physics.add.sprite(x, y, null);
+      sprite.setVisible(false); // Still invisible trigger zone
+      sprite.body.setAllowGravity(false);
 
-        // 👇 Scale the physics body to match map scale
-        sprite.body.setSize(obj.width * SCALE, obj.height * SCALE);
-        // 👇 Do NOT call sprite.setScale() unless you want a visible sprite scaled
-        // sprite.setScale(SCALE); // ❌ Not needed for invisible area
+      // 👇 Scale the physics body to match map scale
+      sprite.body.setSize(obj.width * SCALE, obj.height * SCALE);
+      // 👇 Do NOT call sprite.setScale() unless you want a visible sprite scaled
+      // sprite.setScale(SCALE); // ❌ Not needed for invisible area
 
-        // Copy object properties
-        sprite.properties = {};
-        obj.properties?.forEach((prop) => {
-          sprite.properties[prop.name] = prop.value;
+      // Copy object properties
+      sprite.properties = {};
+      obj.properties?.forEach((prop) => {
+        sprite.properties[prop.name] = prop.value;
+      });
+
+      if (sprite.properties.light) {
+        console.log("Adding light source at:", x, y);
+        console.log("COLOR : " + sprite.properties.lightColor);
+        new LightSource(this, x, y, {
+          radius: Number(sprite.properties.lightRadius) || 150,
+          color: sprite.properties.lightColor || "#ffffff",
+          intensity: Number(sprite.properties.lightIntensity) || 1.0,
+          nightOnly: sprite.properties.lightNightOnly || true,
+          initialHour: this.currentHour(), // you need to pass this in
         });
+      }
 
-        if (sprite.properties.light) {
-          console.log("Adding light source at:", x, y);
-          console.log("COLOR : " + sprite.properties.lightColor);
-          new LightSource(this, x, y, {
-            radius: Number(sprite.properties.lightRadius) || 150,
-            color: sprite.properties.lightColor || "#ffffff",
-            intensity: Number(sprite.properties.lightIntensity) || 1.0,
-            nightOnly: sprite.properties.lightNightOnly || true,
-            initialHour: this.currentHour(), // you need to pass this in
-          });
-        }
-
-        if (sprite.properties.collides) {
-          sprite.body.setImmovable(true);
-          sprite.body.setVelocity(0, 0);
-          sprite.body.moves = false;
-          if ("pushable" in sprite.body) sprite.body.pushable = false; // Optional for Phaser 3.60+
-          this.physics.add.collider(this.player, sprite);
+      if (sprite.properties.collides) {
+        sprite.body.setImmovable(true);
+        sprite.body.setVelocity(0, 0);
+        sprite.body.moves = false;
+        if ("pushable" in sprite.body) sprite.body.pushable = false; // Optional for Phaser 3.60+
+        this.physics.add.collider(this.player, sprite);
       }
     });
 
@@ -490,5 +515,50 @@ export class FlowerField extends Phaser.Scene {
 
   currentHour() {
     return GameState.time.hour;
+  }
+
+  loadStoryCharacters(currentAct) {
+    const characterObjects =
+      this.map.getObjectLayer("characters")?.objects || [];
+    const SCALE = 3;
+
+    this.storyCharacters = this.physics.add.group();
+
+    characterObjects.forEach((obj) => {
+      const props = {};
+      obj.properties?.forEach((p) => (props[p.name] = p.value));
+
+      const visibleActs = (props.actVisible || "")
+        .split(",")
+        .map((str) => Number(str.trim()))
+        .filter((n) => !isNaN(n));
+
+      if (!visibleActs.includes(currentAct)) return; // Skip if not for this act
+
+      const x = (obj.x + obj.width / 2) * SCALE;
+      const y = (obj.y + obj.height / 2) * SCALE;
+      const spriteKey = props.spriteKey || "defaultNPC";
+
+      const sprite = this.physics.add.sprite(x, y, spriteKey);
+      sprite.setOrigin(0.5);
+      sprite.setDepth(10);
+      sprite.body.setImmovable(true);
+      sprite.body.setAllowGravity(false);
+      sprite.body.setVelocity(0, 0);
+      sprite.setDisplaySize(obj.width * SCALE, obj.height * SCALE);
+
+      // Optional: set body size explicitly if needed
+
+      sprite.characterId = obj.name;
+      sprite.properties = props;
+
+      // // 👤 Handle interaction, handled outside by you
+      // this.storyCharacters.add(sprite);
+
+      // 🚧 Collisions
+      if (props.collides !== false) {
+        this.physics.add.collider(this.player, sprite);
+      }
+    });
   }
 }

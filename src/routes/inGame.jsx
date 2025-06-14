@@ -45,6 +45,7 @@ import AnalogClock from "../components/UI/Clock";
 import ShowCurrentPlace from "../components/UI/CurrentPlace";
 
 import VampireWarning from "../components/UI/WarningVamp";
+import AlertBox from "../components/UI/AlertBox";
 
 function MainGame() {
   let navigate = useNavigate();
@@ -177,6 +178,7 @@ function MainGame() {
 
   return (
     <div className="inGameWrapper">
+      <AlertBox />
       <ShowCurrentPlace />
       <ObjectivePanel />
       <ShopInteraction />
@@ -215,7 +217,7 @@ function MainGame() {
             </div>
           </div>
 
-          <div className="hidden md:flex md: md:px-1 z-10 md:fixed md:bottom-7 md:right-4 bg-yellow-400/75 p-3 rounded-full text-center flex-row border-4">
+          <div className="hidden md:flex md: md:px-1 z-50 md:fixed md:bottom-7 md:right-4 bg-yellow-400/75 p-3 rounded-full text-center flex-row border-4">
             <div className="text-4xl">💰</div>
             <div className="text-3xl m-2 text-center">{GameState.money}</div>
           </div>
