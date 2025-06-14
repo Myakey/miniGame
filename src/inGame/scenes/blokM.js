@@ -101,9 +101,14 @@ export class BlokM extends Phaser.Scene {
           });
         },
         act3: ({ scene, handleSaveVN }) => {
-          GameState.currentAct = "Act3M";
+          GameState.currentAct = "Act3Ms";
           handleSaveVN();
           EventBus.emit("performVN", "act3Data");
+        },
+        act3M: ({ scene, handleSaveVN }) => {
+          GameState.currentAct = "Act3M";
+          handleSaveVN();
+          EventBus.emit("performVN", "act3_2Data");
         },
         workLib: ({ scene }) => {
           EventBus.emit("showCustomModal", {
@@ -143,9 +148,15 @@ export class BlokM extends Phaser.Scene {
     if (GameState.currentAct === "Act3") {
       this.loadStoryCharacters(3);
       this.workLib.body.enable = false;
+      this.act3M.body.enable = false;
+    } else if(GameState.currentAct === "Act3Ms"){
+      this.loadStoryCharacters(4);
+      this.workLib.body.enable = false;
+      this.act3.body.enable = false;
     } else {
       this.loadStoryCharacters(10);
       this.act3.body.enable = false;
+      this.act3M.body.enable = false;
     }
   }
 
@@ -324,6 +335,8 @@ export class BlokM extends Phaser.Scene {
           this.act3 = sprite;
         } else if (sprite.properties.id === "workLib") {
           this.workLib = sprite;
+        } else if (sprite.properties.id === "act3M"){
+          this.act3M = sprite;
         }
       }
     });

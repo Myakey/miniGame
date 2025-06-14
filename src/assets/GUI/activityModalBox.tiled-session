@@ -63,13 +63,14 @@
         "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/FlowerField/flowerField.tmj": {
             "expandedObjectLayers": [
                 10,
+                7,
                 9
             ],
             "scale": 5.5,
             "selectedLayer": 7,
             "viewCenter": {
                 "x": 213.54545454545456,
-                "y": 133.36363636363637
+                "y": 112.0909090909091
             }
         },
         "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/FlowerField/flowerField.tmj#Yuuka": {
@@ -95,14 +96,15 @@
         },
         "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/blokM/blokM.tmj": {
             "expandedObjectLayers": [
+                5,
                 4,
                 7
             ],
-            "scale": 3,
-            "selectedLayer": 5,
+            "scale": 4,
+            "selectedLayer": 4,
             "viewCenter": {
-                "x": 409.5,
-                "y": 416.16666666666663
+                "x": 637.375,
+                "y": 144.375
             }
         },
         "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/blokM/blokM.tmj#Floor1BlokM": {
@@ -141,7 +143,7 @@
             "selectedLayer": 3,
             "viewCenter": {
                 "x": 320.0909090909091,
-                "y": 99.00000000000001
+                "y": 112.45454545454547
             }
         },
         "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/dieng/diengsz.tmj#Mark": {
@@ -161,11 +163,14 @@
                 6
             ],
             "scale": 4,
-            "selectedLayer": 6,
+            "selectedLayer": 7,
             "viewCenter": {
-                "x": 273.875,
-                "y": 141.625
+                "x": 172.625,
+                "y": 91.125
             }
+        },
+        "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/mainMap.tmj#Mark": {
+            "scaleInDock": 1
         },
         "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/mainMap.tmj#TILEMAPS": {
             "scaleInDock": 2
@@ -195,11 +200,11 @@
                 7,
                 9
             ],
-            "scale": 4,
+            "scale": 3,
             "selectedLayer": 7,
             "viewCenter": {
-                "x": 342.875,
-                "y": 532.375
+                "x": 299.5,
+                "y": 570.1666666666666
             }
         },
         "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/mansion/mansion.tmj#Sakuya": {
@@ -262,7 +267,7 @@
             "selectedLayer": 6,
             "viewCenter": {
                 "x": 240.25,
-                "y": 159.75
+                "y": 196.75
             }
         },
         "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/pantai/pantai.tmj#beach": {
@@ -292,8 +297,8 @@
             "scale": 5.5,
             "selectedLayer": 10,
             "viewCenter": {
-                "x": 190.63636363636365,
-                "y": 158.63636363636365
+                "x": 215.1818181818182,
+                "y": 145.1818181818182
             }
         },
         "C:/Users/golde/Desktop/Real UAS/final_sem2/public/assets/img/map/rumah/rumah.tmj#Reimu": {

@@ -6,9 +6,9 @@ import Modal from "../components/UI/ModalBox";
 import DebugBox from "../components/UI/DebugBox";
 import { handleDebugInGame, clearSessionStorage } from "../utils/debugHandler";
 import { useSaveSlotModal } from "../components/UI/SlotModal";
-import { GameState } from "../hooks/gamestate";
+import { GameState, createInitialGameState } from "../hooks/gamestate";
 import { useGameContext } from "../context/GameStatusContext";
-import { InitialGameState } from "../hooks/gamestate";
+
 
 const menuOptions = ["New Game", "Continue", "Debug Mode"];
 
@@ -33,7 +33,7 @@ function MainMenu() {
   const handleSelect = (option) => {
     setIsActive(false);
     if (option === "New Game") {
-      Object.assign(GameState, InitialGameState);
+      Object.assign(GameState, createInitialGameState());
       
       syncFromGameState();
       navigate("/charaSel");

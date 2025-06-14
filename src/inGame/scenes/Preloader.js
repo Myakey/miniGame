@@ -133,6 +133,7 @@ export class Preloader extends Scene {
     );
     this.load.image("mansionHouse", "/assets/img/map/mansion/nobg.png");
     this.load.image("meiLing", "/assets/img/map/mansion/meiLing.png");
+    this.load.image("Sakuya", "/assets/img/map/mansion/Sakuya.png");
 
     //Character SpriteSheets
     this.load.spritesheet("Yukari", foundChara.path, {
@@ -169,6 +170,12 @@ export class Preloader extends Scene {
         EventBus.emit(
           "callObjective",
           "Find Kosuzu in Blok M and talk about the incident."
+        );
+      }
+      if (GameState.currentAct === "Act3Ms" || GameState.currentAct === "Act3M") {
+        EventBus.emit(
+          "callObjective",
+          "Find the orb scattered among these places: Blok M, Dieng, and FlowerField. You might need to talk to characters or interact with objects to find it."
         );
       }
 

@@ -453,12 +453,66 @@
                  "height":24,
                  "id":17,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"actVisible",
+                         "type":"string",
+                         "value":"1"
+                        }, 
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"name",
+                         "type":"string",
+                         "value":"Yuuka"
+                        }, 
+                        {
+                         "name":"spriteKey",
+                         "type":"string",
+                         "value":"Sakuya"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":16,
                  "x":335.5,
-                 "y":557
+                 "y":528.333333333333
+                }, 
+                {
+                 "gid":2967,
+                 "height":16,
+                 "id":19,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"actVisible",
+                         "type":"string",
+                         "value":"1"
+                        }, 
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"name",
+                         "type":"string",
+                         "value":"Yukari"
+                        }, 
+                        {
+                         "name":"spriteKey",
+                         "type":"string",
+                         "value":"questMarker2"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":335.666666666667,
+                 "y":512.666666666667
                 }],
          "opacity":1,
          "properties":[
@@ -553,7 +607,7 @@
          "y":0
         }],
  "nextlayerid":10,
- "nextobjectid":19,
+ "nextobjectid":20,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",

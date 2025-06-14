@@ -133,6 +133,7 @@ export class MainGame extends Phaser.Scene {
     const galletcity = map.addTilesetImage("blokM2", "galletcity");
     const torches = map.addTilesetImage("obor", "torches");
     const legends = map.addTilesetImage("legends", "legends");
+    this.map = map;
 
     const groundLayer = map
       .createLayer("Ground", ground)
@@ -391,6 +392,26 @@ export class MainGame extends Phaser.Scene {
 
     this.generateInteractions();
 
+    switch(GameState.currentAct){
+      case "intro":
+        this.loadStoryCharacters(0);
+        break;
+      case "Act1":
+        this.loadStoryCharacters(1);
+        break;
+      case "Act2":
+        this.loadStoryCharacters(2);
+        break;
+      case "Act3":
+        this.loadStoryCharacters(3);
+        break;
+      case "Act3M":
+        this.loadStoryCharacters(4);
+        break;
+      default:
+        this.loadStoryCharacters(0);
+    }
+
     EventBus.on("move", this.handleMove, this);
     EventBus.on("stop", this.handleStopInput, this);
     EventBus.emit("current-scene-ready", this);
@@ -564,5 +585,50 @@ export class MainGame extends Phaser.Scene {
   currentHour() {
     console.log(GameState.time.hour);
     return GameState.time.hour;
+  }
+
+   loadStoryCharacters(currentAct) {
+    const characterObjects =
+      this.map.getObjectLayer("characters")?.objects || [];
+    const SCALE = 3;
+
+    this.storyCharacters = this.physics.add.group();
+
+    characterObjects.forEach((obj) => {
+      const props = {};
+      obj.properties?.forEach((p) => (props[p.name] = p.value));
+
+      const visibleActs = (props.actVisible || "")
+        .split(",")
+        .map((str) => Number(str.trim()))
+        .filter((n) => !isNaN(n));
+
+      if (!visibleActs.includes(currentAct)) return; // Skip if not for this act
+
+      const x = (obj.x + obj.width / 2) * SCALE;
+      const y = (obj.y + obj.height / 2) * SCALE;
+      const spriteKey = props.spriteKey || "defaultNPC";
+
+      const sprite = this.physics.add.sprite(x, y, spriteKey);
+      sprite.setOrigin(0.5);
+      sprite.setDepth(10);
+      sprite.body.setImmovable(true);
+      sprite.body.setAllowGravity(false);
+      sprite.body.setVelocity(0, 0);
+      sprite.setDisplaySize(obj.width * SCALE, obj.height * SCALE);
+
+      // Optional: set body size explicitly if needed
+
+      sprite.characterId = obj.name;
+      sprite.properties = props;
+
+      // // 👤 Handle interaction, handled outside by you
+      // this.storyCharacters.add(sprite);
+
+      // 🚧 Collisions
+      if (props.collides !== false) {
+        this.physics.add.collider(this.player, sprite);
+      }
+    });
   }
 }
