@@ -399,6 +399,8 @@ export class MainGame extends Phaser.Scene {
   update() {
     handleMovement(this);
     this.checkOverlap()
+    console.log(this.player.x);
+    console.log(this.player.y);
 
     const playerBounds = this.player.getBounds();
     let inAnyZone = false;

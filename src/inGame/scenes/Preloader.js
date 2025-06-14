@@ -182,6 +182,8 @@ export class Preloader extends Scene {
           GameState.currentlocation.currentLoc = "HakureiShrine";
           GameState.currentlocation.currentPosX = 153;
           GameState.currentlocation.currentPosY = 1177;
+          GameState.pos_x = 164;
+          GameState.pos_y = 786;
         }
       }
 

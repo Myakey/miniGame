@@ -1,7 +1,45 @@
+// movementHandler.js
 import { isPaused } from "../gameController";
+import { EventBus } from "../EventBus"; // Adjust the path as needed
+
+export function registerMovementEvents(scene) {
+  EventBus.on("move", direction => handleMove(scene, direction));
+  EventBus.on("stop", () => handleStopInput(scene));
+}
+
+function handleMove(scene, direction) {
+  const cursors = scene.cursors;
+  if (!cursors) return;
+
+  switch (direction) {
+    case "up":
+      cursors.up.isDown = true;
+      break;
+    case "down":
+      cursors.down.isDown = true;
+      break;
+    case "left":
+      cursors.left.isDown = true;
+      break;
+    case "right":
+      cursors.right.isDown = true;
+      break;
+  }
+}
+
+function handleStopInput(scene) {
+  const cursors = scene.cursors;
+  if (!cursors) return;
+
+  cursors.left.isDown = false;
+  cursors.right.isDown = false;
+  cursors.up.isDown = false;
+  cursors.down.isDown = false;
+}
 
 export function handleMovement(scene) {
-  if(!scene || isPaused) return;
+  if (!scene || isPaused) return;
+
   const { player, cursors, gamepad, shiftKey } = scene;
   let baseSpeed = 100;
   let velocityX = 0;
@@ -10,8 +48,8 @@ export function handleMovement(scene) {
   let moving = false;
 
   if (gamepad) {
-    let axisH = gamepad.axes[0].getValue();
-    let axisV = gamepad.axes[1].getValue();
+    const axisH = gamepad.axes[0].getValue();
+    const axisV = gamepad.axes[1].getValue();
     const deadZone = 0.2;
 
     if (Math.abs(axisH) > deadZone) velocityX = axisH;

@@ -1,13 +1,16 @@
 import Phaser from "phaser";
 import { EventBus } from "../EventBus";
 import { GameState } from "../../hooks/gamestate";
-import { handleMovement } from "../movements/handleMovement";
+import { handleMovement, registerMovementEvents } from "../movements/handleMovement";
 
 import { LightingManager } from "../lighting/LightingManager";
 import { PlayerLightManager } from "../lighting/PlayerLightManager";
 import { LightSource } from "../lighting/lightSource";
 
 import { setupInteractionHandler } from "../../utils/interactionManager";
+
+import { jalanMCDImage } from "../../assets/assetsPreLoad";
+
 export class BlokM extends Phaser.Scene {
   constructor() {
     super({ key: "BlokM" });
@@ -25,6 +28,7 @@ export class BlokM extends Phaser.Scene {
   }
 
   create(data) {
+    registerMovementEvents(this);
     this.cameras.main.fadeIn(1000, 0, 0, 0);
     this.generateMap();
     if (this.sys.game.renderer instanceof Phaser.Renderer.WebGL.WebGLRenderer) {
@@ -92,16 +96,16 @@ export class BlokM extends Phaser.Scene {
             },
           });
         },
-        act3: ({ scene, handleSaveVN }) =>{
+        act3: ({ scene, handleSaveVN }) => {
           GameState.currentAct = "Act3M";
           handleSaveVN();
           EventBus.emit("performVN", "act3Data");
         },
-        workLib: ({ scene }) =>{
+        workLib: ({ scene }) => {
           EventBus.emit("showCustomModal", {
             modalId:
-              "jalanConfirmation_" + GameState.currentlocation.currentLoc, 
-            title: `Work in Book Store?`, 
+              "jalanConfirmation_" + GameState.currentlocation.currentLoc,
+            title: `Work in Book Store?`,
             description: "Do you want to work to increase money ?",
             // You can add specific gains/losses text if you want to display them
             // gainsText: "...",
@@ -111,14 +115,30 @@ export class BlokM extends Phaser.Scene {
               jobId: "blokm_tokobuku",
             },
           });
-        }
+        },
+        jalan: ({ scene }) => {
+          EventBus.emit("showCustomModal", {
+            modalId:
+              "jalanConfirmation_" + GameState.currentlocation.currentLoc, // Make modalId unique if content depends on location
+            image: jalanMCDImage,
+            title: `Enjoy blok M restaurants?`, // Dynamic title
+            description: "Do you want to take a walk to increase Happiness ?",
+            // You can add specific gains/losses text if you want to display them
+            // gainsText: "...",
+            // lossesText: "...",
+            actionType: "jalan", // <<< This is CRUCIAL for triggering jalan.js later
+            actionParams: {
+              /* No specific params needed by jalan.js directly, but structure is there */
+            },
+          });
+        },
       },
     });
 
-    if(GameState.currentAct === "Act3"){
+    if (GameState.currentAct === "Act3") {
       this.loadStoryCharacters(3);
       this.workLib.body.enable = false;
-    }else{
+    } else {
       this.loadStoryCharacters(10);
       this.act3.body.enable = false;
     }
@@ -215,7 +235,7 @@ export class BlokM extends Phaser.Scene {
     objects.forEach((obj) => {
       if (obj.ellipse) {
         // Position of the circle's center (Tiled's obj.x and obj.y are top-left of bounding box)
-        const radius = (obj.width * SCALE) / 2;
+        const radius = (Math.max(obj.width, obj.height) * SCALE) / 2; // or Math.min(…)
         const centerX = (obj.x + obj.width / 2) * SCALE;
         const centerY = (obj.y + obj.height / 2) * SCALE;
 
@@ -226,6 +246,12 @@ export class BlokM extends Phaser.Scene {
 
         // Set the body to a circle
         sprite.body.setCircle(radius);
+
+        // keep it centred (Arcade puts the circle’s origin at its top‑left):
+        sprite.body.setOffset(
+          -radius + (obj.width * SCALE) / 2,
+          -radius + (obj.height * SCALE) / 2
+        );
 
         sprite.properties = {};
         obj.properties?.forEach((prop) => {
@@ -289,9 +315,9 @@ export class BlokM extends Phaser.Scene {
           this.physics.add.collider(this.player, sprite);
         }
 
-        if(sprite.properties.id === "act3"){
+        if (sprite.properties.id === "act3") {
           this.act3 = sprite;
-        }else if(sprite.properties.id === "workLib"){
+        } else if (sprite.properties.id === "workLib") {
           this.workLib = sprite;
         }
       }
@@ -386,47 +412,47 @@ export class BlokM extends Phaser.Scene {
   }
 
   loadStoryCharacters(currentAct) {
-  const characterObjects = this.map.getObjectLayer("characters")?.objects || [];
-  const SCALE = 3;
+    const characterObjects =
+      this.map.getObjectLayer("characters")?.objects || [];
+    const SCALE = 3;
 
-  this.storyCharacters = this.physics.add.group();
+    this.storyCharacters = this.physics.add.group();
 
-  characterObjects.forEach((obj) => {
-    const props = {};
-    obj.properties?.forEach(p => props[p.name] = p.value);
+    characterObjects.forEach((obj) => {
+      const props = {};
+      obj.properties?.forEach((p) => (props[p.name] = p.value));
 
-    const visibleActs = (props.actVisible || "")
-      .split(",")
-      .map(str => Number(str.trim()))
-      .filter(n => !isNaN(n));
+      const visibleActs = (props.actVisible || "")
+        .split(",")
+        .map((str) => Number(str.trim()))
+        .filter((n) => !isNaN(n));
 
-    if (!visibleActs.includes(currentAct)) return; // Skip if not for this act
+      if (!visibleActs.includes(currentAct)) return; // Skip if not for this act
 
-    const x = (obj.x + obj.width / 2) * SCALE;
-    const y = (obj.y + obj.height / 2) * SCALE;
-    const spriteKey = props.spriteKey || "defaultNPC";
+      const x = (obj.x + obj.width / 2) * SCALE;
+      const y = (obj.y + obj.height / 2) * SCALE;
+      const spriteKey = props.spriteKey || "defaultNPC";
 
-    const sprite = this.physics.add.sprite(x, y, spriteKey);
-    sprite.setOrigin(0.5);
-    sprite.setDepth(10);
-    sprite.body.setImmovable(true);
-    sprite.body.setAllowGravity(false);
-    sprite.body.setVelocity(0, 0);
-    sprite.setDisplaySize(obj.width * SCALE, obj.height * SCALE);
+      const sprite = this.physics.add.sprite(x, y, spriteKey);
+      sprite.setOrigin(0.5);
+      sprite.setDepth(10);
+      sprite.body.setImmovable(true);
+      sprite.body.setAllowGravity(false);
+      sprite.body.setVelocity(0, 0);
+      sprite.setDisplaySize(obj.width * SCALE, obj.height * SCALE);
 
-    // Optional: set body size explicitly if needed
-   
+      // Optional: set body size explicitly if needed
 
-    sprite.characterId = obj.name;
-    sprite.properties = props;
+      sprite.characterId = obj.name;
+      sprite.properties = props;
 
-    // // 👤 Handle interaction, handled outside by you
-    // this.storyCharacters.add(sprite);
+      // // 👤 Handle interaction, handled outside by you
+      // this.storyCharacters.add(sprite);
 
-    // 🚧 Collisions
-    if (props.collides !== false) {
-      this.physics.add.collider(this.player, sprite);
-    }
-  });
-}
+      // 🚧 Collisions
+      if (props.collides !== false) {
+        this.physics.add.collider(this.player, sprite);
+      }
+    });
+  }
 }

@@ -38,6 +38,8 @@ import BathImage from "./image/InGame/Actions/Bath.png";
 import SleepImage from "./image/InGame/Actions/Sleep.png";
 import jalanBeachImage from "./image/InGame/Actions/jalanBeach.png";
 import jalanMCDImage from "./image/InGame/Actions/jalanMCD.png";
+import swimBeach from "./image/InGame/Actions/Swim.png";
+import workMCD from "./image/InGame/Actions/workMCD.png";
 
 import bath from "../assets/gif/AnimasiAction/AnimasiAction/Bath.gif";
 import eat from "../assets/gif/AnimasiAction/AnimasiAction/Eat.gif";
@@ -187,6 +189,8 @@ import Suzunaan_TS from "../assets/image/vn/Suzunaan_TS.png";
 import classRoom from "../assets/image/CG/sumirekoClass.jpg";
 import shrineNight from "../assets/image/vn/ShrineNight.png";
 
+import arrow from "../assets/GUI/arrow.png";
+
 //Title Background
 import actBackground from "../assets/image/vn/actBG.jpg";
 
@@ -226,7 +230,7 @@ export const assetsLoadImg = [
   Yes,No,
   currentPlace, Pause, Save,
 
-  jalanDiengImage, BathImage, SleepImage, jalanBeachImage, jalanMCDImage,
+  jalanDiengImage, BathImage, SleepImage, jalanBeachImage, jalanMCDImage, swimBeach, arrow,
 
   // Reimu
   reimuSmile, reimuNervous, reimuShock, reimuChill, reimuOrb, reimuOrbSad, reimuAngry, reimuHappy, reimuSad, reimuNeutral, reimuOrbNervous,
@@ -280,9 +284,9 @@ export { NitoriShopSound, EsotericistPiano, Alice, FlandreSelect, ReimuSelect, R
 
 export { RemiliaButton, SakuyaButton, YukariButton, FlandreButton, ReimuButton, ReimuRight, RemiliaRight, SakuyaRight, YukariRight, FlandreRight, NitoriShop };
 
-export { GUITry, hunger, happiness, energy, hygiene, Yes, No, currentPlace, Pause, Save }
+export { GUITry, hunger, happiness, energy, hygiene, Yes, No, currentPlace, Pause, Save, arrow }
 
-export {jalanDiengImage, jalanMCDImage, jalanBeachImage, SleepImage, BathImage}
+export {jalanDiengImage, jalanMCDImage, jalanBeachImage, SleepImage, BathImage, swimBeach}
 
 export {
   reimuSmile, reimuNervous, reimuShock, reimuChill, reimuOrb, reimuOrbSad,

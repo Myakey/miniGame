@@ -326,6 +326,40 @@
                  "width":85.6363636363637,
                  "x":263.636363636364,
                  "y":-0.363636363636364
+                }, 
+                {
+                 "height":31.3333333333333,
+                 "id":38,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":true
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":483.333333333333,
+                 "x":-4.66666666666667,
+                 "y":228.666666666667
+                }, 
+                {
+                 "height":33.5,
+                 "id":40,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"id",
+                         "type":"string",
+                         "value":"beachPlay"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":88.5,
+                 "x":197.5,
+                 "y":202.5
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -596,9 +630,86 @@
          "visible":true,
          "x":0,
          "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":8,
+         "name":"characters",
+         "objects":[
+                {
+                 "gid":3833,
+                 "height":16,
+                 "id":37,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"actVisible",
+                         "type":"string",
+                         "value":"1"
+                        }, 
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"name",
+                         "type":"string",
+                         "value":"Yukari"
+                        }, 
+                        {
+                         "name":"spriteKey",
+                         "type":"string",
+                         "value":"questMarker2"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":313.666666666667,
+                 "y":55.6666666666667
+                }, 
+                {
+                 "gid":3833,
+                 "height":16,
+                 "id":41,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"actVisible",
+                         "type":"string",
+                         "value":"1"
+                        }, 
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"name",
+                         "type":"string",
+                         "value":"Yukari"
+                        }, 
+                        {
+                         "name":"spriteKey",
+                         "type":"string",
+                         "value":"questMarker2"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":234,
+                 "y":202.166666666667
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
         }],
- "nextlayerid":8,
- "nextobjectid":37,
+ "nextlayerid":9,
+ "nextobjectid":42,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",
@@ -7365,6 +7476,19 @@
          "name":"obor",
          "spacing":0,
          "tilecount":640,
+         "tileheight":16,
+         "tilewidth":16
+        }, 
+        {
+         "columns":52,
+         "firstgid":3016,
+         "image":"..\/legends.png",
+         "imageheight":480,
+         "imagewidth":832,
+         "margin":0,
+         "name":"legends",
+         "spacing":0,
+         "tilecount":1560,
          "tileheight":16,
          "tilewidth":16
         }],

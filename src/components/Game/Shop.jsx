@@ -10,8 +10,11 @@ import ShopOne from "../../assets/image/InGame/shopOne.jpeg"
 
 import { itemsList } from "../../inGame/mechanics/itemsList";
 
+import { useGameContext } from "../../context/GameStatusContext";
+
 export default function Shop( { onClose }) {
   const place = GameState.currentlocation.currentLoc;
+  const { status, setStatus } = useGameContext();
   // const [show, setShow] = useState(false);
   const NitoriSound = new Audio(NitoriShopSound);
   const [displayedText, setDisplayedText] = useState("");
@@ -34,14 +37,28 @@ export default function Shop( { onClose }) {
 
 
   const handleBuy = (item) => {
-  if (GameState.money < item.money) {
-    alert("You don't have enough money!");
-    return;
-  }
-  // Deduct money
-  GameState.money -= item.money;
-  GameState.inventory.push(item.id);
-  alert(`You bought ${item.name}!`);
+  setStatus(prev => {
+    // 1) Guard: can the player afford it?
+    if (prev.money < item.money) {
+      alert("You don't have enough money!");
+      return prev;                       // no change
+    }
+    
+    // 2) Compute the new values once
+    const newMoney     = prev.money - item.money;
+
+    // 3) Sync the global GameState (optional—until you move to Zustand)
+    GameState.money     = newMoney;
+    alert(`You bought ${item.name}!`);
+
+    // 4) Return the updated status for React
+    return {
+      ...prev,
+      money: newMoney,
+    };
+  });
+
+   GameState.inventory.push(item.id);
   };
 
   return (

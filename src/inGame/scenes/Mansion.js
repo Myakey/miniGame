@@ -2,7 +2,7 @@ import Phaser from "phaser";
 import { EventBus } from "../EventBus";
 import { GameState } from "../../hooks/gamestate";
 
-import { handleMovement } from "../movements/handleMovement";
+import { handleMovement, registerMovementEvents } from "../movements/handleMovement";
 
 import { LightingManager } from "../lighting/LightingManager";
 import { LightSource } from "../lighting/lightSource";
@@ -25,6 +25,7 @@ export class Mansion extends Phaser.Scene {
   }
 
   create() {
+    registerMovementEvents(this);
     this.cameras.main.fadeIn(1500, 0, 0, 0);
     this.generateMap();
 

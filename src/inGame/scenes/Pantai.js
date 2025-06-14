@@ -2,13 +2,14 @@ import Phaser from "phaser";
 import { EventBus } from "../EventBus";
 import { GameState } from "../../hooks/gamestate";
 
-import { handleMovement } from "../movements/handleMovement";
+import { handleMovement, registerMovementEvents } from "../movements/handleMovement";
 
 import { LightingManager } from "../lighting/LightingManager";
 import { PlayerLightManager } from "../lighting/PlayerLightManager";
 import { LightSource } from "../lighting/lightSource";
 
 import { setupInteractionHandler } from "../../utils/interactionManager";
+import { swimBeach } from "../../assets/assetsPreLoad";
 
 export class Pantai extends Phaser.Scene {
   constructor() {
@@ -25,6 +26,7 @@ export class Pantai extends Phaser.Scene {
   }
 
   create(data) {
+    registerMovementEvents(this);
     this.cameras.main.fadeIn(1000, 0, 0, 0);
     this.load.once("complete", () => {
       this.generateMap();
@@ -99,9 +101,26 @@ export class Pantai extends Phaser.Scene {
         },
         shop: ({scene}) =>{
           EventBus.emit("showShop");
-        }
+        },
+      beachPlay: ({scene}) =>{
+        EventBus.emit("showCustomModal", {
+                  modalId: "jalanConfirmation_" + GameState.currentlocation.currentLoc, // Make modalId unique if content depends on location
+                  image: swimBeach,
+                  title: `Want To Swim?`, // Dynamic title
+                  description: "Do you want to swim to increase mood ?",
+                  // You can add specific gains/losses text if you want to display them
+                  // gainsText: "...",
+                  // lossesText: "...",
+                  actionType: "jalan", // <<< This is CRUCIAL for triggering jalan.js later
+                  actionParams: {
+                    /* No specific params needed by jalan.js directly, but structure is there */
+                  },
+                });
+      }
       },
     });
+
+    this.loadStoryCharacters(1);
   }
 
   update() {
@@ -115,6 +134,7 @@ export class Pantai extends Phaser.Scene {
     const toko = map.addTilesetImage("toko", "decorationBlokM");
     const tree = map.addTilesetImage("tree", "treePantai");
     const torches = map.addTilesetImage("obor", "torches");
+    this.map = map;
 
     console.log(Phaser.VERSION);
 
@@ -318,6 +338,51 @@ export class Pantai extends Phaser.Scene {
       Phaser.Input.Keyboard.KeyCodes.SHIFT
     );
   }
+
+    loadStoryCharacters(currentAct) {
+  const characterObjects = this.map.getObjectLayer("characters")?.objects || [];
+  const SCALE = 3;
+
+  this.storyCharacters = this.physics.add.group();
+
+  characterObjects.forEach((obj) => {
+    const props = {};
+    obj.properties?.forEach(p => props[p.name] = p.value);
+
+    const visibleActs = (props.actVisible || "")
+      .split(",")
+      .map(str => Number(str.trim()))
+      .filter(n => !isNaN(n));
+
+    if (!visibleActs.includes(currentAct)) return; // Skip if not for this act
+
+    const x = (obj.x + obj.width / 2) * SCALE;
+    const y = (obj.y + obj.height / 2) * SCALE;
+    const spriteKey = props.spriteKey || "defaultNPC";
+
+    const sprite = this.physics.add.sprite(x, y, spriteKey);
+    sprite.setOrigin(0.5);
+    sprite.setDepth(10);
+    sprite.body.setImmovable(true);
+    sprite.body.setAllowGravity(false);
+    sprite.body.setVelocity(0, 0);
+    sprite.setDisplaySize(obj.width * SCALE, obj.height * SCALE);
+
+    // Optional: set body size explicitly if needed
+   
+
+    sprite.characterId = obj.name;
+    sprite.properties = props;
+
+    // // 👤 Handle interaction, handled outside by you
+    // this.storyCharacters.add(sprite);
+
+    // 🚧 Collisions
+    if (props.collides !== false) {
+      this.physics.add.collider(this.player, sprite);
+    }
+  });
+}
 
   currentHour() {
     return GameState.time.hour;

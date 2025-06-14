@@ -217,8 +217,8 @@
                  "type":"",
                  "visible":true,
                  "width":32.1818181818182,
-                 "x":383.636363636363,
-                 "y":348.181818181819
+                 "x":374.886363636363,
+                 "y":336.431818181819
                 }, 
                 {
                  "height":64,
@@ -1172,6 +1172,23 @@
                  "width":41.5,
                  "x":677.977272727273,
                  "y":69.5
+                }, 
+                {
+                 "height":62.25,
+                 "id":135,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"id",
+                         "type":"string",
+                         "value":"jalan"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":61,
+                 "x":370,
+                 "y":336
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1282,6 +1299,39 @@
                  "width":16,
                  "x":692.181818181818,
                  "y":78.5454545454545
+                }, 
+                {
+                 "gid":9367,
+                 "height":16,
+                 "id":134,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"actVisible",
+                         "type":"string",
+                         "value":"3,10"
+                        }, 
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"name",
+                         "type":"string",
+                         "value":"Yukari"
+                        }, 
+                        {
+                         "name":"spriteKey",
+                         "type":"string",
+                         "value":"questMarker2"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":391.75,
+                 "y":336.5
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1621,7 +1671,7 @@
          "y":0
         }],
  "nextlayerid":8,
- "nextobjectid":134,
+ "nextobjectid":136,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",

@@ -1,14 +1,14 @@
 import { EventBus } from "../EventBus";
 import { useRef } from "react";
+import { arrow } from "../../assets/assetsPreLoad"; // up‑facing arrow
 
 export default function ArrowControls() {
   const holdRef = useRef(null);
 
+  /* ───────────────── handlers ───────────────── */
   const handleDown = (dir) => {
     EventBus.emit("move", dir);
-    holdRef.current = setInterval(() => {
-      EventBus.emit("move", dir);
-    }, 100); // continuous movement while holding
+    holdRef.current = setInterval(() => EventBus.emit("move", dir), 100);
   };
 
   const handleUp = () => {
@@ -18,7 +18,7 @@ export default function ArrowControls() {
 
   const handleTap = (dir) => {
     EventBus.emit("move", dir);
-    setTimeout(() => EventBus.emit("stop"), 100); // brief movement
+    setTimeout(() => EventBus.emit("stop"), 100);
   };
 
   const commonProps = (dir) => ({
@@ -31,25 +31,37 @@ export default function ArrowControls() {
     onTouchCancel: handleUp,
   });
 
-  return (
-    <div className="fixed bottom-4 left-4 flex flex-col gap-2 md:hidden">
-      <button className="bg-gray-200 px-4 py-2 rounded" {...commonProps("up")}>
-        ↑
-      </button>
+  /* background image style reused by every button */
+  const arrowStyle = {
+    backgroundImage: `url(${arrow})`,
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "center",
+    backgroundSize: "contain",
+  };
 
-      <div className="flex gap-2">
-        <button className="bg-gray-200 px-4 py-2 rounded" {...commonProps("left")}>
-          ←
-        </button>
-        <button className="bg-gray-200 px-4 py-2 rounded" {...commonProps("right")}>
-          →
-        </button>
+  /* helper for building each arrow button */
+  const ArrowBtn = ({ dir, rotate }) => (
+    <button
+      {...commonProps(dir)}
+      className={`w-12 h-12 rounded focus:outline-none transform ${rotate}`}
+      style={arrowStyle}
+    />
+  );
+
+  return (
+    <div className="bottom-4 left-4 flex flex-col gap-2 m-5 md:hidden items-center">
+      <ArrowBtn dir="up"    rotate="rotate-0"   />
+
+      <div className="flex gap-5">
+        <ArrowBtn dir="left"  rotate="-rotate-90" />
+        <ArrowBtn dir="down"  rotate="rotate-180" />
+        <ArrowBtn dir="right" rotate="rotate-90"  />
       </div>
 
-      <button className="bg-gray-200 px-4 py-2 rounded" {...commonProps("down")}>
-        ↓
-      </button>
+      
     </div>
   );
 }
+
+
  

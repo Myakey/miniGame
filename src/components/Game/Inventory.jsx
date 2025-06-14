@@ -15,7 +15,7 @@ export default function Inventory() {
   const [show, setShow] = useState(false);
 
   const currentItems = GameState.inventory;
-
+  console.log("MAKE");
   // Toggle inventory with "G"
   useEffect(() => {
     const handleKeyDown = (e) => {
