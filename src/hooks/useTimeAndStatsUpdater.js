@@ -6,6 +6,8 @@ import { isPaused } from "../inGame/gameController";
 export default function useTimeAndStatsUpdater({ setStatus, setVampireWarning }) {
   const tickCounter = useRef(0);
   const vampireWarningCooldown = useRef(false);
+  const isGameOverTriggered = useRef(false);
+  const hasEmittedGameOver = useRef(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -15,7 +17,6 @@ export default function useTimeAndStatsUpdater({ setStatus, setVampireWarning })
       let shouldShowVampireWarning = false;
 
       const hardMode = GameState.difficulties === "hard" ? 1 : 0;
-
       setStatus((prev) => {
         const newMinute = (prev.time.minute + 1) % 60;
         const hourChanged = prev.time.minute === 59;
@@ -86,8 +87,32 @@ export default function useTimeAndStatsUpdater({ setStatus, setVampireWarning })
         GameState.time.hour = newHour;
         GameState.time.day = newDay;
 
+      if (
+        !hasEmittedGameOver.current &&
+        (newState.hunger <= 0 ||
+          newState.energy <= 0 ||
+          newState.happiness <= 0 ||
+          newState.hygiene <= 0)
+      ) {
+        hasEmittedGameOver.current = true;
+
+        EventBus.emit("gameOver", {
+          reason: "One or more status values reached 0",
+          stats: {
+            hunger: newState.hunger,
+            energy: newState.energy,
+            happiness: newState.happiness,
+            hygiene: newState.hygiene,
+          },
+        });
+      }
         return newState;
       });
+
+       if (isGameOverTriggered.current) {
+        EventBus.emit("gameOver", isGameOverTriggered.current);
+        isGameOverTriggered.current = false;
+      }
 
       // Show vampire warning
       if (shouldShowVampireWarning) {
