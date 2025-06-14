@@ -23,7 +23,6 @@ export default function eat(currentStatus, id) {
         hunger: newHunger,
         happiness: newHappiness,
         hygiene: newHygiene,
-        energy: Math.max(currentStatus.energy - 5, 0), // Eating consumes some energy
         score: currentStatus.score + 5,
     };
 }
