@@ -419,8 +419,69 @@
                  "width":98.3333333333333,
                  "x":381,
                  "y":465
+                }, 
+                {
+                 "height":80,
+                 "id":18,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"id",
+                         "type":"string",
+                         "value":"hunt"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":61.75,
+                 "x":311.75,
+                 "y":519.25
                 }],
          "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":9,
+         "name":"characters",
+         "objects":[
+                {
+                 "gid":3710,
+                 "height":24,
+                 "id":17,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":335.5,
+                 "y":557
+                }],
+         "opacity":1,
+         "properties":[
+                {
+                 "name":"actVisible",
+                 "type":"string",
+                 "value":"10"
+                }, 
+                {
+                 "name":"collides",
+                 "type":"bool",
+                 "value":true
+                }, 
+                {
+                 "name":"name",
+                 "type":"string",
+                 "value":"Reimu"
+                }, 
+                {
+                 "name":"spriteKey",
+                 "type":"string",
+                 "value":"Sakuya"
+                }],
          "type":"objectgroup",
          "visible":true,
          "x":0,
@@ -491,8 +552,8 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":9,
- "nextobjectid":17,
+ "nextlayerid":10,
+ "nextobjectid":19,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",
@@ -571,6 +632,19 @@
          "spacing":0,
          "tilecount":1560,
          "tileheight":16,
+         "tilewidth":16
+        }, 
+        {
+         "columns":1,
+         "firstgid":3710,
+         "image":"Sakuya.png",
+         "imageheight":24,
+         "imagewidth":16,
+         "margin":0,
+         "name":"Sakuya",
+         "spacing":0,
+         "tilecount":1,
+         "tileheight":24,
          "tilewidth":16
         }],
  "tilewidth":16,

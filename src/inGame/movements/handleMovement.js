@@ -41,7 +41,7 @@ export function handleMovement(scene) {
   if (!scene || isPaused) return;
 
   const { player, cursors, gamepad, shiftKey } = scene;
-  let baseSpeed = 100;
+  let baseSpeed = 200;
   let velocityX = 0;
   let velocityY = 0;
   let speed = shiftKey?.isDown ? baseSpeed * 2 : baseSpeed;

@@ -49,7 +49,7 @@ export default function Shop( { onClose }) {
 
     // 3) Sync the global GameState (optional—until you move to Zustand)
     GameState.money     = newMoney;
-    alert(`You bought ${item.name}!`);
+    EventBus.emit('show-alert', `You've bought ${item.name}`)
 
     // 4) Return the updated status for React
     return {

@@ -5,14 +5,16 @@ import { EventBus } from '../EventBus';
 export default function work(currentStatus, jobId) {
   const location = GameState.currentlocation.currentLoc;
   const job = jobList[location]?.find(job => job.Id === jobId);
+
   if (!job) {
     console.error("Invalid job or location");
     return currentStatus;
   }
-  //masukkin dari list job
-  const { money, energy, hunger, happiness, hygiene, } = job.effects;
+
+  const { money, energy, hunger, happiness, hygiene } = job.effects;
   const duration = job.duration;
-  //mood ngefek hasil kerja
+
+  // Determine money multiplier based on happiness
   let moneyMult = 1;
   if (currentStatus.happiness >= 75) {
     moneyMult = 1.5;
@@ -22,30 +24,54 @@ export default function work(currentStatus, jobId) {
     moneyMult = 0.75;
   }
 
-  // Update time based on job duration
+  // Pre-calculate new status
+  const newEnergy = Math.max(currentStatus.energy + energy, 0);
+  const newHunger = Math.max(currentStatus.hunger + hunger, 0);
+  const newHappiness = Math.max(currentStatus.happiness + happiness, 0);
+  const newHygiene = Math.max(currentStatus.hygiene + hygiene, 0);
+
+  // Check if any stat is too low after job
+  if (newEnergy <= 0) {
+    EventBus.emit("show-alert", "You're too tired to work!");
+    return currentStatus;
+  }
+  if (newHunger <= 0) {
+    EventBus.emit("show-alert", "You're too hungry to work!");
+    return currentStatus;
+  }
+  if (newHappiness <= 0) {
+    EventBus.emit("show-alert", "You're too upset to work!");
+    return currentStatus;
+  }
+  if (newHygiene <= 0) {
+    EventBus.emit("show-alert", "You're too dirty to work!");
+    return currentStatus;
+  }
+
+  // Calculate time updates
   const newHour = (currentStatus.time.hour + duration) % 24;
-  const newMinute = (currentStatus.time.minute + (duration % 60)) % 60;
-  const crossedMidnight = (currentStatus.time.hour + duration) >= 60;
+  const newMinute = currentStatus.time.minute; // unchanged unless you want to add randomness
+  const crossedMidnight = (currentStatus.time.hour + duration) >= 24;
   const newDay = crossedMidnight ? currentStatus.time.day + 1 : currentStatus.time.day;
 
-
-
-   GameState.money += money * moneyMult;
-   console.log("Your money:", GameState.money);
+  // Update global money
+  GameState.money += money * moneyMult;
+  console.log("Your money:", GameState.money);
 
   return {
     ...currentStatus,
     money: currentStatus.money + money * moneyMult,
-    energy: Math.max(currentStatus.energy + energy, 0),
-    hunger: Math.max(currentStatus.hunger + hunger, 0),
-    happiness: Math.max(currentStatus.happiness + happiness, 0),
-    hygiene: Math.max(currentStatus.hygiene + hygiene, 0),
+    energy: newEnergy,
+    hunger: newHunger,
+    happiness: newHappiness,
+    hygiene: newHygiene,
     score: currentStatus.score + 10,
     time: {
       ...currentStatus.time,
       hour: newHour,
-      minute: currentStatus.time.minute,
+      minute: newMinute,
       day: newDay,
     }
   };
 }
+
