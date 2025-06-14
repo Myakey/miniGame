@@ -60,6 +60,7 @@ function MainGame() {
   const { status, setStatus } = useGameContext();
   const [countTest, setCountTest] = useState(0);
   const [canMoveSprite, setCanMoveSprite] = useState(true);
+  const [isGameOver, setIsGameOver] = useState(false);
   const phaserRef = useRef();
   const currentScene = (scene) => {
     setCanMoveSprite(scene.scene.key !== "InGame");
@@ -101,6 +102,18 @@ function MainGame() {
     setIsActionPlaying,
     setCurrentActionTypeForAnimation,
   });
+
+  //use effect game over
+  useEffect(() => {
+    const handleGameOver = () => {
+      setIsGameOver(true);
+    };
+
+    EventBus.on("gameOver", handleGameOver);
+    return () => {
+      EventBus.off("gameOver", handleGameOver);
+    };
+  }, []);
 
   //Use effect di sini buat stats nurun gradually supaya bisa ada penurunan, ntar disetting di sini aja penurunan perdetiknya berapa janlupp.
   useTimeAndStatsUpdater({ setStatus, setVampireWarning });
@@ -201,12 +214,12 @@ function MainGame() {
 
       <div className="flex flex-col items-center w-full">
         <div className="relative w-full flex justify-center mt-4">
-          <div className="hidden md:flex md:items-start md:fixed md:bottom-4 md:left-4 z-200 rounded-3xl p-3 gap-4">
+          <div className="hidden md:flex md:items-start md:fixed md:bottom-4 md:left-4 z-50 rounded-3xl p-3 gap-4">
             <div className="flex flex-col space-y-2">
               {icons.map(createStatus)}
             </div>
           </div>
-          <div className="hidden md:flex md:flex-col md:items-center justify-center md:max-w-full md:px-1 z-10">
+          <div className="hidden md:flex md:flex-col md:items-center justify-center md:max-w-full md:px-1 z-50">
             <div className="bg-white/30 flex flex-col items-center backdrop-blur-md rounded-xl shadow-md p-3 text-2xl mt-1">
               <div className="flex flex-row">
                 {status.time.hour.toString().padStart(2, "0")}:
@@ -262,6 +275,20 @@ function MainGame() {
       </div>
     )} */}
       {/* ######################################################################### */}
+      {isGameOver && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black text-white text-center">
+          <div>
+            <h1 className="text-5xl font-bold mb-6">Game Over</h1>
+            <p className="text-2xl mb-4">Final Score: {status.score}</p>
+            <button
+              onClick={() => navigate("/")}
+              className="mt-4 bg-white text-black px-6 py-2 rounded-xl text-xl hover:bg-gray-300 transition"
+            >
+              Return to Main Menu
+            </button>
+          </div>
+        </div>
+    )}
     </div>
   );
 }
