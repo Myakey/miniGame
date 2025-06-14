@@ -1189,6 +1189,23 @@
                  "width":61,
                  "x":370,
                  "y":336
+                }, 
+                {
+                 "height":60.5,
+                 "id":139,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"id",
+                         "type":"string",
+                         "value":"act3M"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":44,
+                 "x":616.75,
+                 "y":202
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1332,6 +1349,72 @@
                  "width":16,
                  "x":391.75,
                  "y":336.5
+                }, 
+                {
+                 "gid":6569,
+                 "height":20.4545,
+                 "id":136,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"actVisible",
+                         "type":"string",
+                         "value":"4"
+                        }, 
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"name",
+                         "type":"string",
+                         "value":"Yukari"
+                        }, 
+                        {
+                         "name":"spriteKey",
+                         "type":"string",
+                         "value":"Kosuzu"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":17.4545,
+                 "x":630.77275,
+                 "y":235.27275
+                }, 
+                {
+                 "gid":9419,
+                 "height":14.8864,
+                 "id":137,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"actVisible",
+                         "type":"string",
+                         "value":"4"
+                        }, 
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"name",
+                         "type":"string",
+                         "value":"Yukari"
+                        }, 
+                        {
+                         "name":"spriteKey",
+                         "type":"string",
+                         "value":"questMarker"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":15.9318,
+                 "x":631.5341,
+                 "y":222.8068
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1671,7 +1754,7 @@
          "y":0
         }],
  "nextlayerid":8,
- "nextobjectid":136,
+ "nextobjectid":140,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",

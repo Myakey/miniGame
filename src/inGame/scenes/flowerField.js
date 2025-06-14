@@ -58,30 +58,30 @@ export class FlowerField extends Phaser.Scene {
       console.warn("WebGL not supported — skipping lights");
     }
 
-    this.scaleFactor = 3; // same scale you used for map layers
+    // this.scaleFactor = 3; // same scale you used for map layers
 
-    this.pathfinder = new Pathfinding(
-      this.map,
-      [
-        this.fenceHouseLayer,
-        this.treeLayer,
-        this.flowerLayer,
-        this.grassLayer,
-        this.groundLayer,
-        this.YuukaLayer,
-      ],
-      this.tileSize,
-      3 // pass scale here
-    );
+    // this.pathfinder = new Pathfinding(
+    //   this.map,
+    //   [
+    //     this.fenceHouseLayer,
+    //     this.treeLayer,
+    //     this.flowerLayer,
+    //     this.grassLayer,
+    //     this.groundLayer,
+    //     this.YuukaLayer,
+    //   ],
+    //   this.tileSize,
+    //   3 // pass scale here
+    // );
 
-    this.setupNPC();
+    // this.setupNPC();
 
-    this.physics.add.collider(this.npc, this.fenceHouseLayer);
-    this.physics.add.collider(this.npc, this.treeLayer);
-    this.physics.add.collider(this.npc, this.flowerLayer);
-    this.physics.add.collider(this.npc, this.grassLayer);
-    this.physics.add.collider(this.npc, this.groundLayer);
-    this.physics.add.collider(this.npc, this.YuukaLayer);
+    // this.physics.add.collider(this.npc, this.fenceHouseLayer);
+    // this.physics.add.collider(this.npc, this.treeLayer);
+    // this.physics.add.collider(this.npc, this.flowerLayer);
+    // this.physics.add.collider(this.npc, this.grassLayer);
+    // this.physics.add.collider(this.npc, this.groundLayer);
+    // this.physics.add.collider(this.npc, this.YuukaLayer);
 
     this.time.addEvent({
       delay: 1000,
@@ -89,12 +89,6 @@ export class FlowerField extends Phaser.Scene {
       callbackScope: this,
       loop: true,
     });
-
-    console.log("Tile size:", this.tileSize);
-    console.log("Scale factor:", this.scaleFactor);
-    console.log("Map size in tiles:", this.map.width, this.map.height);
-    console.log("Player pos:", this.player.x, this.player.y);
-    console.log("NPC pos:", this.npc.x, this.npc.y);
 
     this.cursors = this.input.keyboard.createCursorKeys();
     this.shiftKey = this.input.keyboard.addKey(

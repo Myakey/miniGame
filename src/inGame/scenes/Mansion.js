@@ -3,6 +3,7 @@ import { EventBus } from "../EventBus";
 import { GameState } from "../../hooks/gamestate";
 
 import { handleMovement, registerMovementEvents } from "../movements/handleMovement";
+import { huntImg } from "../../assets/assetsPreLoad";
 
 import { LightingManager } from "../lighting/LightingManager";
 import { LightSource } from "../lighting/lightSource";
@@ -80,11 +81,32 @@ export class Mansion extends Phaser.Scene {
           GameState.currentAct = "Act1";
           handleSaveVN();
           EventBus.emit("performVN", "introData");
+        },
+        hunt: ({ scene }) =>{
+          EventBus.emit("showCustomModal", {
+                      modalId:
+                        "jalanConfirmation_" + GameState.currentlocation.currentLoc,
+                      title: `Satisfy your blood thirst?`,
+                      description: "Do you want to feed, Milady?",
+                      image: huntImg,
+                      // image: workLib,
+                      // You can add specific gains/losses text if you want to display them
+                      // gainsText: "...",
+                      // lossesText: "...",
+                      actionType: "hunt", // <<< This is CRUCIAL for triggering jalan.js later
+                      actionParams: {
+                        jobId: "blokm_tokobuku",
+                      },
+          });
         }
       },
     });
 
-    
+    if(GameState.isVampire){
+      this.loadStoryCharacters(1);
+    }else{
+      this.hunt.body.enable = false;
+    }
   }
 
   update() {
@@ -113,6 +135,7 @@ export class Mansion extends Phaser.Scene {
     const ground = map.addTilesetImage("grass", "GroundTile");
     const meiLing = map.addTilesetImage("meiLing", "meiLing");
     const legends = map.addTilesetImage("legends", "legends");
+    this.map = map;
 
     const groundLayer = map
       .createLayer("ground", [ground, galletCity], 0, 0)
@@ -244,6 +267,8 @@ export class Mansion extends Phaser.Scene {
 
         if (sprite.properties.id === "Intro"){
           this.meiLing = sprite;
+        }else if (sprite.properties.id === "hunt"){
+          this.hunt = sprite;
         }
 
         this.interactables.add(sprite);
@@ -340,5 +365,50 @@ export class Mansion extends Phaser.Scene {
 
   currentHour() {
     return GameState.time.hour;
+  }
+
+  loadStoryCharacters(currentAct) {
+    const characterObjects =
+      this.map.getObjectLayer("characters")?.objects || [];
+    const SCALE = 3;
+
+    this.storyCharacters = this.physics.add.group();
+
+    characterObjects.forEach((obj) => {
+      const props = {};
+      obj.properties?.forEach((p) => (props[p.name] = p.value));
+
+      const visibleActs = (props.actVisible || "")
+        .split(",")
+        .map((str) => Number(str.trim()))
+        .filter((n) => !isNaN(n));
+
+      if (!visibleActs.includes(currentAct)) return; // Skip if not for this act
+
+      const x = (obj.x + obj.width / 2) * SCALE;
+      const y = (obj.y + obj.height / 2) * SCALE;
+      const spriteKey = props.spriteKey || "defaultNPC";
+
+      const sprite = this.physics.add.sprite(x, y, spriteKey);
+      sprite.setOrigin(0.5);
+      sprite.setDepth(10);
+      sprite.body.setImmovable(true);
+      sprite.body.setAllowGravity(false);
+      sprite.body.setVelocity(0, 0);
+      sprite.setDisplaySize(obj.width * SCALE, obj.height * SCALE);
+
+      // Optional: set body size explicitly if needed
+
+      sprite.characterId = obj.name;
+      sprite.properties = props;
+
+      // // 👤 Handle interaction, handled outside by you
+      // this.storyCharacters.add(sprite);
+
+      // 🚧 Collisions
+      if (props.collides !== false) {
+        this.physics.add.collider(this.player, sprite);
+      }
+    });
   }
 }

@@ -41,9 +41,11 @@ import jalanMCDImage from "./image/InGame/Actions/jalanMCD.png";
 import swimBeach from "./image/InGame/Actions/Swim.png";
 import workMCD from "./image/InGame/Actions/workMCD.png";
 import workLib from "./image/InGame/Actions/workLibrary.png"
+import huntImg from "./image/InGame/Actions/hunt.png"
 
 import bath from "../assets/gif/AnimasiAction/AnimasiAction/Bath.gif";
 import eat from "../assets/gif/AnimasiAction/AnimasiAction/Eat.gif";
+import hunt from "../assets/gif/AnimasiAction/AnimasiAction/Hunt.gif"
 // import sleep from "../assets/gif/AnimasiAction/sleep.gif";
 import work from "../assets/gif/AnimasiAction/AnimasiAction/Work.gif";
 import sleep from "../assets/gif/AnimasiAction/AnimasiAction/Sleep.gif";
@@ -52,6 +54,7 @@ import jalan from "../assets/gif/AnimasiAction/AnimasiAction/JalanDieng.gif";
 
 import jalanBlokM from "../assets/gif/AnimasiAction/AnimasiAction/JalanBlokm.gif";
 import jalanSunFlower from "../assets/gif/AnimasiAction/AnimasiAction/JalanSunflowerfield.gif";
+import jalanBeach from "../assets/gif/AnimasiAction/AnimasiAction/jalanBeach.gif";
 
 //Sprite Reimu
 import reimuSmile from "../assets/image/Characters/spriteReimu/0.png";
@@ -230,11 +233,11 @@ export const assetsLoadImg = [
   jalan,
 
   GUITry,
-  hunger,happiness,energy,hygiene,
+  hunger,happiness,energy,hygiene, hunt, huntImg,
   Yes,No,
   currentPlace, Pause, Save,
 
-  jalanDiengImage, BathImage, SleepImage, jalanBeachImage, jalanMCDImage, swimBeach, arrow, workMCD, workLib, jalanBlokM, jalanSunFlower,
+  jalanDiengImage, BathImage, SleepImage, jalanBeachImage, jalanMCDImage, swimBeach, arrow, workMCD, workLib, jalanBlokM, jalanSunFlower, jalanBeach,
 
   // Reimu
   reimuSmile, reimuNervous, reimuShock, reimuChill, reimuOrb, reimuOrbSad, reimuAngry, reimuHappy, reimuSad, reimuNeutral, reimuOrbNervous,
@@ -290,7 +293,7 @@ export { RemiliaButton, SakuyaButton, YukariButton, FlandreButton, ReimuButton, 
 
 export { GUITry, hunger, happiness, energy, hygiene, Yes, No, currentPlace, Pause, Save, arrow }
 
-export {jalanDiengImage, jalanMCDImage, jalanBeachImage, SleepImage, BathImage, swimBeach, workMCD, workLib, jalanBlokM, jalanSunFlower}
+export {jalanDiengImage, jalanMCDImage, jalanBeachImage, SleepImage, BathImage, swimBeach, workMCD, workLib, jalanBlokM, jalanSunFlower, jalanBeach, hunt}
 
 export {
   reimuSmile, reimuNervous, reimuShock, reimuChill, reimuOrb, reimuOrbSad,
@@ -299,7 +302,7 @@ export {
 
 // Sakuya
 export {
-  sakuyaSmile, sakuyaAngry, sakuyaBored, sakuyaDis, sakuyaShock, sakuyaHappy
+  sakuyaSmile, sakuyaAngry, sakuyaBored, sakuyaDis, sakuyaShock, sakuyaHappy, huntImg
 };
 
 // Flandre

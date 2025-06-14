@@ -7,14 +7,16 @@ export class PlayerLightManager {
     this.radius = options.radius || 200;
     this.intensity = options.intensity || 3;
     this.enabled = true;
-    this.temp = this.intensity; // Temporary variable for intensity
+     // Temporary variable for intensity
     console.log("Vampire mode:", GameState.isVampire);
     if(GameState.isVampire){
       console.log("Vampire mode enabled, setting light color to red");
       this.color = "#aa0033";
+      this.intensity = 1.3;
     }else{
       this.color = options.color || 0x222244;
     }
+    this.temp = this.intensity;
     console.log("PlayerLightManager color:", this.color);
     this.light = this.scene.lights
       .addLight(player.x, player.y, this.radius)

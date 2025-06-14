@@ -3,7 +3,7 @@ import React from 'react'; // Removed useState, useEffect, animationTimeout if m
 
 import { GUITry } from '../../assets/assetsPreLoad';
 
-import { bath, sleep, work, eat, jalan,jalanBlokM, jalanSunFlower } from '../../assets/assetsPreLoad';
+import { bath, sleep, work, eat, jalan,jalanBlokM, jalanSunFlower, jalanBeach, hunt } from '../../assets/assetsPreLoad';
 
 import AnalogClock from '../UI/Clock';
 import { GameState } from '../../hooks/gamestate';
@@ -20,12 +20,13 @@ function ActionFlow({ isPlaying, currentActionType, onSkip }) {
         eat: "https://tenor.com/view/reimu-touhou-watermelon-gif-20351061", // Key changed to 'eat'
         bath: bath, // Key changed to 'bath'
         jalan: jalan, // Key changed to 'jalan'
-        hunt: "https://tenor.com/view/touhou-gif-19771546", // Key changed to 'hunt'
+        hunt: hunt, // Key changed to 'hunt'
         work: work, // Key changed to 'work'
         sunflower: jalanSunFlower, // Key for 'sunflower'
         // Add other action types and their corresponding GIFs here
         sleep: sleep,
         jalan2blokm: jalanBlokM,
+        jalanbeach: jalanBeach,
     };
 
     if (!isPlaying || !currentActionType) {
@@ -39,6 +40,7 @@ function ActionFlow({ isPlaying, currentActionType, onSkip }) {
             case "BlokM" : gifs = "jalan2blokm";break;
             case "FlowerField" : gifs = "sunflower"; break;
             case "Dieng" : gifs = "jalan"; break;
+            case "Pantai" : gifs = "jalanbeach"; break;
             default: gifs = "jalan";
         }
     }else{

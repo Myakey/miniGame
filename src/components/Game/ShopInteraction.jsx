@@ -1,4 +1,5 @@
 import { useState, useEffect, memo } from "react";
+import { GameState } from "../../hooks/gamestate";
 import { NitoriShop } from "../../assets/assetsPreLoad";
 import { EventBus } from "../../inGame/EventBus";
 import Shop from "./Shop";
@@ -6,6 +7,24 @@ import Shop from "./Shop";
 function ShopInteraction() {
   const [show, setShow] = useState(false);
   const [stage, setStage] = useState("intro");
+
+  function handleJob(){
+    if(GameState.currentlocation.currentLoc === "Pantai") {
+      EventBus.emit("showCustomModal", {
+            modalId:
+              "jalanConfirmation_" + GameState.currentlocation.currentLoc,
+            title: `Work As a Tour Guide?`,
+            description: "Do you want to work to increase money ?",
+            // You can add specific gains/losses text if you want to display them
+            // gainsText: "...",
+            // lossesText: "...",
+            actionType: "work", // <<< This is CRUCIAL for triggering jalan.js later
+            actionParams: {
+              jobId: "pantai_guIde",
+            },
+      });
+    }
+  }
 
   useEffect(() => {
     const handleAction = () => {
@@ -48,7 +67,7 @@ function ShopInteraction() {
               🛒 Go to Shop
             </button>
             <button
-              onClick={() => handleChoice("work")}
+              onClick={() => handleJob()}
               className="bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg transition w-full"
             >
               💼 Do a Job
