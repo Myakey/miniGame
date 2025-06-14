@@ -2,7 +2,7 @@ import Phaser from "phaser";
 import { EventBus } from "../EventBus";
 import { GameState } from "../../hooks/gamestate";
 
-import { handleMovement } from "../movements/handleMovement";
+import { handleMovement, registerMovementEvents } from "../movements/handleMovement";
 import setupPlayerMovement from "../movements/pathFinding";
 
 import CreatePlayerAnimation from "../movements/animation";
@@ -30,6 +30,7 @@ export class Dieng extends Phaser.Scene {
   }
 
   create(data) {
+    registerMovementEvents(this);
     this.cameras.main.fadeIn(1000, 0, 0, 0);
 
     this.generateMap();

@@ -229,8 +229,8 @@ function MainGame() {
 
         <div className="md:hidden grid grid-cols-2 gap-3 p-4 mt-4 bg-blue-400 rounded-3xl z-10 w-full max-w-xs sm:max-w-sm">
           {icons.map(createStatus)}
-          <div className="flex flex-col items-center w-full px-1">
-            <div className="text-xs mt-1">{GameState.money}</div>
+          <div className="flex flex-col items-center justify-center w-full px-1">
+            <div className="text-xs mt-1">💰{GameState.money}</div>
           </div>
         </div>
 

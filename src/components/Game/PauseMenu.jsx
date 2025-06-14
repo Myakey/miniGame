@@ -17,7 +17,8 @@ export default function PauseMenu({ onQuit, onSetTime }) {
 
   const buttons = [
     { label: "Resume", action: handleResume },
-    { label: "Quit", action: onQuit },
+    { label: "Save", action: onQuit },
+    { label: "Quit", action: () => openModalSave()},
   ];
 
   function handleResume() {
@@ -162,7 +163,7 @@ export default function PauseMenu({ onQuit, onSetTime }) {
             <button
               onClick={onQuit}
               className={`w-40 h-12 bg-no-repeat bg-center bg-contain mb-2 transition ${
-                selectedIndex === 1 ? "scale-110" : "hover:scale-105"
+                selectedIndex === 2 ? "scale-110" : "hover:scale-105"
               }`}
               style={{
                 backgroundImage: `url(${Quit})`,
@@ -171,7 +172,7 @@ export default function PauseMenu({ onQuit, onSetTime }) {
               }}
             />
 
-            <button
+            {/* <button
               onClick={onSetTime}
               className={`w-40 h-12 bg-no-repeat bg-center bg-contain mb-2 transition ${
                 selectedIndex === 1 ? "scale-110" : "hover:scale-105"
@@ -181,7 +182,7 @@ export default function PauseMenu({ onQuit, onSetTime }) {
                 border: "none",
                 imageRendering: "pixelated",
               }}
-            />
+            /> */}
 
             
           </div>

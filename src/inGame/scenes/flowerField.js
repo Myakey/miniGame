@@ -1,7 +1,7 @@
 import Phaser from "phaser";
 
 import CreatePlayerAnimation from "../movements/animation";
-import { handleMovement } from "../movements/handleMovement";
+import { handleMovement, registerMovementEvents } from "../movements/handleMovement";
 import { GameState } from "../../hooks/gamestate";
 
 import Pathfinding from "../movements/npcTry";
@@ -27,6 +27,7 @@ export class FlowerField extends Phaser.Scene {
   }
 
   create(data) {
+    registerMovementEvents(this);
     this.cameras.main.fadeIn(1000, 0, 0, 0);
 
     this.generateMap();

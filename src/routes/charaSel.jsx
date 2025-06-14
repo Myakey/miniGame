@@ -26,8 +26,10 @@ import { Selected } from "../assets/assetsPreLoad";
 
 import { useVNSelector } from "../components/VN/VNSELECTOR";
 import { Game } from "phaser";
+import DifficultyModal from "../components/UI/Difficulty";
 
 export default function CharSel() {
+  const [showModal, setShowModal] = useState(true);
   console.log(GameState)
   let VNSelector = useVNSelector();
 
@@ -298,6 +300,10 @@ useEffect(() => {
       {fadeOut && (
   <div className="fixed top-0 left-0 w-full h-full bg-black z-50 animate-fadeOut"></div>
 )}
+      <DifficultyModal
+        isOpen={showModal}
+        onClose={() => setShowModal(false)}
+      />
       <div className="charaSelect">
         <div className="flex flex-col lg:flex-row h-screen w-screen overflow-hidden">
           {/*Character Selection Grid*/}

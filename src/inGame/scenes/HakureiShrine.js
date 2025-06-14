@@ -4,7 +4,7 @@ import { EventBus } from "../EventBus";
 import { GameState } from "../../hooks/gamestate";
 // import trialMap from "../../assets/image/InGame/maps/Trial.tmj"
 import { useNavigate } from "react-router-dom";
-import { handleMovement } from "../movements/handleMovement";
+import { handleMovement, registerMovementEvents } from "../movements/handleMovement";
 import setupPlayerMovement from "../movements/pathFinding";
 
 import CreatePlayerAnimation from "../movements/animation";
@@ -34,6 +34,7 @@ export class HakureiShrine extends Phaser.Scene {
   }
 
   create(data) {
+    registerMovementEvents(this);
     this.cameras.main.fadeIn(1500, 0, 0, 0);
 
     console.log("Renderer Type:", this.sys.game.renderer.type);
